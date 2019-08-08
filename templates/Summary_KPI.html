@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+
+
+    <!-- Page title -->
+    <title>EY Business Intelligence</title>
+
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="/static/vendor/fontawesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/static/vendor/animate.css/animate.css"/>
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css"/>
+	
+	<link rel="icon" href="/static/images/EYBIicon.png" sizes="32x32" />
+	<link rel="icon" href="/static/images/EYBIicon.png" sizes="192x192" />
+    
+	<!-- App styles -->
+    <link rel="stylesheet" href="/static/styles/pe-icons/pe-icon-7-stroke.css"/>
+    <link rel="stylesheet" href="/static/styles/pe-icons/helper.css"/>
+    <link rel="stylesheet" href="/static/styles/stroke-icons/style.css"/>
+    <link rel="stylesheet" href="/static/styles/style.css">
+	
+	<script type='text/javascript' src='/static/data/dbase/data.js'></script>
+	<script type='text/javascript' src='/static/scripts/angular.min.js'></script>
+<!-- 	<script type='text/javascript' src='../wp-includes/js/jquery/jqueryb8ff.js?ver=1.12.4'></script> -->
+	<script src="/static/scripts/d3.v4.min.js"></script>
+<!--	<script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script>-->
+	<style>
+	.hoveryellow{
+color:white;
+transition: all .25s ease-in-out;
+}
+.hoveryellow:hover{
+background:rgba(255,255,255,0.1);
+color: #fff;
+transition: background .25s ease-in-out;
+border-radius:4px;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #444; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #222; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+	</style>
+	
+</head>
+<body>
+
+<!-- Wrapper-->
+<div class="wrapper">
+
+    <!-- Header-->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div id="mobile-menu">
+                    <div class="left-nav-toggle">
+                        <a href="#">
+                            <i class="stroke-hamburgermenu"></i>
+                        </a>
+                    </div>
+                </div>
+                <a class="navbar-brand" style="background: #2f323b;" href="/main_page">
+                    <a href="/main_page">
+                	<img src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
+					<!--<span style="color:white;"> Business </br> Intelligence</span>-->
+                </a>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- End header-->
+
+	<!-- Navigation-->
+	<div id="navbar-frame"></div>
+	<!-- End navigation-->
+
+    <!-- Main content-->
+    <section class="content">
+        <div class="container-fluid">
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="view-header">
+                        <div class="pull-right text-right" style="line-height: 14px">
+                         
+						 </div>
+                        <div class="header-icon">
+                            <i class="pe page-header-icon pe-7s-graph3"></i>
+                        </div>
+                        <div class="header-title">
+                            <h3>Key Performance Indicators</h3>
+                            <small>
+                              All documents 
+                            </small>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+			
+			<div class="row" >
+               <div class="col-lg-12">
+                    <div class="panel" style="margin-top: -30px;">
+                        <div class="panel-body" style="padding:0px;">
+
+                            <div class="modal-example">
+
+                                <style>
+                                    /* Local style only for demo purpose */
+                                    .modal-example .modal { position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: 1; display: block; }
+                                </style>
+
+                                <div class="modal" id="myModal3" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" style="width: 100%;">
+                                        <div class="modal-content">
+                                            <div class="modal-body" style="padding:15px;">
+                                               <div class="row">
+                                <div class="col-md-4 col-xs-6 text-center">
+                                    <h2 id="documents_count_top"  class="no-margins">
+                                      
+                                      
+                                    </h2>
+                                    <span  class="c-white">Total number of documents</span>
+                                </div>
+                                <div class="col-md-3 col-xs-6 text-center">
+                                    <h2 class="no-margins" id='documents_class_count'>
+                                        3
+                                    </h2>
+                                    <span class="c-white">Document Types</span> 
+                                </div>
+
+
+                                
+                                <div class="col-md-4 col-xs-6 text-center" style='display:none;'>
+                                  <h2 class="no-margins" id="ocr_score">                              
+                                    asdfasdf
+                                  </h2>
+                                  <span class="c-white">Avg. Suspicious Score</span> 
+                              </div>
+
+                                <div class="col-md-4 col-xs-6 text-center">
+                                    <h2 class="no-margins">
+                                        <span id='last_updated'>22<sup>nd</sup> July 2019</span>
+                                    </h2>
+                                    <span class="c-white">Last Updated</span> 
+                                </div>
+                            </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+			
+
+
+            <div class="row">
+
+                <div class="col-md-6" style='display:none;'>
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                                
+                            </div>
+                           Fields Extracted
+                        </div>
+                        <div class="panel-body">
+							
+							<div style="text-align:center; padding-top:30px; min-height:270px;">
+							   
+                                    <div id="parent12"><div id="container12" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px;; z-index:1;"></div></div>
+									
+									<div class="met-text" style=" margin-top:-60px;  text-align:left; padding-left:60px;">
+                                      <span style=" color: #ffe600; color:white; font-size: 2vh; ">
+                                       <span style="border-left:15px solid #ffe600; padding-left:10px;">IBOR Contracts: </span>
+									   <a href="#" style="color:#ffe600;" id="total_fields_extracted_count">70</a> </br>
+                                       <span style="border-left:15px solid #777; padding-left:10px;">Non-IBOR Contracts: </span>
+									   <a href="#" style="color:#ffe600;" id="fields_not_extracted_count"> 100</a> </br>
+									    <a href="#" style="color:rgba(0,0,0,0); " id="total_fields"> 100</a> </br>
+									   
+							
+			                   
+							   </span>
+                                    </div>
+									
+									<div style="height:0px; width:0px;opacity:0;">
+                                       <div class="pie_dark" id="bla" data-value="67" >
+                                          <div  class="pie_dark-val" ><div id="field_extraction_percentage" style="color:white; font-size:0.3em; margin-top:-40px;">67%</div></div>
+                                       </div>
+                                    </div>
+                                    
+							  </div>
+                        </div>
+                    </div>
+                </div>
+				<div class="col-md-6" style="">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"></a>
+                                <a class="panel-close"></a>
+                            </div>
+                            Breakdown based on pages 
+                        </div>
+                        <div class="panel-body">
+						
+                            <div id="doughnutChartParent1" style=" ">
+							<div id='doughnutChartLegend1' style='margin-left:-30px;'></div>
+                                <canvas id="doughnutChart1" width="200" height="200" style=' float:left; margin-left:100px;'></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>		
+				<div class="col-md-6" style="">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            
+                            Processing Status
+                        </div>
+                        <div class="panel-body">
+                             <div class="buttonhover" style="background:none; min-height:50px; width:100%;  overflow:hidden; padding-top:20px;" >
+                              
+							  
+								<div class="container" style="width:100%;">
+  
+  <span style=" color: #ffe600; color:white; font-size: 2vh;">
+
+  Total documents: <a href="#" id="documents_count" style="color:#fff;">70</a> 
+  <div class="progress progressbar" style=" height: 5px;    background-color: #171717; border-left: 0px solid #777; border-radius: 0px; margin-bottom: 5px;">
+    <div class="progress-bar progress-bar-success" id="total" style="transition: width 1s ease; border:none; background-color: #fff; width: 70%;"></div>
+  </div>
+
+  <!-- Completed documents: <a href="#" id="complete_count" style="color:#00b386;"> 100</a> 
+  <div class="progress progressbar" style=" height: 5px;     background-color: #222; border-left: 0px solid #777;  border-radius: 0px; margin-bottom: 5px;">
+    <div class="progress-bar progress-bar-success" id="completed_progress" style="transition: width 1s ease; border:none; background-color: #00b386; width: 70%;"></div>
+  </div> -->
+
+  <!-- In Review: <a href="#" id="in_review_count" style="color:#bbb;">100</a> 
+  <div class="progress progressbar" style="  height: 5px;    background-color: #222; border-left: 0px solid #777; border-radius: 0px; margin-bottom: 5px;">
+    <div class="progress-bar progress-bar-success" id="review_progress" style="transition: width 1s ease; border:none; background-color: #bbb; width: 70%;"></div>
+  </div> -->
+
+Ready: <a href="#" id="in_progress_count" style="color:#ffe600;">1</a> 
+<div class="progress progressbar" style="  height: 5px;    background-color: #222; border-left: 0px solid #777; border-radius: 0px; margin-bottom: 5px;">
+    <div class="progress-bar progress-bar-success" id="progress_progress" style="transition: width 1s ease; border:none; background-color: #ffe600; width: 70%;"></div>
+  </div>
+
+Finalizing: <a href="#" id="not_started_count" style="color:#bbb;">1</a> 
+<div class="progress progressbar"style=" height: 5px;     background-color: #222; border-left: 0px solid #777; border-radius: 0px; padding-bottom:0px;">
+    <div class="progress-bar progress-bar-success" id="nstart_progress" style="transition: width 1s ease; border:none; background-color: #999; width: 70%;"></div>
+  </div> 
+  
+  </span>
+
+  
+
+
+</div>
+								
+								
+			
+							  
+							  
+							  
+							  </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </br></br>
+			<div class='row'>
+				
+			<div class="col-md-6">
+                    <div class="panel panel-filled" style='background:rgba(0,0,0,0.1)'>
+                        <div class="panel-heading">
+                            
+                            Document Types
+                        </div>
+                        <div class="panel-body">
+
+                            
+                            <script>
+
+                            </script>
+                           
+                            <div class="table-responsive">
+
+                                <table class="table table-hover table-striped table-bordered table-condensed" style='font-weight:400; color:white;' id="table0"></table>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+				<div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"></a>
+                                <a class="panel-close"></a>
+                            </div>
+                             PoC Document Characteristics 
+                        </div>
+                        <div class="panel-body">
+						
+                            <div id="barOptionsParent">
+							<div id='barOptionsLegend' style=''></div>
+                                <canvas id="barOptions" width="400" height="250" style=''></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+			
+				
+				<!-- <div class="col-md-4">
+
+                        <div class="panel panel-b-accent m-t-sm">
+                            <div class="panel-body text-center p-m">
+                                <h2 class="font-light" style="color: #555;">
+                                    Valid Documents
+									</br></br>
+									<span id="totalcount">211 <span></br>
+                                </h2>
+ 								
+								
+                                <div class="sparkline7 m-t-xs"></div>
+                            </div>
+                        </div>
+                    </div> -->
+				
+				
+
+            </div>
+			
+			
+
+            
+
+
+        </div>
+    </section>
+    <!-- End main content-->
+
+</div>
+<!-- End wrapper-->
+
+<!-- Vendor scripts -->
+<script src="/static/vendor/pacejs/pace.min.js"></script>
+<script src="/static/vendor/jquery/dist/jquery.min.js"></script>
+<script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/vendor/chart.js/dist/Chart.min.js"></script>
+<!-- App scripts -->
+<script src="/static/scripts/luna.js"></script>
+
+
+<script>
+$(document).ready(function() {
+	$("#navbar-frame").load("/nav_bar");
+});
+
+</script>
+
+
+<script>
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    console.log('today' + date);
+    document.getElementById('last_updated').innerHTML = date;
+
+window.localStorage.clear();
+window.localStorage.setItem('user', 'hi siddharth today is a friday');
+var my_arr;
+var parsedText;
+
+function displayResult(param)
+{
+document.getElementById('resultDiv').innerHTML = param;
+// console.log('########################333' + param);
+
+}
+
+function scoreOCR(arr) {
+    var i;
+    var sum_ocr = 0;
+    var arr_len = arr.length;
+
+    for(i = 0; i < arr_len; i++) {		
+        
+      sum_ocr += arr[i].ocr_suspicion_avg;      
+    }    
+	return sum_ocr/arr_len
+}
+
+//  Functions to populate KPI-page charts
+function countDocs(arr) {
+  var k =0;
+  
+  while (k < arr.length){
+    k++
+  }
+	return k
+}
+
+function countClasses(arr) {
+  var k =0;
+  var counter = 0;
+  var doc_class_set = new Set(); 
+  while (k < arr.length){
+    if(!doc_class_set.has(arr[k].ibor_doc_class)){
+		doc_class_set.add(arr[k].ibor_doc_class);
+		counter++;
+    }
+
+    k++;
+
+  }
+	return counter
+}
+
+function count_docs(arr,input_text) {
+  var k =0;
+  var counter = 0;
+  
+  while (k < arr.length){
+    if(arr[k].ibor_doc_class == input_text){
+        console.log(arr[k].ibor_doc_class);
+		counter++;
+    }
+    
+    k++;
+
+  }
+	return counter
+}
+
+function pageBuckets(arr){
+  var one_to_six = 0;
+  var six_to_twentyfive = 0;
+  var twentyfive_to_hundred = 0;
+  var more_than_hundred = 0;
+
+  var arr_len = arr.length;
+
+  for(i = 0; i < arr_len; i++) {        
+      if (arr[i].page_count < 6) {one_to_six += 1;}
+      else if (arr[i].page_count >= 6 && arr[i].page_count <= 25) {six_to_twentyfive += 1;}
+      else if (arr[i].page_count > 25 && arr[i].page_count <= 99) {twentyfive_to_hundred += 1;}
+      else {more_than_hundred += 1;}
+
+      }
+
+      return [one_to_six, six_to_twentyfive, twentyfive_to_hundred, more_than_hundred]
+}
+
+function docProcessStatus(arr) {
+    var i;
+    var in_prog = 0;
+    var not_start = 0;
+    var no_update = 0;
+    var arr_len = arr.length;
+
+    for(i = 0; i < arr_len; i++) {		
+        
+      if (arr[i].processing_status == 'Ready') {in_prog += 1;}
+      else if (arr[i].processing_status == 'Finalizing') {not_start += 1;}
+      else {no_update += 1;}      
+    
+    }
+
+  return [in_prog, not_start]
+  
+}
+
+
+
+
+
+
+// Load contracts.json
+const Http = new XMLHttpRequest();
+const url='https://qa002-ibornp.westus2.dip.sbp.eyclienthub.com:8000/demo/contracts.json';
+Http.open("GET", url);
+Http.send();
+
+Http.onreadystatechange = (e) => {
+	// debugger;
+	var my_total = -1;
+	//window.localStorage.setItem('user', Http.responseText);
+  var dataToStore = JSON.stringify(Http.responseText);
+  // console.log(Http.responseText)
+	var parsedText = JSON.parse(Http.responseText);
+     data = parsedText;
+     
+	localStorage.setItem('user', data);
+
+	
+	avg_ocr_score = Math.round(scoreOCR(data)*100).toFixed(2) + '%';	
+  console.log('Average of OCR score: ' + avg_ocr_score);
+  // document.getElementById("ocr_score").textContent = avg_ocr_score
+
+  total_num_docs = countDocs(data);	
+  console.log('Total Number of docs: ' + total_num_docs);
+
+  total_num_doc_classes = countClasses(data);	
+  console.log('Total Number of doc classes: ' + total_num_doc_classes);
+
+
+
+  ref_rate = doc_classes(data);
+    console.log('Ref Rate' + ref_rate[0][0]);
+    console.log('Ref Rate' + ref_rate[1][0]);
+
+     var array_names = ref_rate[0];
+                               var array_values = ref_rate[1];
+
+var result = "<table style='background:red;' border=1>";
+result += "<tr>";
+for (var j = 0; j < array_names.length; j++) {
+  result += "<td style='font-size:12px;  max-width: 500px; background:rgba(0,0,0,0.3);'>" + array_names[j] + "</td>";
+  result += "<td style='font-size:12px;   background:rgba(0,0,0,0.3);'>" + array_values[j] + "</td>";
+  if ((j + 1) % 1 == 0) {
+    result += "</tr><tr>";
+  }
+}
+result += "</tr>";
+result += "</table>";
+
+document.getElementById('table0').innerHTML = result;
+  // document.getElementById("documents_count_top").textContent = total_num_docs
+  // document.getElementById("documents_count").textContent = total_num_docs
+
+  doc_counts = pageBuckets(data);
+  doc_status = docProcessStatus(data);
+  var not_started = doc_status[1];
+  var in_progress = doc_status[0];
+  document.getElementById("in_progress_count").textContent = in_progress;
+  document.getElementById("not_started_count").textContent = 1//not_started;
+  
+
+  document.getElementById("ocr_score").textContent = avg_ocr_score;
+  document.getElementById("documents_count_top").textContent = total_num_docs;
+  document.getElementById("documents_count").textContent = total_num_docs;
+  document.getElementById("documents_class_count").textContent = total_num_doc_classes;
+  document.getElementById("nstart_progress").style.width = Math.round((not_started/total_num_docs)*100) + "%";	
+  document.getElementById("progress_progress").style.width = Math.round((in_progress/total_num_docs)*100) + "%";//0+ '%';	
+  
+	document.getElementById("total").style.width = 100 + "%";
+	
+
+
+function doc_classes(arr) {
+    var ref_rate = [];
+
+    for (var i = 0; i < arr.length; i++){
+        ref_rate.push(arr[i]['ibor_doc_class']);
+    }
+
+    var a = [], b = [], prev;
+
+    ref_rate.sort();
+    for ( var i = 0; i < ref_rate.length; i++ ) {
+        if ( ref_rate[i] !== prev ) {
+            a.push(ref_rate[i]);
+            b.push(1);
+        } else {
+            b[b.length-1]++;
+        }
+        prev = ref_rate[i];
+    }
+
+    return [a, b];
+
+}
+
+
+function getBoxWidth(labelOpts, fontSize) {
+  return labelOpts.usePointStyle ?
+    fontSize * Math.SQRT2 :
+  labelOpts.boxWidth;
+};
+
+Chart.NewLegend = Chart.Legend.extend({
+  afterFit: function() {
+    this.height = this.height + 50;
+  },
+});
+
+function createNewLegendAndAttach(chartInstance, legendOpts) {
+  var legend = new Chart.NewLegend({
+    ctx: chartInstance.chart.ctx,
+    options: legendOpts,
+    chart: chartInstance
+  });
+  
+  if (chartInstance.legend) {
+    Chart.layoutService.removeBox(chartInstance, chartInstance.legend);
+    delete chartInstance.newLegend;
+  }
+  
+  chartInstance.newLegend = legend;
+  Chart.layoutService.addBox(chartInstance, legend);
+}
+
+// Register the legend plugin
+Chart.plugins.register({
+  beforeInit: function(chartInstance) {
+    var legendOpts = chartInstance.options.legend;
+
+    if (legendOpts) {
+      createNewLegendAndAttach(chartInstance, legendOpts);
+    }
+  },
+  beforeUpdate: function(chartInstance) {
+    var legendOpts = chartInstance.options.legend;
+
+    if (legendOpts) {
+      legendOpts = Chart.helpers.configMerge(Chart.defaults.global.legend, legendOpts);
+
+      if (chartInstance.newLegend) {
+        chartInstance.newLegend.options = legendOpts;
+      } else {
+        createNewLegendAndAttach(chartInstance, legendOpts);
+      }
+    } else {
+      Chart.layoutService.removeBox(chartInstance, chartInstance.newLegend);
+      delete chartInstance.newLegend;
+    }
+  },
+  afterEvent: function(chartInstance, e) {
+    var legend = chartInstance.newLegend;
+    if (legend) {
+      legend.handleEvent(e);
+    }
+  }
+  
+});
+
+        var globalOptions = {
+            responsive: false,
+            legend: {
+                labels:{
+					fontColor: "white",
+					fontSize: 10
+                }
+            },
+			axisX:{
+   labelFontColor: "red",
+ },
+ axisY:{
+   labelFontColor: "red",
+ },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        fontColor: "white",
+						fontSize: 10,
+						labelFontColor: "red"
+                    },
+                    gridLines: {
+                        color: "#37393F"
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        fontColor: "white",
+						fontSize: 10,
+						labelFontColor: "red"
+                    },
+                    gridLines: {
+                        color: "#37393F"
+                    }
+                }]
+            }
+        };
+		
+		var globalOptions_noAxis = {
+            responsive: false,
+            legendCallback: function (chart) {
+            var text = [];
+            text.push('<table class="' + chart.id + '-legend"><tbody>');
+
+            var data = chart.data;
+            var datasets = data.datasets;
+            var labels = data.labels;
+			
+			// console.log(data);
+			// console.log(datasets);
+			// console.log(labels);
+
+            if (datasets.length) {
+                for (var i = 0; i < datasets[0].data.length; ++i) {
+                    text.push('<tr style="text-align: center;"><div style="margin-left:10px; height: 10px; width: 20px; float:left; background-color:' + chart.data.datasets[0].backgroundColor[i] + '"></div><div style="margin-left:10px; margin-top:-2px; float:left; color:white; font-size:12px;">' + labels[i] + ':  ' + datasets[0].data[i] + '</div></tr>'); 
+                    
+                }
+            }
+            text.push('</tbody></table>');
+            return text.join('');
+        },
+        legend: {
+            // since you're providing your own legend
+            display: false,
+        }
+        };
+		
+		var globalOptions_noAxis_noLegend = {
+            responsive: false,
+			legend: {
+                display: false
+            }
+        };
+		
+var doughnutData1 = {
+            labels: [
+                "<6 pages",
+                "6-25 pages",
+                "26-99 pages",
+                ">100+ pages"
+
+            ],
+            datasets: [
+                {
+                    data: [doc_counts[0], doc_counts[1], doc_counts[2], doc_counts[3]],
+                    borderWidth: 0,
+                    backgroundColor: [
+                        "rgba(255, 230, 0, 0.8)",
+                        "rgba(80,80,86, 0.8)",
+                        "rgba(200, 200, 200, .8)",
+                        "rgba(150, 150, 150, .8)"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(255, 230, 0, 0.8)",
+                        "rgba(80,80,86, 0.8)",
+                        "rgba(200, 200, 200, .8)",
+                        "rgba(150, 150, 150, .8)"
+                    ]
+                }]
+        };
+		
+		var element = document.getElementById("doughnutChart1");
+    element.parentNode.removeChild(element);
+	var p = document.getElementById("doughnutChartParent1");
+    var newElement = document.createElement('canvas');
+	var newElementLegend1 = document.createElement('div');
+	newElementLegend1.setAttribute('id', 'doughnutChartLegend1');
+	newElementLegend1.setAttribute("style", "  margin-left:100px;");
+	newElement.setAttribute('id', 'doughnutChart1');
+	newElement.setAttribute('width', '200');
+	newElement.setAttribute('height', '200');
+	newElement.setAttribute("style", "  margin-left:100px; float:left; ");
+    p.appendChild(newElement);
+
+		Chart.defaults.global.defaultFontColor='white';
+		
+		var c1 = document.getElementById("doughnutChart1").getContext("2d");
+        var temp1 = new Chart(c1, {type: 'doughnut', data: doughnutData1, options: globalOptions_noAxis});
+		var legend1 = temp1.generateLegend();
+		document.getElementById("doughnutChartLegend1").innerHTML = legend1;
+		
+		
+var barData = {
+            labels: ["No Issues Identified", "Multiple", "Incomplete", "Contract Set", "Template", "OCR Quality", "Complexity", "Non-IBOR", "Not a Contract"],
+            datasets:  [{
+      label: "Field",
+      data: [92, 32, 32, 17, 14, 3, 2, 2, 1],
+      backgroundColor: [
+        'rgba(255, 230, 0, 1)',
+        'rgba(119, 119, 119, 1)',
+        'rgba(60,60, 66, 1)', 
+        'rgba(100,100,100, 1)',
+        'rgba(187, 187, 187, 1)',
+        'rgba(230, 230, 78, 1)',
+        'rgba(140, 140, 142, 1)',
+        'rgba(197, 197, 197, 1)',
+        'rgba(244, 233, 78, 1)'        
+
+
+      ],
+      borderColor: [
+       'rgba(255,99,132,0)',
+        'rgba(54, 162, 235, 0)',
+        'rgba(60,60, 66, 0)',
+        'rgba(100,100,100, 0)',
+        'rgba(153, 102, 255, 0)',
+        'rgba(255, 159, 64, 0)'
+      ],
+      borderWidth: 1
+    }]
+        };
+
+		Chart.defaults.global.defaultFontColor='white';
+			
+		var c4 = document.getElementById("barOptions").getContext("2d");
+        var temp4 = new Chart(c4, {type: 'horizontalBar', data: barData, options: globalOptions_noAxis});
+		var legend4 = temp4.generateLegend();
+		document.getElementById("barOptionsLegend").innerHTML = legend4;
+
+	
+}
+
+</script>
+
+
+<script>
+
+
+
+window.localStorage.clear();
+d3.csv("/static/data/processed/BI_12032018.csv", function(data){
+	
+    var _temp;
+    // console.log(data);
+	var variables = data.columns;
+	var admin_agent_count_flag=0;
+	var admin_agent_role_flag="Administrative Agent";
+	var field_extraction_percentage_val = 0;
+  data.map(function(d) {
+    if (d['Extraction status']=='In Progress') {
+	admin_agent_count_flag++;
+        // console.log( d['LegalEntitysRoles'] );
+		}
+	
+	/*document.getElementById("admin_agent_count").textContent=admin_agent_count_flag ;
+	document.getElementById("admin_agent_role").textContent=admin_agent_role_flag ;*/
+	
+  });
+  
+  var documents_flag=0;
+  var variables = data.columns;
+  variables.forEach(function(d) {
+  if (d == 'Extraction status') {
+		for (var i=0; i < 300; i += 1){
+
+				try{
+				
+				if(typeof(data[i])!="undefined"){
+					documents_flag++;
+					}
+				}
+			catch(e){
+					console.log('An error has occurred: '+e.message);
+				}	
+
+		}}
+
+  });
+  
+  
+  let legal_role_set = new Set();
+  var weak_flag = 0;
+   var ibor = 0;
+var    nibor =0;
+var ibor_unextracted=0;
+var  silent_flag = 0;
+var  strong_flag = 0;
+var blank_flag=0;
+var medium_flag = 0;
+  let legal_entity_set = new Set();
+  let borrower_role_set = new Set();
+  let holdings_role_set = new Set();
+  let admin_role_set = new Set();
+  let borrower_role_set_current = new Set();
+  var borrower_role_list_current = [];
+  var admin_role_list = [];
+  var ref_rate = {"No rate": 0, "USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent": 0, "Eurocurrency Rate": 0, 
+  "Adjusted LIBOR": 0, "LIBOR": 0, "Eurodollar": 0, "EURIBO": 0};
+  var holdings_role_list = [];
+  var borrower_role_list = [];
+  var legal_role_list = [];
+   var legal_entity_list = [];
+  var ContractualMaturityDatePre2021 = [];
+  var ContractualMaturityDatePost2021 = [];
+  var ContractualMaturityDateUnextracted = [];
+  
+  var variables = data.columns;
+  variables.forEach(function(d) {
+    if (d == "Clean LE") {
+	
+		for (var i=0; i < documents_flag; i += 1){
+			
+			 
+			if(!data[i][d].includes('Unextracted')){
+				legal_entity_set.add(data[i][d]);
+				legal_entity_list.push(data[i][d]);
+				}
+			
+			
+		}
+	}
+    if (d == "Clean LER") {
+	
+		for (var i=0; i < documents_flag; i += 1){
+			
+			
+			if(!data[i][d].includes('Unextracted')){
+				legal_role_set.add(data[i][d]);
+				legal_role_list.push(data[i][d]);
+				}
+			
+			
+		}
+	}
+	/*document.getElementById("lead_arranger").textContent="Arranger" ;
+	document.getElementById("lead_arranger_count").textContent=legal_role_list.length ;
+	document.getElementById("lead_arranger_count").textContent=" " ;*/
+	if (d == "Clean Borrower") {
+		for (var i=0; i < documents_flag; i += 1){
+
+			
+			if(!data[i][d].includes('Unextracted')){
+				borrower_role_set.add(data[i][d]);
+				borrower_role_list.push(data[i][d]);
+				}
+			
+		}
+	}
+	
+	/*document.getElementById("borrower_role").textContent="Borrower" ;
+	document.getElementById("borrower_count").textContent=borrower_role_list.length ;
+	document.getElementById("borrower_count").textContent=" " ;*/
+	if (d == "Clean AA") {
+		for (var i=0; i < documents_flag; i += 1){
+
+			
+			if(!data[i][d].includes('Unextracted')){
+				admin_role_set.add(data[i][d]);
+				admin_role_list.push(data[i][d]);
+				}
+			
+		}
+	}
+	
+	/*document.getElementById("admin_agent_role").textContent="CalculationAdministrativeAgent" ;
+	document.getElementById("admin_agent_count").textContent=admin_role_list.length ;
+	document.getElementById("admin_agent_count").textContent=" " ;*/
+	if (d == "Clean Holdings") {
+		for (var i=0; i < documents_flag; i += 1){
+
+			
+			if(!data[i][d].includes('Unextracted')){
+				holdings_role_set.add(data[i][d]);
+				holdings_role_list.push(data[i][d]);
+				}
+			
+		}
+	}
+	
+	/*document.getElementById("holdings_role").textContent="Holdings" ;
+	document.getElementById("holdings_count").textContent=holdings_role_list.length ;
+	document.getElementById("holdings_count").textContent=" " ;*/
+	if (d == "ContractualMaturityDate") {
+		for (var i=0; i < documents_flag; i += 1){
+
+			if (data[i]['Full File Name'].includes('CREDIT') || data[i]['Full File Name'].includes('Credit') || data[i]['Full File Name'].includes('credit')
+		|| data[i]['Full File Name'].includes('agreement') || data[i]['Full File Name'].includes('Agreement') || data[i]['Full File Name'].includes('AGREEMENT')
+		|| data[i]['Full File Name'].includes('resta') || data[i]['Full File Name'].includes('Resta') || data[i]['Full File Name'].includes('RESTA')) {
+			if(!data[i][d].includes('Unextracted') ){
+				var mydate = new Date(data[i][d]);
+				if (mydate.getFullYear()<2021)
+					ContractualMaturityDatePre2021.push(mydate);
+				else
+					ContractualMaturityDatePost2021.push(mydate);
+				}
+			else
+				{	
+					ContractualMaturityDateUnextracted.push(data[i][d]);
+				}
+			}
+		}
+	}
+	/*document.getElementById("field_extraction_percentage").textContent=92 + "%";*/
+	
+	if (d == "ReferenceRate Only") {
+		for (var i=0; i < documents_flag; i += 1){
+
+			if (data[i]['Full File Name'].includes('CREDIT') || data[i]['Full File Name'].includes('Credit') || data[i]['Full File Name'].includes('credit')
+		|| data[i]['Full File Name'].includes('agreement') || data[i]['Full File Name'].includes('Agreement') || data[i]['Full File Name'].includes('AGREEMENT')
+		|| data[i]['Full File Name'].includes('resta') || data[i]['Full File Name'].includes('Resta') || data[i]['Full File Name'].includes('RESTA')) {
+			if(!data[i][d].includes('Unextracted') ){
+				
+				for(var key in ref_rate) {
+					// console.log(key);
+					// console.log(data[i][d]);
+					if (data[i][d].includes(key))
+						{
+							ref_rate[key]++;
+						}
+  }
+  
+  
+				}
+			
+			}
+		}
+	}
+	/*document.getElementById("ref_rate_1").textContent=1;//ref_rate["No rate"];
+	document.getElementById("ref_rate_2").textContent=5;//ref_rate["USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent"];
+	document.getElementById("ref_rate_3").textContent=23;//ref_rate["Eurocurrency Rate"];
+	document.getElementById("ref_rate_4").textContent=47;//ref_rate["Eurodollar"];
+	document.getElementById("ref_rate_5").textContent=33;//ref_rate["EURIBO"];
+	document.getElementById("ref_rate_6").textContent=90;//ref_rate["LIBOR"];
+	document.getElementById("ref_rate_7").textContent=ref_rate["Adjusted LIBOR"];*/
+	
+	if (d == "IBOR/NON-IBOR") {
+		for (var i=0; i < documents_flag; i += 1){
+
+			
+			if(!data[i][d].includes('No Data Present') ){
+				
+				if (data[i][d]=="IBOR")
+					{ibor++;}
+				else if (data[i][d].includes("NON"))
+					{nibor++;}
+				}
+			else
+			{
+				ibor_unextracted++;
+			}
+			
+			
+		}
+	}
+	
+	
+	
+	
+field_extraction_percentage = Math.round(ContractualMaturityDatePost2021.length/(ContractualMaturityDatePre2021.length+ContractualMaturityDatePost2021.length)*100);
+	document.getElementById("field_extraction_percentage").textContent=ContractualMaturityDatePost2021.length + "/" + ContractualMaturityDatePre2021.length;
+	
+	
+		
+/*		  
+	document.getElementById("pre_count").textContent=;ContractualMaturityDatePre2021.length// 29;
+	document.getElementById("post_count").textContent=ContractualMaturityDatePost2021.length;//148 ;
+	document.getElementById("ContractualMaturityDateUnextractedCount").textContent=current_unextracted_matdate_count;//22;
+*/	
+$(document).ready( function () {
+  	    $( "#bla" ).attr('data-value', field_extraction_percentage ); 	  
+}); 
+
+	if (d == "Fallback Language Strength") {
+		for (var i=0; i < documents_flag; i += 1){
+
+			if (data[i]['Full File Name'].includes('CREDIT') || data[i]['Full File Name'].includes('Credit') || data[i]['Full File Name'].includes('credit')
+		|| data[i]['Full File Name'].includes('agreement') || data[i]['Full File Name'].includes('Agreement') || data[i]['Full File Name'].includes('AGREEMENT')
+		|| data[i]['Full File Name'].includes('resta') || data[i]['Full File Name'].includes('Resta') || data[i]['Full File Name'].includes('RESTA')) {
+			
+				if(data[i][d].includes('Weak')){
+				weak_flag++;}
+			else if(data[i][d].includes('Silent')){
+				silent_flag++;}
+			else if(data[i][d].includes('Medium')){
+				medium_flag++;}
+			else if(data[i][d].includes('Strong')){
+				strong_flag++;}
+			else
+				blank_flag++;
+				
+				
+			}
+		}
+	}
+
+  });
+  
+  
+  var variables = data.columns;
+	var SYNDICATED_flag=0;
+	var MORTGAGE_flag=0;
+	var ISDA_flag=0;
+	var TOTAL_flag=0;
+  data.map(function(d) {
+    if (!d['Full File Name'].includes('Unextracted')) {
+		TOTAL_flag++;
+		if (d['Full File Name'].includes('CREDIT') || d['Full File Name'].includes('Credit') || d['Full File Name'].includes('credit')
+		|| d['Full File Name'].includes('agreement') || d['Full File Name'].includes('Agreement') || d['Full File Name'].includes('AGREEMENT')
+		|| d['Full File Name'].includes('resta') || d['Full File Name'].includes('Resta') || d['Full File Name'].includes('RESTA')) {
+			SYNDICATED_flag++;
+		}
+		
+		if (d['Full File Name'].includes('confirm') || d['Full File Name'].includes('Confirm') || d['Full File Name'].includes('CONFIRM') 
+		|| d['Full File Name'].includes('Master') || d['Full File Name'].includes('master') || d['Full File Name'].includes('isda')) {
+			ISDA_flag++;
+		}
+		
+		if (d['Full File Name'].includes('CLOSING') || d['Full File Name'].includes('closing') || d['Full File Name'].includes('Closing')) {
+			MORTGAGE_flag++;
+			// console.log(d['Full File Name']);
+		}
+	}
+	
+	
+	
+  });
+  
+  var total_fields_extracted = [];
+  var fields_not_extracted = [];
+  var documents_flag=0;
+  var in_progress=0;
+  var in_review=0;
+  var MORTGAGE = [0,0,0,0];
+  var SYNDICATED = [0,0,0,0];
+  var ISDA = [0,0,0,0] ;  //completed[0], not started[1], in review[2], in progress[3]
+  var complete=0;
+  var not_started=0;
+  var variables = data.columns;
+  var field_extraction_percentage_val = 0;
+  var field_extraction_val = 0;
+
+
+  variables.forEach(function(d) {
+  
+  
+  if (d == 'Extraction status')
+  {
+		for (var i=0; i < (ISDA_flag+MORTGAGE_flag+SYNDICATED_flag); i += 1){
+
+			
+			try  // KPI progress bar
+			{	 
+			
+				if (data[i][d].includes('Complete')) {
+					complete++;
+					if (data[i]['Full File Name'].includes('CREDIT') || data[i]['Full File Name'].includes('Credit') || data[i]['Full File Name'].includes('credit')
+		|| data[i]['Full File Name'].includes('agreement') || data[i]['Full File Name'].includes('Agreement') || data[i]['Full File Name'].includes('AGREEMENT')
+		|| data[i]['Full File Name'].includes('resta') || data[i]['Full File Name'].includes('Resta') || data[i]['Full File Name'].includes('RESTA')) {
+			SYNDICATED[0]++;
+		}
+		
+		if (data[i]['Full File Name'].includes('confirm') || data[i]['Full File Name'].includes('Confirm') || data[i]['Full File Name'].includes('CONFIRM')
+		|| data[i]['Full File Name'].includes('Master') || data[i]['Full File Name'].includes('master') || data[i]['Full File Name'].includes('isda')) {
+			ISDA[0]++;
+		}
+		
+		if (data[i]['Full File Name'].includes('CLOSING') || data[i]['Full File Name'].includes('closing') || data[i]['Full File Name'].includes('Closing')) {
+			MORTGAGE[0]++;
+		}
+				}
+				if (data[i][d].includes('Not Started')) {
+					not_started++;
+					if (data[i]['Full File Name'].includes('CREDIT') || data[i]['Full File Name'].includes('Credit') || data[i]['Full File Name'].includes('credit')
+		|| data[i]['Full File Name'].includes('agreement') || data[i]['Full File Name'].includes('Agreement') || data[i]['Full File Name'].includes('AGREEMENT')
+		|| data[i]['Full File Name'].includes('resta') || data[i]['Full File Name'].includes('Resta') || data[i]['Full File Name'].includes('RESTA')) {
+			SYNDICATED[1]++;
+		}
+		
+		if (data[i]['Full File Name'].includes('confirm') || data[i]['Full File Name'].includes('Confirm') || data[i]['Full File Name'].includes('CONFIRM')
+		|| data[i]['Full File Name'].includes('Master') || data[i]['Full File Name'].includes('master') || data[i]['Full File Name'].includes('isda')) {
+			ISDA[1]++;
+		}
+		
+		if (data[i]['Full File Name'].includes('CLOSING') || data[i]['Full File Name'].includes('closing') || data[i]['Full File Name'].includes('Closing')) {
+			MORTGAGE[1]++;
+		}
+				}
+				if (data[i][d].includes('In Review')) {
+					in_review++;
+					if (data[i]['Full File Name'].includes('CREDIT') || data[i]['Full File Name'].includes('Credit') || data[i]['Full File Name'].includes('credit')
+		|| data[i]['Full File Name'].includes('agreement') || data[i]['Full File Name'].includes('Agreement') || data[i]['Full File Name'].includes('AGREEMENT')
+		|| data[i]['Full File Name'].includes('resta') || data[i]['Full File Name'].includes('Resta') || data[i]['Full File Name'].includes('RESTA')) {
+			SYNDICATED[2]++;
+		}
+		
+		if (data[i]['Full File Name'].includes('confirm') || data[i]['Full File Name'].includes('Confirm') || data[i]['Full File Name'].includes('CONFIRM')
+		|| data[i]['Full File Name'].includes('Master') || data[i]['Full File Name'].includes('master') || data[i]['Full File Name'].includes('isda')) {
+			ISDA[2]++;
+		}
+		
+		if (data[i]['Full File Name'].includes('CLOSING') || data[i]['Full File Name'].includes('closing') || data[i]['Full File Name'].includes('Closing')) {
+			MORTGAGE[2]++;
+		}
+				}
+				if (data[i][d].includes('In Progress')) {
+					in_progress++;
+					if (data[i]['Full File Name'].includes('CREDIT') || data[i]['Full File Name'].includes('Credit') || data[i]['Full File Name'].includes('credit')
+		|| data[i]['Full File Name'].includes('agreement') || data[i]['Full File Name'].includes('Agreement') || data[i]['Full File Name'].includes('AGREEMENT')
+		|| data[i]['Full File Name'].includes('resta') || data[i]['Full File Name'].includes('Resta') || data[i]['Full File Name'].includes('RESTA')) {
+			SYNDICATED[3]++;
+		}
+		
+		if (data[i]['Full File Name'].includes('confirm') || data[i]['Full File Name'].includes('Confirm') || data[i]['Full File Name'].includes('CONFIRM')
+		|| data[i]['Full File Name'].includes('Master') || data[i]['Full File Name'].includes('master') || data[i]['Full File Name'].includes('isda')) {
+			ISDA[3]++;
+		}
+		
+		if (data[i]['Full File Name'].includes('CLOSING') || data[i]['Full File Name'].includes('closing') || data[i]['Full File Name'].includes('Closing')) {
+			MORTGAGE[3]++;
+		}
+				}
+				if(typeof(data[i])!="undefined"){
+					documents_flag++;
+					}
+				
+			}
+			catch(e){
+					console.log('An error has occurred: '+e.message);
+				}	
+				
+				
+			
+			
+		}
+	}
+	
+	
+	//dynamic update html for javacsript varibales
+	
+		// document.getElementById("documents_count").textContent= total_num_docs; //documents_flag; //466
+		// document.getElementById("not_started_count").textContent=not_started ;
+		document.getElementById("complete_count").textContent=complete; // 442;
+		document.getElementById("in_review_count").textContent=in_review;// 0;
+		// document.getElementById("in_progress_count").textContent=in_progress;//0;
+    //document.getElementById("documents_count_top").textContent = total_num_docs
+    
+		
+		
+		var pc = ((documents_flag-not_started)/documents_flag*100) + "%";
+	
+	
+	// document.getElementById("nstart_progress").style.width = Math.round((not_started/documents_flag)*100) + "%";
+	// document.getElementById("review_progress").style.width = Math.round((in_review/documents_flag)*100) + "%";// 0+ '%';
+	// document.getElementById("progress_progress").style.width = Math.round((in_progress/documents_flag)*100) + "%";//0+ '%';
+	// document.getElementById("completed_progress").style.width = Math.round((complete/documents_flag)*100) + "%" ;//(442/466*100) + '%';
+	// document.getElementById("total").style.width = 100 + "%";
+	
+	
+	for (var i=0; i < documents_flag; i += 1){
+
+				if (data[i]['Full File Name'].includes('CREDIT') || data[i]['Full File Name'].includes('Credit') || data[i]['Full File Name'].includes('credit')
+		|| data[i]['Full File Name'].includes('agreement') || data[i]['Full File Name'].includes('Agreement') || data[i]['Full File Name'].includes('AGREEMENT')
+		|| data[i]['Full File Name'].includes('resta') || data[i]['Full File Name'].includes('Resta') || data[i]['Full File Name'].includes('RESTA')) {
+		
+				total_fields_extracted.push(data[i][d]);
+				if(data[i][d].includes('Unextracted')){
+					fields_not_extracted.push(data[i][d]);
+				}
+			}
+			
+		}
+	
+	
+	
+	field_extraction_val=total_fields_extracted.length-fields_not_extracted.length ;
+//	document.getElementById("total_fields_extracted_count").textContent = field_extraction_val; //3624;
+	field_extraction_percentage_val = Math.ceil(field_extraction_val/total_fields_extracted.length * 100) ;
+	document.getElementById("field_extraction_percentage").textContent=field_extraction_percentage_val + "%";
+//	document.getElementById("total_fields").textContent=total_fields_extracted.length; //3815;
+
+	
+/*	
+	document.getElementById("fields_not_extracted_count").textContent=fields_not_extracted.length ;//191;
+	document.getElementById("total_fields_extracted_count").textContent = field_extraction_val; //3624;
+	document.getElementById("total_fields").textContent=total_fields_extracted.length; //3815;
+*/	
+
+	document.getElementById("fields_not_extracted_count").textContent = ibor ;//191;
+	document.getElementById("total_fields_extracted_count").textContent = nibor; 	
+	
+	document.getElementById("slcount").textContent=SYNDICATED_flag;//211;
+	document.getElementById("isdacount").textContent=ISDA_flag;//113;
+	document.getElementById("mortcount").textContent=MORTGAGE_flag;//118;
+	document.getElementById("totalcount").textContent=(ISDA_flag+MORTGAGE_flag+SYNDICATED_flag);//442;
+	
+	document.getElementById("mortvalue").textContent=MORTGAGE[0];//118;
+	document.getElementById("mortcompleted").textContent=MORTGAGE[0];//118;
+	document.getElementById("mortreview").textContent=MORTGAGE[2];//0;
+	document.getElementById("mortprogress").textContent=MORTGAGE[3];//0;
+	document.getElementById("mortnstart").textContent=MORTGAGE[1];//0;
+	
+	document.getElementById("isdavalue").textContent=ISDA[0];//113;
+	document.getElementById("isdacompleted").textContent=ISDA[0];//113;
+	document.getElementById("isdareview").textContent=ISDA[2];//0;
+	document.getElementById("isdaprogress").textContent=ISDA[3];//0;
+	document.getElementById("isdanstart").textContent=ISDA[1];//0;
+	
+	document.getElementById("slvalue").textContent=SYNDICATED[0]; //211;
+	document.getElementById("slcompleted").textContent= SYNDICATED[0]; //211;
+	document.getElementById("slreview").textContent=SYNDICATED[2]; //0;
+	document.getElementById("slprogress").textContent= SYNDICATED[3]; //0;
+	document.getElementById("slnstart").textContent= SYNDICATED[1]; //0;
+	
+	
+  });
+
+  
+//pie chart for syndicated_loan 
+var dataset_doc1 = {
+  mat_date: [SYNDICATED[0], SYNDICATED[1], SYNDICATED[2], SYNDICATED[3]] 		//FOR DEMO
+}; 
+ 
+pie_segments_doc1(dataset_doc1); 
+
+
+
+//pie chart for mortgage 
+var dataset_doc2 = {
+  mat_date: [MORTGAGE[0], MORTGAGE[1], MORTGAGE[2], MORTGAGE[3]] 		//FOR DEMO
+}; 
+ 
+pie_segments_doc2(dataset_doc2); 
+
+
+
+//pie chart for isda 
+var dataset_doc3 = {
+  mat_date: [ISDA[0], ISDA[1], ISDA[2], ISDA[3]] 		//FOR DEMO
+}; 
+ 
+pie_segments_doc3(dataset_doc3); 
+
+
+
+ 
+/*	  
+var dataset = {
+  mat_date: [3624,191] 		//FOR DEMO
+};
+	pie_segments2(dataset);
+  
+  var dataset_doc1 = {
+  mat_date: [211] 		//FOR DEMO
+};
+
+var dataset_doc2 = {
+  mat_date: [118] 		//FOR DEMO
+};
+
+var dataset_doc3 = {
+  mat_date: [113] 		//FOR DEMO
+};
+	
+  pie_segments_doc1(dataset_doc1);
+  pie_segments_doc2(dataset_doc2);
+  pie_segments_doc3(dataset_doc3);
+	
+*/	
+    
+
+  
+  var dataset2 = {
+  mat_date: [ibor, nibor, 0] // ibor_unextracted
+  //mat_date: [ibor, nibor, 0]
+};
+ 
+
+
+ 
+  
+  var dataset = {
+  mat_date: [ContractualMaturityDatePre2021.length, ContractualMaturityDatePost2021.length, ContractualMaturityDateUnextracted.length]
+  //mat_date: [29, 148, 22]
+};
+
+var dataset1 = {
+  mat_date: [
+ref_rate["No rate"],
+ref_rate["USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent"],
+ref_rate["Eurocurrency Rate"],
+ref_rate["Eurodollar"],
+ref_rate["EURIBO"],
+ref_rate["LIBOR"],
+ref_rate["Adjusted LIBOR"]
+  ]
+};
+/*
+var dataset1 = {			//REMOVE AFTER DEMO
+  mat_date: [
+1,
+5,
+23,
+47,
+33,
+90,
+ref_rate["Adjusted LIBOR"]
+  ]
+};
+
+weak_flag=38;  //	temp hard code for demo -- remove later 
+strong_flag=67;
+silent_flag=17;
+medium_flag=77;
+*/
+var bardata = [0,silent_flag*2, weak_flag*2, medium_flag*2, strong_flag*2];
+	cost_bar(bardata);
+	
+/*	document.getElementById("silent").textContent=silent_flag;
+	document.getElementById("weak").textContent=weak_flag;
+	document.getElementById("medium").textContent=medium_flag;
+	document.getElementById("strong").textContent=strong_flag;
+  
+  holdings_role_set.forEach((el) => {
+  console.log(el);
+});*/
+
+/*
+  pie_segments1(dataset1);
+  pie_segments2(dataset2);
+  pie_segments(dataset);
+*/
+// IBOR/NON-IBOR
+    pie_segments2(dataset2);
+
+// Syndicated loan 
+//  pie_segments_doc1(dataset);
+  
+// Mortgage  
+//  pie_segments_doc2(dataset1);
+  
+// ISDA  
+//  pie_segments_doc3(dataset2);
+  
+
+let set3 = new Set(function*() { yield* legal_entity_set; yield* admin_role_set; yield* holdings_role_set; yield* borrower_role_set; }());
+/*An array containing all the country names in the world:*/
+// console.log(set3);
+let countries = Array.from(set3);
+// console.log(countries);
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete(document.getElementById("myInput"), countries);
+  
+function msg() {
+    alert("Hello world!");
+}
+  
+function pie_segments(dataset){
+  
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#ffe600", "#777", "#999"],
+    svg = d3.select('#container1234')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')');
+        
+radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+    .sort(null);
+
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+		.attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+
+  
+  }
+  
+  function pie_segments1(dataset){
+  
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#ffe600", "cornflowerblue", "rgb(66, 62, 110)", "#D95B43", "#53777A", "#7792AE" , "#AE9377"],
+    svg = d3.select('#container123')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+		  
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')')
+		.on("click", function(d, i) {
+    window.location = "#";
+  });
+        
+radius = Math.min(width, height) / 2;
+
+var tooltip = d3.select('#container123')                               // NEW
+          .append('div')                                                // NEW
+          .attr('class', 'tooltip');                                    // NEW
+                      
+        tooltip.append('div')                                           // NEW
+          .attr('class', 'label');                                      // NEW
+             
+        tooltip.append('div')                                           // NEW
+          .attr('class', 'count');                                      // NEW
+
+        tooltip.append('div')                                           // NEW
+          .attr('class', 'percent');                                    // NEW
+
+
+var pie = d3.pie()
+    .sort(null);
+	
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("#container123 path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+	.attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+	
+
+
+  
+  }
+  
+  
+  
+  function pie_segments_doc1(dataset){
+  
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#00b386","#ffe600", "#777", "#ddd"],
+    svg = d3.select('#container_doc1')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')');
+        
+radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+    .sort(null);
+
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("#container12 path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+		.attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+
+  
+  }
+  
+  
+  
+  function pie_segments_doc2(dataset){
+  
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#00b386","#ffe600", "#777", "#ddd"],
+    svg = d3.select('#container_doc2')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')');
+        
+radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+    .sort(null);
+
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("#container12 path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+		.attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+
+  
+  }
+  
+  
+  
+  function pie_segments_doc3(dataset){
+  
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#00b386","#ffe600", "#777", "#ddd"],
+    svg = d3.select('#container_doc3')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')');
+        
+radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+    .sort(null);
+
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("#container12 path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+		.attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+
+  
+  }
+  
+  
+  function pie_segments2(dataset){
+  
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#ffe600", "#777", "#ddd"],
+    svg = d3.select('#container12')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')');
+        
+radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+    .sort(null);
+
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("#container12 path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+		.attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+
+  
+  }
+  
+  function cost_bar(bardata){
+	
+
+var height = 200,
+    width = 400,
+    barWidth = 70,
+    barOffset = 5;
+	
+var colors = ['red','#bb0826','#f04c3e','#ffc000','#00b050'];
+
+d3.select('#chart').append('svg')
+  .attr('width', width)
+  .attr('height', height)
+  .style('background', 'none')
+  .selectAll('rect').data(bardata)
+  .enter().append('rect')
+      .style('fill', function(d,i){ return colors[i]})
+      .attr('width', barWidth)
+      .attr('height', function(d) {
+          return d;
+})
+
+ .attr('x', function(d,i) {
+          return i * (barWidth + barOffset);
+})
+  .attr('y', function(d) {
+          return height - d;
+  })
+
+
+
+  }
+  
+  
+  
+  
+});
+
+
+</script>
+
+</body>
+
+
+
+</html>

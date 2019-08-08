@@ -1,0 +1,56 @@
+Phrase,Concept,Tag
+Affected Party,Party,party_class
+ such business is not continued by a successor ,Rating_Based,rating_based_class
+by twenty percent (20%) or more compared to,Event Type Attribute,event_class
+"as of any day the Net Asset Value of Party B declines below USD30,000,000",Event Type Attribute,event_class
+A-2 by S&P,Rating_Based,rating_based_class
+"ability to exercise its rights, under this agreement",Event Type Attribute,event_class
+Additional Event of Default,Event Type Identification,event_class
+all outstanding Transactions,Rating_Based,rating_based_class
+any financial information,Event Type Attribute,event_class
+Any of the constitutive documents or the Prospectus relating to,Event Type Attribute,event_class
+Baa2 by Moody's,Rating_Based,rating_based_class
+BBB by Standard,Rating_Based,rating_based_class
+both of Moody's and S&P shall fail to provide such ratings,Rating_Based,rating_based_class
+Both Party A and Party B shall have the right,Designated Party,party_class
+both Party A and Party B will be the Affected Parties,Party,party_class
+ceases to be rated,Rating_Based,rating_based_class
+Credit Support Provider,Party,party_class
+extent rated on or after date of this agreement,Rating_Based,rating_based_class
+failure to do so shall constitute an Additional Termination Event,Rating_Based,rating_based_class
+five (5) calendar days,Notification,notification_class
+following the Business Day on which the Ratings Triggering Event Notice is delivered by Party B,Rating_Based,rating_based_class
+giving at least five (5) London Business Days prior notice to Party A,Notification,notification_class
+If either party,Party,party_class
+If one of the foregoing credit rating agencies ceases to be in the business of rating debt securities,Rating_Based,rating_based_class
+Impossibility,Event Type Identification,event_class
+last Local Business Day of any calendar month,Notification,notification_class
+last Local Business Day of the twelfth prior calendar month,Event Type Attribute,event_class
+Local Business Day,Rating_Based,rating_based_class
+Net Asset Value,Event Type Attribute,event_class
+"no exemption from the ""prohibited transaction provisions ERISA and Code",Event Attribute,event_class
+notifies the other party in writing,Notification,notification_class
+of Party A,Party,party_class
+or approval is withdrawn or subjected to conditions,Event Type Attribute,event_class
+or Credit Support Provider,Party,party_class
+outstanding senior debt of Party A,Rating_Based,rating_based_class
+P-2 by Moody,Rating_Based,rating_based_class
+Party B shall have the right to send a written notice to Party A,Notification,notification_class
+prior written notice,Notification,notification_class
+Prohibited Transaction,Event Type,event_class
+promptly provides to the other Party (in writing),Notification,notification_class
+"Provided however that if Party B is not subject to ERISA as specified in an Exhibit hereto, Party B represents that it is not and will not be a Benefit Plan",Event Attribute,event_class
+"ratings downgrade of Party B, Party B shall be the sole Affected Party",Party,party_class
+Ratings Termination Event,Event Type Identification,event_class
+respect to Party A and Party B,Party,party_class
+senior unsecured long-term indebtedness,Rating_Based,rating_based_class
+shall constitute an Additional Termination Event,Rating_Based,rating_based_class
+the long-term senior unsecured debt,Rating_Based,rating_based_class
+The Regulator's authorization,Event Type Attribute,event_class
+the senior unsecured long-term indebtedness,Rating_Based,event_class
+to perform its obligations,Event Type Attribute,event_class
+Trustee,Event Type Identification,event_class
+under ERISA,Event Attribute,event_class
+with respect to Party A,Party,party_class
+within 30 calendar days,Notification,notification_class
+XXX ceases to be responsible for the day-to-day portfolio management,Event Type Attribute,event_class

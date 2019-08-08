@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from webapplayers.com/luna_admin-v1.3/chartJs.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 03 Jan 2019 14:09:17 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+
+    <!-- Page title -->
+    <title>EY Business Intelligence</title>
+
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="vendor/animate.css/animate.css"/>
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css"/>
+	
+	<link rel="icon" href="EYBIicon.png" sizes="32x32" />
+	<link rel="icon" href="EYBIicon.png" sizes="192x192" />
+    
+	<!-- App styles -->
+    <link rel="stylesheet" href="styles/pe-icons/pe-icon-7-stroke.css"/>
+    <link rel="stylesheet" href="styles/pe-icons/helper.css"/>
+    <link rel="stylesheet" href="styles/stroke-icons/style.css"/>
+    <link rel="stylesheet" href="styles/style.css">
+	
+	<script type='text/javascript' src='../wp-includes/js/jquery/jqueryb8ff.js?ver=1.12.4'></script>
+	<script src="../inputdata/d3.v4.min.js"></script>
+	<script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script>
+	
+	
+</head>
+<body>
+
+<!-- Wrapper-->
+<div class="wrapper">
+
+    <!-- Header-->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div id="mobile-menu">
+                    <div class="left-nav-toggle">
+                        <a href="#">
+                            <i class="stroke-hamburgermenu"></i>
+                        </a>
+                    </div>
+                </div>
+                <a class="navbar-brand" style="background: #2f323b;" href="index.html">
+                    <a href="Summary_KPI.html">
+                	<img src="EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
+					<!--<span style="color:white;"> Business </br> Intelligence</span>-->
+                </a>
+                </a>
+            </div>
+            <!--<div id="navbar" class="navbar-collapse collapse">
+                <div class="left-nav-toggle">
+                    <a href="#">
+                        <i class="stroke-hamburgermenu"></i>
+                    </a>
+                </div>
+                <form class="navbar-form navbar-left">
+                    <input type="text" class="form-control" placeholder="Search data for analysis" style="width: 175px">
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="versions.html" >Versions
+                            <span class="label label-warning pull-right">2</span>
+                        </a>
+                    </li>
+                    <li class=" profil-link">
+                        <a href="login.html">
+                            <span class="profile-address">luna@company.io</span>
+                            <img src="images/profile.jpg" class="img-circle" alt="">
+                        </a>
+                    </li>
+                </ul>
+            </div>-->
+        </div>
+    </nav>
+    <!-- End header-->
+
+    <!-- Navigation-->
+    <aside class="navigation">
+        <nav>
+            <ul class="nav luna-nav">
+                 <li class="active">
+                    <a href="#charts" >
+                        Summary
+                    </a>
+                </li>
+                
+
+                <li>
+                    <a href="#uielements" data-toggle="collapse" aria-expanded="false">
+                        BI Reporting<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
+                    </a>
+                    <ul id="uielements" class="nav nav-second collapse">
+                        <li><a href="panels.html">Syndicate Loans</a></li>
+                        <li><a href="typography.html">Mortgage</a></li>
+                        <li><a href="icons.html">ISDA</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#tables" data-toggle="collapse" aria-expanded="false">
+                        Fallback Language<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
+                    </a>
+                    <ul id="tables" class="nav nav-second collapse">
+                        <li><a href="panels.html">Syndicate Loans</a></li>
+                        <li><a href="typography.html">Mortgage</a></li>
+                        <li><a href="icons.html">ISDA</a></li>
+                    </ul>
+                </li>
+               
+
+                
+                <li class="nav-info">
+                    <!--<i class="pe pe-7s-shield text-accent"></i>-->
+
+                    <div class="m-t-xs">
+                        <span class="c-white">EY Business Intelligence</span> Dashboard for monitoring and reporting.
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <!-- End navigation-->
+
+
+    <!-- Main content-->
+    <section class="content">
+        <div class="container-fluid">
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="view-header">
+                        <div class="pull-right text-right" style="line-height: 14px">
+                         
+						 </div>
+                        <div class="header-icon">
+                            <i class="pe page-header-icon pe-7s-graph3"></i>
+                        </div>
+                        <div class="header-title">
+                            <h3>Key Performance Indicators</h3>
+                            <small>
+                              All documents 
+                            </small>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+			
+			<div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-filled">
+
+                        <div class="panel-body">
+
+                            <div class="row">
+                                <div class="col-md-3 col-xs-6 text-center">
+                                    <h2 class="no-margins">
+                                        466
+                                    </h2>
+                                    <span class="c-white">Total number of documents</span>
+                                </div>
+                                <div class="col-md-3 col-xs-6 text-center">
+                                    <h2 class="no-margins">
+                                        3
+                                    </h2>
+                                    <span class="c-white">Use case types</span> 
+                                </div>
+                                <div class="col-md-3 col-xs-6 text-center">
+                                    <h2 class="no-margins">
+                                        94%
+                                    </h2>
+                                    <span class="c-white">Total Confidence Level</span> 
+                                </div>
+                                <div class="col-md-3 col-xs-6 text-center">
+                                    <h2 class="no-margins">
+                                        16<sup>th</sup> Jan 2019
+                                    </h2>
+                                    <span class="c-white">Last Updated</span> 
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                                <a class="panel-close"><i class="fa fa-times"></i></a>
+                            </div>
+                           Fields Extracted
+                        </div>
+                        <div class="panel-body">
+							
+							<div style="text-align:center; padding-top:30px; min-height:270px;">
+							   
+                                    <div id="parent12"><div id="container12" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px;; z-index:1;"></div></div>
+									
+									<div class="met-text" style=" margin-top:-60px;  text-align:left; padding-left:60px;">
+                                      <span style=" color: #ffe600; color:white; font-size: 2vh; ">
+                                       <span style="border-left:15px solid #ffe600; padding-left:10px;">IBOR Contracts: </span>
+									   <a href="#" id="ibor_count">70</a> </br>
+                                       <span style="border-left:15px solid #777; padding-left:10px;">Non-IBOR Contracts: </span>
+									   <a href="#" style="color:#ffe600;" id="nibor_count"> 100</a> </br>
+									    <a href="#" style="color:rgba(0,0,0,0); " id="ibor_unextracted_count"> 100</a> </br>
+									   
+							
+			                   
+							   </span>
+                                    </div>
+									
+									<div style="height:0px; width:0px;opacity:0;">
+                                       <div class="pie_dark" id="bla" data-value="67" >
+                                          <div  class="pie_dark-val" ><div id="field_extraction_percentage" style="color:white; font-size:0.3em; margin-top:-40px;">67%</div></div>
+                                       </div>
+                                    </div>
+                                    
+							  </div>
+                        </div>
+                    </div>
+                </div>
+				<div class="col-md-6" style="">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                                <a class="panel-close"><i class="fa fa-times"></i></a>
+                            </div>
+                            Cost Savings
+                        </div>
+                        <div class="panel-body">
+                             <div style="text-align:center; padding-top:30px; min-height:270px;">
+							   
+                                    <div id="parent"><div id="container1234" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px;; z-index:1;"></div></div>
+									
+									<div class="met-text" style=" margin-top:-60px;  text-align:left; padding-left:60px;">
+                                      <span style=" color: #ffe600; color:white; font-size: 2vh; ">
+                                       <span style="border-left:15px solid #ffe600; padding-left:10px;">Pre 2021 Contracts: </span>
+									   <a href="#" id="pre_count">70</a> </br>
+                                       <span style="border-left:15px solid #777; padding-left:10px;">Post 2021 Contracts: </span>
+									   <a href="#" style="color:#ffe600;" id="post_count"> 100</a> </br>
+									   <span style="border-left:15px solid #999; padding-left:10px;">Uncertain: </span>
+									   <a href="#" style="color:#ffe600;" id="ContractualMaturityDateUnextractedCount"> 12</a> 
+			                   
+							   </span>
+                                    </div>
+									
+									<div style="height:0px; width:0px;opacity:0;">
+                                       <div class="pie_dark" id="bla" data-value="67" >
+                                          <div  class="pie_dark-val" ><div id="field_extraction_percentage" style="color:white; font-size:0.3em; margin-top:-40px;">67%</div></div>
+                                       </div>
+                                    </div>
+                                    
+							  </div>
+                        </div>
+                    </div>
+                </div>
+				<div class="col-md-6" style="">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                                <a class="panel-close"><i class="fa fa-times"></i></a>
+                            </div>
+                            Fallback Language
+                        </div>
+                        <div class="panel-body">
+                             <div style="text-align:center; ">
+							 
+                                   
+									<a href="Fallback_Language.html" style="text-decoration:none; color:white;">
+									<div id="parent_chart" style=""><div id="chart" style="width: 200px; margin-left:-200px; margin-top: -50px; height: 120px; padding-top: 30px; transform:scale(0.8); padding-left:70px; margin-left:-80px; "></div></div>
+								   
+                                    <div class="met-text" style=" padding-top: 130px; color:white;font-size: 2vh; text-align:left; padding-left:40px; ">
+                                       <span style=" color: #ffe600; color:white; font-size: 2vh;">
+                                       <span style="border-left:15px solid #bb0826; padding-left:10px;">Silent:  </span>
+									   <a href="#"  style="margin-left:20px; color: #bb0826;" id="silent">70</a> 
+									   
+									    <span style="margin-left:35px; border-left:15px solid #f04c3e; padding-left:10px;">Weak: &nbsp; &nbsp; </span>
+										<a href="#"  style="color: #f04c3e;" id="weak"> 100</a>
+                                        </br>
+										 <span style="border-left:15px solid #ffc000; padding-left:10px;">Medium: </span>
+										 <a href="#" style="margin-left:19.5px; color: #ffc000;" id="medium">1</a> 
+										 
+										  <span style="margin-left:20px; border-left:15px solid #00b050; padding-left:10px;">Strong: &nbsp; &nbsp; </span>
+										  <a href="#" style="color:#00b050;" id="strong">1</a>
+										 </br>
+                                       </span>
+                                    </div></a>
+							 </div>
+                        </div>
+                    </div>
+                </div>
+				<div class="col-md-6" style="">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                                <a class="panel-close"><i class="fa fa-times"></i></a>
+                            </div>
+                            Reference Rate
+                        </div>
+                        <div class="panel-body">
+                             <div style="text-align:center; padding-top:30px;">
+							   
+									
+									
+									<div id="parent123" style="float:left; max-height:160px;"><div id="container123" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px; z-index:1;"></div></div>
+									
+									
+								<div style="text-align:center; padding-top:30px;">
+							   
+                                    <div id="parent12"><div id="container12" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px; z-index:1;"></div></div>
+									
+									<div class="met-text" style=" margin-top:70px; margin-left:80px; text-align:left; ">
+                                     
+									  
+									<span style=" color: white; font-size: 2vh; border-left:15px solid cornflowerblue; padding-left:10px;">USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent:
+                                      </span> <a href="#" style="" id="ref_rate_2"></a> 
+									  </br>
+									  <span style=" color: white; font-size: 2vh; border-left:15px solid rgb(66, 62, 110); padding-left:10px;">(Adjusted) Eurocurrency Rate 
+                                      </span> <a href="#" style=" " id="ref_rate_3"></a> 
+									  </br>
+									  <span style=" color: white; font-size: 2vh; border-left:15px solid #D95B43; padding-left:10px;">(Adjusted) Eurodollar Rate :
+                                      </span> <a href="#" style="" id="ref_rate_4"></a> 
+									  </br>
+									  <span style=" color: white; font-size: 2vh; border-left:15px solid #53777A; padding-left:10px;">EURIBOR Rate:
+                                      </span> <a href="#" style="" id="ref_rate_5"></a> 
+									  </br>
+									  <span style=" color: white; font-size: 2vh; border-left:15px solid #7792AE; padding-left:10px;">LIBOR Rate:
+                                      </span> <a href="#" style=" " id="ref_rate_6"></a> 
+									  </br>
+									  
+									  <!-- 
+									  
+									  ["#ffe600", "cornflowerblue", "rgb(66, 62, 110)", "#D95B43", "#53777A", "#7792AE" , "#AE9377"],
+									  
+										document.getElementById("ref_rate_1").textContent=current_ref_rate["No rate"];
+	document.getElementById("ref_rate_2").textContent=current_ref_rate["USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent"];
+	document.getElementById("ref_rate_3").textContent=current_ref_rate["Eurocurrency Rate"];
+	document.getElementById("ref_rate_4").textContent=current_ref_rate["Eurodollar"];
+	document.getElementById("ref_rate_5").textContent=current_ref_rate["EURIBO"];
+	document.getElementById("ref_rate_6").textContent=current_ref_rate["LIBO"];
+	document.getElementById("ref_rate_7").textContent=current_ref_rate["Adjusted LIBOR"];
+									  
+									  -->
+									  
+									  
+									  <span style=" color: white; font-size: 2vh; border-left:15px solid #ffe600; padding-left:10px;">Unspecified:
+                                     </span> <a href="#" style="" id="ref_rate_1"></a> 
+									 </br>
+									 
+									  <span style=" color: white; font-size: 2vh;">
+                                      </span> <a href="#" style="color:rgba(0,0,0,0)" id="ref_rate_7"></a> 
+									  </br>
+                                       <span style=" font-size: 2vh; color: white;" ></span> <a href="#" style="color:#ffe600;"> </a> 
+									   
+                                       
+                                    </div>
+									
+									<div style="height:0px; width:0px;opacity:0;">
+                                       <div class="pie_dark" id="bla" data-value="67" >
+                                          <div  class="pie_dark-val" ><div id="field_extraction_percentage" style="color:white; font-size:0.3em; margin-top:-40px;">67%</div></div>
+                                       </div>
+                                    </div>
+                                    
+							  </div>
+							  
+							  
+									
+									
+							  </div>
+                        </div>
+                    </div>
+                </div>
+				
+            </div>
+			
+			 <div class="row">
+                <div class="col-lg-12">
+                    <div class="view-header">
+                        <div class="pull-right text-right" style="line-height: 14px">
+                         
+						 </div>
+                        <div class="header-icon">
+                            <i class="pe page-header-icon pe-7s-folder"></i>
+                        </div>
+                        <div class="header-title">
+                            <h3>Document Types</h3>
+                            <small>
+                              All documents 
+                            </small>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="row">
+			
+			
+
+                <div class="col-md-4">
+
+                    <div class="panel panel-filled">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                                <a class="panel-close"><i class="fa fa-times"></i></a>
+                            </div>
+                            Syndicated Loans
+                        </div>
+                        <div class="panel-body">
+                             
+						<div id="my-sub-panel">
+                        <div style="float:left; width:50%; ">
+						<small>Document Count:  </small> 211 </br>
+						<small>Completed: </small> 211 </br>
+								<small>In Review: </small> 0 </br>				
+								<small>In Progress: </small> 0	</br>	
+								<small>Not Started: </small> 0	</br>	
+						</div>
+						<div style="transform: scale(0.7); float:right; width:50%; margin-top:-30px;">
+						<div style="text-align:center;padding-bottom:10px;">Progress</div>
+                                <div id="container_doc1" style="transform:scale(0.2); position: relative; margin-left: -10px; margin-top:-110px;; z-index:1;"></div>
+							<div style="text-align:center;margin-top: -110px;;">211 Completed</div>
+                            </div>
+						</div>
+					   </div>
+						
+						
+                    </div>
+
+                </div>
+				
+				<div class="col-md-4">
+
+                    <div class="panel panel-filled">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                                <a class="panel-close"><i class="fa fa-times"></i></a>
+                            </div>
+                            Mortgage
+                        </div>
+                        <div class="panel-body">
+                             
+						<div id="my-sub-panel">
+                        <div style="float:left; width:50%; ">
+						<small>Document Count:  </small> 211 </br>
+						<small>Completed: </small> 211 </br>
+								<small>In Review: </small> 0 </br>				
+								<small>In Progress: </small> 0	</br>	
+								<small>Not Started: </small> 0	</br>	
+						</div>
+						<div style="transform: scale(0.7); float:right; width:50%; margin-top:-30px;">
+						<div style="text-align:center;padding-bottom:10px;">Progress</div>
+                               <div id="container_doc2" style="transform:scale(0.2); position: relative; margin-left: -10px; margin-top:-110px;; z-index:1;"></div>
+								<div style="text-align:center;margin-top: -110px;;">118 Completed</div>
+                            </div>
+						</div>
+					   </div>
+						
+						
+                    </div>
+
+                </div>
+				
+				<div class="col-md-4">
+
+                    <div class="panel panel-filled">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                                <a class="panel-close"><i class="fa fa-times"></i></a>
+                            </div>
+                            ISDA
+                        </div>
+                        <div class="panel-body">
+                             
+						<div id="my-sub-panel">
+                        <div style="float:left; width:50%; ">
+						<small>Document Count:  </small> 211 </br>
+						<small>Completed: </small> 211 </br>
+								<small>In Review: </small> 0 </br>				
+								<small>In Progress: </small> 0	</br>	
+								<small>Not Started: </small> 0	</br>	
+						</div>
+						<div style="transform: scale(0.7); float:right; width:50%; margin-top:-30px; height:50%;">
+						<div style="text-align:center;padding-bottom:10px;">Progress</div>
+                                <div id="container_doc3" style="transform:scale(0.2); position: relative; margin-left: -10px; margin-top:-110px;; z-index:1;"></div>
+								<div style="text-align:center;margin-top: -110px;;">113 Completed</div>
+                            </div>
+						</div>
+					   </div>
+						
+						
+                    </div>
+
+                </div>
+				
+				<div class="col-md-4">
+
+                        <div class="panel panel-b-accent m-t-sm">
+                            <div class="panel-body text-center p-m">
+                                <h2 class="font-light" style="color: #555;">
+                                    Total documents
+									</br></br>
+									211 </br>
+                                </h2>
+ 								
+								
+                                <div class="sparkline7 m-t-xs"></div>
+                            </div>
+                        </div>
+                    </div>
+				
+				
+
+            </div>
+			
+			
+
+            
+
+
+        </div>
+    </section>
+    <!-- End main content-->
+
+</div>
+<!-- End wrapper-->
+
+<!-- Vendor scripts -->
+<script src="vendor/pacejs/pace.min.js"></script>
+<script src="vendor/jquery/dist/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- App scripts -->
+<script src="scripts/luna.js"></script>
+
+
+ <script>
+
+d3.csv("BI_12032018.csv", function(data){
+	
+   var _temp;
+    console.log(data);
+	var variables = data.columns;
+	var admin_agent_count_flag=0;
+	var admin_agent_role_flag="Administrative Agent";
+	var field_extraction_percentage_val = 0;
+  data.map(function(d) {
+    if (d['Extraction status']=='In Progress') {
+	admin_agent_count_flag++;
+        console.log( d['LegalEntitysRoles'] );
+		}
+	
+	/*document.getElementById("admin_agent_count").textContent=admin_agent_count_flag ;
+	document.getElementById("admin_agent_role").textContent=admin_agent_role_flag ;*/
+	
+  });
+  
+  var documents_flag=0;
+  var variables = data.columns;
+  variables.forEach(function(d) {
+  if (d == 'Extraction status') {
+		for (var i=0; i < 300; i += 1){
+
+				try{
+				
+				if(typeof(data[i])!="undefined"){
+					documents_flag++;
+					}
+				}
+			catch(e){
+					console.log('An error has occurred: '+e.message);
+				}	
+
+		}}
+
+  });
+  
+  
+  let legal_role_set = new Set();
+  var weak_flag = 0;
+   var ibor = 0;
+var    nibor =0;
+var ibor_unextracted=0;
+var  silent_flag = 0;
+var  strong_flag = 0;
+var blank_flag=0;
+var medium_flag = 0;
+  let legal_entity_set = new Set();
+  let borrower_role_set = new Set();
+  let holdings_role_set = new Set();
+  let admin_role_set = new Set();
+  let borrower_role_set_current = new Set();
+  var borrower_role_list_current = [];
+  var admin_role_list = [];
+  var ref_rate = {"No rate": 0, "USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent": 0, "Eurocurrency Rate": 0, 
+  "Adjusted LIBOR": 0, "LIBOR": 0, "Eurodollar": 0, "EURIBO": 0};
+  var holdings_role_list = [];
+  var borrower_role_list = [];
+  var legal_role_list = [];
+   var legal_entity_list = [];
+  var ContractualMaturityDatePre2021 = [];
+  var ContractualMaturityDatePost2021 = [];
+  var ContractualMaturityDateUnextracted = [];
+  
+  var variables = data.columns;
+  variables.forEach(function(d) {
+    if (d == "Clean LE") {
+	
+		for (var i=0; i < documents_flag; i += 1){
+			
+			 
+			if(!data[i][d].includes('Unextracted')){
+				legal_entity_set.add(data[i][d]);
+				legal_entity_list.push(data[i][d]);
+				}
+			
+			
+		}
+	}
+    if (d == "Clean LER") {
+	
+		for (var i=0; i < documents_flag; i += 1){
+			
+			
+			if(!data[i][d].includes('Unextracted')){
+				legal_role_set.add(data[i][d]);
+				legal_role_list.push(data[i][d]);
+				}
+			
+			
+		}
+	}
+	/*document.getElementById("lead_arranger").textContent="Arranger" ;
+	document.getElementById("lead_arranger_count").textContent=legal_role_list.length ;
+	document.getElementById("lead_arranger_count").textContent=" " ;*/
+	if (d == "Clean Borrower") {
+		for (var i=0; i < documents_flag; i += 1){
+
+			
+			if(!data[i][d].includes('Unextracted')){
+				borrower_role_set.add(data[i][d]);
+				borrower_role_list.push(data[i][d]);
+				}
+			
+		}
+	}
+	
+	/*document.getElementById("borrower_role").textContent="Borrower" ;
+	document.getElementById("borrower_count").textContent=borrower_role_list.length ;
+	document.getElementById("borrower_count").textContent=" " ;*/
+	if (d == "Clean AA") {
+		for (var i=0; i < documents_flag; i += 1){
+
+			
+			if(!data[i][d].includes('Unextracted')){
+				admin_role_set.add(data[i][d]);
+				admin_role_list.push(data[i][d]);
+				}
+			
+		}
+	}
+	
+	/*document.getElementById("admin_agent_role").textContent="CalculationAdministrativeAgent" ;
+	document.getElementById("admin_agent_count").textContent=admin_role_list.length ;
+	document.getElementById("admin_agent_count").textContent=" " ;*/
+	if (d == "Clean Holdings") {
+		for (var i=0; i < documents_flag; i += 1){
+
+			
+			if(!data[i][d].includes('Unextracted')){
+				holdings_role_set.add(data[i][d]);
+				holdings_role_list.push(data[i][d]);
+				}
+			
+		}
+	}
+	
+	/*document.getElementById("holdings_role").textContent="Holdings" ;
+	document.getElementById("holdings_count").textContent=holdings_role_list.length ;
+	document.getElementById("holdings_count").textContent=" " ;*/
+	if (d == "ContractualMaturityDate") {
+		for (var i=0; i < documents_flag; i += 1){
+
+			if (data[i]['Full File Name'].includes('CREDIT') || data[i]['Full File Name'].includes('Credit') || data[i]['Full File Name'].includes('credit')
+		|| data[i]['Full File Name'].includes('agreement') || data[i]['Full File Name'].includes('Agreement') || data[i]['Full File Name'].includes('AGREEMENT')
+		|| data[i]['Full File Name'].includes('resta') || data[i]['Full File Name'].includes('Resta') || data[i]['Full File Name'].includes('RESTA')) {
+			if(!data[i][d].includes('Unextracted') ){
+				var mydate = new Date(data[i][d]);
+				if (mydate.getFullYear()<2021)
+					ContractualMaturityDatePre2021.push(mydate);
+				else
+					ContractualMaturityDatePost2021.push(mydate);
+				}
+			else
+				{	
+					ContractualMaturityDateUnextracted.push(data[i][d]);
+				}
+			}
+		}
+	}
+	/*document.getElementById("field_extraction_percentage").textContent=92 + "%";*/
+	
+	if (d == "ReferenceRate Only") {
+		for (var i=0; i < documents_flag; i += 1){
+
+			if (data[i]['Full File Name'].includes('CREDIT') || data[i]['Full File Name'].includes('Credit') || data[i]['Full File Name'].includes('credit')
+		|| data[i]['Full File Name'].includes('agreement') || data[i]['Full File Name'].includes('Agreement') || data[i]['Full File Name'].includes('AGREEMENT')
+		|| data[i]['Full File Name'].includes('resta') || data[i]['Full File Name'].includes('Resta') || data[i]['Full File Name'].includes('RESTA')) {
+			if(!data[i][d].includes('Unextracted') ){
+				
+				for(var key in ref_rate) {
+					console.log(key);
+					console.log(data[i][d]);
+					if (data[i][d].includes(key))
+						{
+							ref_rate[key]++;
+						}
+  }
+  
+  
+				}
+			
+			}
+		}
+	}
+	/*document.getElementById("ref_rate_1").textContent=1;//ref_rate["No rate"];
+	document.getElementById("ref_rate_2").textContent=5;//ref_rate["USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent"];
+	document.getElementById("ref_rate_3").textContent=23;//ref_rate["Eurocurrency Rate"];
+	document.getElementById("ref_rate_4").textContent=47;//ref_rate["Eurodollar"];
+	document.getElementById("ref_rate_5").textContent=33;//ref_rate["EURIBO"];
+	document.getElementById("ref_rate_6").textContent=90;//ref_rate["LIBOR"];
+	document.getElementById("ref_rate_7").textContent=ref_rate["Adjusted LIBOR"];*/
+	
+	if (d == "IBOR/NON-IBOR") {
+		for (var i=0; i < documents_flag; i += 1){
+
+			
+			if(!data[i][d].includes('No Data Present') ){
+				
+				if (data[i][d]=="IBOR")
+					{ibor++;}
+				else if (data[i][d].includes("NON"))
+					{nibor++;}
+				}
+			else
+			{
+				ibor_unextracted++;
+			}
+			
+			
+		}
+	}
+	
+	document.getElementById("ibor_count").textContent=;ibor//199;
+	document.getElementById("nibor_count").textContent=;nibor//12;
+	document.getElementById("ibor_unextracted_count").textContent=ibor_unextracted;
+	
+	
+field_extraction_percentage = Math.round(ContractualMaturityDatePost2021.length/(ContractualMaturityDatePre2021.length+ContractualMaturityDatePost2021.length)*100);
+	document.getElementById("field_extraction_percentage").textContent=ContractualMaturityDatePost2021.length + "/" + ContractualMaturityDatePre2021.length;
+	
+	
+		
+		  
+	document.getElementById("pre_count").textContent=ContractualMaturityDatePre2021.length;// ;29
+	document.getElementById("post_count").textContent=ContractualMaturityDatePost2021.length;// ;148
+	document.getElementById("ContractualMaturityDateUnextractedCount").textContent=current_unextracted_matdate_count;//22;
+	
+									$(document).ready( function () {
+
+  	    $( "#bla" ).attr('data-value', field_extraction_percentage ); 	
+		
+  
+});
+
+	if (d == "Fallback Language Strength") {
+		for (var i=0; i < documents_flag; i += 1){
+
+			if (data[i]['Full File Name'].includes('CREDIT') || data[i]['Full File Name'].includes('Credit') || data[i]['Full File Name'].includes('credit')
+		|| data[i]['Full File Name'].includes('agreement') || data[i]['Full File Name'].includes('Agreement') || data[i]['Full File Name'].includes('AGREEMENT')
+		|| data[i]['Full File Name'].includes('resta') || data[i]['Full File Name'].includes('Resta') || data[i]['Full File Name'].includes('RESTA')) {
+			
+				if(data[i][d].includes('Weak')){
+				weak_flag++;}
+			else if(data[i][d].includes('Silent')){
+				silent_flag++;}
+			else if(data[i][d].includes('Medium')){
+				medium_flag++;}
+			else if(data[i][d].includes('Strong')){
+				strong_flag++;}
+			else
+				blank_flag++;
+				
+				
+			}
+		}
+	}
+
+
+
+  });
+
+  
+  var dataset2 = {
+  //mat_date: [ibor, nibor, ibor_unextracted] REMOVE AFTER DEMO
+  mat_date: [ibor, nibor, 0]
+};
+  
+  
+  var dataset = {
+  //mat_date: [ContractualMaturityDatePre2021.length, ContractualMaturityDatePost2021.length, ContractualMaturityDateUnextracted.length]
+  mat_date: [29, 148, 22]
+};
+
+  var dataset1 = {
+  mat_date: [
+ref_rate["No rate"],
+ref_rate["USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent"],
+ref_rate["Eurocurrency Rate"],
+ref_rate["Eurodollar"],
+ref_rate["EURIBO"],
+ref_rate["LIBOR"],
+ref_rate["Adjusted LIBOR"]
+  ]
+};
+
+var dataset1 = {			//REMOVE AFTER DEMO
+  mat_date: [
+1,
+5,
+23,
+47,
+33,
+90,
+ref_rate["Adjusted LIBOR"]
+  ]
+};
+
+weak_flag=38;  //	temp hard code for demo -- remove later 
+strong_flag=67;
+silent_flag=17;
+medium_flag=77;
+
+var bardata = [0,silent_flag*2, weak_flag*2, medium_flag*2, strong_flag*2];
+	cost_bar(bardata);
+	
+/*	document.getElementById("silent").textContent=silent_flag;
+	document.getElementById("weak").textContent=weak_flag;
+	document.getElementById("medium").textContent=medium_flag;
+	document.getElementById("strong").textContent=strong_flag;
+  
+  holdings_role_set.forEach((el) => {
+  console.log(el);
+});*/
+
+pie_segments(dataset);
+  pie_segments1(dataset1);
+  pie_segments2(dataset2);
+  pie_segments_doc1(dataset);
+  pie_segments_doc2(dataset);
+  pie_segments_doc3(dataset);
+  
+
+let set3 = new Set(function*() { yield* legal_entity_set; yield* admin_role_set; yield* holdings_role_set; yield* borrower_role_set; }());
+/*An array containing all the country names in the world:*/
+console.log(set3);
+let countries = Array.from(set3);
+console.log(countries);
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete(document.getElementById("myInput"), countries);
+  
+  function msg() {
+    alert("Hello world!");
+}
+  
+  function pie_segments(dataset){
+  
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#ffe600", "#777", "#999"],
+    svg = d3.select('#container1234')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')');
+        
+radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+    .sort(null);
+
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+		.attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+
+  
+  }
+  
+  function pie_segments1(dataset){
+  
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#ffe600", "cornflowerblue", "rgb(66, 62, 110)", "#D95B43", "#53777A", "#7792AE" , "#AE9377"],
+    svg = d3.select('#container123')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+		  
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')')
+		.on("click", function(d, i) {
+    window.location = "#";
+  });
+        
+radius = Math.min(width, height) / 2;
+
+var tooltip = d3.select('#container123')                               // NEW
+          .append('div')                                                // NEW
+          .attr('class', 'tooltip');                                    // NEW
+                      
+        tooltip.append('div')                                           // NEW
+          .attr('class', 'label');                                      // NEW
+             
+        tooltip.append('div')                                           // NEW
+          .attr('class', 'count');                                      // NEW
+
+        tooltip.append('div')                                           // NEW
+          .attr('class', 'percent');                                    // NEW
+
+
+var pie = d3.pie()
+    .sort(null);
+	
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("#container123 path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+	.attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+	
+
+
+  
+  }
+  
+  
+  
+  function pie_segments_doc1(dataset){
+  
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#ffe600", "#777", "#ddd"],
+    svg = d3.select('#container_doc1')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')');
+        
+radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+    .sort(null);
+
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("#container12 path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+		.attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+
+  
+  }
+  
+  
+  
+  function pie_segments_doc2(dataset){
+  
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#ffe600", "#777", "#ddd"],
+    svg = d3.select('#container_doc2')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')');
+        
+radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+    .sort(null);
+
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("#container12 path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+		.attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+
+  
+  }
+  
+  
+  
+  function pie_segments_doc3(dataset){
+  
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#ffe600", "#777", "#ddd"],
+    svg = d3.select('#container_doc3')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')');
+        
+radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+    .sort(null);
+
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("#container12 path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+		.attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+
+  
+  }
+  
+  
+  function pie_segments2(dataset){
+  
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#ffe600", "#777", "#ddd"],
+    svg = d3.select('#container12')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')');
+        
+radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+    .sort(null);
+
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("#container12 path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+		.attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+
+  
+  }
+  
+  function cost_bar(bardata){
+	
+
+var height = 200,
+    width = 415,
+    barWidth = 70,
+    barOffset = 5;
+	
+var colors = ['red','#bb0826','#f04c3e','#ffc000','#00b050'];
+
+d3.select('#chart').append('svg')
+  .attr('width', width)
+  .attr('height', height)
+  .style('background', 'none')
+  .selectAll('rect').data(bardata)
+  .enter().append('rect')
+      .style('fill', function(d,i){ return colors[i]})
+      .attr('width', barWidth)
+      .attr('height', function(d) {
+          return d;
+})
+
+ .attr('x', function(d,i) {
+          return i * (barWidth + barOffset);
+})
+  .attr('y', function(d) {
+          return height - d;
+  })
+
+
+
+  }
+  
+  
+});
+
+
+</script>
+
+<!--
+<script>
+
+    $(document).ready(function () {
+
+
+        /**
+         * Options for Line chart
+         */
+
+        var globalOptions = {
+            responsive: true,
+            legend: {
+                labels:{
+                    fontColor:"#90969D"
+                }
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        fontColor: "#90969D"
+                    },
+                    gridLines: {
+                        color: "#37393F"
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        fontColor: "#90969D"
+                    },
+                    gridLines: {
+                        color: "#37393F"
+                    }
+                }]
+            }
+        };
+		
+		var globalOptions_noAxis = {
+            responsive: true,
+            legend: {
+                labels:{
+                    fontColor:"#90969D"
+                }
+            }
+        };
+		
+		var globalOptions_noAxis_noLegend = {
+            responsive: true,
+			legend: {
+                display: false
+            }
+        };
+
+        var lineData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+
+                {
+                    
+                    backgroundColor: 'transparent',
+                    borderColor: "#ffe600",
+                    pointBorderWidth: 0,
+                    pointRadius: 2,
+                    pointBorderColor: '#ffe600',
+                    borderWidth: 1,
+                    data: [16, 32, 18, 26, 42, 33, 44]
+                }
+            ]
+        };
+
+        var c1 = document.getElementById("lineOptions").getContext("2d");
+        new Chart(c1, {type: 'line', data: lineData, options: globalOptions_noAxis_noLegend});
+
+        /**
+         * Options for Sharp Line chart
+         */
+        var sharpLineData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+                {
+                    label: "Example dataset",
+                    backgroundColor: 'rgba(246,168,33, 0.1)',
+                    borderColor: "#f6a821",
+                    pointBorderWidth: 0,
+                    pointRadius: 2,
+                    pointBorderColor: '#f6a821',
+                    borderWidth: 1,
+                    data: [33, 48, 40, 19, 54, 27, 54],
+                    lineTension: 0
+                }
+            ]
+        };
+
+        /**
+         * Data for Bar chart
+         */
+        var barData = {
+            labels: ["Total documents", "Completed Documents", "In Review", "In Progress", "Not Started"],
+            datasets:  [{
+      label: "Document progress",
+      data: [466, 442, 0, 0, 24],
+      backgroundColor: [
+        'rgba(144, 144, 144, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(75, 75, 75, 0.2)',
+        'rgba(155, 155, 155, 0.2)',
+        'rgba(255, 230, 0, .2)',
+        'rgba(255, 159, 64, 0.2)'
+      ],
+      borderColor: [
+        'rgba(144,144,144,1)',
+         'rgba(75, 192, 192, 1)',
+        'rgba(255, 206, 86, 1)',
+       'rgba(153, 102, 255, 1)',
+        'rgba(255, 230, 0, 1)',
+        'rgba(255, 159, 64, 1)'
+      ],
+      borderWidth: 1
+    }]
+        };
+
+		
+			
+		var c3 = document.getElementById("barOptions").getContext("2d");
+        new Chart(c3, {type: 'horizontalBar', data: barData, options: globalOptions_noAxis_noLegend});
+		
+        /**
+         * Options for Bar chart
+         */
+
+        /**
+         * Data for Bar chart
+         */
+        var singleBarData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+                {
+                    label: "Data 0",
+                    backgroundColor: 'transparent',
+                    borderColor: "#f6a821",
+                    borderWidth: 1,
+                    data: [15, 20, 30, 40, 30, 50, 60]
+                }
+            ]
+        };
+
+       
+
+        var polarData = {
+            datasets: [{
+                data: [
+                    360,
+                    191,
+                    500
+                ],
+                borderWidth: 0,
+                backgroundColor: [
+                    "rgba(255, 230, 0, .8)",
+                    "rgba(150, 150, 150, .8)",
+                    "rgba(75,75,75, 0.8)"
+                ],
+                label: 'My dataset' // for legend
+            }],
+            labels: [
+                "Homer",
+                "Inspinia",
+                "Luna"
+            ]
+        };
+
+       
+
+        var doughnutData = {
+            
+            datasets: [
+                {
+                    data: [100,0,0],
+                    borderWidth: 0,
+                    backgroundColor: [
+                        "#00b386",
+                        "rgba(119, 119, 119, .8)",
+                        "rgba(74, 74, 74, .8)"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(255, 230, 0, 1)",
+                        "rgba(119, 119, 119, 1)",
+                        "rgba(74, 74, 74, 1)"
+                    ]
+                }]
+        };
+		
+		var doughnutData1 = {
+            labels: [
+                "Total fields extracted",
+                "Total fields not found"
+            ],
+            datasets: [
+                {
+                    data: [3624, 191],
+                    borderWidth: 0,
+                    backgroundColor: [
+                        "rgba(255, 230, 0, .8)",
+                        "rgba(119, 119, 119, .8)",
+                        "rgba(74, 74, 74, .8)"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(255, 230, 0, 1)",
+                        "rgba(119, 119, 119, 1)",
+                        "rgba(74, 74, 74, 1)"
+                    ]
+                }]
+        };
+		
+		var doughnutData2 = {
+            labels: [
+                " ",
+                " ",
+				" "
+            ],
+            datasets: [
+                {
+                    data: [3624, 191, 500],
+                    borderWidth: 0,
+                    backgroundColor: [
+                        "rgba(255, 230, 0, .8)",
+                        "rgba(119, 119, 119, .8)",
+                        "rgba(74, 74, 74, .8)"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(255, 230, 0, 1)",
+                        "rgba(119, 119, 119, 1)",
+                        "rgba(74, 74, 74, 1)"
+                    ]
+                }]
+        };
+	
+	  var c6 = document.getElementById("doughnutChart_isda").getContext("2d");
+        new Chart(c6, {type: 'doughnut', data: doughnutData, options: globalOptions_noAxis_noLegend});
+          var c6 = document.getElementById("doughnutChart_mortgage").getContext("2d");
+        new Chart(c6, {type: 'doughnut', data: doughnutData, options: globalOptions_noAxis_noLegend});
+		  var c6 = document.getElementById("doughnutChart_sl").getContext("2d");
+        new Chart(c6, {type: 'doughnut', data: doughnutData, options: globalOptions_noAxis_noLegend});
+        var c6 = document.getElementById("doughnutChart1").getContext("2d");
+        new Chart(c6, {type: 'doughnut', data: doughnutData1, options: globalOptions_noAxis});
+		var c6 = document.getElementById("doughnutChart2").getContext("2d");
+        new Chart(c6, {type: 'doughnut', data: doughnutData2, options: globalOptions_noAxis});
+		
+		
+    });
+</script>-->
+
+</body>
+
+
+<!-- Mirrored from webapplayers.com/luna_admin-v1.3/chartJs.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 03 Jan 2019 14:09:18 GMT -->
+</html>

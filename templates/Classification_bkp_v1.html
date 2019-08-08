@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+    <!-- Page title -->
+    <title>EY Business Intelligence</title>
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="vendor/animate.css/animate.css" />
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css" />
+    <link rel="icon" href="EYBIicon.png" sizes="32x32" />
+    <link rel="icon" href="EYBIicon.png" sizes="192x192" />
+    <!-- App styles -->
+    <link rel="stylesheet" href="styles/pe-icons/pe-icon-7-stroke.css" />
+    <link rel="stylesheet" href="styles/pe-icons/helper.css" />
+    <link rel="stylesheet" href="styles/stroke-icons/style.css" />
+    <link rel="stylesheet" href="styles/style.css">
+    <!-- <script type='text/javascript' src='../wp-includes/js/jquery/jqueryb8ff.js?ver=1.12.4'></script> -->
+    <script src="../inputdata/d3.v4.min.js"></script>
+    <!-- <script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script> -->
+    <script type='text/javascript' src='angular.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.6/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.1/xlsx.core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/alasql/0.3/alasql.min.js"></script>
+    <style>
+        input {
+                  border: 1px solid transparent;
+                  background-color: #f1f1f1;
+                  padding: 10px;
+                }
+                .hoveryellow{
+                color:white;
+                transition: all .25s ease-in-out;
+                }
+                .hoveryellow:hover{
+                background:rgba(255,255,255,0.1);
+                color: #fff;
+                transition: background .25s ease-in-out;
+                border-radius:4px;
+                }
+
+                /* Lets Pop up */
+                .letspop{
+                }
+                .letspop:hover{
+                  cursor: pointer;
+                }
+                .overlay{
+                  display: none; /* Default Hidden */
+                  position: fixed;
+                  left: 0;
+                  top: 0;
+                  z-index: 1;
+                  background-color: rgba(0,0,0,0.6);
+                  height: 100%;
+                  width: 100%;
+                } 
+                .popup{
+                  display: none; /* Default Hidden */
+                  position: fixed;
+                  left: 50%; 
+                  top: 5%;
+                  z-index: 2;
+                  background:none;
+                  height: auto;
+                  width: auto;
+                  overflow: hidden;
+                  padding: 0px;
+                  transform: translate(-50%, 0);
+                }
+
+
+                /* Bored stuff & extras*/
+
+                .close{
+                  position: absolute;
+                  top: 8px;
+                  right: 8px;
+                  display: block;
+                  color: #666666;
+                  font-family: sans-serif;
+                }
+                .close:hover{
+                  cursor: pointer;
+                  color: #444444;
+                }
+    </style>
+</head>
+
+<body style="overflow-x: hidden;">
+    <!-- Wrapper-->
+    <div class="wrapper">
+        <!-- Header-->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div id="mobile-menu">
+                        <div class="left-nav-toggle">
+                            <a href="#">
+                                <i class="stroke-hamburgermenu"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <a class="navbar-brand" style="background: #2f323b;" href="index.html">
+                        <a href="Summary_KPI.html">
+                            <img src="EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
+                            <!--<span style="color:white;"> Business </br> Intelligence</span>-->
+                        </a>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <!-- End header-->
+        <!-- Navigation-->
+        <aside class="navigation">
+            <nav>
+                <ul class="nav luna-nav">
+                    <li >
+                    <a href="Summary_KPI.html" >
+                        Summary
+                    </a>
+                </li>
+                
+				<li class="active">
+                    <a href="#documents" data-toggle="collapse" aria-expanded="false">
+                        Documents<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
+                    </a>
+                    <ul id="documents" class="nav nav-second collapse">
+                        <li><a href="Upload.html">Upload</a></li>
+                        <li><a href="OCR_display.html">OCR</a></li>
+                        <li class="active"><a href="Classification.html">Classification</a></li>
+                    </ul>
+                </li>
+				
+				
+
+                <li>
+                    <a href="#bi_reporting" data-toggle="collapse" aria-expanded="false">
+                        BI Reporting<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
+                    </a>
+                    <ul id="bi_reporting"  class="nav nav-second collapse">
+                        <li><a href="BIReporting2_syndicated.html">Syndicate Loans</a></li>
+                        <li><a href="BIReporting2_mortgage.html">Mortgage</a></li>
+                        <li><a href="BIReporting2_isda.html">ISDA</a></li>
+                    </ul>
+                </li>
+				<li>
+                    <a href="#fallback_language" data-toggle="collapse" aria-expanded="false">
+                        Contract Lifecycle Management<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
+                    </a>
+                    
+                </li>
+				<li>
+                    <a href="#fallback_language" data-toggle="collapse" aria-expanded="false">
+                        Exception </br>Management<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
+                    </a>
+                    
+                </li>
+                <!--<li>
+                    <a href="#fallback_language" data-toggle="collapse" aria-expanded="false">
+                        Fallback Language<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
+                    </a>
+                    <ul id="fallback_language" class="nav nav-second collapse">
+                        <li><a href="Fallback_Language.html">Syndicate Loans</a></li>
+                        <li><a href="Fallback_Language_mortgage.html">Mortgage</a></li>
+                        <li><a href="Fallback_Language_isda.html">ISDA</a></li>
+                    </ul>
+                </li>-->
+                    <li class="nav-info">
+                        <!--<i class="pe pe-7s-shield text-accent"></i>-->
+                        <div class="m-t-xs">
+                            <span class="c-white">EY Business Intelligence</span> Dashboard for monitoring and reporting.
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <!-- End navigation-->
+        <!-- Main content-->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="view-header">
+                            <div class="pull-right text-right" style="line-height: 14px">
+                            </div>
+                            <div class="header-icon">
+                                <i class="pe page-header-icon pe-7s-next-2"></i>
+                            </div>
+                            <div class="header-title">
+                                <h3>Document Classification</h3>
+                                <small>
+                                    Predicted by ML Models
+                                </small>
+                            </div>
+                            <!-- <div ng-controller="ItemController" style=""> -->
+                            <!-- </div> -->
+                            <!-- <div style="text-align: right"> Selected 2 of 70 Files </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="dock_box">
+                <div ng-app="app" ng-controller="ItemController" style="">
+                    <div class="btn-group pull-right" style="margin-top:-30px;">
+                        <!--<button class="btn btn-default letspop button-pop-up" href="#popup" style="float:right;margin-bottom: 10px;"><i class="fa fa-cloud-download"></i> </button>-->
+						<a href="#popup"> <button style="parring-right:5px;border-radius:0px;" class="letspop btn btn-yellow btn-xs button-pop-up" ><i class="fa fa-cloud-download"></i>&nbsp; Download Data Model</button> </a>
+                        <!--<button class="btn btn-default" style="float:right;margin-bottom: 10px;" ng-click="clickButton(persons, $scope.query)"><i class="fa fa-cog"></i> Process Document</button>-->
+						<button style=" border-radius:0px;" ng-click="clickButton(persons, $scope.query)" class=" btn btn-yellow btn-xs " ><i class="fa fa-cog"></i>&nbsp; Process Document</button> 
+                    </div>
+					</br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-filled">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="input-group m-b-xs m-t-xs" style="width:100%;">
+                                                <input type="text" ng-change="getData()" ng-model="$scope.query" placeholder="Search by document here.." style="color: #949ba2;border: none; width:100%; border-radius: 4px;-webkit-box-shadow: none;
+                                                        box-shadow: none;-webkit-transition: none;-o-transition: none;transition: none;
+                                                        background-color: #494b54;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-t-sm">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="item " style=" text-align: left;  vertical-align: middle; padding: 5px; padding-left: 10px; float:left; width:100%;">
+                                    <div class="item-short" style="">
+                                        <div class="container1" style="margin-top:-20px;">
+                                            <div class="panel panel-filled">
+                                                <div class="panel-body" style=" padding-bottom: 10px; padding-top: 10px; padding-right: 30px; padding-left: 30px;">
+                                                    <div class="wrapper1" style="padding:0px;text-align: right; color:orange;">
+                                                        Selected {{getSelected()[0]}} out of {{persons.length}} document(s)
+                                                    </div>
+                                                    <table style="color: white;width:100%;">
+                                                        <thead>
+                                                            <tr style="color:white; padding:5px;">
+                                                                <td class="team test" id="admin_agent_role1" style="text-align:center;padding:5px; color:white; font-weight:bold; max-width:100px; min-width:50px;  white-space: wrap; word-break: break-all;transform: scale(1.5,1.5);">
+                                                                    <input type="checkbox" ng-change="updateHosts()" ng-model="allHosts" size="50" /></td>
+                                                                <td class="team test" id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold; max-width:100px; min-width:50px;  white-space: wrap; word-break: break-all;">#</td>
+                                                                <td class="team test" id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold; max-width:300px; min-width:300px;  white-space: wrap; word-break: break-all;">Document Name</td>
+                                                                <td class="team test" id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold; max-width:100px; min-width:300px;  white-space: wrap; word-break: break-all;">IBOR or Non IBOR</td>
+                                                                <td class="team " id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold; max-width:300px; min-width:300px;  white-space: wrap; word-break: break-all;">Document Class (Predicted)</td>
+                                                                <td class="team " id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold; max-width:300px; min-width:300px;  white-space: wrap; word-break: break-all;">Status</td>
+                                                                <td class="team " id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold; max-width:300px; min-width:300px;  white-space: wrap; word-break: break-all;">Status Date</td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr class="wrapper1 hoveryellow" style="color:white; border-top: 1px solid rgba(255,255,255,0.1); " ng-repeat="person in persons| filter:$scope.query" ng-click="person.checked = !person.checked">
+                                                                <td class="team " id="borrower_role" style="text-align:center; padding:5px; max-width:100; min-width:50px;  word-break: break-all; white-space: wrap; color:#aaa;transform: scale(1.5,1.5);"><input type="checkbox" ng-change="getData()" ng-model="person.checked" ng-click="person.checked = !person.checked"></td>
+                                                                <td class="team " id="borrower_role" style="padding:5px; max-width:100; min-width:50px;  word-break: break-all; white-space: wrap; color:#aaa;">{{$index + 1}} </td>
+                                                                <td class="team " id="borrower_role" style="padding:5px; max-width:300px; min-width:300px;  word-break: break-all; white-space: wrap; color:#aaa;">{{ person['Document_Name'] }} </td>
+                                                                <td class="team " id="borrower_role" ng-style="set_color(person)" style="padding:5px; max-width:300px; min-width:300px;  word-break: break-all; white-space: wrap; color:#aaa;">{{ person['IBOR_NonIBOR'] }} </td>
+                                                                <td class="rank " id="borrower_count" style="padding:5px; max-width:300px; min-width:300px;  word-break: break-all; color:#aaa; white-space: wrap;">{{ person['Document_Class'] }} </td>
+                                                                <td class="team " id="borrower_role" style="padding:5px; max-width:300px; min-width:300px;  word-break: break-all; white-space: wrap; color:#aaa;">
+                                                                    <i ng-show="getProcess(person)" class="fa fa-spinner fa-spin fa-lg"></i> {{person['Status']}}
+                                                                    <i ng-show="getProcess(person) == false" class="fa fa-check fa-lg"></i>
+                                                                </td>
+                                                                <td class="team " id="borrower_role" style="padding:5px; max-width:300px; min-width:300px;  word-break: break-all; white-space: wrap; color:#aaa;" ng-bind="person['Status Date'] | date:'MM/dd/yyyy'">{{person['Status Date']}}
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <!-- </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-show="checked" class="item-detail">
+                                        <div class="person-competence-detail">
+                                            <ul>
+                                                <li ng-repeat="item in person.competences.kind">{{ item }}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overlay"></div>
+                    <div class="popup">
+                        <div modal-movable>
+                            <div class="modal-content" style="padding-top:30px;">
+                                <div class="modal-header text-center">
+                                    <h3>Download Files</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-vertical-align-middle" style="background:none;">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:150px;text-align:center">
+                                                        Select
+                                                    </th>
+                                                    <th>
+                                                        Document_Class
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="wrapper1 hoveryellow" style="color:white; border-top: 1px solid rgba(255,255,255,0.1); " ng-repeat='doc_class in doc_classes()'>
+                                                    <td style="text-align:center; padding:5px; max-width:100; min-width:50px;  word-break: break-all; white-space: wrap; color:#aaa;transform: scale(1.5,1.5);">
+                                                        <input type="checkbox" value={{doc_class}} ng-click="toggleSelection(doc_class)" >
+                                                    </td>
+                                                    <td>{{doc_class}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class=" modal-footer">
+                                    <div class="btn-toolbar">
+                                        <button type="button" class="btn btn-default close-pop" data-dismiss="modal">Close</button>
+                                        <button class="btn btn-default letspop button-pop-up" ng-click="getDownload()" style="float:right;margin-bottom: 10px;"><i class="fa fa-cloud-download"></i> Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </section>
+    <!-- End main content-->
+    </div>
+    <!-- End wrapper-->
+    <!-- Vendor scripts -->
+    <script src="vendor/pacejs/pace.min.js"></script>
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- App scripts -->
+    <script src="scripts/luna.js"></script>
+    <!--  <script>
+    /* set up XMLHttpRequest */
+    var url = "data/WF_IBOR_DataModel.xlsx";
+    var oReq = new XMLHttpRequest();
+    oReq.open("GET", url, true);
+    oReq.responseType = "arraybuffer";
+
+    oReq.onload = function(e) {
+        var arraybuffer = oReq.response;
+
+        /* convert data to binary string */
+        var data = new Uint8Array(arraybuffer);
+        var arr = new Array();
+        for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+        var bstr = arr.join("");
+
+        /* Call XLSX */
+        var workbook = XLSX.read(bstr, { type: "binary" });
+
+        /* DO SOMETHING WITH workbook HERE */
+        var SyndicatedLoan = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], { raw: true });
+        var Mortgage = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[1]], { raw: true });
+        var ISDA = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[2]], { raw: true });
+
+        return [SyndicatedLoan, Mortgage, ISDA];
+    };
+
+    oReq.send();
+    </script> -->
+    <script>
+    var theApp = angular.module('app', []);
+    theApp.controller('ItemController', function ItemController($scope, $http, $filter, $timeout, $window) {
+        $http.get('data_class_result.json').success(function(data) {
+            data = JSON.parse(window.localStorage.getItem('user'));
+            $scope.persons = data;
+            $scope.persons.process = false;
+            $scope.set_status();
+            console.log("Ingest Data", data);
+        });
+
+        $http({
+            method: 'GET',
+            url: "data/WF_IBOR_DataModel.xlsx",
+            responseType: 'arraybuffer'
+        }).then(function(data) {
+            var wb = XLSX.read(data.data, { type: "array" });
+            var doc1 = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { raw: true });
+            var doc2 = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[1]], { raw: true });
+            var doc3 = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[2]], { raw: true });
+
+            $scope.data_model = [doc1, doc2, doc3];
+
+        }, function(err) { console.log(err); });
+
+        $scope.CSVToArray = function(strData, strDelimiter) {
+            strDelimiter = (strDelimiter || ",");
+            var objPattern = new RegExp((
+                // Delimiters.
+                "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
+                // Quoted fields.
+                "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+                // Standard fields.
+                "([^\"\\" + strDelimiter + "\\r\\n]*))"), "gi");
+            var arrData = [
+                []
+            ];
+            var arrMatches = null;
+            while (arrMatches = objPattern.exec(strData)) {
+                var strMatchedDelimiter = arrMatches[1];
+                if (strMatchedDelimiter.length && (strMatchedDelimiter != strDelimiter)) {
+                    arrData.push([]);
+                }
+                if (arrMatches[2]) {
+                    var strMatchedValue = arrMatches[2].replace(
+                        new RegExp("\"\"", "g"), "\"");
+                } else {
+                    var strMatchedValue = arrMatches[3];
+                }
+                arrData[arrData.length - 1].push(strMatchedValue);
+            }
+            // #Remove empty arrays
+            var filtered = arrData.filter(function(el) {
+                return el != "";
+            });
+            return (filtered);
+        }
+        $scope.data_json = function(array) {
+            var objArray = [];
+            for (var i = 1; i < array.length; i++) {
+                objArray[i - 1] = {};
+                for (var k = 0; k < array[0].length && k < array[i].length; k++) {
+                    var key = array[0][k];
+                    objArray[i - 1][key] = array[i][k];
+                };
+            }
+            var json = JSON.stringify(objArray);
+            var str = json.replace(/},/g, "},\r\n");
+
+            return angular.fromJson(str);
+        }
+        $scope.set_status = function() {
+            $scope.persons.forEach(function(person) {
+                if (person['IBOR_NonIBOR'] != 'IBOR') {
+                    person.Status = "NA";
+                } else {
+                    person.Status = person.Status;
+                };
+            });
+        };
+        $scope.set_color = function(person) {
+            if (person['IBOR_NonIBOR'] == 'IBOR') {
+                return { color: "yellow" }
+            } else
+                return { color: "orange" }
+        }
+        $scope.updateHosts = function() {
+            $scope.getData().forEach(function(person) {
+                person.checked = $scope.allHosts;
+            });
+        }
+        $scope.getData = function() { return $filter('filter')($scope.persons, $scope.query) };
+
+        $scope.getSelected = function() {
+            var selectedCounter = 0;
+            var queryData = $scope.getData();
+            var selectData = $filter('filter')(queryData, { "checked": true });
+            angular.forEach(selectData, function(person) {
+                if (person.checked) {
+                    selectedCounter += 1;
+                }
+            });
+            return [selectedCounter, selectData]
+        };
+
+        $scope.clickButton = function(persons, query) {
+            var data = $scope.getSelected(persons, query)[1];
+            angular.forEach(data, function(person) {
+                person.process = true
+                person.Status = "Processing...."
+                var delay = Math.floor(Math.random() * 5000);
+                $timeout(function() {
+                    person.Status = "Processed";
+                    person["Status Date"] = new Date();
+                    person.process = false;
+                }, delay);
+            });
+        };
+
+        $scope.getProcess = function(person) {
+            return (person.process);
+        };
+        $scope.hideButton = function() {
+            return ($scope.getSelected()[0] == 0);
+        };
+        $scope.doc_classes = function() {
+            var doc_type = [];
+            angular.forEach($scope.persons, function(person) {
+                if (doc_type.indexOf(person["Document_Class"]) === -1) {
+                    doc_type.push(person["Document_Class"]);
+                }
+            });
+            return doc_type;
+        };
+        $scope.addToList = function(id) {
+            $scope.checkboxes.push(id);
+        };
+        $scope.getDownload = function() {
+            var doc_class = $scope.doc_classes();
+            for (i in doc_class) {
+                var val_array = $scope.fetchJSON($scope.persons, "Document_Class", [doc_class[i]]);
+                var selectData = $filter('filter')(val_array, { "Status": "Processed" });
+                var fileList = []
+                for (var j = 0; j < selectData.length; j++) {
+                    fileList.push(selectData[j]["Document_Name"]);
+                };
+                if (i == 0) {
+                    var out_data = $scope.fetchJSON($scope.data_model[i], "Name", fileList);
+                } else {
+                    var out_data = $scope.fetchJSON($scope.data_model[i], "Full File Name", fileList)
+                };
+                $scope.exportData(out_data, doc_class[i])
+            };
+            // return selectData;
+        };
+        // $scope.selectedDoc = function toggleSelection(doc) {
+        //     $scope.doc_select = [];
+        //     var idx = $scope.doc_classes().indexOf(doc);
+        //     if (idx > -1) {
+        //         $scope.doc_select.splice(idx, 1);
+        //     } else {
+        //         $scope.doc_select.push(doc);
+        //     }
+        //     return $scope.doc_select
+        // };
+        $scope.selectedDoc = [];
+        $scope.toggleCheck = function(doc_class) {
+            if ($scope.selectedDoc.indexOf(doc_class) === -1) {
+                $scope.selectedDoc.push(doc_class);
+            } else {
+                $scope.selectedDoc.splice($scope.selectedDoc.indexOf(doc_class), 1);
+            }
+        };
+        // $scope.selectedDoc = function selectedDoc() {
+        //     return filterFilter($scope.doc_classes, { selected: true });
+        // };
+
+        $scope.exportData = function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel = true) {
+            var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+            var CSV = '';
+
+            CSV += ReportTitle + '\r\n\n';
+
+            if (ShowLabel) {
+                var row = "";
+                for (var index in arrData[0]) {
+                    row += index + ',';
+                }
+                row = row.slice(0, -1);
+                CSV += row + '\r\n';
+            }
+            for (var i = 0; i < arrData.length; i++) {
+                var row = "";
+                for (var index in arrData[i]) {
+                    row += '"' + arrData[i][index] + '",';
+                }
+
+                row.slice(0, row.length - 1);
+                CSV += row + '\r\n';
+            }
+
+            if (CSV == '') {
+                alert("Invalid data");
+                return;
+            }
+
+            //Generate a file name
+            var fileName = "DataModel_";
+            fileName += ReportTitle.replace(/ /g, "_");
+
+            //Initialize file format you want csv or xls
+            var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+            //this trick will generate a temp <a /> tag
+            var link = document.createElement("a");
+            link.href = uri;
+
+            //set the visibility hidden so it will not effect on your web-layout
+            link.style = "visibility:hidden";
+            link.download = fileName + ".csv";
+            //this part will append the anchor tag and remove it after automatic click
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        $scope.fetchJSON = function(JSON_data, key, array) {
+            var foo = $filter('filter')(JSON_data, function(item) {
+                return array.indexOf(item[key]) !== -1;
+            });
+            return foo;
+        };
+    });
+    // The class you click to trigger the popup 
+    $('.letspop').on('click', function() {
+        // The Overlay fades in
+        $(".overlay").fadeIn(200, function() {});
+        // The Popup fades in just after
+        $(".popup").fadeIn(600, function() {});
+    });
+    // The class's you click when you want to close the pop
+    $('.overlay, .close-pop').on('click', function() {
+        // The Overlay fades out slower
+        $(".overlay").fadeOut(600, function() {});
+        // The Popup fades out faster
+        $(".popup").fadeOut(200, function() {});
+    });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+      <!-- Page title -->
+      <title>EY Business Intelligence</title>
+		<!-- Vendor styles -->
+		<link rel="stylesheet" href="/static/vendor/fontawesome/css/font-awesome.css"/>
+		<link rel="stylesheet" href="/static/vendor/animate.css/animate.css"/>
+		<link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css"/>
+
+		<link rel="icon" href="/static/images/EYBIicon.png" sizes="32x32" />
+		<link rel="icon" href="/static/images/EYBIicon.png" sizes="192x192" />
+
+		<!-- App styles -->
+		<link rel="stylesheet" href="/static/styles/pe-icons/pe-icon-7-stroke.css"/>
+		<link rel="stylesheet" href="/static/styles/pe-icons/helper.css"/>
+		<link rel="stylesheet" href="/static/styles/stroke-icons/style.css"/>
+		<link rel="stylesheet" href="/static/styles/style.css">
+
+		<script type='text/javascript' src='/static/data/dbase/data.js'></script>
+		<script type='text/javascript' src='/static/scripts/angular.min.js'></script>
+		
+		
+	<!---	<script type='text/javascript' src='../wp-includes/js/jquery/jqueryb8ff.js?ver=1.12.4'></script> -->
+		<script src="/static/scripts/d3.v4.min.js"></script>
+		<script src="/static/scripts/d3-ez.js"></script>
+	<!---    <script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script>  -->
+		<link rel="stylesheet" type="text/css" href="/static/styles/d3-ez.css" />
+
+
+		<style>
+
+.autocomplete-items::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+.autocomplete-items::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.autocomplete-items::-webkit-scrollbar-thumb {
+    background: #777;
+}
+
+/* Handle on hover */
+.autocomplete-items::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+}
+
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+
+input[type=submit] {
+  background-color: #ffe600;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #111;
+  cursor: pointer;
+}
+
+.autocomplete-items {
+  position: relative;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 500px;
+    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+	  </style>
+   </head>
+   <body>
+      <!-- Wrapper-->
+      <div class="wrapper">
+      <!-- Header-->
+      <nav class="navbar navbar-default navbar-fixed-top">
+         <div class="container-fluid">
+            <div class="navbar-header">
+               <div id="mobile-menu">
+                  <div class="left-nav-toggle">
+                     <a href="#">
+                     <i class="stroke-hamburgermenu"></i>
+                     </a>
+                  </div>
+               </div>
+               <a class="navbar-brand" style="background: #2f323b;" href="/">
+               <a href="/">
+                  <img src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
+                  <!--<span style="color:white;"> Business </br> Intelligence</span>-->
+               </a>
+               </a>
+            </div>
+         </div>
+      </nav>
+      <!-- End header-->
+
+	<!-- Navigation-->
+	<div id="navbar-frame"></div>
+	<!-- End navigation-->
+
+      <!-- Main content-->
+      <section class="content">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="view-header">
+                     <div class="pull-right text-right" style="line-height: 14px">
+                     </div>
+                     <div class="header-icon">
+                        <i class="pe page-header-icon pe-7s-graph2"></i>
+                     </div>
+                     <div class="header-title">
+                        <h3>Business Reporting</h3>
+                        <small id="page_title">
+                        Mortgage
+                        </small>
+                     </div>
+                  </div>
+                  <hr>
+               </div>
+            </div>
+<!--            <div class="row" style="display:none;">    -->
+			<div class="row">
+               <div class="col-md-12">
+                  <div class="panel panel-filled">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-group m-b-xs m-t-xs autocomplete" style="width:100%;">
+                                        <input id="myInput" type="text" name="myCountry" placeholder="Search by organization here.."
+										style="color: #949ba2;border: none;border-radius: 4px;-webkit-box-shadow: none;
+										box-shadow: none;-webkit-transition: none;-o-transition: none;transition: none;
+										background-color: #494b54;">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-6">
+                  <div class="panel">
+                     <div class="panel-heading">
+                        <div class="panel-tools">
+                           <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                           
+                        </div>
+                    <h5>    IBOR | non-IBOR </h5>
+                     </div>
+                     <div class="panel-body">
+                        <div style="text-align:center; padding-top:30px; min-height:270px;">
+                           <div id="parent12">
+                              <div id="container12" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px;; z-index:1;"></div>
+                           </div>
+                           <div class="met-text" style=" margin-top:-60px;  text-align:left; padding-left:60px;">
+                              <span style=" color: #ffe600; color:white; font-size: 2vh; ">
+                              <span style="border-left:15px solid #ffe600; padding-left:10px;">IBOR Contracts: </span>
+                              <a href="#" id="ibor_count" style="color:#ffe600;">70</a> </br>
+                              <span style="border-left:15px solid #777; padding-left:10px;">Non-IBOR Contracts: </span>
+                              <a href="#" style="color:#ffe600;" id="nibor_count"> 100</a> </br>
+                              <a href="#" style="color:rgba(0,0,0,0); " id="ibor_unextracted_count"> 100</a> </br>
+                              </span>
+                           </div>
+                           <div style="height:0px; width:0px;opacity:0;">
+                              <div class="pie_dark" id="bla" data-value="67" >
+                                 <div  class="pie_dark-val" >
+                                    <div id="field_extraction_percentage" style="color:white; font-size:0.3em; margin-top:-40px;">67%</div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="panel">
+                     <div class="panel-heading">
+                        <div class="panel-tools">
+                           <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                           
+                        </div>
+                     <h5>   Maturity Date </h5>
+                     </div>
+                     <div class="panel-body">
+                        <div style="text-align:center; padding-top:30px;">
+
+                                    <div id="parent"><div id="container1234" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px;; z-index:1;"></div></div>
+
+									<div class="met-text" style=" margin-top:-60px; text-align:left; padding-left:60px;">
+                                      <span style=" color: #ffe600; color:white; font-size: 2vh; ">
+                                       <span style="border-left:15px solid #ffe600; padding-left:10px;"> Pre 2021 Contracts: </span><a href="#" id="pre_count" style="color:#ffe600;">3</a> </br>
+                                       <span style="border-left:15px solid rgb(66, 62, 110); padding-left:10px;"> Post 2021 Contracts:</span> <a href="#" id="post_count" style="color:#ffe600; " > 66</a> </br>
+									   <span style="border-left:15px solid cornflowerblue; padding-left:10px;"> Uncertain: </span><a href="#" style=" color:#ffe600;" id="ContractualMaturityDateUnextractedCount"> 100</a>
+
+							   </span>
+                                    </div>
+
+									<div style="height:0px; width:0px;opacity:0;">
+                                       <div class="pie_dark" id="bla" data-value="67" >
+                                          <div  class="pie_dark-val" ><div id="field_extraction_percentage" style="color:white; font-size:0.3em; margin-top:-40px;">67%</div></div>
+                                       </div>
+                                    </div>
+
+							  </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+			<div class="col-md-6">
+                  <div class="panel">
+                     <div class="panel-heading">
+                        <div class="panel-tools">
+                           <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                           
+                        </div>
+                      <h5>  Adjustable-Fixed | Floating </h5>
+                     </div>
+                     <div class="panel-body">
+                        <div style="text-align:center; padding-top:30px;">
+
+
+
+									<div id="parent123" style=""><div id="container123" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px;; z-index:1;"></div></div>
+
+
+								<div class="met-text" style=" margin-top:-60px;  text-align:left; padding-left:60px;">
+
+									  <span style=" color: white; font-size: 2vh; border-left:15px solid #ffe600; padding-left:10px;">Adjustable Fixed:
+                                     </span> <a href="#" style="color:#ffe600; font-size: 2vh;" id="adjustable_floating_count"></a>
+									 </br>
+									<span style=" color: white; font-size: 2vh; border-left:15px solid #777; padding-left:10px;">Floating:
+                                      </span> <a href="#" style="color:#ffe600; font-size: 2vh;" id="fixed_count"></a>
+									  </br>
+									  <span style=" color: white; font-size: 2vh;">
+                                      </span> <a href="#" style="color:#ffe600; display:none;" id="adjust_fixed_unextracted_count"></a>
+									  </br>
+
+                                       <span style=" font-size: 2vh; color: white;" ></span> <a href="#" style="color:#ffe600;"> </a>
+
+
+                                    </div>
+
+
+							  </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="panel">
+                     <div class="panel-heading">
+                        <div class="panel-tools">
+                           <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                           
+                        </div>
+                       <h5> Fallback Language Categorization </h5>
+                     </div>
+                     <div class="panel-body">
+                        <div style="text-align:center; ">
+
+
+									<a href="/fallback_language" style="text-decoration:none; color:white;">
+									<div id="parent_chart" style=""><div id="chart" style="width: 200px; margin-left:-200px; margin-top: -50px; height: 120px; padding-top: 30px; transform:scale(0.8); padding-left:70px; margin-left:-80px; "></div></div>
+
+                                    <div class="met-text" style=" padding-top: 130px; color:white;font-size: 2vh;  text-align:left; padding-left:30px;">
+                                       <table>
+								 <tbody>
+								 <tr>
+								 <td>
+								 <span style=" color: #ffe600; color:white; font-size: 2vh;">
+                                       <span style="margin-left:35px; border-left:15px solid #00b050; padding-left:10px;">A:</span></td>
+									   <td>
+									   <a href="#"  style="margin-left:20px;color: #ffe600;" id="strong">16</a>
+									   <span style="margin-left:35px; border-left:15px solid #ffc000; padding-left:10px;">B: </span></td>
+									   <td>
+									   <a href="#"  style="color: #ffe600; margin-left:20px;" id="medium"> 35</a>
+                                         </br>
+						   </td>
+						   </tr>
+						   <tr>
+						   <td>
+										<span style="margin-left:35px; border-left:15px solid #f04c3e; padding-left:10px;">C:  </span></td>
+									   <td>
+										<a href="#" style="color: #ffe600; margin-left:20px;" id="weak">11</a>
+										<span style="margin-left:35px; border-left:15px solid #bb0826; padding-left:10px;">D:  </span></td>
+									   <td>
+										<a href="#" style="color:#ffe600; margin-left:20px;" id="silent">12</a>
+										 </br>
+                                       </span>
+									   </td>
+						   </tr>
+								 </tbody>
+						   </table>
+                                    </div></a>
+							 </div>
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+            </br>
+            <div class="row" style="">
+               <div class="col-md-6">
+                  <div class="panel panel-filled" style="background:rgba(0,0,0,0.2);">
+                     <div class="panel-heading">
+                        <div class="panel-tools">
+                           <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                           
+                        </div>
+                    <h5>    Confidence Level by Field</h5>
+                     </div>
+                     <div class="panel-body">
+                        <div>
+                           <div class="table-responsive">
+                              <table class="table">
+                                 <tbody>
+								 <tr>
+                                    <td style="color:#eee; border-bottom: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1);">Agreement Name</td>
+                                    <td style="color:green; border-bottom: 1px solid rgba(255,255,255,0.1); "> <span class="label label-accent-success">100%</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td style="color:#eee; border-bottom: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1);">Borrower</td>
+                                       <td style="color: green; border-bottom: 1px solid rgba(255,255,255,0.1); "><span class="label label-accent-success">100%</span> </td>
+                                    </tr>
+                                    <tr>
+                                       <td class="team" id="lead_arranger"style="color:#eee; border-bottom: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1);">Contract Origination Date</td>
+                                       <td class="rank" id="lead_arranger_count" style="color:yellow; border-bottom: 1px solid rgba(255,255,255,0.1); "><span class="label label-accent-warning">75%</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td class="team" id="holdings_role" style="color:#eee; border-bottom: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1);">Contract Maturity Date</td>
+                                       <td class="rank" id="holdings_count" style="color:green; border-bottom: 1px solid rgba(255,255,255,0.1); "><span class="label label-accent-success">100%</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td class="team" id="book_runner" style="color:#eee; border-bottom: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1);">Reference Rate Definition</td>
+                                       <td class="rank" id="book_runner_count"style="color:green; border-bottom: 1px solid rgba(255,255,255,0.1); "><span class="label label-accent-success">100%</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td class="team" id="synidcation_agent"style="color:#eee; border-bottom: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1);">Permanent Fallback Language</td>
+                                       <td class="rank" id="syndication_agent_count"style="color:yellow; border-bottom: 1px solid rgba(255,255,255,0.1); "><span class="label label-accent-warning">83%</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td class="team" id="documentation_agent"  style="color:#eee;  border-right: 1px solid rgba(255,255,255,0.1);">Lender</td>
+                                       <td class="rank" id="documentation_agent_count" style="color:green; border-bottom: 1px solid rgba(255,255,255,0.1); ">
+									    <span class="label label-accent-success">100%</span>
+										</td>
+									   
+                                    </tr>
+                                    <tr>
+									
+                                       <td class="team" id="documentation_agent"  style="color:#eee; border-bottom: 1px solid rgba(255,255,255,0.1);  border-right: 1px solid rgba(255,255,255,0.1);">Reference Rate Optionality</td>
+                                       <td class="rank" id="documentation_agent_count" style="color:green; border-bottom: 1px solid rgba(255,255,255,0.1); "><span class="label label-accent-success">92%</span></td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+      </section>
+      <!-- End main content-->
+      </div>
+      <!-- End wrapper-->
+      <!-- Vendor scripts -->
+      <script src="/static/vendor/pacejs/pace.min.js"></script>
+      <script src="/static/vendor/jquery/dist/jquery.min.js"></script>
+      <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+      <!-- App scripts -->
+      <script src="/static/scripts/luna.js"></script>
+
+<script> 
+$(document).ready(function() {
+	$("#navbar-frame").load("/nav_bar");
+});
+</script>
+
+
+<script>
+d3.csv("/static/data/processed/BI_12032018.csv", function(data){
+
+   var _temp;
+    //console.log(data);
+
+	var variables = data.columns;
+	var admin_agent_count_flag=0;
+	var admin_agent_role_flag="Administrative Agent";
+	var field_extraction_percentage_val = 0;
+  data.map(function(d) {
+    if (d['Extraction status']=='In Progress') {
+	admin_agent_count_flag++;
+        //console.log( d['LegalEntitysRoles'] );
+		}
+
+	//document.getElementById("admin_agent_count").textContent=admin_agent_count_flag ;
+	//document.getElementById("admin_agent_role").textContent=admin_agent_role_flag ;
+
+  });
+
+  var documents_flag=0;
+  var variables = data.columns;
+  variables.forEach(function(d) {
+  if (d == 'Extraction status') {
+		for (var i=0; i < 600; i += 1){
+
+				try{
+
+				if(typeof(data[i])!="undefined"){
+					documents_flag++;
+					}
+				}
+			catch(e){
+					//console.log('An error has occurred: '+e.message);
+				}
+
+		}}
+
+  });
+
+
+  let legal_role_set = new Set();
+  var weak_flag = 0;
+   var ibor = 0;
+var    nibor =0;
+var ibor_unextracted=0;
+var  silent_flag = 0;
+var  strong_flag = 0;
+var medium_flag = 0;
+
+var adjustable_floating=0;
+var fixed =0;
+var adjust_fixed_unextracted=0;
+
+  let legal_entity_set = new Set();
+  let borrower_role_set = new Set();
+  let holdings_role_set = new Set();
+  let admin_role_set = new Set();
+  let borrower_role_set_current = new Set();
+  var borrower_role_list_current = [];
+  var admin_role_list = [];
+  var ref_rate = {"No rate": 0, "USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent": 0, "Eurocurrency Rate": 0,
+  "Adjusted LIBOR": 0, "LIBOR": 0, "Eurodollar": 0, "EURIBO": 0};
+  var holdings_role_list = [];
+  var borrower_role_list = [];
+  var legal_role_list = [];
+   var legal_entity_list = [];
+  var ContractualMaturityDatePre2021 = [];
+  var ContractualMaturityDatePost2021 = [];
+  var ContractualMaturityDateUnextracted = [];
+
+  var variables = data.columns;
+  variables.forEach(function(d) {
+    if (d == "LenderGeneral") {
+
+		for (var i=0; i < documents_flag; i += 1){
+			if(data[i]['DOC_CLASS'] == 'Mortgage') {
+			//console.log(data[i]['Full File Name']);
+				if(!data[i][d].includes('Unextracted')){
+					legal_entity_set.add(data[i][d]);
+					legal_entity_list.push(data[i][d]);
+				}
+			}
+		}
+	}
+    if (d == "LegalEntitysRoles") {
+		for (var i=0; i < documents_flag; i += 1){
+			if(data[i]['DOC_CLASS'] == 'Mortgage') {
+				if(!data[i][d].includes('Unextracted')){
+					legal_role_set.add(data[i][d]);
+					legal_role_list.push(data[i][d]);
+				}
+			}
+		}
+	}
+	//document.getElementById("lead_arranger").textContent="Arranger" ;
+	//document.getElementById("lead_arranger_count").textContent=legal_role_list.length ;
+	//document.getElementById("lead_arranger_count").textContent=" " ;
+	if (d == "BorrowerGeneral") {
+		for (var i=0; i < documents_flag; i += 1){
+			if(data[i]['DOC_CLASS'] == 'Mortgage') {
+				if(!data[i][d].includes('Unextracted')){
+					borrower_role_set.add(data[i][d]);
+					borrower_role_list.push(data[i][d]);
+				}
+			}
+		}
+	}
+
+	//document.getElementById("borrower_role").textContent="Borrower" ;
+	//document.getElementById("borrower_count").textContent=borrower_role_list.length ;
+	//document.getElementById("borrower_count").textContent=" " ;
+	if (d == "CalculationAdministrativeAgent") {
+		for (var i=0; i < documents_flag; i += 1){
+			if(data[i]['DOC_CLASS'] == 'Mortgage') {
+				if(!data[i][d].includes('Unextracted')){
+					admin_role_set.add(data[i][d]);
+					admin_role_list.push(data[i][d]);
+				}
+			}
+		}
+	}
+
+	//document.getElementById("admin_agent_role").textContent="CalculationAdministrativeAgent" ;
+	//document.getElementById("admin_agent_count").textContent=admin_role_list.length ;
+	//document.getElementById("admin_agent_count").textContent=" " ;
+	if (d == "Holdings") {
+		for (var i=0; i < documents_flag; i += 1){
+			if(data[i]['DOC_CLASS'] == 'Mortgage') {
+				if(!data[i][d].includes('Unextracted')){
+					holdings_role_set.add(data[i][d]);
+					holdings_role_list.push(data[i][d]);
+				}
+			}
+		}
+	}
+
+	//document.getElementById("holdings_role").textContent="Holdings" ;
+	//document.getElementById("holdings_count").textContent=holdings_role_list.length ;
+	//document.getElementById("holdings_count").textContent=" " ;
+	if (d == "ContractualMaturityDate2") {
+		for (var i=0; i < documents_flag; i += 1){
+			if(data[i]['DOC_CLASS'] == 'Mortgage') {
+				if(!data[i][d].includes('Unextracted')  && !data[i][d].includes('Not Defined')) {
+					var mydate = new Date(data[i][d]);
+					if (mydate.getFullYear()<2021)
+						ContractualMaturityDatePre2021.push(mydate);
+					else
+						ContractualMaturityDatePost2021.push(mydate);
+				}
+				else {
+						ContractualMaturityDateUnextracted.push(data[i][d]);
+				}
+			}
+		}
+	}
+	document.getElementById("field_extraction_percentage").textContent=92 + "%";
+
+	if (d == "ReferenceRate Only") {
+		for (var i=0; i < documents_flag; i += 1) {
+			if(data[i]['DOC_CLASS'] == 'Mortgage') {
+				if(!data[i][d].includes('Unextracted') ){
+					for(var key in ref_rate) {
+						if (data[i][d].includes(key)) {
+								ref_rate[key]++;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	document.getElementById("adjustable_floating_count").textContent=ref_rate["Adjusted LIBOR"];
+	document.getElementById("fixed_count").textContent=ref_rate["Adjusted LIBOR"];
+	document.getElementById("adjust_fixed_unextracted_count").textContent=ref_rate["Adjusted LIBOR"];
+
+	if (d == "Mortgage IBOR vs. Non-IBOR") {
+		for (var i=0; i < documents_flag; i += 1){
+			if(data[i]['DOC_CLASS'] == 'Mortgage') {
+				if(!data[i][d].includes('No Data Present') ){
+					if (data[i][d]=="IBOR") {
+						ibor++;
+						adjustable_floating++;
+					}
+					else if (data[i][d].includes("NON") || data[i][d].includes("Non")) {
+							nibor++;
+						}
+					}
+				else {
+					ibor_unextracted++;
+					adjust_fixed_unextracted++;
+				}
+			}
+		}
+	}
+
+	document.getElementById("ibor_count").textContent=ibor;
+	document.getElementById("nibor_count").textContent=nibor;
+	document.getElementById("ibor_unextracted_count").textContent=ibor_unextracted;
+
+	document.getElementById("adjustable_floating_count").textContent=adjustable_floating;
+	document.getElementById("fixed_count").textContent=fixed;
+	document.getElementById("adjust_fixed_unextracted_count").textContent=adjust_fixed_unextracted;
+
+
+
+field_extraction_percentage = Math.round(ContractualMaturityDatePost2021.length/(ContractualMaturityDatePre2021.length+ContractualMaturityDatePost2021.length)*100);
+	document.getElementById("field_extraction_percentage").textContent=ContractualMaturityDatePost2021.length + "/" + ContractualMaturityDatePre2021.length;
+	document.getElementById("ContractualMaturityDateUnextractedCount").textContent=ContractualMaturityDateUnextracted.length;
+
+
+
+	document.getElementById("pre_count").textContent=ContractualMaturityDatePre2021.length ;
+	document.getElementById("post_count").textContent=ContractualMaturityDatePost2021.length ;
+
+	$(document).ready( function () {
+  	    $( "#bla" ).attr('data-value', field_extraction_percentage );
+	});
+
+	
+	if (d == "Fallback Language Strength") {
+		for (var i=0; i < documents_flag; i += 1){
+			if(data[i]['DOC_CLASS'] == 'Mortgage') {
+				if(data[i][d].includes('C')){
+					weak_flag++;}
+				else if(data[i][d].includes('D')){
+					silent_flag++;}
+				else if(data[i][d].includes('B')){
+					medium_flag++;}
+				else
+					strong_flag++;
+			}
+		}
+	}
+});
+
+
+  var dataset2 = {
+  mat_date: [ibor, nibor, ibor_unextracted]
+};
+
+
+  var dataset = {
+  mat_date: [ContractualMaturityDatePre2021.length, ContractualMaturityDatePost2021.length, ContractualMaturityDateUnextracted.length]
+};
+
+  var dataset1 = {
+  mat_date: [adjustable_floating, fixed, adjust_fixed_unextracted]
+};
+
+/*
+silent_flag = 12; //REMOVE AFTER DEMO
+weak_flag = 11;
+medium_flag = 35;
+strong_flag = 17;
+*/
+
+	document.getElementById("silent").textContent=silent_flag;
+	document.getElementById("weak").textContent=weak_flag;
+	document.getElementById("medium").textContent=medium_flag;
+	document.getElementById("strong").textContent=strong_flag;
+
+
+var bardata = [0,silent_flag*2, weak_flag*2, medium_flag*2, strong_flag*2];
+cost_bar(bardata);
+
+
+  pie_segments(dataset);
+  pie_segments1(dataset1);
+  pie_segments2(dataset2);
+  holdings_role_set.forEach((el) => {
+  //console.log(el);
+});
+
+  function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+
+			  <!-----   -->
+			  _temp=inp.value;
+			  //console.log(_temp);
+			  var current_borrower_count=0;
+			  var current_lender_count=0;
+			  var current_documentation_agent_count=0;
+			  var current_syndication_agent_count=0;
+			  var current_lead_arranger_count=0;
+			  var current_book_runner_count=0;
+			  var current_holdings_count=0;
+			  var current_ref_rate = {"No rate": 0, "USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent": 0, "Eurocurrency Rate": 0,
+  "Adjusted LIBOR": 0, "LIBOR": 0, "Eurodollar": 0, "EURIBO": 0};
+			  var current_admin_agent_count=0;
+			  var current_ibor=0;
+			  var current_nibor=0;
+			  var current_ibor_unextracted=0;
+			  var current_adjustable_floating=0;
+			  var current_fixed=0;
+			  var current_adjust_fixed_unextracted=0;
+			  var current_pre_2021_count=0;
+			  var current_post_2021_count=0;
+			  var current_strong_fallback_count=0;
+			  var current_weak_fallback_count=0;
+			  var current_silent_fallback_count=0;
+			  var current_medium_fallback_count=0;
+			  var current_unextracted_matdate_count =0;
+
+	//console.log(current_unextracted_matdate_count);
+
+
+		for (var i=0; i < borrower_role_list.length;i += 1){
+
+			if(borrower_role_list[i].includes(_temp)){
+				current_borrower_count++;
+				}
+			//console.log(borrower_role_list[i]);
+			//console.log(_temp);
+
+		}
+//		document.getElementById("borrower_count").textContent=current_borrower_count;
+		for (var j=0; j<holdings_role_list.length;j += 1){
+
+			if(holdings_role_list[j].includes(_temp)){
+				current_holdings_count++;
+				}
+			//console.log(holdings_role_list[j]);
+			//console.log(_temp);
+
+		}
+		document.getElementById("holdings_count").textContent=current_holdings_count;
+		for (var k=0; k<admin_role_list.length;k += 1){
+
+			if(admin_role_list[k].includes(_temp)){
+				current_admin_agent_count++;
+				}
+			//console.log(admin_role_list[k]);
+			//console.log(_temp);
+
+		}
+//		document.getElementById("admin_agent_count").textContent=current_admin_agent_count;
+		for (var k=0; k<legal_entity_list.length;k += 1){
+
+			//console.log(legal_entity_list[k]);
+			//console.log(_temp.substring(0, 5));
+
+			if(legal_entity_list[k].includes(_temp.substring(0, 13)) && data[k]['LegalEntitysRoles'].includes('Arranger')){
+				current_lead_arranger_count++;
+
+				//console.log(data[k]['LegalEntitysRoles'] + "  :  " + data[k]['Full File Name']);
+			//console.log(_temp);
+				}
+
+
+		}
+		document.getElementById("lead_arranger_count").textContent=current_lead_arranger_count;
+		for (var k=0; k<legal_entity_list.length;k += 1){
+
+			if(legal_entity_list[k].includes(_temp.substring(0, 13)) && data[i]['LegalEntitysRoles'].includes('Book Runner')){
+				current_book_runner_count++;
+				}
+			//console.log(data[i]['LegalEntitysRoles']);
+			//console.log(_temp);
+
+		}
+		document.getElementById("book_runner_count").textContent=current_book_runner_count;
+		for (var k=0; k<legal_entity_list.length;k += 1){
+
+			if(legal_entity_list[k].includes(_temp.substring(0, 13)) && data[i]['LegalEntitysRoles'].includes('Syndication Agent')){
+				current_syndication_agent_count++;
+				}
+			//console.log(data[i]['LegalEntitysRoles']);
+			//console.log(_temp);
+
+		}
+		document.getElementById("syndication_agent_count").textContent=current_syndication_agent_count;
+		for (var k=0; k<legal_entity_list.length;k += 1){
+
+			if(legal_entity_list[k].includes(_temp.substring(0, 13)) && data[i]['LegalEntitysRoles'].includes('Documentation Agent')){
+				current_documentation_agent_count++;
+				}
+			//console.log(data[i]['LegalEntitysRoles']);
+			//console.log(_temp);
+
+		}
+		document.getElementById("documentation_agent_count").textContent=current_documentation_agent_count;
+
+	for (var i=0; i < documents_flag; i += 1) {
+		if(data[i]['DOC_CLASS'] == 'Mortgage') {
+			if (data[i]['Holdings'].includes(_temp))
+				{
+				if (!data[i]['ContractualMaturityDate'].includes('Unextracted'))
+				{
+				var mydate = new Date(data[i]['ContractualMaturityDate']);
+				if(mydate.getFullYear()<2021)
+					current_pre_2021_count++;
+				if(mydate.getFullYear()>2021)
+					current_post_2021_count++;
+				}
+				else {
+					current_unextracted_matdate_count++;
+				}
+
+
+				if(data[i]['Fallback Language Strength'].includes('D')){
+					current_silent_fallback_count++;}
+				else if(data[i]['Fallback Language Strength'].includes('C')){
+					current_weak_fallback_count++;}
+				else if(data[i]['Fallback Language Strength'].includes('B')){
+					current_medium_fallback_count++;}
+				else
+					current_strong_fallback_count++;
+
+					for(var key in current_ref_rate) {
+						//console.log(key);
+						//console.log(data[i]['ReferenceRate Only']);
+						if (data[i]['ReferenceRate Only'].includes(key))
+							{
+								current_ref_rate[key]++;
+							}
+					}
+
+				if(!data[i]['Mortgage IBOR vs. Non-IBOR'].includes('No Data Present') ){
+
+					if (data[i]['Mortgage IBOR vs. Non-IBOR'].includes("IBOR"))
+						{current_ibor++;
+						current_adjustable_floating++;}
+					else if (data[i]['Mortgage IBOR vs. Non-IBOR'].includes("NON") || data[i]['Mortgage IBOR vs. Non-IBOR'].includes("Non"))
+						{current_nibor++;
+						current_fixed++;}
+					}
+				else
+				{
+					current_ibor_unextracted++;
+					current_adjust_fixed_unextracted++;
+				}
+
+
+
+
+				//console.log(data[i]['ContractualMaturityDate']);
+				//console.log(_temp);
+				}
+			 else if (data[i]['Borrower'].includes(_temp))
+				{
+				if (!data[i]['ContractualMaturityDate'].includes('Unextracted'))
+				{
+				var mydate = new Date(data[i]['ContractualMaturityDate']);
+				if(mydate.getFullYear()<2021)
+					current_pre_2021_count++;
+				if(mydate.getFullYear()>2021)
+					current_post_2021_count++;
+				}
+				else {
+					current_unextracted_matdate_count++;
+				}
+
+				if(data[i]['Fallback Language Strength'].includes('D')){
+					current_silent_fallback_count++;}
+				else if(data[i]['Fallback Language Strength'].includes('C')){
+					current_weak_fallback_count++;}
+				else if(data[i]['Fallback Language Strength'].includes('B')){
+					current_medium_fallback_count++;}
+				else
+					current_strong_fallback_count++;
+
+					for(var key in current_ref_rate) {
+						//console.log(key);
+						//console.log(data[i]['ReferenceRate Only']);
+						if (data[i]['ReferenceRate Only'].includes(key))
+							{
+								current_ref_rate[key]++;
+							}
+					}
+
+				if(!data[i]['Mortgage IBOR vs. Non-IBOR'].includes('No Data Present') ){
+
+					if (data[i]['Mortgage IBOR vs. Non-IBOR'].includes("IBOR"))
+						{current_ibor++;
+						current_adjustable_floating++;}
+					else if (data[i]['Mortgage IBOR vs. Non-IBOR'].includes("NON") || data[i]['Mortgage IBOR vs. Non-IBOR'].includes("Non"))
+						{current_nibor++;
+						current_fixed++;}
+					}
+				else
+				{
+					current_ibor_unextracted++;
+					current_adjust_fixed_unextracted++;
+				}
+
+
+				//console.log(data[i]['ContractualMaturityDate']);
+				//console.log(_temp);
+				}
+			else if (data[i]['CalculationAdministrativeAgent'].includes(_temp))
+				{
+				if (!data[i]['ContractualMaturityDate'].includes('Unextracted'))
+				{
+				var mydate = new Date(data[i]['ContractualMaturityDate']);
+				if(mydate.getFullYear()<2021)
+					current_pre_2021_count++;
+				if(mydate.getFullYear()>2021)
+					current_post_2021_count++;
+				}
+				else {
+					current_unextracted_matdate_count++;
+				}
+				if(data[i]['Fallback Language Strength'].includes('D')){
+					current_silent_fallback_count++;}
+				else if(data[i]['Fallback Language Strength'].includes('C')){
+					current_weak_fallback_count++;}
+				else if(data[i]['Fallback Language Strength'].includes('B')){
+					current_medium_fallback_count++;}
+				else
+					current_strong_fallback_count++;
+
+					for(var key in current_ref_rate) {
+						//console.log(key);
+						//console.log(data[i]['ReferenceRate Only']);
+						if (data[i]['ReferenceRate Only'].includes(key))
+							{
+								current_ref_rate[key]++;
+							}
+					}
+
+				if(!data[i]['Mortgage IBOR vs. Non-IBOR'].includes('No Data Present') ){
+
+					if (data[i]['Mortgage IBOR vs. Non-IBOR'].includes("IBOR"))
+						{current_ibor++;
+						current_adjustable_floating++;}
+					else if (data[i]['Mortgage IBOR vs. Non-IBOR'].includes("NON") || data[i]['Mortgage IBOR vs. Non-IBOR'].includes("Non"))
+						{current_nibor++;
+						current_fixed++;}
+					}
+				else
+				{
+					current_ibor_unextracted++;
+					current_adjust_fixed_unextracted++;
+				}
+
+				//console.log(data[i]['ContractualMaturityDate']);
+				//console.log(_temp);
+				}
+			else if(data[i]['LegalEntityies'].includes(_temp))
+				{
+				if (!data[i]['ContractualMaturityDate'].includes('Unextracted'))
+				{
+				var mydate = new Date(data[i]['ContractualMaturityDate']);
+				if(mydate.getFullYear()<2021)
+					current_pre_2021_count++;
+				if(mydate.getFullYear()>2021)
+					current_post_2021_count++;
+				}
+				else {
+					current_unextracted_matdate_count++;
+				}
+				if(data[i]['Fallback Language Strength'].includes('D')){
+					current_silent_fallback_count++;}
+				else if(data[i]['Fallback Language Strength'].includes('C')){
+					current_weak_fallback_count++;}
+				else if(data[i]['Fallback Language Strength'].includes('B')){
+					current_medium_fallback_count++;}
+				else
+					current_strong_fallback_count++;
+
+					for(var key in current_ref_rate) {
+						//console.log(key);
+						//console.log(data[i]['ReferenceRate Only']);
+						if (data[i]['ReferenceRate Only'].includes(key))
+							{
+								current_ref_rate[key]++;
+							}
+					}
+
+				if(!data[i]['Mortgage IBOR vs. Non-IBOR'].includes('No Data Present') ){
+
+					if (data[i]['Mortgage IBOR vs. Non-IBOR'].includes("IBOR"))
+						{current_ibor++;
+						current_adjustable_floating++;}
+					else if (data[i]['Mortgage IBOR vs. Non-IBOR'].includes("NON") || data[i]['Mortgage IBOR vs. Non-IBOR'].includes("Non"))
+						{current_nibor++;
+						current_fixed++;}
+					}
+				else
+				{
+					current_ibor_unextracted++;
+					current_adjust_fixed_unextracted++;
+				}
+
+
+				//console.log(data[i]['ContractualMaturityDate']);
+				//console.log(_temp);
+				}
+			}
+		}
+
+
+
+	document.getElementById("ibor_count").textContent=current_ibor;
+	document.getElementById("nibor_count").textContent=current_nibor;
+	document.getElementById("ibor_unextracted_count").textContent=current_ibor_unextracted;
+
+	document.getElementById("adjustable_floating_count").textContent=current_adjustable_floating;
+	document.getElementById("fixed_count").textContent=current_fixed;
+	document.getElementById("adjust_fixed_unextracted_count").textContent=current_adjust_fixed_unextracted;
+
+
+		document.getElementById("pre_count").textContent=current_pre_2021_count ;
+		document.getElementById("post_count").textContent=current_post_2021_count ;
+		document.getElementById("ContractualMaturityDateUnextractedCount").textContent=current_unextracted_matdate_count ;
+		field_extraction_percentage = Math.round(current_post_2021_count/(current_pre_2021_count+current_post_2021_count)*100);
+	document.getElementById("field_extraction_percentage").textContent=current_post_2021_count + "/" + current_pre_2021_count;
+
+	//console.log(current_unextracted_matdate_count);
+
+
+  var dataset = {
+  mat_date: [current_pre_2021_count, current_post_2021_count, current_unextracted_matdate_count]
+};
+
+
+
+ var dataset1 = {
+  mat_date: [current_adjustable_floating, current_fixed, current_adjust_fixed_unextracted]
+};
+
+
+  var dataset2 = {
+  mat_date: [current_ibor, current_nibor, current_ibor_unextracted]
+};
+
+
+var element = document.getElementById("container1234");
+    element.parentNode.removeChild(element);
+	var p = document.getElementById("parent");
+    var newElement = document.createElement('div');
+    newElement.setAttribute('id', 'container1234');
+	newElement.setAttribute("style", "transform:scale(0.4); position: relative; margin-left: -20px; margin-top:-110px;; z-index:1;");
+    p.appendChild(newElement);
+
+  pie_segments(dataset);
+
+
+ var element = document.getElementById("container123");
+    element.parentNode.removeChild(element);
+	var p = document.getElementById("parent123");
+    var newElement = document.createElement('div');
+    newElement.setAttribute('id', 'container123');
+	newElement.setAttribute("style", "transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px;; z-index:1;");
+    p.appendChild(newElement);
+
+  pie_segments1(dataset1);
+
+  var element = document.getElementById("container12");
+    element.parentNode.removeChild(element);
+	var p = document.getElementById("parent12");
+    var newElement = document.createElement('div');
+    newElement.setAttribute('id', 'container12');
+	newElement.setAttribute("style", "transform:scale(0.4); position: relative; margin-left: -20px; margin-top:-110px;; z-index:1;");
+    p.appendChild(newElement);
+
+  pie_segments2(dataset2);
+
+  var element = document.getElementById("chart");
+    element.parentNode.removeChild(element);
+	var p = document.getElementById("parent_chart");
+    var newElement = document.createElement('div');
+    newElement.setAttribute('id', 'chart');
+	newElement.setAttribute("style", "width: 200px; height: 120px; padding-top: 30px; transform:scale(0.7); margin-left:0px;");
+    p.appendChild(newElement);
+
+	if (current_silent_fallback_count==0)
+		{current_silent_fallback_count1=0.1;}
+	else
+		{current_silent_fallback_count1=current_silent_fallback_count;}
+
+	if (current_weak_fallback_count==0)
+		{current_weak_fallback_count1=0.1;}
+	else
+		{current_weak_fallback_count1=current_weak_fallback_count;}
+
+
+  var bardata = [0,current_silent_fallback_count1*10*2,current_weak_fallback_count1*10*2,current_medium_fallback_count*10*2,current_strong_fallback_count*10*2];
+	cost_bar(bardata);
+	console.log(bardata)
+	console.log(current_strong_fallback_count)
+	document.getElementById("silent").textContent=current_silent_fallback_count;
+	document.getElementById("weak").textContent=current_weak_fallback_count;
+	document.getElementById("medium").textContent=current_medium_fallback_count;
+	document.getElementById("strong").textContent=current_strong_fallback_count;
+	document.getElementById("page_title").textContent=_temp;
+
+	$(document).ready( function () {
+
+  	    $( "#bla" ).attr('data-value', field_extraction_percentage );
+
+});
+
+
+
+			  <!---- ---->
+
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+
+
+let set3 = new Set(function*() { yield* legal_entity_set; yield* borrower_role_set; }());
+/*An array containing all the country names in the world:*/
+//console.log(set3);
+let countries = Array.from(set3);
+console.log(countries);
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete(document.getElementById("myInput"), countries);
+
+  function msg() {
+    alert("Hello world!");
+}
+
+function pie_segments(dataset){
+
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#ffe600", "rgb(66, 62, 110)", "cornflowerblue"],
+    svg = d3.select('#container1234')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')');
+
+radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+    .sort(null);
+
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+		.attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+
+
+}
+
+function pie_segments1(dataset){
+
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#ffe600", "#00b386", "#00b386", "#aaa", "#666", "#ccc", "#888"],
+    svg = d3.select('#container123')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')');
+
+radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+    .sort(null);
+
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+		.attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+
+
+  }
+
+
+  function pie_segments2(dataset){
+
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#ffe600", "#777", "#ddd"],
+    svg = d3.select('#container12')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')');
+
+radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+    .sort(null);
+
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+		.attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+
+
+  }
+
+  function cost_bar(bardata){
+
+
+var height = 200,
+    width = 415,
+    barWidth = 70,
+    barOffset = 5;
+
+var colors = ['red','#bb0826','#f04c3e','#ffc000','#00b050'];
+
+d3.select('#chart').append('svg')
+  .attr('width', width)
+  .attr('height', height)
+  .style('background', 'rgba(0,0,0,0)')
+  .selectAll('rect').data(bardata)
+  .enter().append('rect')
+      .style('fill', function(d,i){ return colors[i]})
+      .attr('width', barWidth)
+      .attr('height', function(d) {
+          return d;
+})
+
+ .attr('x', function(d,i) {
+          return i * (barWidth + barOffset);
+})
+  .attr('y', function(d) {
+          return height - d;
+  })
+
+
+
+  }
+
+
+});
+
+
+      </script>
+   </body>
+</html>

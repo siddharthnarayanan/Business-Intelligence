@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+    <!-- Page title -->
+    <title>EY Document Intelligence</title>
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="/static/vendor/fontawesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/static/vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css">
+    <link rel="icon" href="/static/images/EYBIicon.png" sizes="32x32">
+    <link rel="icon" href="/static/images/EYBIicon.png" sizes="192x192">
+    <!-- App styles -->
+    <link rel="stylesheet" href="/static/styles/pe-icons/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="/static/styles/pe-icons/helper.css">
+    <link rel="stylesheet" href="/static/styles/stroke-icons/style.css">
+    <link rel="stylesheet" href="/static/styles/upload.css">
+    <link rel="stylesheet" href="/static/styles/style.css">
+    <script src="/static/scripts/d3.v4.min.js"></script>
+    <script type='text/javascript' src='/static/scripts/angular.min.js'></script>
+    <script type='text/javascript' src='/static/data/dbase/data.js'></script>
+    <style>
+        .checkmark-circle {  width: 15px;
+              height: 15px;
+              position: relative;
+              display: inline-block;
+              vertical-align: top;
+            }
+            .checkmark-circle .background {
+              width: 150px;
+              height: 150px;
+              border-radius: 50%;
+              background: #2EB150;
+              position: absolute;
+            }
+            .checkmark-circle .checkmark {
+              border-radius: 5px;
+            }
+            .checkmark-circle .checkmark.draw:after {
+              -webkit-animation-delay: 100ms;
+              -moz-animation-delay: 100ms;
+              animation-delay: 100ms;
+              -webkit-animation-duration: 1s;
+              -moz-animation-duration: 1s;
+              animation-duration: 1s;
+              -webkit-animation-timing-function: ease;
+              -moz-animation-timing-function: ease;
+              animation-timing-function: ease;
+              -webkit-animation-name: checkmark;
+              -moz-animation-name: checkmark;
+              animation-name: checkmark;
+              -webkit-transform: scaleX(-1) rotate(135deg);
+              -moz-transform: scaleX(-1) rotate(135deg);
+              -ms-transform: scaleX(-1) rotate(135deg);
+              -o-transform: scaleX(-1) rotate(135deg);
+              transform: scaleX(-1) rotate(135deg);
+              -webkit-animation-fill-mode: forwards;
+              -moz-animation-fill-mode: forwards;
+              animation-fill-mode: forwards;
+            }
+            .checkmark-circle .checkmark:after {
+              opacity: 1;
+              height: 75px;
+              width: 37.5px;
+              -webkit-transform-origin: left top;
+              -moz-transform-origin: left top;
+              -ms-transform-origin: left top;
+              -o-transform-origin: left top;
+              transform-origin: left top;
+              border-right: 15px solid white;
+              border-top: 15px solid white;
+              border-radius: 2.5px !important;
+              content: '';
+              left: 25px;
+              top: 75px;
+              position: absolute;
+            }
+
+            @-webkit-keyframes checkmark {
+              0% {
+                height: 0;
+                width: 0;
+                opacity: 1;
+              }
+              20% {
+                height: 0;
+                width: 37.5px;
+                opacity: 1;
+              }
+              40% {
+                height: 75px;
+                width: 37.5px;
+                opacity: 1;
+              }
+              100% {
+                height: 75px;
+                width: 37.5px;
+                opacity: 1;
+              }
+            }
+            @-moz-keyframes checkmark {
+              0% {
+                height: 0;
+                width: 0;
+                opacity: 1;
+              }
+              20% {
+                height: 0;
+                width: 37.5px;
+                opacity: 1;
+              }
+              40% {
+                height: 75px;
+                width: 37.5px;
+                opacity: 1;
+              }
+              100% {
+                height: 75px;
+                width: 37.5px;
+                opacity: 1;
+              }
+            }
+            @keyframes checkmark {
+              0% {
+                height: 0;
+                width: 0;
+                opacity: 1;
+              }
+              20% {
+                height: 0;
+                width: 37.5px;
+                opacity: 1;
+              }
+              40% {
+                height: 75px;
+                width: 37.5px;
+                opacity: 1;
+              }
+              100% {
+                height: 75px;
+                width: 37.5px;
+                opacity: 1;
+              }
+            }
+
+                input {
+              border: 1px solid transparent;
+              background-color: #f1f1f1;
+              padding: 10px;
+            }
+            .hoveryellow{
+            color:white;
+            transition: all .25s ease-in-out;
+            }
+            .hoveryellow:hover{
+            background:rgba(255,255,255,0.1);
+            color: #fff;
+            transition: background .25s ease-in-out;
+            border-radius:4px;
+            }
+
+            /* Lets Pop up */
+            .letspop{
+            }
+            .letspop:hover{
+              cursor: pointer;
+            }
+            .overlay{
+              display: none; /* Default Hidden */
+              position: fixed;
+              left: 0;
+              top: 0;
+              z-index: 1;
+              background-color: rgba(0,0,0,0.6);
+              height: 100%;
+              width: 100%;
+            } 
+            .popup{
+              display: none; /* Default Hidden */
+              position: fixed;
+              left: 50%; 
+              top: 5%;
+              z-index: 2;
+              background:none;
+              height: auto;
+              width: auto;
+              overflow: hidden;
+              padding: 0px;
+              transform: translate(-50%, 0);
+            }
+
+
+            /* Bored stuff & extras*/
+
+            .close{
+              position: absolute;
+              top: 8px;
+              right: 8px;
+              display: block;
+              color: #666666;
+              font-family: sans-serif;
+            }
+            .close:hover{
+              cursor: pointer;
+              color: #444444;
+            }
+
+            .red{
+            color: red;
+              }
+
+              .blue{
+                  color: blue;   
+              }
+              .green{
+                  color: green;
+              }
+    </style>
+</head>
+<body>
+    <!-- Wrapper-->
+    <div class="wrapper">
+        <!-- Header-->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div id="mobile-menu">
+                        <div class="left-nav-toggle">
+                            <a href="#">
+                                <i class="stroke-hamburgermenu"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <a class="navbar-brand" style="background: #2f323b;" href="index.html">
+                        <a href="Summary_KPI.html">
+                            <img src="/static/images/EYBI.png" alt="" style="transform: scale(1.2); width: 134px; height:auto; max-width:100%; margin-left: -52%; margin-top: 4px;" />
+                            <!--<span style="color:white;"> Business </br> Intelligence</span>-->
+                        </a>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <!-- End header-->
+        <!-- Navigation-->
+        {% include '/eybi_nav.html' %}
+        <!-- End navigation-->
+        <!-- Main content-->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="view-header">
+                            <div class="header-icon">
+                                <i class="pe page-header-icon pe-7s-file"></i>
+                            </div>
+                            <div class="header-title">
+                                <h3>Record Management</h3>
+                                <h5>Document Processing Status For Branch: <span id="page_title"></span></h5>
+                                <small><span id="page_sub_title">
+                                        <!-- Box Level Inventory</span> -->
+                                </small>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div id="dock_box">
+                    <div ng-app="app" ng-controller="ItemController" style="">
+                        <div class="panel-body" style=" padding: 0px;">
+                            <div class="wrapper1" style="padding:0px; ">
+                                <div class="col-md-12">
+                                    <div class='row modal-content' style='padding:10px;'>
+                                        <div class="btn-group pull-right" style="float:right;">
+                                            <button class="btn btn-yellow btn-xs" style="margin-right: 5px; margin: 5px; border-radius:3px; float:right; margin-bottom: 5px;" ng-click="clickButton(persons, $scope.query)"><i class="fa fa-cog"></i> Update Status</button>
+                                            <button class="btn btn-yellow btn-xs letspop button-pop-up" ng-click="getDownload()" style="margin-right: 5px; margin: 5px; border-radius:3px; float:right; margin-bottom: 5px;"><i class="fa fa-cloud-download"></i> Download</button>
+                                        </div>
+                                        <div class="btn-group pull-left" style="float:left; margin-bottom:5px; background:rgba(0,0,0,0.1); padding-left:7px; border-radius:3px; ">
+                                            <div class="checkbox checkbox-primary" style='transform:scale(0.9);'>
+                                                <strong>Document Processing Status:</strong><br><br>
+                                                <input id="checkbox1" class="styled" style=" " type="checkbox" ng-click="includeStatus('Requires Review')">
+                                                <label for="checkbox1" style='color: rgba(255,255,255,0.7);'> Requires Review
+                                                </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <input id="checkbox2" class="styled" style=" " type="checkbox" ng-click="includeStatus('Processed')">
+                                                <label for="checkbox2" style='color: rgba(255,255,255,0.7);'> Processed
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="btn-group pull-right" style="float:left; margin-right:200px;margin-bottom:10px;margin-top:20px;  padding-left:7px; border-radius:3px;">
+                                            <label>Scanned Documents: {{'{{getTotal(filtered_data)[2]}}'}}% ({{'{{getTotal(filtered_data)[0]}}'}}/{{'{{getTotal(filtered_data)[1]}}'}})</label><br>
+                                            <label>Requires Review: {{'{{getTotal(filtered_data)[5]}}'}}% ({{'{{getTotal(filtered_data)[3]}}'}}/{{'{{getTotal(filtered_data)[4]}}'}})</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="panel panel-filled">
+                            <div class="panel-body" style=" padding: 0px;">
+                                <div class="wrapper1" style="padding:0px; ">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <table style="width:100%;">
+                                                <thead style="background:rgba(0,0,0,0.2);">
+                                                    <tr style="color:white; padding:5px;">
+                                                        <td class="team test" id="admin_agent_role1" style="text-align:center;  color:white; font-weight:bold;  white-space: wrap; word-break: break-all; padding:15px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:50px; "><span style="margin-left:-40px;">#</span></td>
+                                                        <td class="team test" id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold;   white-space: wrap; word-break: break-all; width:150px; ">Document ID</td>
+                                                        <td class="team test" id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:120px; ">Document Type</td>
+                                                        <td class="team " id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:100px;">Date of Request</td>
+                                                        <td class="team " id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:100px;">Matches<br>System of Records</td>
+                                                        <td class="team " id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:100px;">Review<br> Status</td>
+                                                        <td class="team " id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:100px;">Remediation<br>Required</td>
+                                                        <td class="team " id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:100px;">Document<br> Quality</td>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                            <div class="item hoveryellow" style="border-radius:0px; text-align: left;  vertical-align: middle; padding: 5px; padding-left: 10px; float:left; width:100%;" ng-repeat="person in persons|filter:{Office_Address:getBranch()}|filter:statusFilter as filtered_data">
+                                                <a href="./tagging?Use_Id={{'{{person.Doc}} + {{person.Office_Address}}'}}" style="text-decoration:none;">
+                                                    <div class="item-short " style=" ">
+                                                        <div class="wrapper1">
+                                                            <table style="color: white;width:100%;">
+                                                                <tbody>
+                                                                    <tr class="" style=" height:40px; ">
+                                                                        <td class="team " id="borrower_role" style="padding:5px;  width:50px;  word-break: break-all; white-space: wrap; color:white;">{{'{{$index + 1}} '}}</td>
+                                                                        <td class="team " id="borrower_role" style="padding:5px;  width:150px; word-break: break-all; white-space: wrap; color:white;">
+                                                                            <i class="pe-7s-file" style="transform: scale(1.3);  background:#587096; border-radius:5px; "></i>&nbsp; &nbsp;
+                                                                            {{'{{ person["Doc"] }}'}} </td>
+                                                                        <td class="team " id="borrower_role" ng-style="set_color(person)" style="padding:5px;  word-break: break-all; white-space: wrap; color:#aaa; width:120px;">
+                                                                            <span class="label label-accent" style="background:rgba(0,0,0,0.3); ">{{'{{ person["Document_Type"] }}'}}</span></td>
+                                                                        <td class="rank " id="borrower_count" style="padding:5px;   word-break: break-all; width:100px; color:white; white-space: wrap;">
+                                                                            <span class="label label-accent" style="background:rgba(255,255,255,0.2); ">{{'{{ person["Date_of_Request"] }}'}} </span></td>
+                                                                        <td class="rank " id="borrower_count" style="padding:5px;   word-break: break-all; width:100px; color:white; white-space: wrap;">
+                                                                            <span class="label label-accent" style="background:rgba(255,255,255,0.2); ">{{'{{ person["Matches_Records"] }}'}} </span></td>
+                                                                        <td class="rank " id="borrower_count" style="padding:5px;   word-break: break-all; width:100px; color:white; white-space: wrap;">
+                                                                            <span class="label label-accent" style="background:rgba(255,255,255,0.2);" ng-style="{'background-color':person.Review_Status == 'Requires Review' ?  '#b13939': 'green'}">{{'{{ person["Review_Status"] }}'}} </span></td>
+                                                                            <td class="rank " id="borrower_count" style="padding:5px;   word-break: break-all; width:100px; color:white; white-space: wrap;">
+                                                                            <span class="label label-accent" style="background:rgba(255,255,255,0.2); ">{{'{{ person["Require_Remediation"] }}'}} </span></td>
+                                                                        <td class="rank " id="borrower_count" style="padding:5px;   word-break: break-all; width:100px; color:white; white-space: wrap;">
+                                                                            <span class="label label-accent" style="background:rgba(255,255,255,0.2); ">{{'{{ person["Document_Quality"] }}'}} </span></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div ng-show="checked" class="item-detail">
+                                                        <div class="person-competence-detail">
+                                                            <ul>
+                                                                <li ng-repeat="item in person.competences.kind">{{'{{ item }}'}}</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- End main content-->
+    <!-- End wrapper-->
+    <!-- Vendor scripts -->
+    <script src="/static/vendor/pacejs/pace.min.js"></script>
+    <script src="/static/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- App scripts -->
+    <script>
+    $(document).ready(function() {
+        $("#navbar-frame").load("/nav_bar");
+    });
+    </script>
+    <script>
+    var param, file_name
+    window.localStorage.clear();
+
+    var GET = {};
+    var query = window.location.search.substring(1).split("&");
+    for (var i = 0, max = query.length; i < max; i++) {
+        if (query[i] === "") // check for trailing & with no param
+            continue;
+        param = query[i].split("=");
+    }
+    file_name = param[1]
+    console.log(file_name);
+    file_name = file_name.replace(/%20/g, ' ');
+    url_name = file_name.split("+");
+    document.getElementById("page_sub_title").textContent = url_name[0];
+    document.getElementById("page_title").textContent = url_name[1];
+
+    var theApp = angular.module('app', []);
+    theApp.controller('ItemController', function ItemController($scope, $http, $filter, $timeout, $window) {
+        $http.get('/static/data/dbase/main_database.csv').success(function(data) {
+            $scope.persons = $scope.data_json(data);
+            // data = JSON.parse(window.localStorage.getItem('user'));
+            // $scope.persons = data;
+            // console.log("Ingest Data", data);
+        });
+        $scope.data_json = function(csv) {
+            var array = $scope.CSVToArray(csv);
+            var objArray = [];
+            // console.log(array);
+            for (var i = 1; i < array.length; i++) {
+                objArray[i - 1] = {};
+                for (var k = 0; k < array[0].length && k < array[i].length; k++) {
+                    var key = array[0][k];
+                    objArray[i - 1][key] = array[i][k]
+                }
+            }
+            return objArray
+        };
+        $scope.CSVToArray = function(strData, strDelimiter) {
+            strDelimiter = (strDelimiter || ",");
+            var objPattern = new RegExp((
+                // Delimiters.
+                "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
+                // Quoted fields.
+                "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+                // Standard fields.
+                "([^\"\\" + strDelimiter + "\\r\\n]*))"), "gi");
+            var arrData = [
+                []
+            ];
+            var arrMatches = null;
+            while (arrMatches = objPattern.exec(strData)) {
+                var strMatchedDelimiter = arrMatches[1];
+                if (strMatchedDelimiter.length && (strMatchedDelimiter != strDelimiter)) {
+                    arrData.push([]);
+                }
+                if (arrMatches[2]) {
+                    var strMatchedValue = arrMatches[2].replace(
+                        new RegExp("\"\"", "g"), "\"");
+                } else {
+                    var strMatchedValue = arrMatches[3];
+                }
+                arrData[arrData.length - 1].push(strMatchedValue);
+            }
+            // #Remove empty arrays
+            var filtered = arrData.filter(function(el) {
+                return el != "";
+            });
+            return (filtered);
+        }
+        $scope.getBranch = function() {
+            console.log("Selected Branch is:", url_name[1]);
+            return url_name[1];
+        }
+        $scope.getDownload = function() {
+            $scope.exportData($scope.persons, "MainDatabase");
+        };
+
+        $scope.colourIncludes = [];
+
+        $scope.includeColour = function(colour) {
+            var i = $.inArray(colour, $scope.colourIncludes);
+            console.log("ColourIncludes", $scope.colourIncludes)
+            console.log(i)
+            if (i > -1) {
+                $scope.colourIncludes.splice(i, 1);
+            } else {
+                $scope.colourIncludes.push(colour);
+            }
+        }
+
+        $scope.colourFilter = function(persons) {
+            // console.log(persons)
+            if ($scope.colourIncludes.length > 0) {
+                if ($.inArray(persons.colour, $scope.colourIncludes) < 0)
+                    return;
+            }
+            return persons;
+        }
+        $scope.statusIncludes = [];
+        $scope.includeStatus = function(status) {
+            var i = $.inArray(status, $scope.statusIncludes);
+            console.log("statusIncludes", $scope.statusIncludes)
+            console.log(i)
+            if (i > -1) {
+                $scope.statusIncludes.splice(i, 1);
+            } else {
+                $scope.statusIncludes.push(status);
+            }
+        }
+
+        $scope.statusFilter = function(persons) {
+            // console.log(persons)
+            if ($scope.statusIncludes.length > 0) {
+                if ($.inArray(persons.Review_Status, $scope.statusIncludes) < 0)
+                    return;
+            }
+            return persons;
+        }
+
+        $scope.exportData = function JSONToCSVConvertor(JSONData, ReportTitle = "Search Result", ShowLabel = true) {
+            var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+            var CSV = '';
+
+            CSV += ReportTitle + '\r\n\n';
+
+            if (ShowLabel) {
+                var row = "";
+                for (var index in arrData[0]) {
+                    row += index + ',';
+                }
+                row = row.slice(0, -1);
+                CSV += row + '\r\n';
+            }
+            for (var i = 0; i < arrData.length; i++) {
+                var row = "";
+                for (var index in arrData[i]) {
+                    row += '"' + arrData[i][index] + '",';
+                }
+
+                row.slice(0, row.length - 1);
+                CSV += row + '\r\n';
+            }
+
+            if (CSV == '') {
+                alert("Invalid data");
+                return;
+            }
+
+            //Generate a file name
+            var fileName = "DataModel_";
+            fileName += ReportTitle.replace(/ /g, "_");
+
+            //Initialize file format you want csv or xls
+            var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+            //this trick will generate a temp <a /> tag
+            var link = document.createElement("a");
+            link.href = uri;
+
+            //set the visibility hidden so it will not effect on your web-layout
+            link.style = "visibility:hidden";
+            link.download = fileName + ".csv";
+            //this part will append the anchor tag and remove it after automatic click
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        $scope.fetchJSON = function(JSON_data, key, array) {
+            var foo = $filter('filter')(JSON_data, function(item) {
+                return array.indexOf(item[key]) !== -1;
+            });
+            return foo;
+        };
+
+        $scope.getTotal = function(items) {
+            var scanned = 0;
+            var total = 0;
+            var processed = 0;
+            var reviewed = 0;
+
+            angular.forEach(items, function(item) {
+                if (item.Office_Address == document.getElementById("page_title").textContent) {
+                    if (item.No_of_Docs) {
+                        // console.log("Value", item.No_of_Docs);
+                        scanned += parseInt(item.No_of_Docs_Scanned);
+                        total += parseInt(item.No_of_Docs);
+                        processed += (item.Review_Status == 'Requires Review') ? 0 : 1;
+                        reviewed += (item.Review_Status == 'Requires Review') ? 1 : 0;
+                    }
+                };
+            });
+            scan_percent = parseFloat(100 * scanned / total).toFixed(1)
+
+            tot_tobereviewed = parseInt(scanned * (reviewed / (processed + reviewed)))
+            tot_processed = parseInt(scanned * (processed / (processed + reviewed)))
+            toreview_percent = parseFloat(100 * tot_tobereviewed / scanned).toFixed(1)
+
+            return [scanned, total, scan_percent, tot_tobereviewed, scanned, toreview_percent];
+        };
+    });
+
+    // The class you click to trigger the popup 
+    $('.letspop').on('click', function() {
+        // The Overlay fades in
+        $(".overlay").fadeIn(200, function() {});
+        // The Popup fades in just after
+        $(".popup").fadeIn(600, function() {});
+    });
+    // The class's you click when you want to close the pop
+    $('.overlay, .close-pop').on('click', function() {
+        // The Overlay fades out slower
+        $(".overlay").fadeOut(600, function() {});
+        // The Popup fades out faster
+        $(".popup").fadeOut(200, function() {});
+    });
+    </script>
+</body>
+</html>

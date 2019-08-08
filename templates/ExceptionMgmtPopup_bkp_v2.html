@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+      <!-- Page title -->
+      <title>EY Business Intelligence</title>
+      <!-- Vendor styles -->
+      <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.css"/>
+      <link rel="stylesheet" href="vendor/animate.css/animate.css"/>
+      <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css"/>
+      <link rel="icon" href="EYBIicon.png" sizes="32x32" />
+      <link rel="icon" href="EYBIicon.png" sizes="192x192" />
+      <!-- App styles -->
+      <link rel="stylesheet" href="styles/pe-icons/pe-icon-7-stroke.css"/>
+      <link rel="stylesheet" href="styles/pe-icons/helper.css"/>
+      <link rel="stylesheet" href="styles/stroke-icons/style.css"/>
+      <link rel="stylesheet" href="styles/style.css">
+      <script src="../inputdata/d3.v4.min.js"></script>
+      <link rel="stylesheet" href="styles/my-styles.css"/>
+      <!--<link rel="stylesheet" href="styles/my-workflow.css"/>-->
+      <style>
+	  .stepnumber{font-family: 'Roboto', sans-serif; color: white; font-size:20px;}
+	  .vertical-timeline-icon{border:none;}
+	  .check_field{}
+	  .panel-body{padding-bottom: 10px !important; padding-top: 10px !important; padding-right: 20px !important; padding-left: 20px !important; }
+  .cell_width_80{  word-break: break-all; width: 80px;}
+  .cell_width_150{ word-break: break-all; width: 150px;}
+  .bold{font-weight: bold;}
+  .padded_cell{padding:4px;}
+  .panel{background-color: #2c2e35;  padding-left:20px;  padding-right:20px;   border: 1px solid #3d404c;}
+  
+/* Lets Pop up */
+.letspop{
+}
+.letspop:hover{
+  cursor: pointer;
+}
+.overlay{
+  display: none; /* Default Hidden */
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background-color: rgba(0,0,0,0.6);
+  height: 100%;
+  width: 100%;
+} 
+.popup{
+  display: none; /* Default Hidden */
+  position: fixed;
+  left: 50%; 
+  top: 5%;
+  z-index: 2;
+  background:none;
+  height: auto;
+  width: auto;
+  overflow: hidden;
+  padding: 0px;
+  transform: translate(-50%, 0);
+}
+
+
+/* Bored stuff & extras*/
+
+.close{
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: block;
+  color: #666666;
+  font-family: sans-serif;
+}
+.close:hover{
+  cursor: pointer;
+  color: #444444;
+}
+	  </style>
+   </head>
+   <body>
+      <!-- Wrapper-->
+      <div class="wrapper">
+         <!-- Header-->
+         <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+               <div class="navbar-header">
+                  <div id="mobile-menu">
+                     <div class="left-nav-toggle">
+                        <a href="#">
+                        <i class="stroke-hamburgermenu"></i>
+                        </a>
+                     </div>
+                  </div>
+                  <a class="navbar-brand" style="background: #2f323b;" href="index.html">
+                  <a href="Summary_KPI.html">
+                     <img src="EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
+                     <!--<span style="color:white;"> Business </br> Intelligence</span>-->
+                  </a>
+                  </a>
+               </div>
+            </div>
+         </nav>
+         <!-- End header-->
+         <!-- Navigation-->
+       <div id="navbar-frame"></div>
+	   <aside class="navigation">
+        <nav>
+            <ul class="nav luna-nav">
+                 <li >
+                    <a href="Summary_KPI.html" >
+                        Summary
+                    </a>
+                </li>
+                
+				<li >
+                    <a href="#documents" data-toggle="collapse" aria-expanded="false">
+                        Documents<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
+                    </a>
+                    <ul id="documents" class="nav nav-second collapse">
+                        <li><a href="Upload.html">Upload</a></li>
+                        <li ><a href="Digitalized.html">Digitization</a></li>
+                        <li><a href="Classification.html">Information Extraction</a></li>
+                    </ul>
+                </li>
+				
+				
+
+                 <li>
+                    <a href="#bi_reporting" data-toggle="collapse" aria-expanded="false">
+                        BI Reporting<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
+                    </a>
+                    <ul id="bi_reporting"  class="nav nav-second collapse">
+                        <li><a href="BIReporting2_syndicated.html">Syndicate Loans</a></li>
+                        <li><a href="BIReporting2_mortgage.html">Mortgage</a></li>
+                        <li><a href="BIReporting2_isda.html">ISDA</a></li>
+						<li>
+                    <a href="Fallback_Language.html" >
+                        Fallback Language 
+                    </a>
+                </li>
+                    </ul>
+                </li>
+				
+				<li class="active"> 
+                    <a href="ExceptionMgmtPopup.html" >
+                        Exception </br>Management 
+                    </a>
+                    
+                </li>
+				<li>
+                    <a href="ContractLifecycleManagement.html">
+                        Contract Lifecycle Management 
+                    </a>
+                    
+                </li>
+                <!--<li>
+                    <a href="#fallback_language" data-toggle="collapse" aria-expanded="false">
+                        Fallback Language<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
+                    </a>
+                    <ul id="fallback_language" class="nav nav-second collapse">
+                        <li><a href="Fallback_Language.html">Syndicate Loans</a></li>
+                        <li><a href="Fallback_Language_mortgage.html">Mortgage</a></li>
+                        <li><a href="Fallback_Language_isda.html">ISDA</a></li>
+                    </ul>
+                </li>-->
+               
+
+                
+                <li class="nav-info">
+                    <!--<i class="pe pe-7s-shield text-accent"></i>-->
+
+                    <div class="m-t-xs">
+                        <span class="c-white">EY Business Intelligence</span> Dashboard for monitoring and reporting.
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+         <!-- End navigation-->
+         <!-- Main content-->
+         <section class="content">
+            <div class="container-fluid">
+			<!--Start Title-->
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="view-header">
+                        <div class="pull-right text-right" style="line-height: 14px">
+                        </div>
+                        <div class="header-icon">
+                           <i class="pe page-header-icon pe-7s-repeat"></i>
+                        </div>
+                        <div class="header-title">
+                           <h3>Exception Management</h3>
+                           <small style="color: #949ba2;">
+                           Contracts & Amendments
+                           </small>
+                        </div>
+                     </div>
+                     <hr>
+                  </div>
+               </div>
+			   <!-- End Title -->
+			   <!-- Start-->
+			   
+			   
+			   
+			
+										<div class="btn-toolbar">
+                        <a href="https://ereview-discovery.ey.com" target="_blank"><button class="btn btn-default letspop button-pop-up"  style="float:left; margin-bottom: 10px;"><i class="fa fa-cloud-download"></i> E-discovery</button></a>
+                    </div>
+                                    
+			
+			
+			   <!-- End  -->
+               
+			   
+			   
+			   
+			   
+            </div>
+         </section>
+         <!-- End main content-->
+      </div>
+      <!-- End wrapper-->
+      <!-- Vendor scripts -->
+      <script src="vendor/pacejs/pace.min.js"></script>
+      <script src="vendor/jquery/dist/jquery.min.js"></script>
+      <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+      <!-- App scripts -->
+      <script src="scripts/luna.js"></script>
+	  <script>
+	  // The class you click to trigger the popup 
+$('.letspop').on('click', function() {
+  // The Overlay fades in
+  $(".overlay").fadeIn(200, function() {});
+  // The Popup fades in just after
+  $(".popup").fadeIn(600, function() {});
+});
+
+// The class's you click when you want to close the pop
+$('.overlay, .close-pop').on('click', function() {
+  // The Overlay fades out slower
+  $(".overlay").fadeOut(600, function() {});
+  // The Popup fades out faster
+  $(".popup").fadeOut(200, function() {});
+});
+	  </script>
+   </body>
+</html>

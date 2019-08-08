@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+      <!-- Page title -->
+    <!-- Page title -->
+    <title>EY Business Intelligence</title>
+
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="/static/vendor/fontawesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/static/vendor/animate.css/animate.css"/>
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css"/>
+	
+	<link rel="icon" href="/static/images/EYBIicon.png" sizes="32x32" />
+	<link rel="icon" href="/static/images/EYBIicon.png" sizes="192x192" />
+    
+	<!-- App styles -->
+    <link rel="stylesheet" href="/static/styles/pe-icons/pe-icon-7-stroke.css"/>
+    <link rel="stylesheet" href="/static/styles/pe-icons/helper.css"/>
+    <link rel="stylesheet" href="/static/styles/stroke-icons/style.css"/>
+    <link rel="stylesheet" href="/static/styles/style.css">
+	
+	<script type='text/javascript' src='/static/data/dbase/data.js'></script>
+	<script type='text/javascript' src='/static/scripts/angular.min.js'></script>
+<!-- 	<script type='text/javascript' src='../wp-includes/js/jquery/jqueryb8ff.js?ver=1.12.4'></script> -->
+	<script src="/static/scripts/d3.v4.min.js"></script>
+<!--	<script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script>-->
+
+<style>
+	  input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+}
+.hoveryellow{
+color:white;
+transition: all .25s ease-in-out;
+}
+.hoveryellow:hover{
+background:rgba(255,255,255,0.1);
+color: #fff;
+transition: background .25s ease-in-out;
+border-radius:4px;
+}
+	  </style>
+   </head>
+   <body>
+      <!-- Wrapper-->
+      <div class="wrapper">
+      <!-- Header-->
+      <nav class="navbar navbar-default navbar-fixed-top">
+         <div class="container-fluid">
+            <div class="navbar-header">
+               <div id="mobile-menu">
+                  <div class="left-nav-toggle">
+                     <a href="#">
+                     <i class="stroke-hamburgermenu"></i>
+                     </a>
+                  </div>
+               </div>
+               <a class="navbar-brand" style="background: #2f323b;" href="/main_page">
+               <a href="/main_page">
+                  <img src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
+                  <!--<span style="color:white;"> Business </br> Intelligence</span>-->
+               </a>
+               </a>
+            </div>
+         </div>
+      </nav>
+      <!-- End header-->
+	  
+	<!-- Navigation-->
+	<div id="navbar-frame"></div>
+	<!-- End navigation-->
+
+      <!-- Main content-->
+      <section class="content">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="view-header">
+                     <div class="pull-right text-right" style="line-height: 14px">
+                     </div>
+                     <div class="header-icon">
+                        <i class="pe page-header-icon pe-7s-next-2"></i>
+                     </div>
+                     <div class="header-title">
+                        <h3>Fallback Language</h3>
+                        <small>
+                        Mortgage
+                        </small>
+                     </div>
+                  </div>
+                  <hr>
+               </div>
+            </div>
+
+		    <section  style=""/>
+                                <div id="dock_box">
+
+                              <div ng-app="app" ng-controller="ItemController" style="">
+
+							  <div class="row">
+               <div class="col-md-12">
+                  <div class="panel panel-filled">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-group m-b-xs m-t-xs" style="width:100%;">
+										<input type="text" ng-model="$scope.query" placeholder="Search by document here.."
+										style="color: #949ba2;border: none; width:100%; border-radius: 4px;-webkit-box-shadow: none;
+										box-shadow: none;-webkit-transition: none;-o-transition: none;transition: none;
+										background-color: #494b54;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </div>
+
+
+
+
+
+
+
+  <div class="row m-t-sm">
+
+                <div class="col-md-12">
+
+                            <div class="row">
+
+							<div class="item "  style=" text-align: left;  vertical-align: middle; padding: 5px; padding-left: 10px; float:left; width:100%;" ng-repeat="person in persons | filter:$scope.query" >
+							<a href="Fallback_Language_Detail_mortgage.html?Use_Id={{'{{ person.Full_File_Name }}'}} " style="text-decoration:none;">
+
+      <div class="item-short" style="">
+
+
+        <div class="container1 hoveryellow" style="margin-top:-20px;">
+		<div class="panel panel-filled">
+
+                        <div class="panel-body" style=" padding-bottom: 10px; padding-top: 10px; padding-right: 30px; padding-left: 30px;">
+
+
+			<div class="wrapper1" style="padding:0px; ">
+				<table style="color: white;width:100%;">
+
+					<tbody>
+						<tr style="color:white; padding:5px;">
+				 <td class="team test" id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold; max-width:300px; min-width:300px;  white-space: wrap; word-break: break-all;">Document Name</td>
+			   <td class="team " id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold; max-width:300px; min-width:300px;  white-space: wrap; word-break: break-all;">Lender</td>
+				<td class="rank " id="admin_agent_fallback" style="padding:5px; color:white; font-weight:bold;">Fallback Categorization</td>
+
+              </tr>
+					  <tr style="color:white; border-top: 1px solid rgba(255,255,255,0.1); ">
+                <td class="team " id="borrower_role" style="padding:5px; max-width:300px; min-width:300px;  word-break: break-all; white-space: wrap; color:#aaa;">{{'{{ person.Full_File_Name }}'}} </td>
+				<td class="rank " id="borrower_count" style="padding:5px; max-width:300px; min-width:300px;  word-break: break-all; color:#aaa; white-space: wrap;">{{'{{ (person.LenderGeneral.includes('Unextracted') || person.LenderGeneral.includes('Not Defined')) ? ' ' : person.LenderGeneral }}'}} </td>
+				<td class="rank " id="borrower_count1" ng-style="set_color(person)" style="padding:5px; ">{{'{{ person.Mortgage_Fallback_Strength }}'}} </td>
+              </tr>
+
+
+
+					</tbody>
+				</table>
+			</div>
+			</div></div>
+		</div>
+
+      </div>
+      <div ng-show="checked" class="item-detail">
+        <div class="person-competence-detail">
+          <ul>
+            <li ng-repeat="item in person.competences.kind">{{'{{ item }}'}}</li>
+          </ul>
+        </div>
+      </div>
+    </a></div>
+	</div>
+
+                </div>
+            </div>
+  </section>
+
+
+
+
+
+</div>
+
+
+
+		</div>
+
+
+      </section>
+      <!-- End main content-->
+      </div>
+      <!-- End wrapper-->
+<!-- Vendor scripts -->
+<script src="/static/vendor/pacejs/pace.min.js"></script>
+<script src="/static/vendor/jquery/dist/jquery.min.js"></script>
+<script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!-- App scripts -->
+<script src="/static/scripts/luna.js"></script>
+
+
+<script>
+$(document).ready(function() {
+	$("#navbar-frame").load("/nav_bar");
+});
+</script>
+
+	  <script>
+				var theApp = angular.module('app', []);
+
+theApp.controller('ItemController', function ItemController($scope,  $http) {
+
+$http.get('data_mortgage.json').success(function (data) {
+        $scope.persons = data;
+		   });
+
+
+
+
+  $scope.set_color = function (person) {
+        if (person['Mortgage Fallback Strength'] == 'D') {
+            return { color: "#bb0826" }
+        }
+		else if (person['Mortgage Fallback Strength'] == 'C') {
+            return { color: "#f04c3e" }
+		}
+		else if (person['Mortgage Fallback Strength'] == 'B') {
+            return { color: "#ffc000" }
+        }
+		else
+			return { color: "#00b050" }
+        }
+
+});
+				</script>
+   </body>
+
+</html>

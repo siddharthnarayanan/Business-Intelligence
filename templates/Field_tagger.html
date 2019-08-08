@@ -1,0 +1,986 @@
+﻿<!DOCTYPE html>
+<html dir="ltr" mozdisallowselectionprint moznomarginboxes>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="google" content="notranslate">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+    <!-- Page title -->
+    <title>EY Document Intelligence</title>
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="/static/vendor/fontawesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/static/vendor/animate.css/animate.css" />
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="icon" href="/static/images/EYBIicon.png" sizes="32x32" />
+    <link rel="icon" href="/static/images/EYBIicon.png" sizes="192x192" />
+    <!-- App styles -->
+    <link rel="stylesheet" href="/static/styles/pe-icons/pe-icon-7-stroke.css" />
+    <link rel="stylesheet" href="/static/styles/pe-icons/helper.css" />
+    <link rel="stylesheet" href="/static/styles/stroke-icons/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css" />
+    <link rel="stylesheet" href="/static/styles/split.css">
+    <link rel="stylesheet" href="/static/styles/style.css">
+    <link rel="stylesheet" href="/static/styles/file.css">
+    <link rel="stylesheet" href="/static/styles/tagging.css">
+    <link rel="stylesheet" href="/static/styles/my-styles.css" />
+    <link rel="stylesheet" href="/static/styles/my-workflow.css" />
+    <script src="/static/scripts/d3.v4.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script> -->
+    <script type='text/javascript' src='/static/scripts/angular.min.js'></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/mark.js/8.4.0/mark.min.js"></script>
+    <!-- <script src="ate_data.js"></script> -->
+    <!-- <script type='text/javascript' src='angular.min.js'></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.6/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.1/xlsx.core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/alasql/0.3/alasql.min.js"></script>
+    <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
+    <!--<link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap-combined.min.css" />-->
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+</head>
+<style>
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #444; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #222; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+    .bg-overlay {
+        position: fixed;
+        z-index: 998;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.7);
+        width: 100%;
+        height: 100%;
+        transition: opacity 500ms;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .bg-overlay:target {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .subscribe-optin {
+        position: relative;
+        z-index: 999;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 2.5rem;
+        width: 50%;
+        height: auto;
+        background: rgba(192, 192, 192, 0.7);
+        border-radius: 3px;
+    }
+
+    .subscribe-optin h2 {
+        padding: 1rem 0;
+    }
+
+    .subscribe-optin .optin-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 999;
+        color: #000;
+        text-decoration: none;
+    }
+
+    .subscribe-optin .optin-close:hover {
+        color: #c7c7c7;
+        transition: color 500ms ease;
+    }
+
+    .subscribe-optin form label {
+        display: none;
+    }
+
+    .subscribe-optin form input {
+        display: inline-block;
+        padding: .5rem 1rem;
+        outline: none;
+        border: 1px solid rgba(0, 0, 0, 0);
+    }
+
+    .subscribe-optin form input[type=text],
+    .subscribe-optin form input[type=email] {
+        padding: .5rem 1rem;
+        width: 40%;
+    }
+
+    .my-button input[type=submit] {
+        background: #1d1d1b;
+        color: #c7c7c7;
+        padding: .5rem 1rem;
+        outline: none;
+        border: 1px solid #1d1d1b;
+    }
+
+    .my-button form input[type=submit]:hover {
+        background: #c7c7c7;
+        color: #1d1d1b;
+        transition: all 500ms;
+    }
+
+    .my-button form input[type=submit]:active {
+        box-shadow: inset 2px 2px 2px 0 #1d1d1b;
+    }
+
+    #ATE_AEOD {
+        background: rgba(255, 0, 0, 0.2) !important;
+        color: black;
+        text-decoration: none;
+    }
+
+
+    .Designated_Party1 {
+        background: rgba(255, 0, 0, 0.2) !important;
+        color: black;
+        text-decoration: none;
+    }
+
+    #Designated_Party2 {
+        background: rgba(255, 0, 0, 0.2) !important;
+        color: black;
+        text-decoration: none;
+    }
+
+    #Credit_Rating_Basis_Type {
+        background: rgba(255, 0, 0, 0.2) !important;
+        color: black;
+        text-decoration: none;
+    }
+
+    #Other_Rated_Entity_Description {
+        background: rgba(255, 0, 0, 0.2) !important;
+        color: black;
+        text-decoration: none;
+    }
+
+    #Credit_Rating_Code {
+        background: rgba(255, 0, 0, 0.2) !important;
+        color: black;
+        text-decoration: none;
+    }
+
+    #Credit_Rating_Agency {
+        background: rgba(255, 0, 0, 0.2) !important;
+        color: black;
+        text-decoration: none;
+    }
+
+    #Affected_Parties1 {
+        background: rgba(255, 0, 0, 0.2) !important;
+        color: black;
+        text-decoration: none;
+    }
+
+    #Affected_Parties2 {
+        background: rgba(255, 0, 0, 0.2) !important;
+        color: black;
+        text-decoration: none;
+    }
+
+
+    .button {
+        font: bold 11px Arial;
+        text-decoration: none;
+        background-color: #EEEEEE;
+        color: #333333;
+        padding: 2px 6px 2px 6px;
+        border-top: 1px solid #CCCCCC;
+        border-right: 1px solid #333333;
+        border-bottom: 1px solid #333333;
+        border-left: 1px solid #CCCCCC;
+    }
+
+    .event_class {
+        font-weight: bold;
+        color: green;
+    }
+
+    .event_specific_class {
+        font-weight: bold;
+        color: green;
+    }
+
+    .party_class {
+        font-weight: bold;
+        color: #3BB9FF;
+    }
+
+    .notification_class {
+        font-weight: bold;
+        color: yellow;
+    }
+
+    .rating_based_class {
+        font-weight: bold;
+        color: orange;
+    }
+
+    .greyrow {
+        background: #ffe600;
+        padding-bottom: 10px !important;
+        padding-top: 10px !important;
+        font-size: 15px;
+        text-align: center;
+        border: none !important;
+        vertical-align: middle !important;
+        color: #111;
+        border-top: 1px solid #000000 !important;
+        border-bottom: 1px solid #000000 !important;
+        border-left: 1px solid #000000 !important;
+        border-right: 1px solid #000000 !important;
+        font-weight: bold;
+    }
+
+    .supergreyrow {
+        background: white;
+        border: none !important;
+        vertical-align: middle !important;
+        text-align: center;
+        padding-bottom: 5px !important;
+        padding-top: 5px !important;
+        font-size: 15px;
+        color: #111;
+        border-top: 1px solid #000000 !important;
+        border-bottom: 1px solid #000000 !important;
+        border-left: 1px solid #000000 !important;
+        border-right: 1px solid #000000 !important;
+    }
+
+    #file_iframe {
+        zoom: 1.2;
+        -moz-transform: scale(1.2);
+        -moz-transform-origin: 0 0;
+    }
+
+    .highlight_fields {
+        background: rgba(255, 0, 0, 0.2) !important;
+        color: black;
+        text-decoration: none;
+    }
+
+    table {
+        table-layout: auto;
+        width: 50%;
+        height: 50%;
+        overflow: hidden;
+        word-wrap: break-word;
+    }
+    .table td.fit,
+    .table th.fit {
+        word-wrap: break-word;
+        word-break: break-all;
+        /*white-space: normal;*/
+        white-space: nowrap;
+        /*width: 1%;*/
+    }
+
+    .table-wrapper {
+        position: relative;
+        overflow: auto;
+    }
+
+    .table-scroll {
+        height: 70%;
+        overflow-y: auto;
+        margin-top: 20px;
+    }
+
+    /*.table-wrapper table {
+        width: 100%;
+    }
+    */
+
+    .clickable {
+        cursor: pointer;
+    }
+
+    .panel {
+        overflow: auto;
+    }
+
+    /* Add a black background color to the top navigation bar */
+    .topnav {
+      overflow: hidden;
+      background-color: #e9e9e9;
+    }
+
+    /* Style the links inside the navigation bar */
+    .topnav a {
+      float: left;
+      display: block;
+      color: black;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    /* Change the color of links on hover */
+    .topnav a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    /* Style the "active" element to highlight the current page */
+    .topnav a.active {
+      background-color: #2196F3;
+      color: white;
+    }
+
+    /* Style the search box inside the navigation bar */
+    .topnav input[type=text] {
+      float: right;
+      padding: 6px;
+      border: none;
+      margin-top: 8px;
+      margin-right: 16px;
+      font-size: 17px;
+    }
+
+    /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+    @media screen and (max-width: 600px) {
+      .topnav a, .topnav input[type=text] {
+        float: none;
+        display: block;
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        padding: 14px;
+      }
+      .topnav input[type=text] {
+        border: 1px solid #ccc;
+      }
+    }
+
+    .saveButton,
+    [contenteditable] .editButton{
+        display: none;
+    }
+
+    .editButton,
+    [contenteditable] .saveButton {
+        display: inline; 
+        display: inline-block;
+    }
+
+    [contenteditable] {
+        background: #b1b1b1;
+        color: black;
+    }
+
+    .saveButton{
+    display:none;
+    }
+
+
+
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+        /*table-layout: fixed;*/
+        width: 100%;
+    }
+/* 
+    td {
+        border: 2px solid black;
+        padding: 0;
+        margin: 0px;
+        overflow: hidden;
+        white-space:pre;
+    }
+
+    td div {
+        border: 0;
+        width: auto;
+        height: auto;
+        min-height: 20px;
+        min-width: 20px;
+    } */
+
+    .showoverflowtext {
+        width: 100px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .showoverflowtext:hover{
+        color:black;
+        overflow: visible;
+        white-space: normal;
+        width: auto;
+        position: absolute;
+        background-color:#808080;
+    }
+    .showoverflowtext:hover+div {
+        margin-top:20px;
+    }
+
+     /* Lets Pop up */
+    .letspop{
+    }
+    .letspop:hover{
+      cursor: pointer;
+    }
+
+    .letspop-filter:hover{
+      cursor: pointer;
+    }
+    .overlay{
+      display: none; /* Default Hidden */
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      background-color: rgba(0,0,0,0.6);
+      height: 100%;
+      width: 100%;
+    }
+    .popup{
+      display: none; /* Default Hidden */
+      position: fixed;
+      left: 50%;
+      top: 5%;
+      z-index: 2;
+      background:none;
+      height: auto;
+      width: auto;
+      overflow: hidden;
+      padding: 0px;
+      transform: translate(-50%, 0);
+    }
+
+    #myModal {
+      position: relative;
+    }
+
+    .modal-dialog {
+      position: fixed;
+    /*  width: 100%;
+    */  margin: 0;
+      padding: 10px;
+    }
+
+    .paginate_css .pagination-sm {
+        @include '/static/vendor/bootstrap/css/bootstrap-combined.min.css';
+}
+
+.showoverflowtext:hover {width:100%;}
+
+
+</style>
+
+<body>
+    <div class="wrapper">
+        <!-- Header-->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div id="mobile-menu">
+                        <div class="left-nav-toggle">
+                            <a href="#">
+                                <i class="stroke-hamburgermenu"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <a class="navbar-brand" style="background: #2f323b;" href="index.html">
+                        <a href="Summary_KPI.html">
+                            <img src="/static/images/EYBI.png" alt="" style="transform: scale(1.2); width: 134px; height:auto; max-width:100%; margin-left: -52%; margin-top: 4px;" />
+                            <!--<span style="color:white;"> Business </br> Intelligence</span>-->
+                        </a>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <!-- Navigation-->
+        <div ng-app="app" ng-controller="ItemController" style="">
+            <div id="navbar-frame"></div>
+            <!-- End navigation-->
+            <!-- Main content-->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- HEADER -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="view-header">
+                                <div class="pull-right text-right" style="line-height: 14px">
+
+    <a target='_blank' href='http://qa002-ibornp.westus2.dip.sbp.eyclienthub.com'><button id="select-button" class='btn btn-yellow btn-xs button-pop-up' ><i class="fa fa-cog"></i>&nbsp; Model Training</button></a>
+                                </div>
+                                <div class="header-icon">
+                                    <i style="transform: scale(0.6);" class="fa fa-list-alt"></i>
+                                </div>
+                                <!--      Start Right Hand Navigation-->
+                                <div id="buttons-frame"></div>
+                                <!--      End Right Hand Navigation-->
+                                <div class="header-title">
+                                    <h3>Data Model</h3>
+                                    <small style='color: #949ba2;'><span id="page_title"></span></small>
+                                </div>
+                            </div>
+                            <hr style=""/>
+                        </div>
+                    </div>
+                    <!-- END HEADER ROW -->
+                    <!-- MAIN STUFF -->
+                    <div class="page-container">
+
+                         <div class="panel-heading" style="overflow: hidden;">
+                                        <div class="btn-group pull-left">
+                                            <h3 class="panel-title" style='color:white;'>Contract Terms</h3>
+                                        </div>
+                                    </div>
+
+                        <div class="panel-container">
+                            <div class="" style="width:100vw;">
+                                
+
+                                <div class="panel">
+                        
+                                   
+
+                                    <table style="color: white;">
+                                            <thead style="border-top: 2px solid #ffe600; background:rgba(0,0,0,0.2);">
+                                                <tr style="color:white; height:30px; ">
+                                                    <td style="   width: 150px;  padding: 10px; text-align: left;color:white; font-weight:bold;white-space: wrap; word-break: break-all; ">Fields</td>
+                                                    <td style="    padding: 10px; text-align: left;  color:white; font-weight:bold;white-space: wrap; word-break: break-all; ">Values</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="height:30px; color:white" ng-repeat="row in persons">
+                                                    <td style='padding:10px;'>
+                                                        Agreement Name
+                                                    </td>
+
+                                                    <td>
+                                                        <!-- <i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp; -->
+                                                        {{'{{ row.defaultValues["Agreement Name"] }}'}}
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                                    <td style="padding:10px;  word-break: break-all; white-space: wrap; color:white;">
+                                                        Legal Entities Roles & Legal Entities &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </td>
+
+                                                    <td style="  word-break: break-all; white-space: wrap; color:white;">
+                                                        <!-- <i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp; -->
+                                                        {{ '{{row["defaultValues"]["Legal Entities Roles & Legal Entities"]}}' }}
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                                    <td style=" padding:10px; word-break: break-all; white-space: wrap; color:white;">
+                                                        Contract Origination Date
+                                                    </td>
+
+                                                    <td style="  word-break: break-all; white-space: wrap; color:white;">
+                                                        <!-- <i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp; -->
+                                                        {{'{{ row.defaultValues["Contract Origination Date"] }}'}}
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                                    <td style=" padding:10px; word-break: break-all; white-space: wrap; color:white;">
+                                                        Contractual Maturity Date
+                                                    </td>
+
+                                                    <td style="  word-break: break-all; white-space: wrap; color:white;">
+                                                        <!-- <i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp; -->
+                                                        {{'{{ row.defaultValues["Contractual Maturity Date"] }}'}}
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                                    <td style=" padding:10px; word-break: break-all; white-space: wrap; color:white;">
+                                                        Consent
+                                                    </td>
+
+                                                    <td style="  word-break: break-all; white-space: wrap; color:white;">
+                                                        <!-- <i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp; -->
+                                                        {{'{{ row.defaultValues.Consent }}'}}
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                                    <td style=" padding:10px; word-break: break-all; white-space: wrap; color:white;">
+                                                        Governing Law
+                                                    </td>
+
+                                                    <td style="  word-break: break-all; white-space: wrap; color:white;">
+                                                        <!-- <i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp; -->
+                                                        {{'{{ row.defaultValues["Governing Law"] }}'}}
+                                                    </td>
+
+                                                </tr>
+    
+                                            </tbody>
+                                        </table>
+
+
+                                </div></div></div>
+                            </br></br>
+                            <div class="panel-heading" style="overflow: hidden;">
+                                        <div class="btn-group pull-left">
+                                            <h3 class="panel-title" style='color:white;'>IBOR Terms</h3>
+                                        </div>
+                                    </div>
+<div class="panel-container">
+                            <div class="" style="width:100vw;">
+                                
+
+                                <div class="panel">
+                        
+                                    
+
+                                    <table style="color: white;">
+                                            <thead style="border-top: 2px solid #ffe600; background:rgba(0,0,0,0.2);">
+                                                <tr style="height:30px; color:white; ">
+                                                    <td style=" width: 150px;   padding: 10px; text-align: left;color:white; font-weight:bold;white-space: wrap; word-break: break-all; width: 150px;">Fields</td>
+                                                    <td style="    padding: 10px; text-align: left;  color:white; font-weight:bold;white-space: wrap; word-break: break-all; ">Values</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="height:30px; color:white" ng-repeat="row in persons">
+                                                    <td style='padding:10px;'>
+                                                        Reference Rate Definition &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </td>
+
+                                                    <td>
+                                                        <!-- <i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp; -->
+                                                        {{'{{ row.defaultValues["Reference Rate Definition"] }}'}}
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                                    <td style=" padding:10px; word-break: break-all; white-space: wrap; color:white;">
+                                                        Reference Rate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </td>
+
+                                                    <td style="  word-break: break-all; white-space: wrap; color:white;">
+                                                        <!-- <i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp; -->
+                                                        {{ '{{row["defaultValues"]["Reference Rate"]}}' }}
+                                                    </td>
+                                                </tr>
+    
+                                            </tbody>
+                                        </table>
+
+
+                                </div></div></div>
+</br></br>
+ <div class="panel-heading" style="overflow: hidden;">
+                                        <div class="btn-group pull-left">
+                                            <h3 class="panel-title" style='color:white;'>Fallback Terms</h3>
+                                        </div>
+                                    </div>
+
+<div class="panel-container">
+                            <div class="" style="width:100vw;">
+                                
+
+                                <div class="panel" style='width:100%;'>
+                        
+                                   
+
+                                    <table style="color: white;">
+                                            <thead style="border-top: 2px solid #ffe600; background:rgba(0,0,0,0.2);">
+                                                <tr style="color:white;     height: 30px;">
+                                                    <td style=" width: 150px;   padding: 10px; text-align: left; color:white; font-weight:bold;white-space: wrap; word-break: break-all; ">Fallback Language 1</td>
+                                                    <td style="    padding: 10px; text-align: left;  color:white; font-weight:bold;white-space: wrap; word-break: break-all; "></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="    height: 30px; color:white; " ng-repeat="row in persons">
+                                                    <td style='padding: 10px;'>
+                                                        Fallback Language 1
+                                                    </td>
+
+                                                    <td>
+                                                        {{'{{ row["defaultValues"]["Fallback 1_Language"] }}'}}
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="wrapper1 hoveryellow" style="    height: 30px; color:white; " ng-repeat="row in persons">
+                                                    <td style="padding: 10px;  word-break: break-all; white-space: wrap; color:white;">
+                                                        Trigger Event
+                                                    </td>
+
+                                                    <td style="  word-break: break-all; white-space: wrap; color:white;">
+                                                        <!-- <i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp; -->
+                                                        {{ '{{row["defaultValues"]["Fallback 1_Trigger Event"]}}' }}
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="wrapper1 hoveryellow" style="    height: 30px; color:white; " ng-repeat="row in persons">
+                                                    <td style="padding: 10px;  word-break: break-all; white-space: wrap; color:white;">
+                                                        Option 1
+                                                    </td>
+
+                                                    <td style="  word-break: break-all; white-space: wrap; color:white;">
+                                                        <!-- <i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp; -->
+                                                        {{'{{ row.defaultValues["Fallback 1_Rate Option 1_Text"] }}'}}
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr class="wrapper1 hoveryellow" style="    height: 30px; color:white; " ng-repeat="row in persons">
+                                                    <td style="padding: 10px;  word-break: break-all; white-space: wrap; color:white;">
+                                                        Option 2
+                                                    </td>
+
+                                                    <td style="  word-break: break-all; white-space: wrap; color:white;">
+                                                        <!-- <i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp; -->
+                                                          {{'{{ row.defaultValues["Fallback 1_Rate Option 2_Text"] }}'}}
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr class="wrapper1 hoveryellow" style="    height: 30px; color:white; " ng-repeat="row in persons">
+                                                    <td style="padding: 10px;  word-break: break-all; white-space: wrap; color:white;">
+                                                       Option 3
+                                                    </td>
+
+                                                    <td style="  word-break: break-all; white-space: wrap; color:white;">
+                                                        <!-- <i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp; -->
+                                                        {{'{{ row.defaultValues["Fallback 1_Rate Option 3_Text"] }}'}}
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr class="wrapper1 hoveryellow" style="    height: 30px; color:white; " ng-repeat="row in persons">
+                                                    <td style=" padding: 10px; word-break: break-all; white-space: wrap; color:white; ">
+                                                        Summary Categorization &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </td>
+
+                                                    <td style="  word-break: break-all; white-space: wrap; color:white;">
+                                                        <!-- <i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp; -->
+                                                        {{'{{ row["defaultValues"]["Fallback 1 Summary Categorization"] }}'}}
+                                                    </td>
+
+                                                </tr>
+    
+                                            </tbody>
+                                        </table>
+                                          <table  style='font-weight:400; color:white;'>
+                                              <tbody>
+
+                                              <tr style='height:30px;  background:rgba(0,0,0,0.1);'>
+                                                <td style='padding: 10px;'>Fallback Options</td>
+                                                  <td style='padding: 10px;'>Fallback Rate</td>
+                                                  <td style='padding: 10px;'>Fallback Spread</td>
+                                                  <td style='padding: 10px;'>Determined By</td>
+                                                  <td style='padding: 10px;'>Fallback Category</td>
+                                                </tr>
+                                                <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                                  <td style='padding:10px; '>Option 1</td>
+                                                  <td id='fl1 opt1 rate'>{{'{{ row["defaultValues"]["Fallback 1_Rate Option 1_Fallback Rate"] }}'}}</td>
+                                                  <td id='fl1 opt1 spread'>{{'{{ row["defaultValues"]["Fallback 1_Rate Option 1_Fallback Spread"]}}'}}</td>
+                                                  <td id='fl1 opt1 determineby'>{{'{{ row["defaultValues"]["Fallback 1_Rate Option 1_DeterminedBy"]}}'}}</td>
+                                                  <td id='fl1 opt1 category'>{{'{{ row["defaultValues"]["Fallback 1_Rate Option 1_Category"] }}'}}</td>
+                                                  <!-- <td id='fl1 opt1 rate'>PRIME RATE</td>
+                                                  <td id='fl1 opt1 spread'>N</td>
+                                                  <td id='fl1 opt1 determineby'>null</td>
+                                                  <td id='fl1 opt1 category'> A. Specified non-IBOR rate</td> -->
+                                              </tr>
+                                              <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                                <td style='padding:10px; '>Option 2</td>
+                                                <!-- <td id='fl1 opt2 rate'>FRBNY</td>
+                                                <td id='fl1 opt2 spread'>Y</td>
+                                                <td id='fl1 opt2 determineby'>null</td>
+                                                <td id='fl1 opt2 category'> A. Specified non-IBOR rate</td> -->
+
+                                                <td id='fl1 opt1 rate'>{{'{{ row["defaultValues"]["Fallback 1_Rate Option 2_Fallback Rate"] }}'}}</td>
+                                                  <td id='fl1 opt1 spread'>{{'{{ row["defaultValues"]["Fallback 1_Rate Option 2_Fallback Spread"]}}'}}</td>
+                                                  <td id='fl1 opt1 determineby'>{{'{{ row["defaultValues"]["Fallback 1_Rate Option 2_DeterminedBy"]}}'}}</td>
+                                                  <td id='fl1 opt1 category'>{{'{{ row["defaultValues"]["Fallback 1_Rate Option 2_Category"] }}'}}</td>
+
+                                            </tr>
+                                            <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                              <td style='padding:10px; '>Option 3</td>
+                                              <!-- <td id='fl1 opt3 rate'>null</td>
+                                              <td id='fl1 opt3 spread'>null</td>
+                                              <td id='fl1 opt3 determineby'>null</td>
+                                              <td id='fl1 opt3 category'>D. Historical Rate</td> -->
+
+                                              <td id='fl1 opt1 rate'>{{'{{ row["defaultValues"]["Fallback 1_Rate Option 3_Fallback Rate"] }}'}}</td>
+                                                  <td id='fl1 opt1 spread'>{{'{{ row["defaultValues"]["Fallback 1_Rate Option 3_Fallback Spread"]}}'}}</td>
+                                                  <td id='fl1 opt1 determineby'>{{'{{ row["defaultValues"]["Fallback 1_Rate Option 3_DeterminedBy"]}}'}}</td>
+                                                  <td id='fl1 opt1 category'>{{'{{ row["defaultValues"]["Fallback 1_Rate Option 3_Category"] }}'}}</td>
+
+                                          </tr>
+                                              </tbody>
+                                          </table>
+                                           </br></br>
+                                          <table  style='font-weight:400; color:white;'>
+                                             <tbody>
+                                                <tr class="wrapper1 hoveryellow" style="border-top: 2px solid #ffe600; background:rgba(0,0,0,0.2); height:30px; color:white; " ng-repeat="row in persons">
+                                                <td style='padding:10px; width:260px;'>Fallback Language 2</td>
+                                                <td id='fl 2' style="word-wrap:break-word;"> </td>
+                                            </tr>
+                                            <tr class="wrapper1 hoveryellow" style="  height:30px; color:white; " ng-repeat="row in persons">
+                                                <td style='padding:10px; width:260px;'>Fallback Language 2</td>
+                                                <td id='fl 2' style="word-wrap:break-word;">{{'{{ row["defaultValues"]["Fallback 2_Language"] }}'}}
+                                                </td>
+                                            </tr>
+                                            <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                                <td style='padding:10px; '>Trigger Event</td>
+                                                <td id='trigger 2'>{{'{{ row["defaultValues"]["Fallback 2_Trigger Event"]}}'}}
+                                                </td>
+                                              </tr>
+                                              <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                                <td style='padding:10px; '>Option 1</td>
+                                                <td id='fl2 opt1'> {{'{{ row["defaultValues"]["Fallback 2_Rate Option 1_Text"]}}'}}
+                                                </td>
+                                              </tr>
+                                              <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                                <td style='padding:10px; '>Option 2</td>
+                                                <td id='fl2 opt2'> {{'{{ row["defaultValues"]["Fallback 2_Rate Option 2_Text"] }}'}}
+                                                </td>
+                                              </tr>
+                                              <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                                <td style='padding:10px; '>Option 3</td>
+                                                <td id='fl2 opt3'> {{'{{ row["defaultValues"]["Fallback 2_Rate Option 3_Text"] }}'}}
+                                                </td>
+                                            </tr>
+                                            <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                                <td style='padding:10px; width:100px;'>Summary Categorization</td>
+                                                <td id='fb sum'>  {{'{{ row["defaultValues"]["Fallback 2 Summary Categorization"] }}'}}
+                                                </td>
+                                              </tr>
+
+                                            </tbody>
+                                          </table>
+                                          <table  style='font-weight:400; color:white;'>
+                                             <tbody>
+
+                                            <tr style='height:30px;  background:rgba(0,0,0,0.1);'>
+                                              <td style='padding:10px; '>Fallback Options</td>
+                                                <td style='padding:10px; '>Fallback Rate</td>
+                                                <td style='padding:10px; '>Fallback Spread</td>
+                                                <td style='padding:10px; '>Determined By</td>
+                                                <td style='padding:10px; '>Fallback Category</td>
+                                              </tr>
+                                              <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                                <td style='padding:10px; '>Option 1</td>
+                                                <td id='fl2 opt1 rate'>{{'{{ row["defaultValues"]["Fallback 2_Rate Option 1_Fallback Rate"]}}'}}</td>
+                                                <td id='fl2 opt1 spread'>{{'{{ row["defaultValues"]["Fallback 2_Rate Option 1_Fallback Spread"] }}'}}</td>
+                                                <td id='fl2 opt1 determineby'>{{'{{ row["defaultValues"]["Fallback 2_Rate Option 1_DeterminedBy"] }}'}}</td>
+                                                <td id='fl2 opt1 category'>{{'{{ row["defaultValues"]["Fallback 2_Rate Option 1_Category"] }}'}}</td>
+                                            </tr>
+                                            <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                              <td style='padding:10px; '>Option 2</td>
+                                              <td id='fl2 opt2 rate'>{{'{{ row["defaultValues"]["Fallback 2_Rate Option 2_Fallback Rate"]}}'}}</td>
+                                                <td id='fl2 opt2 spread'>{{'{{ row["defaultValues"]["Fallback 2_Rate Option 2_Fallback Spread"] }}'}}</td>
+                                                <td id='fl2 opt2 determineby'>{{'{{ row["defaultValues"]["Fallback 2_Rate Option 2_DeterminedBy"] }}'}}</td>
+                                                <td id='fl2 opt2 category'>{{'{{ row["defaultValues"]["Fallback 2_Rate Option 2_Category"] }}'}}</td>
+                                          </tr>
+                                          <tr class="wrapper1 hoveryellow" style="height:30px; color:white; " ng-repeat="row in persons">
+                                            <td style='padding:10px; '>Option 3</td>
+                                            <td id='fl2 opt3 rate'>{{'{{ row["defaultValues"]["Fallback 2_Rate Option 3_Fallback Rate"]}}'}}</td>
+                                                <td id='fl2 opt3 spread'>{{'{{ row["defaultValues"]["Fallback 2_Rate Option 3_Fallback Spread"] }}'}}</td>
+                                                <td id='fl2 opt3 determineby'>{{'{{ row["defaultValues"]["Fallback 2_Rate Option 3_DeterminedBy"] }}'}}</td>
+                                                <td id='fl2 opt3 category'>{{'{{ row["defaultValues"]["Fallback 2_Rate Option 3_Category"] }}'}}</td>
+                                        </tr>
+                                            </tbody>
+                                          </table>
+
+
+                                </div></div></div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END MAIN -->
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <!-- End wrapper-->
+    <!-- Vendor scripts -->
+    <script src="/static/vendor/pacejs/pace.min.js"></script>
+    <script src="/static/scripts/jquery.min.js"></script>
+    <script src="/static/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/static/scripts/jquery-resizable.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- App scripts -->
+    <script src="/static/scripts/luna.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#navbar-frame").load("/nav_bar");
+    });
+
+    </script>
+    <script>
+var query = window.location.search.substring(1).split("&");
+    for (var i = 0, max = query.length; i < max; i++)
+    {
+        if (query[i] === "") // check for trailing & with no param
+            continue;
+
+        var param = query[i].split("=");
+    }
+
+    var file_id = param[1];
+
+
+        var theApp = angular.module('app', ['ui.bootstrap', 'ngStorage']);
+
+    theApp.controller('ItemController', function ItemController($scope, $http, $filter, $timeout, $window, $localStorage, $document) {
+        $http.get('https://qa002-ibornp.westus2.dip.sbp.eyclienthub.com:8000/demo/contract_data.json?id=' + file_id).success(function(data) {
+            // console.log(data);
+            // var persons_arr = [];
+            $scope.persons = [];
+            $scope.persons.push(data);
+            console.log('file_id' + file_id);
+            console.log($scope.persons);
+
+            $scope.pdf_file = "/static/frames/" + data['contract_file_name'];
+            document.getElementById("page_title").textContent = data['contract_file_name'];
+            console.log("PDF FILE NAME" + $scope.pdf_file)
+
+           // $scope.persons = replaceKeys($scope.persons)
+            console.log($scope.persons);  
+         });
+    });
+    </script>
+</body>
+
+</html>

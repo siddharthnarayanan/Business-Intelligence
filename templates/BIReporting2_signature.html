@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from webapplayers.com/luna_admin-v1.3/chartJs.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 03 Jan 2019 14:09:17 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+
+    <!-- Page title -->
+    <title>EY Business Intelligence</title>
+
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="/static/vendor/fontawesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/static/vendor/animate.css/animate.css"/>
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css"/>
+	
+	<link rel="icon" href="/static/images/EYBIicon.png" sizes="32x32" />
+	<link rel="icon" href="/static/images/EYBIicon.png" sizes="192x192" />
+    
+	<!-- App styles -->
+    <link rel="stylesheet" href="/static/styles/pe-icons/pe-icon-7-stroke.css"/>
+    <link rel="stylesheet" href="/static/styles/pe-icons/helper.css"/>
+    <link rel="stylesheet" href="/static/styles/stroke-icons/style.css"/>
+    <link rel="stylesheet" href="/static/styles/style.css">
+	<script src='/static/data/dbase/data.js'></script>
+	<style>
+	
+	option:focus, option:focus, option:focus{ outline: none; } 
+	select:focus {
+outline: none;
+}
+
+.panel-body{
+padding-top: 20px !important;
+}
+
+canvas{
+transform: scale(0.9);
+}
+
+	</style>
+</head>
+<body>
+
+<!-- Wrapper-->
+<div class="wrapper">
+
+    <!-- Header-->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div id="mobile-menu">
+                    <div class="left-nav-toggle">
+                        <a href="#">
+                            <i class="stroke-hamburgermenu"></i>
+                        </a>
+                    </div>
+                </div>
+                <a class="navbar-brand" style="background: #2f323b;" href="index.html">
+                        <a href="Summary_KPI.html">
+                            <img src="/static/images/EYBI.png" alt="" style="transform: scale(1.2); width: 134px; height:auto; max-width:100%; margin-left: -52%; margin-top: 4px;" />
+                            <!--<span style="color:white;"> Business </br> Intelligence</span>-->
+                        </a>
+                    </a>
+					
+            </div>
+			<div class="pull-right text-right" style="line-height: 14px; margin-top:20px;">
+					 <select id="dropDown0" onchange="myFunction0(this.value);" style="background: #24262d;
+    border: none;
+    padding: 5px; font-size:10px;
+    border-radius: 3px;"></select>
+	<script type="text/javascript">
+    var jsonObj0 = { location: [
+		{ "name": "All Branches", "address": 'All Branches' },
+        { "name": "1463 Southern Boulevard", "address": '1463 Southern Boulevard' },
+        { "name": '1824 Alton Road, Suite C', "address": '1824 Alton Road, Suite C' },
+		{ "name": "3333 East Tropicana Avenue", "address": '3333 East Tropicana Avenue' },
+		{ "name": "3400 Camino Tassajara Road", "address": '3400 Camino Tassajara Road' }
+    ]
+    }
+	
+	var myDDL = document.getElementById("dropDown0");
+
+for (i = 0; i < jsonObj0.location.length; i++) {
+    var option = document.createElement("option");
+	option.style.height = "10px";
+	option.style.fontSize = "10px";
+	option.style.padding = "0px";
+    option.text = jsonObj0.location[i].name;
+
+    option.value = jsonObj0.location[i].address;
+    try {
+        myDDL.options.add(option);
+    }
+    catch (e) {
+        alert(e);
+    }
+}
+</script>
+	
+	<select id="dropDown" onchange="myFunction(this.value);" style="background: #24262d;
+    border: none;
+    padding: 5px; font-size:10px;
+    border-radius: 3px;"></select>
+<script type="text/javascript">
+    var jsonObj = { location: [
+        { "name": "All Time", "address": 'All Time' },
+        { "name": "Current Week", "address": 'Current Week' }
+    ]
+    }
+	
+	var myDDL = document.getElementById("dropDown");
+
+for (i = 0; i < jsonObj.location.length; i++) {
+    var option = document.createElement("option");
+	option.style.height = "10px";
+	option.style.fontSize = "10px";
+	option.style.padding = "0px";
+    option.text = jsonObj.location[i].name;
+
+    option.value = jsonObj.location[i].address;
+    try {
+        myDDL.options.add(option);
+    }
+    catch (e) {
+        alert(e);
+    }
+}
+</script>
+                     </div>
+            <!--<div id="navbar" class="navbar-collapse collapse">
+                <div class="left-nav-toggle">
+                    <a href="#">
+                        <i class="stroke-hamburgermenu"></i>
+                    </a>
+                </div>
+                <form class="navbar-form navbar-left">
+                    <input type="text" class="form-control" placeholder="Search data for analysis" style="width: 175px">
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="versions.html" >Versions
+                            <span class="label label-warning pull-right">2</span>
+                        </a>
+                    </li>
+                    <li class=" profil-link">
+                        <a href="login.html">
+                            <span class="profile-address">luna@company.io</span>
+                            <img src="images/profile.jpg" class="img-circle" alt="">
+                        </a>
+                    </li>
+                </ul>
+            </div>-->
+        </div>
+    </nav>
+    <!-- End header-->
+
+      <!-- Navigation-->
+       
+            <div id="navbar-frame"></div>
+            <!-- End navigation-->
+
+
+    <!-- Main content-->
+    <section class="content">
+        <div class="container-fluid">
+
+
+
+
+            <div class="row">
+                <img style='width:100px; height:100px;' src='https://uw2ncria129sta01.blob.core.windows.net/processing/52_Redacted.pdf.5d2cb556a03c81e2063b8c0b.png'>asdfasdfasdf</img>
+                <div class="col-lg-12">
+                    <div class="view-header">
+                     
+                     <div class="header-icon">
+                        <i class="pe page-header-icon pe-7s-graph2"></i>
+                     </div>
+                     <div class="header-title">
+                        <h3>Business Reporting</h3>
+                        <small id="page_title">
+						<div id="cardListParent">
+                                <div id="cardList" style="">
+						Reporting for All Branches</div>
+                            </div>
+                        </small>
+                     </div>
+                  </div>
+                    <hr>
+                </div>
+            </div>
+			
+			
+
+
+
+             <div class="row">
+
+                <div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"></a>
+                                <a class="panel-close"></a>
+                            </div>
+                           Contracts tied to IBOR
+
+                        </div>
+						
+                        <div class="panel-body">
+						
+                            <div id="doughnutChartParent" style="">
+							<div id='doughnutChartLegend' style='margin-left:50px;'></div>
+                                <canvas id="doughnutChart" width="250" height="250" style=' float:left; margin-left:100px;'></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				
+				<div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            
+                            Bordered striped basic table
+                        </div>
+                        <div class="panel-body">
+                           
+                            <div class="table-responsive">
+                                <table  class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Rate Interest</th>
+                                        <th># of contracts</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Abraham</td>
+                                        <td>076 9477 4896</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phelan</td>
+                                        <td>0500 034548</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Raya</td>
+                                        <td>(01315) 27698</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Azalia</td>
+                                        <td>0500 854198</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+				
+				
+            </div>
+			
+			<div class="row">
+                <div class="col-lg-12">
+                    <h4>Product Conventions</h4>
+                    <hr>
+                </div>
+            </div>
+			
+			
+			
+			<div class="row">
+			
+			<div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"></a>
+                                <a class="panel-close"></a>
+                            </div>
+                           IBOR Optionality
+                        </div>
+                        <div class="panel-body">
+						
+                            <div id="doughnutChartParent2" style=" text-align:left;">
+							<div id='doughnutChartLegend2' style='margin-left:100px;'></div>
+                                <canvas id="doughnutChart2" width="250" height="250" style='float:left; text-align:left; margin-left:-240px; '></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			
+			<div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"></a>
+                                <a class="panel-close"></a>
+                            </div>
+                             Maturity Profile
+                        </div>
+                        <div class="panel-body">
+						
+                            <div id="doughnutChartParent3" style=" text-align:left;">
+							<div id='doughnutChartLegend3' style='margin-left:100px;'></div>
+                                <canvas id="doughnutChart3" width="250" height="250" style='float:left; text-align:left; margin-left:-220px; '></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+			
+			<div class="row">
+                <div class="col-lg-12">
+                    <h4>Fallback Language</h4>
+                    <hr>
+                </div>
+            </div>
+			
+			
+			<div class="row">
+				<div class="col-md-6" style="">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"></a>
+                                <a class="panel-close"></a>
+                            </div>
+                            IBOR Optionality
+                        </div>
+                        <div class="panel-body">
+						
+                            <div id="doughnutChartParent1" style=" ">
+							<div id='doughnutChartLegend1' style='margin-left:50px;'></div>
+                                <canvas id="doughnutChart1" width="250" height="250" style=' float:left; margin-left:100px;'></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>		
+				
+				<div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            
+                            Bordered striped basic table
+                        </div>
+                        <div class="panel-body">
+                           
+                            <div class="table-responsive">
+                                <table  class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Rate Interest</th>
+                                        <th># of contracts</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Abraham</td>
+                                        <td>076 9477 4896</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phelan</td>
+                                        <td>0500 034548</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Raya</td>
+                                        <td>(01315) 27698</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Azalia</td>
+                                        <td>0500 854198</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+				
+				</div>
+				<div class="row">
+				
+				
+				<div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"></a>
+                                <a class="panel-close"></a>
+                            </div>
+                            Field Errors
+                        </div>
+                        <div class="panel-body">
+						
+                            <div id="barOptionsParent">
+							<div id='barOptionsLegend' style='width:600px;'></div>
+                                <canvas id="barOptions" width="500" height="250" style=''></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				</div>
+
+            
+
+            
+
+<div id='temp' style='display:none;'></div>
+        </div>
+    </section>
+    <!-- End main content-->
+
+</div>
+<!-- End wrapper-->
+
+<!-- Vendor scripts -->
+<script src="/static/vendor/pacejs/pace.min.js"></script>
+<script src="/static/vendor/jquery/dist/jquery.min.js"></script>
+<script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/vendor/chart.js/dist/Chart.min.js"></script>
+
+<!-- App scripts -->
+<script src="scripts/luna.js"></script>
+<script>
+const Http = new XMLHttpRequest();
+const url='https://iborqa001-dicrnp.westus2.dip.sbp.eyclienthub.com:8000/demo/contracts.json';
+Http.open("GET", url);
+Http.send();
+
+Http.onreadystatechange = (e) => {
+  console.log(Http.responseText)
+}
+</script>
+
+</script>
+
+
+<script>
+ $(document).ready(function() {
+        $("#navbar-frame").load("/nav_bar");
+    });
+
+var main_data
+    $(document).ready(function () {
+
+	
+        /**
+         * Options for Line chart
+         */
+		 
+		 function getBoxWidth(labelOpts, fontSize) {
+  return labelOpts.usePointStyle ?
+    fontSize * Math.SQRT2 :
+  labelOpts.boxWidth;
+};
+
+Chart.NewLegend = Chart.Legend.extend({
+  afterFit: function() {
+    this.height = this.height + 50;
+  },
+});
+
+function createNewLegendAndAttach(chartInstance, legendOpts) {
+  var legend = new Chart.NewLegend({
+    ctx: chartInstance.chart.ctx,
+    options: legendOpts,
+    chart: chartInstance
+  });
+  
+  if (chartInstance.legend) {
+    Chart.layoutService.removeBox(chartInstance, chartInstance.legend);
+    delete chartInstance.newLegend;
+  }
+  
+  chartInstance.newLegend = legend;
+  Chart.layoutService.addBox(chartInstance, legend);
+}
+
+// Register the legend plugin
+Chart.plugins.register({
+  beforeInit: function(chartInstance) {
+    var legendOpts = chartInstance.options.legend;
+
+    if (legendOpts) {
+      createNewLegendAndAttach(chartInstance, legendOpts);
+    }
+  },
+  beforeUpdate: function(chartInstance) {
+    var legendOpts = chartInstance.options.legend;
+
+    if (legendOpts) {
+      legendOpts = Chart.helpers.configMerge(Chart.defaults.global.legend, legendOpts);
+
+      if (chartInstance.newLegend) {
+        chartInstance.newLegend.options = legendOpts;
+      } else {
+        createNewLegendAndAttach(chartInstance, legendOpts);
+      }
+    } else {
+      Chart.layoutService.removeBox(chartInstance, chartInstance.newLegend);
+      delete chartInstance.newLegend;
+    }
+  },
+  afterEvent: function(chartInstance, e) {
+    var legend = chartInstance.newLegend;
+    if (legend) {
+      legend.handleEvent(e);
+    }
+  }
+  
+});
+
+        var globalOptions = {
+            responsive: false,
+            legend: {
+                labels:{
+					fontColor: "white",
+					fontSize: 10
+                }
+            },
+			axisX:{
+   labelFontColor: "red",
+ },
+ axisY:{
+   labelFontColor: "red",
+ },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        fontColor: "white",
+						fontSize: 10,
+						labelFontColor: "red"
+                    },
+                    gridLines: {
+                        color: "#37393F"
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        fontColor: "white",
+						fontSize: 10,
+						labelFontColor: "red"
+                    },
+                    gridLines: {
+                        color: "#37393F"
+                    }
+                }]
+            }
+        };
+		
+		var globalOptions_noAxis = {
+            responsive: false,
+            legendCallback: function (chart) {
+            var text = [];
+            text.push('<table class="' + chart.id + '-legend"><tbody>');
+
+            var data = chart.data;
+            var datasets = data.datasets;
+            var labels = data.labels;
+			
+			console.log(data);
+			console.log(datasets);
+			console.log(labels);
+
+            if (datasets.length) {
+                for (var i = 0; i < datasets[0].data.length; ++i) {
+                    text.push('<tr style="text-align: center;"><div style="margin-left:10px; height: 10px; width: 20px; float:left; background-color:' + chart.data.datasets[0].backgroundColor[i] + '"></div><div style="margin-left:10px; margin-top:-2px; float:left; color:white; font-size:12px;">' + labels[i] + ':  ' + datasets[0].data[i] + '</div></tr>'); 
+                    
+                }
+            }
+            text.push('</tbody></table>');
+            return text.join('');
+        },
+        legend: {
+            // since you're providing your own legend
+            display: false,
+        }
+        };
+		
+		var globalOptions_noAxis_noLegend = {
+            responsive: false,
+			legend: {
+                display: false
+            }
+        };
+
+        
+        var doughnutData = {
+            labels: [
+                "Signature Present",
+                "Signature Absent"
+            ],
+            datasets: [
+                {
+                    data: [103421, 5587],
+                    borderWidth: 0,
+                    backgroundColor: [
+                        "rgba(255, 230, 0, .8)",
+                        "rgba(119, 119, 119, .8)",
+                        "rgba(74, 74, 74, .8)"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(255, 230, 0, 1)",
+                        "rgba(119, 119, 119, 1)",
+                        "rgba(74, 74, 74, 1)"
+                    ]
+                }]
+        };
+		
+		var doughnutData1 = {
+            labels: [
+                "Require Verification",
+                "Correclty Processed"
+            ],
+            datasets: [
+                {
+                    data: [105798, 3210],
+                    borderWidth: 0,
+                    backgroundColor: [
+                        "rgba(66, 62, 110,0.8)",
+                        "rgba(100,149,237,0.8)",
+                        "rgba(74, 74, 74, .8)"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(66, 62, 110,1)",
+                        "rgba(100,149,237,1)",
+                        "rgba(74, 74, 74, 1)"
+                    ]
+                }]
+        };
+		
+		var doughnutData2 = {
+            labels: [
+                "Pending",
+                "Processed"
+            ],
+            datasets: [
+                {
+                    data: [104487, 4521],
+                    borderWidth: 0,
+                    backgroundColor: [
+                        "rgba(119,119,119,.8)",
+                        "rgba(187,187,187,.8)"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(119,119,119,1)",
+                        "rgba(187,187,187,1)"
+                    ]
+                }]
+        };
+		
+		var doughnutData3 = {
+            labels: [
+                "Digital",
+                "Physical"
+            ],
+            datasets: [
+                {
+                    data: [75889, 33119],
+                    borderWidth: 0,
+                    backgroundColor: [
+                        "rgba(144,238,144,0.8)",
+                        "rgba(70, 130, 180,0.8)"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(144,238,144,1)",
+                        "rgba(70, 130, 180,1)"
+                    ]
+                }]
+        };
+		
+		/**
+         * Data for Bar chart
+         */
+        var barData = {
+            labels: ["Type of Account", "Account Number", "Ownership Type", "Tax ID", "Account Name",'Signature Present'],
+            datasets:  [{
+      label: "Field",
+      data: [12, 19, 3, 5, 2, 3],
+      backgroundColor: [
+         'rgba(255, 230, 0,1)',
+        'rgba(119, 119, 119, 1)',
+        'rgba(255, 206, 86, 1)',
+	  
+	  
+	  
+        'rgba(75, 192, 192, 1)',
+        'rgba(187,187,187, 1)',
+        'rgba(244, 233, 78, 1)'
+      ],
+      borderColor: [
+       'rgba(255,99,132,0)',
+        'rgba(54, 162, 235, 0)',
+        'rgba(255, 206, 86, 0)',
+        'rgba(75, 192, 192, 0)',
+        'rgba(153, 102, 255, 0)',
+        'rgba(255, 159, 64, 0)'
+      ],
+      borderWidth: 1
+    }]
+        };
+
+		Chart.defaults.global.defaultFontColor='white';
+			
+		var c4 = document.getElementById("barOptions").getContext("2d");
+        var temp4 = new Chart(c4, {type: 'horizontalBar', data: barData, options: globalOptions_noAxis});
+		var legend4 = temp4.generateLegend();
+		document.getElementById("barOptionsLegend").innerHTML = legend4;
+		
+		
+        var c = document.getElementById("doughnutChart").getContext("2d");
+        var temp = new Chart(c, {type: 'doughnut', data: doughnutData, options: globalOptions_noAxis});
+		var legend = temp.generateLegend();
+		document.getElementById("doughnutChartLegend").innerHTML = legend;
+		
+		var c1 = document.getElementById("doughnutChart1").getContext("2d");
+        var temp1 = new Chart(c1, {type: 'doughnut', data: doughnutData1, options: globalOptions_noAxis});
+		var legend1 = temp1.generateLegend();
+		document.getElementById("doughnutChartLegend1").innerHTML = legend1;
+		
+		
+		var c2 = document.getElementById("doughnutChart2").getContext("2d");
+        var temp2 = new Chart(c2, {type: 'doughnut', data: doughnutData2, options: globalOptions_noAxis});
+		var legend2 = temp2.generateLegend();
+		document.getElementById("doughnutChartLegend2").innerHTML = legend2;
+		
+		
+		var c3 = document.getElementById("doughnutChart3").getContext("2d");
+        var temp3 = new Chart(c3, {type: 'doughnut', data: doughnutData3, options: globalOptions_noAxis});
+		var legend3 = temp3.generateLegend();
+		document.getElementById("doughnutChartLegend3").innerHTML = legend3;
+		
+		
+    });
+</script>
+<script>
+document.getElementById("temp").innerHTML = person;
+var global_var = document.getElementById("mySelect").value;
+function myFunction0(dropdown_value) {
+console.log('qerq',document.getElementById("dropDown").value);
+var temp = document.getElementById("dropDown").value;
+main_data = person;
+	console.log('asdfqwerqwerqwwerqwer',global_var);
+	console.log('main person',main_data);
+	
+	for (var i = 0; i < main_data.length; i++){
+    var obj = main_data[i];
+    for (var key in obj){
+	if(key == 'Office_Address'){
+        var attrName = key;
+        var attrValue = obj[key];
+		if (attrValue == '')
+		console.log('attrName',attrName);
+		console.log('attrValue',attrValue);}
+    }
+}
+ 
+Chart.defaults.global.defaultFontColor='white';
+
+global_var = dropdown_value;
+ my_data = [660,123]
+console.log(dropdown_value)
+if (temp == 'All Time'){
+if (global_var == '1824 Alton Road, Suite C')
+{
+ my_data = [31026,1676]
+ my_data1 = [31739,963]
+ my_data2 = [31346,1356]
+ my_data3 = [22766,9935]
+ my_data4 = [45, 19, 3, 5, 2, 3]
+}
+
+if (global_var == '1463 Southern Boulevard')
+{
+ my_data = [20684,1117]
+ my_data1 = [21159,642]
+ my_data2 = [20897,904]
+ my_data3 = [15177,6623]
+ my_data4 = [7, 567, 3, 5, 2, 3]
+}
+
+if (global_var == '3333 East Tropicana Avenue')
+{
+ my_data = [36197,1955]
+ my_data1 = [37029,1123]
+ my_data2 = [36570,1582]
+ my_data3 = [26561,11591]
+ my_data4 = [78, 453, 3, 5, 2, 3]
+}
+
+if (global_var == '3400 Camino Tassajara Road')
+{
+ my_data = [15513,838]
+ my_data1 = [15869,481]
+ my_data2 = [15673,678]
+ my_data3 = [11383,4967]
+ my_data4 = [25, 19, 3, 5, 2, 3]
+}
+}
+else{
+if (global_var == '1824 Alton Road, Suite C')
+{
+ my_data = [56,34]
+ my_data1 = [46,65]
+ my_data2 = [456,567]
+ my_data3 = [3,7]
+ my_data4 = [87, 19, 3, 5, 2, 3]
+}
+
+if (global_var == '1463 Southern Boulevard')
+{
+ my_data = [76,2415]
+ my_data1 = [789,23]
+ my_data2 = [453,879]
+ my_data3 = [3,97]
+ my_data4 = [7, 6, 3, 5, 2, 3]
+}
+
+if (global_var == '3333 East Tropicana Avenue')
+{
+ my_data = [768,3456]
+ my_data1 = [46,768]
+ my_data2 = [567,46]
+ my_data3 = [68,345]
+ my_data4 = [896, 453, 3, 5, 2, 3]
+}
+
+if (global_var == '3400 Camino Tassajara Road')
+{
+ my_data = [56,120]
+ my_data1 = [789,46]
+ my_data2 = [768,86]
+ my_data3 = [768,576]
+ my_data3 = [608,576]
+ my_data4 = [789, 19, 3, 5, 2, 3]
+}
+}
+        /**
+         * Options for Line chart
+         */
+
+		var globalOptions_noAxis = {
+            responsive: false,
+            legendCallback: function (chart) {
+            var text = [];
+            text.push('<table class="' + chart.id + '-legend"><tbody>');
+
+            var data = chart.data;
+            var datasets = data.datasets;
+            var labels = data.labels;
+			
+			console.log(data);
+			console.log(datasets);
+			console.log(labels);
+
+            if (datasets.length) {
+                for (var i = 0; i < datasets[0].data.length; ++i) {
+                    text.push('<tr style="text-align: center;"><div style="margin-left:10px; height: 10px; width: 20px; float:left; background-color:' + chart.data.datasets[0].backgroundColor[i] + '"></div><div style="margin-left:10px; margin-top:-2px; float:left; color:white; font-size:12px;">' + labels[i] + ':  ' + datasets[0].data[i] + '</div></tr>'); 
+                    
+                }
+            }
+            text.push('</tbody></table>');
+            return text.join('');
+        },
+        legend: {
+            // since you're providing your own legend
+            display: false,
+        }
+        };
+		
+
+        
+        var doughnutData = {
+            labels: [
+                "Signature Present",
+                "Signature Absent"
+            ],
+            datasets: [
+                {
+                    data: my_data,
+                    borderWidth: 0,
+                    backgroundColor: [
+                        "rgba(255, 230, 0, .8)",
+                        "rgba(119, 119, 119, .8)",
+                        "rgba(74, 74, 74, .8)"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(255, 230, 0, 1)",
+                        "rgba(119, 119, 119, 1)",
+                        "rgba(74, 74, 74, 1)"
+                    ]
+                }]
+        };
+		
+	var element = document.getElementById("doughnutChart");
+    element.parentNode.removeChild(element);
+	var p = document.getElementById("doughnutChartParent");
+    var newElement = document.createElement('canvas');
+	var newElementLegend = document.createElement('div');
+	newElementLegend.setAttribute('id', 'doughnutChartLegend');
+	newElementLegend.setAttribute("style", " margin-left:100px;");
+	newElement.setAttribute('id', 'doughnutChart');
+	newElement.setAttribute('width', '250');
+	newElement.setAttribute('height', '250');
+	newElement.setAttribute("style", "  margin-left:100px; float:left;");
+	p.appendChild(newElementLegend);
+    p.appendChild(newElement);
+
+		
+        var c = document.getElementById("doughnutChart").getContext("2d");
+		var temp = new Chart(c, {type: 'doughnut', data: doughnutData, options: globalOptions_noAxis});
+		var legend = temp.generateLegend();
+		document.getElementById("doughnutChartLegend").innerHTML = legend;
+		
+		var doughnutData1 = {
+            labels: [
+                "Require Verification",
+                "Correclty Processed"
+            ],
+            datasets: [
+                {
+                    data: my_data1,
+                    borderWidth: 0,
+                    backgroundColor: [
+                        "rgba(66, 62, 110,0.8)",
+                        "rgba(100,149,237,0.8)",
+                        "rgba(74, 74, 74, .8)"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(66, 62, 110,1)",
+                        "rgba(100,149,237,1)",
+                        "rgba(74, 74, 74, 1)"
+                    ]
+                }]
+        };
+		
+	var element = document.getElementById("doughnutChart1");
+    element.parentNode.removeChild(element);
+	var p = document.getElementById("doughnutChartParent1");
+    var newElement = document.createElement('canvas');
+	var newElementLegend1 = document.createElement('div');
+	newElementLegend1.setAttribute('id', 'doughnutChartLegend1');
+	newElementLegend1.setAttribute("style", "  margin-left:100px;");
+	newElement.setAttribute('id', 'doughnutChart1');
+	newElement.setAttribute('width', '250');
+	newElement.setAttribute('height', '250');
+	newElement.setAttribute("style", "  margin-left:100px; float:left; ");
+    p.appendChild(newElement);
+		
+		
+        var c1 = document.getElementById("doughnutChart1").getContext("2d");
+		var temp1 = new Chart(c1, {type: 'doughnut', data: doughnutData1, options: globalOptions_noAxis});
+		var legend1 = temp1.generateLegend();
+		document.getElementById("doughnutChartLegend1").innerHTML = legend1;
+		
+		var doughnutData2 = {
+            labels: [
+                "Pending",
+                "Processed"
+            ],
+            datasets: [
+                {
+                    data: my_data2,
+                    borderWidth: 0,
+                    backgroundColor: [
+                        "rgba(119,119,119,.8)",
+                        "rgba(187,187,187,.8)",
+                        "rgba(74, 74, 74, .8)"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(119,119,119,1)",
+                        "rgba(187,187,187,1)",
+                        "rgba(74, 74, 74, 1)"
+                    ]
+                }]
+        };
+
+		var element = document.getElementById("doughnutChart2");
+    element.parentNode.removeChild(element);
+	var p = document.getElementById("doughnutChartParent2");
+    var newElement = document.createElement('canvas');
+	var newElementLegend2 = document.createElement('div');
+	newElementLegend2.setAttribute('id', 'doughnutChartLegend2');
+	newElementLegend2.setAttribute("style", "   margin-left:100px;");
+	newElement.setAttribute('id', 'doughnutChart2');
+	newElement.setAttribute('width', '250');
+	newElement.setAttribute('height', '250');
+	newElement.setAttribute("style", "  margin-left:100px; float:left; ");
+    p.appendChild(newElement);
+		
+        var c2 = document.getElementById("doughnutChart2").getContext("2d");
+		var temp2 = new Chart(c2, {type: 'doughnut', data: doughnutData2, options: globalOptions_noAxis});
+		var legend2 = temp2.generateLegend();
+		document.getElementById("doughnutChartLegend2").innerHTML = legend2;
+		
+		var doughnutData3 = {
+            labels: [
+                "Digital",
+                "Physical"
+            ],
+            datasets: [
+                {
+                    data: my_data3,
+                    borderWidth: 0,
+                    backgroundColor: [
+                        "rgba(144,238,144,0.8)",
+                        "rgba(70, 130, 180,0.8)",
+                        "rgba(74, 74, 74, .8)"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(144,238,144,1)",
+                        "rgba(70, 130, 180,1)",
+                        "rgba(74, 74, 74, 1)"
+                    ]
+                }]
+        };
+
+		var element = document.getElementById("doughnutChart3");
+    element.parentNode.removeChild(element);
+	var p = document.getElementById("doughnutChartParent3");
+    var newElement = document.createElement('canvas');
+	var newElementLegend3 = document.createElement('div');
+	newElementLegend3.setAttribute('id', 'doughnutChartLegend3');
+	newElementLegend3.setAttribute("style", "   margin-left:100px;");
+	newElement.setAttribute('id', 'doughnutChart3');
+	newElement.setAttribute('width', '250');
+	newElement.setAttribute('height', '250');
+	newElement.setAttribute("style", " margin-left:100px;  float:left; margin-left:-220px;");
+    p.appendChild(newElement);
+		
+        var c3 = document.getElementById("doughnutChart3").getContext("2d");
+        var temp3 = new Chart(c3, {type: 'doughnut', data: doughnutData3, options: globalOptions_noAxis});
+		var legend3 = temp3.generateLegend();
+		document.getElementById("doughnutChartLegend3").innerHTML = legend3;
+		
+		var globalOptions_noAxis_noLegend = {
+            responsive: false,
+			legend: {
+                display: false
+            }
+        };
+
+	var barData = {
+            labels: ["Type of Account", "Account Number", "Ownership Type", "Tax ID", "Account Name",'Signature Present'],
+            datasets:  [{
+      label: "Field",
+      data: my_data4,
+      backgroundColor: [
+	  'rgba(255, 230, 0,1)',
+        'rgba(119, 119, 119, 1)',
+        'rgba(255, 206, 86, 1)',
+	  
+	  
+	  
+        'rgba(75, 192, 192, 1)',
+        'rgba(187,187,187, 1)',
+        'rgba(244, 233, 78, 1)'
+      ],
+      borderColor: [
+        'rgba(255,99,132,0)',
+        'rgba(54, 162, 235, 0)',
+        'rgba(255, 206, 86, 0)',
+        'rgba(75, 192, 192, 0)',
+        'rgba(153, 102, 255, 0)',
+        'rgba(255, 159, 64, 0)'
+      ],
+      borderWidth: 1
+    }]
+        };
+
+		var element = document.getElementById("barOptions");
+    element.parentNode.removeChild(element);
+	var p = document.getElementById("barOptionsParent");
+    var newElement = document.createElement('canvas');
+	var newElementLegend4 = document.createElement('div');
+	newElementLegend4.setAttribute('id', 'doughnutChartLegend4');
+	newElementLegend4.setAttribute("style", "width:600px; margin-left:100px;");
+	newElement.setAttribute('id', 'barOptions');
+	newElement.setAttribute('width', '500');
+	newElement.setAttribute('height', '250');
+	
+	//newElement.setAttribute("style", );
+    p.appendChild(newElement);
+			
+		var c4 = document.getElementById("barOptions").getContext("2d");
+        var temp4 = new Chart(c4, {type: 'horizontalBar', data: barData, options: globalOptions_noAxis});
+		var legend4 = temp4.generateLegend();
+		document.getElementById("barOptionsLegend").innerHTML = legend4;
+		
+		document.getElementById("cardList").innerHTML = 'Reporting for Branch: ' + global_var;
+		
+}
+
+
+</script>
+
+<script>
+
+function myFunction(dropdown_value) {
+  
+var global_var = document.getElementById("dropDown0").value;
+console.log('hgkjhg',document.getElementById("dropDown0").value);
+
+global_var = dropdown_value;
+
+
+
+console.log(dropdown_value)
+        /**
+         * Options for Line chart
+         */
+
+		var globalOptions_noAxis = {
+            responsive: false,
+            legend: {
+                labels:{
+                    fontColor:"white",
+					fontSize: 10
+                }
+            }
+        };
+		
+
+        
+        var doughnutData = {
+            labels: [
+                "Signature Present",
+                "Signature Absent"
+            ],
+            datasets: [
+                {
+                    data: [100, global_var],
+                    borderWidth: 0,
+                    backgroundColor: [
+                        "rgba(255, 230, 0, .8)",
+                        "rgba(119, 119, 119, .8)",
+                        "rgba(74, 74, 74, .8)"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(255, 230, 0, 1)",
+                        "rgba(119, 119, 119, 1)",
+                        "rgba(74, 74, 74, 1)"
+                    ]
+                }]
+        };
+		
+	var element = document.getElementById("doughnutChart");
+    element.parentNode.removeChild(element);
+	var p = document.getElementById("doughnutChartParent");
+    var newElement = document.createElement('canvas');
+	newElement.setAttribute('id', 'doughnutChart');
+	
+	newElement.setAttribute("style", " height:180px;  float:left;");
+    p.appendChild(newElement);
+
+		
+        var c = document.getElementById("doughnutChart").getContext("2d");
+		var temp = new Chart(c, {type: 'doughnut', data: doughnutData, options: globalOptions_noAxis});
+		var legend = temp.generateLegend();
+		document.getElementById("doughnutChartLegend").innerHTML = legend;
+		
+		var doughnutData1 = {
+            labels: [
+                "Require Verification",
+                "Correclty Processed"
+            ],
+            datasets: [
+                {
+                    data: [3624, 191],
+                    borderWidth: 0,
+                    backgroundColor: [
+                        "rgba(66, 62, 110,0.8)",
+                        "rgba(100,149,237,0.8)",
+                        "rgba(74, 74, 74, .8)"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(66, 62, 110,1)",
+                        "rgba(100,149,237,1)",
+                        "rgba(74, 74, 74, 1)"
+                    ]
+                }]
+        };
+		
+	var element = document.getElementById("doughnutChart1");
+    element.parentNode.removeChild(element);
+	var p = document.getElementById("doughnutChartParent1");
+    var newElement = document.createElement('canvas');
+	newElement.setAttribute('id', 'doughnutChart1');
+	
+	newElement.setAttribute("style", " height:180px;  float:left; ");
+    p.appendChild(newElement);
+		
+		
+        var c1 = document.getElementById("doughnutChart1").getContext("2d");
+		var temp1 = new Chart(c1, {type: 'doughnut', data: doughnutData1, options: globalOptions_noAxis});
+		var legend1 = temp1.generateLegend();
+		document.getElementById("doughnutChartLegend1").innerHTML = legend1;
+		
+		var doughnutData2 = {
+            labels: [
+                "Pending",
+                "Processed"
+            ],
+            datasets: [
+                {
+                    data: [3624, 191],
+                    borderWidth: 0,
+                    backgroundColor: [
+                        "rgba(119,119,119,.8)",
+                        "rgba(187,187,187,.8)",
+                        "rgba(74, 74, 74, .8)"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(119,119,119,1)",
+                        "rgba(187,187,187,1)",
+                        "rgba(74, 74, 74, 1)"
+                    ]
+                }]
+        };
+
+		var element = document.getElementById("doughnutChart2");
+    element.parentNode.removeChild(element);
+	var p = document.getElementById("doughnutChartParent2");
+    var newElement = document.createElement('canvas');
+	newElement.setAttribute('id', 'doughnutChart2');
+	
+	newElement.setAttribute("style", " height:180px;  float:left; ");
+    p.appendChild(newElement);
+		
+        var c2 = document.getElementById("doughnutChart2").getContext("2d");
+		var temp2 = new Chart(c2, {type: 'doughnut', data: doughnutData2, options: globalOptions_noAxis});
+		var legend2 = temp2.generateLegend();
+		document.getElementById("doughnutChartLegend2").innerHTML = legend2;
+		
+		var doughnutData3 = {
+            labels: [
+                "Digital",
+                "Physical"
+            ],
+            datasets: [
+                {
+                    data: [3624, 191],
+                    borderWidth: 0,
+                    backgroundColor: [
+                        "rgba(144,238,144,0.8)",
+                        "rgba(70, 130, 180,0.8)",
+                        "rgba(74, 74, 74, .8)"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(144,238,144,1)",
+                        "rgba(70, 130, 180,1)",
+                        "rgba(74, 74, 74, 1)"
+                    ]
+                }]
+        };
+
+		var element = document.getElementById("doughnutChart3");
+    element.parentNode.removeChild(element);
+	var p = document.getElementById("doughnutChartParent3");
+    var newElement = document.createElement('canvas');
+	newElement.setAttribute('id', 'doughnutChart3');
+	
+	newElement.setAttribute("style", " height:180px;  float:left; margin-left:-220px;");
+    p.appendChild(newElement);
+		
+        var c3 = document.getElementById("doughnutChart3").getContext("2d");
+		var temp3 = new Chart(c3, {type: 'doughnut', data: doughnutData3, options: globalOptions_noAxis});
+		var legend3 = temp3.generateLegend();
+		document.getElementById("doughnutChartLegend3").innerHTML = legend3;
+		
+		var globalOptions_noAxis_noLegend = {
+            responsive: false,
+			legend: {
+                display: false
+            }
+        };
+
+	var barData = {
+            labels: ["Type of Account", "Account Number", "Ownership Type", "Tax ID", "Account Name",'Signature Present'],
+            datasets:  [{
+      label: "Field",
+      data: [global_var, 19, 3, 5, 2, 3],
+      backgroundColor: [
+         'rgba(255, 230, 0,1)',
+        'rgba(119, 119, 119, 1)',
+        'rgba(255, 206, 86, 1)',
+	  
+	  
+	  
+        'rgba(75, 192, 192, 1)',
+        'rgba(187,187,187, 1)',
+        'rgba(244, 233, 78, 1)'
+      ],
+      borderColor: [
+        'rgba(255,99,132,0)',
+        'rgba(54, 162, 235, 0)',
+        'rgba(255, 206, 86, 0)',
+        'rgba(75, 192, 192, 0)',
+        'rgba(153, 102, 255, 0)',
+        'rgba(255, 159, 64, 0)'
+      ],
+      borderWidth: 1
+    }]
+        };
+
+		var element = document.getElementById("barOptions");
+    element.parentNode.removeChild(element);
+	var p = document.getElementById("barOptionsParent");
+    var newElement = document.createElement('canvas');
+	newElement.setAttribute('id', 'barOptions');
+	
+	//newElement.setAttribute("style", );
+    p.appendChild(newElement);
+			
+		var c4 = document.getElementById("barOptions").getContext("2d");
+        var temp4 = new Chart(c4, {type: 'horizontalBar', data: barData, options: globalOptions_noAxis});
+		var legend4 = temp4.generateLegend();
+		document.getElementById("barOptionsLegend").innerHTML = legend4;
+		
+}
+
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from webapplayers.com/luna_admin-v1.3/chartJs.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 03 Jan 2019 14:09:18 GMT -->
+</html>

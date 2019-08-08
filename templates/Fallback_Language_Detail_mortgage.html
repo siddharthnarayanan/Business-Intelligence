@@ -1,0 +1,622 @@
+D<!DOCTYPE html>
+<html>
+
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+      <!-- Page title -->
+      <title>EY Business Intelligence</title>
+      <!-- Vendor styles -->
+      <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.css"/>
+      <link rel="stylesheet" href="vendor/animate.css/animate.css"/>
+      <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css"/>
+      <link rel="icon" href="EYBIicon.png" sizes="32x32" />
+      <link rel="icon" href="EYBIicon.png" sizes="192x192" />
+      <!-- App styles -->
+      <link rel="stylesheet" href="styles/pe-icons/pe-icon-7-stroke.css"/>
+      <link rel="stylesheet" href="styles/pe-icons/helper.css"/>
+      <link rel="stylesheet" href="styles/stroke-icons/style.css"/>
+      <link rel="stylesheet" href="styles/style.css">
+      <script type='text/javascript' src='../wp-includes/js/jquery/jqueryb8ff.js?ver=1.12.4'></script>
+      <script src="../inputdata/d3.v4.min.js"></script>
+      <script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script>
+   <style>
+
+.greyrow{
+background: #ffe600;
+padding-bottom: 10px !important;
+padding-top: 10px !important;
+font-size:11px;
+border:none !important;
+text-align:center;
+vertical-align: middle !important;
+color: #111;
+}
+
+.supergreyrow{
+background: white;
+border:none !important;
+vertical-align: middle !important;
+text-align:center;
+padding-bottom: 5px !important;
+padding-top: 5px!important;
+font-size:11px;
+color:#111;
+}
+
+#fl{line-height:20px !important;}
+#alt_rate{line-height:20px !important;}
+#select_alt_rate{line-height:20px !important;}
+   </style>
+
+   </head>
+   <body>
+      <!-- Wrapper-->
+      <div class="wrapper">
+      <!-- Header-->
+      <nav class="navbar navbar-default navbar-fixed-top">
+         <div class="container-fluid">
+            <div class="navbar-header">
+               <div id="mobile-menu">
+                  <div class="left-nav-toggle">
+                     <a href="#">
+                     <i class="stroke-hamburgermenu"></i>
+                     </a>
+                  </div>
+               </div>
+               <a class="navbar-brand" style="background: #2f323b;" href="index.html">
+               <a href="Summary_KPI.html">
+                  <img src="EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
+                  <!--<span style="color:white;"> Business </br> Intelligence</span>-->
+               </a>
+               </a>
+            </div>
+         </div>
+      </nav>
+      <!-- End header-->
+      <!-- Navigation-->
+      <aside class="navigation">
+         <nav>
+            <ul class="nav luna-nav">
+               <li >
+                    <a href="Summary_KPI.html" >
+                        Summary
+                    </a>
+                </li>
+                <li >
+                    <a href="#bi_reporting" data-toggle="collapse" aria-expanded="false">
+                        BI Reporting<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
+                    </a>
+                    <ul id="bi_reporting"  class="nav nav-second collapse">
+                        <li><a href="BIReporting2_syndicated.html">Syndicate Loans</a></li>
+                        <li><a href="BIReporting2_mortgage.html">Mortgage</a></li>
+                        <li><a href="BIReporting2_isda.html">ISDA</a></li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#fallback_language" data-toggle="collapse" aria-expanded="false">
+                        Fallback Language<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
+                    </a>
+                    <ul id="fallback_language" class="nav nav-second collapse">
+                        <li><a href="Fallback_Language.html">Syndicate Loans</a></li>
+                        <li class="active"><a href="Fallback_Language_mortgage.html">Mortgage</a></li>
+                        <li><a href="Fallback_Language_isda.html">ISDA</a></li>
+                    </ul>
+                </li>
+               <li class="nav-info">
+                  <!--<i class="pe pe-7s-shield text-accent"></i>-->
+                  <div class="m-t-xs">
+                     <span class="c-white">EY Business Intelligence</span> Dashboard for monitoring and reporting.
+                  </div>
+               </li>
+            </ul>
+         </nav>
+      </aside>
+      <!-- End navigation-->
+      <!-- Main content-->
+      <section class="content">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="view-header">
+                     <div class="pull-right text-right" style="line-height: 14px">
+                     </div>
+                     <div class="header-icon">
+                        <i class="pe page-header-icon pe-7s-next-2"></i>
+                     </div>
+                     <div class="header-title">
+                        <h3>Fallback Language</h3>
+                        <small><span id="page_title">
+                        Syndicate Loans </span>
+                        </small>
+                     </div>
+                  </div>
+                  <hr>
+               </div>
+            </div>
+
+			<div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="panel panel-filled">
+
+                        <div class="panel-body">
+							  <span id="div1" style="color: #ffe600; line-height: 2px; font-size:1em;">Fallback Language:</span></br></br>
+                              <span id="fl" style="color: #fff; line-height: 2px; font-size:0.8em; ">if the rate referenced in the preceding clause (d)(i) does not appear on such page or service or such page or service shall not be available, the rate per annum equal to the rate reasonably determined by the Administrative Agent to be the offered rate on such other page or other service that displays an offered rate administered by ICE Benchmark Administration for deposits in such Alternative Currency (for delivery on  the first day of such Interest Period) with a term equivalent to such Interest Peri</span>
+                              </br></br></br>
+							  <span id="div_alt_rate" style="color: #ffe600; line-height: 2px; font-size:1em;">Alternative Rate:</span></br></br>
+                              <span id="alt_rate" style="color: #fff; line-height: 2px; font-size:0.8em; ">if the rate referenced in the preceding clause (d)(i) does not appear on such page or service or such page or service shall not be available, the rate per annum equal to the rate reasonably determined by the Administrative Agent to be the offered rate on such other page or other service that displays an offered rate administered by ICE Benchmark Administration for deposits in such Alternative Currency (for delivery on  the first day of such Interest Period) with a term equivalent to such Interest Peri</span>
+							  </br></br></br>
+							  <span id="div_alt_rate" style="color: #ffe600; line-height: 2px; font-size:1em;">Selected Alternative Rate:</span></br></br>
+                              <span id="select_alt_rate" style="color: #fff; line-height: 2px; font-size:0.8em; ">if the rate referenced in the preceding clause (d)(i) does not appear on such page or service or such page or service shall not be available, the rate per annum equal to the rate reasonably determined by the Administrative Agent to be the offered rate on such other page or other service that displays an offered rate administered by ICE Benchmark Administration for deposits in such Alternative Currency (for delivery on  the first day of such Interest Period) with a term equivalent to such Interest Peri</span>
+							  </br>
+                              <span id="div1" style="color: #ffe600; line-height: 2px; font-size:0.7em; color:#fff;"></span>
+                              <span id="div1" style="color: #ffe600; line-height: 2px; font-size:0.7em; "></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+			<div class="row" >
+               <div class="col-lg-12">
+                    <div class="panel" style="margin-top: -30px;">
+                        <div class="panel-body" style="padding:0px;">
+
+                            <div class="modal-example">
+
+                                <style>
+                                    /* Local style only for demo purpose */
+                                    .modal-example .modal { position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: 1; display: block; }
+                                </style>
+
+                                <div class="modal" id="myModal3" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" style="width: 100%;">
+                                        <div class="modal-content">
+                                            <div class="modal-body" style="padding:15px;">
+                                              <h5>Suggested Fallback Language Strength </h5>
+
+                                                <table  class="table m-t-md" style="margin-top:0px; margin-bottom:0px;">
+                                                    <tbody>
+						<tr>
+               <td class="team greyrow" id="admin_agent_role1">Permanent Discontinuation</td>
+				<td class="rank greyrow" id="admin_agent_count1">Fallback Rate</br>Category</td>
+				<td class="rank greyrow" id="admin_agent_fallback">non-IBOR Specified Rate</td>
+				<td class="rank greyrow" id="admin_agent_fallback">Path to non-IBOR rate</td>
+				<td class="rank greyrow" id="admin_agent_fallback" >Fallback Categorization</td>
+
+              </tr>
+				<tr id="nohover" style="text-align:center; vertical-align:middle;">
+        <td class="team supergreyrow" id="ans" style="height: 70px;">LIBOR no longer available</td>
+				<td class="rank supergreyrow" id="ans1">non-IBOR Replacement Rate</td>
+				<td class="rank supergreyrow" id="ans2">Yes</td>
+				<td class="rank supergreyrow" id="ans3">Yes</td>
+				<td class="rank supergreyrow" id="recalc" rowspan="2" style=" ">A</td>
+              </tr>
+
+
+<script>
+
+function myFunction_reset() {
+
+		document.getElementById('perm_disc_no1').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('perm_disc_no2').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('perm_disc_no3').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('perm_disc_yes1').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('perm_disc_yes2').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('perm_disc_yes3').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('n_ibor_no1').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('n_ibor_no2').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('n_ibor_no3').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('n_ibor_no4').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('n_ibor_yes1').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('n_ibor_yes2').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('path_ibor_no1').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('path_ibor_no2').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('path_ibor_yes1').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('path_ibor_yes2').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('path_ibor_na1').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('path_ibor_na2').setAttribute("style", "background:rgba(255,255,255,1);");
+
+}
+
+function myFunction(name) {
+    document.getElementById('ans').innerHTML = name;
+	document.getElementById('ans').setAttribute("style", "color:rgb(0, 139, 248);");
+	if(name=="NO"||name=="No"||name=="no")
+	{
+		document.getElementById('perm_disc_no1').setAttribute("style", "");
+		document.getElementById('perm_disc_no2').setAttribute("style", "");
+		document.getElementById('perm_disc_no3').setAttribute("style", "");
+		}
+		if(name=="YES"||name=="Yes"||name=="yes")
+	{
+		document.getElementById('perm_disc_yes1').setAttribute("style", "");
+		document.getElementById('perm_disc_yes2').setAttribute("style", "");
+		document.getElementById('perm_disc_yes3').setAttribute("style", "");
+		}
+}
+
+function myFunction2(name) {
+    document.getElementById('ans2').innerHTML = name;
+	document.getElementById('ans2').setAttribute("style", "color:rgb(0, 139, 248);");
+	if(name=="NO"||name=="No"||name=="no")
+	{
+		document.getElementById('n_ibor_no1').setAttribute("style", "");
+		document.getElementById('n_ibor_no2').setAttribute("style", "");
+		document.getElementById('n_ibor_no3').setAttribute("style", "");
+		document.getElementById('n_ibor_no4').setAttribute("style", "");
+		}
+			if(name=="YES"||name=="Yes"||name=="yes")
+	{
+		document.getElementById('n_ibor_yes1').setAttribute("style", "");
+		document.getElementById('n_ibor_yes2').setAttribute("style", "");
+		}
+}
+function myFunction3(name) {
+    document.getElementById('ans3').innerHTML = name;
+	document.getElementById('ans3').setAttribute("style", "color:rgb(0, 139, 248);");
+	if(name=="NO"||name=="No"||name=="no")
+	{
+		document.getElementById('path_ibor_no1').setAttribute("style", "");
+		document.getElementById('path_ibor_no2').setAttribute("style", "");
+		}
+	if(name=="YES"||name=="Yes"||name=="yes")
+	{
+		document.getElementById('path_ibor_yes1').setAttribute("style", "");
+		document.getElementById('path_ibor_yes2').setAttribute("style", "");
+		}
+	if(name==""||name==" "||name=="N/A"||name=="NA"||name=="n/a"||name=="na")
+	{
+		document.getElementById('path_ibor_na1').setAttribute("style", "");
+		document.getElementById('path_ibor_na2').setAttribute("style", "");
+		}
+}
+function recalc() {
+
+	var Permanent_Discontinuation = document.getElementById('ans').innerHTML;
+	var Non_IBOR_Rate_Specified = document.getElementById('ans2').innerHTML;
+	var Path_to_Non_IBOR_Rate = document.getElementById('ans3').innerHTML;
+	var all = Permanent_Discontinuation.toUpperCase() + Non_IBOR_Rate_Specified.toUpperCase() + Path_to_Non_IBOR_Rate.toUpperCase();
+
+	console.log(all);
+	if (all.includes('YESYES',0)  && !all.includes('NOYES',0))
+	{
+		document.getElementById('perm_disc_yes1').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('n_ibor_yes1').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('path_ibor_na1').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+	}
+	if (all.startsWith('NOYES') && !all.startsWith('YESNOYES'))
+	{
+		document.getElementById('perm_disc_no1').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('n_ibor_yes2').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('path_ibor_na2').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+	}
+	if (all.startsWith('YESNOFLAG'))
+	{
+		document.getElementById('perm_disc_yes3').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('n_ibor_no2').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('path_ibor_no1').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+	}
+	if (all.startsWith('YESNOYES'))
+	{
+		document.getElementById('perm_disc_yes2').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('n_ibor_no1').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('path_ibor_yes1').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+	}
+	if (all.startsWith('YESNONO'))
+	{
+		document.getElementById('perm_disc_yes3').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('n_ibor_no2').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('path_ibor_no1').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+	}
+	if (all.startsWith('NONOYES'))
+	{
+		document.getElementById('perm_disc_no2').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('n_ibor_no3').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('path_ibor_yes2').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+	}
+	if (all.startsWith('NONONO'))
+	{
+		document.getElementById('perm_disc_no3').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('n_ibor_no4').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('path_ibor_no2').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+	}
+
+
+	var value;
+
+	console.log(Permanent_Discontinuation);
+	console.log(Non_IBOR_Rate_Specified);
+	console.log(Path_to_Non_IBOR_Rate);
+
+    if ((Permanent_Discontinuation == "Yes" || Permanent_Discontinuation == "yes") && (Non_IBOR_Rate_Specified == "Yes" || Non_IBOR_Rate_Specified == "yes"))
+        value = "A";
+    else if ((Permanent_Discontinuation == "No" || Permanent_Discontinuation == "no") && (Non_IBOR_Rate_Specified == "Yes" || Non_IBOR_Rate_Specified == "yes"))
+        value = "B";
+    else if ((Permanent_Discontinuation == "Yes" || Permanent_Discontinuation == "yes") && (Path_to_Non_IBOR_Rate == "Yes" || Path_to_Non_IBOR_Rate == "yes"))
+        value = "B";
+    else
+        value = "C"
+
+
+	console.log(value);
+
+	document.getElementById('recalc').innerHTML = value;
+	document.getElementById('recalc').setAttribute("style", "color:rgb(0, 139, 248);");
+	recalc1(value);
+}
+function recalc1(fallback) {
+	if (fallback.includes('C')||fallback.includes('C'))
+	{document.getElementById('recalc').setAttribute("style", "background:#f04c3e; -webkit-transition: background-color 800ms linear; -ms-transition: background-color 800ms linear; transition: background-color 800ms linear;");}
+	else if (fallback.includes('B')||fallback.includes('B'))
+	{document.getElementById('recalc').setAttribute("style", "background:#ffc000; -webkit-transition: background-color 800ms linear; -ms-transition: background-color 800ms linear; transition: background-color 800ms linear;");}
+	else if (fallback.includes('D')||fallback.includes('D'))
+	{document.getElementById('recalc').setAttribute("style", "background:#bb0826; -webkit-transition: background-color 800ms linear; -ms-transition: background-color 800ms linear; transition: background-color 800ms linear;");}
+	else
+	{document.getElementById('recalc').setAttribute("style", "background:#00b050;  -webkit-transition: background-color 800ms linear; -ms-transition: background-color 800ms linear; transition: background-color 800ms linear; ");}
+
+}
+
+function myFunction1234() {
+	var x = document.getElementById("myDIV1234");
+  if (x.style.height != "0px") {
+	x.style.height = "0px";
+	 x.style.opacity = "0";
+	x.style.WebkitTransition = "all 0.5s ease"; // Code for Safari 3.1 to 6.0
+    x.style.transition = "all 0.5s ease";
+
+  } else {
+    x.style.height = "270px";
+	 x.style.opacity = "1";
+	x.style.WebkitTransition = "all 0.5s ease"; // Code for Safari 3.1 to 6.0
+    x.style.transition = "all 0.5s ease";
+  }
+}
+
+function myFunction12345() {
+	var x = document.getElementById("myDIV12345");
+  if (x.style.background != "#333") {
+	x.style.background != "#333"
+	x.style.WebkitTransition = "all 0.3s ease"; // Code for Safari 3.1 to 6.0
+    x.style.transition = "all 0.3s ease";
+
+  } else {
+    x.style.background != "#ccc"
+	x.style.WebkitTransition = "all 0.3s ease"; // Code for Safari 3.1 to 6.0
+    x.style.transition = "all 0.3s ease";
+  }
+}
+
+function myFunction123() {
+  var x = document.getElementById("myDIV");
+  if (x.style.transform != "scale(1)") {
+	x.style.height = "400px";
+	x.style.WebkitTransition = "all 0.3s ease"; // Code for Safari 3.1 to 6.0
+    x.style.transition = "all 0.3s ease";
+	x.style.transform = "scale(1)";
+	x.style.marginLeft = "25%";
+	x.style.marginTop = "0px";
+	x.style.marginBottom = "0px";
+
+  } else {
+    x.style.height = "350px";
+	x.style.WebkitTransition = "all 0.3s ease"; // Code for Safari 3.1 to 6.0
+    x.style.transition = "all 0.3s ease";
+	x.style.transform = "scale(0.3)";
+	x.style.marginTop = "-100px";
+	x.style.marginBottom = "-80px";
+	x.style.marginLeft = "400px";
+  }
+}
+
+
+</script>
+
+
+					</tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" >
+                     <div class="col-md-12">
+                        <div class="panel panel-filled">
+                           <div class="panel-heading">
+                              <div class="panel-tools">
+                                 <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                                 <a class="panel-close"><i class="fa fa-times"></i></a>
+                              </div>
+                              Fallback language strength key
+                           </div>
+                           <div class="panel-body">
+                              <div>
+                                 <div class="table-responsive">
+                                    <table class="table">
+                                       <tbody>
+      								 <thead >
+                     <td class="team greyrow" id="admin_agent_role1" colspan="3" style="margin-left:60px;">Permanent Discontinuation</td>
+      			   <td class="rank greyrow" id="admin_agent_fallback">non-IBOR Specified Rate</td>
+      				<td class="rank greyrow" id="admin_agent_fallback">Path to non-IBOR rate</td>
+      				<td class="rank greyrow" id="admin_agent_fallback">Fallback Categorization</td>
+
+                    </thead>
+      					  <tr id="nohover" style="background:white;">
+                      <td class="team supergreyrow" colspan="3"id="perm_disc_yes1">&#10004;</td>
+      				<td class="rank supergreyrow" id="n_ibor_yes1">&#10004;</td>
+      				<td class="rank supergreyrow" id="path_ibor_na1">N/A</td>
+      				<td class="rank supergreyrow" style="background:#00b050;">A</td>
+                    </tr>
+
+      			  <tr style="background:white;">
+                      <td class="team supergreyrow" colspan="3" id="perm_disc_no1">No</td>
+      				<td class="rank supergreyrow" id="n_ibor_yes2"> &#10004; </td>
+      				<td class="rank supergreyrow" id="path_ibor_na2">N/A </td>
+      				<td class="rank supergreyrow" style="background:#ffc000;"> B </td>
+                    </tr>
+      			   <tr style="background:white;">
+                      <td class="team supergreyrow" colspan="3"id="perm_disc_yes2">&#10004;</td>
+      				<td class="rank supergreyrow" id="n_ibor_no1"> No </td>
+      				<td class="rank supergreyrow" id="path_ibor_yes1"> &#10004;  </td>
+      				<td class="rank supergreyrow" style="background:#ffc000;" > B  </td>
+                    </tr>
+      			  <tr style="background:white;">
+                      <td class="team supergreyrow" colspan="3" id="perm_disc_yes3">&#10004; </td>
+      				<td class="rank supergreyrow" id="n_ibor_no2"> No</td>
+      				<td class="rank supergreyrow" id="path_ibor_no1"> No  </td>
+      					<td class="rank supergreyrow" style="background:#f04c3e;"> C </td>
+                    </tr>
+      			  <tr style="background:white;">
+                      <td class="team supergreyrow" colspan="3" id="perm_disc_no2">No</td>
+      				<td class="rank supergreyrow" id="n_ibor_no3"> No </td>
+      				<td class="rank supergreyrow" id="path_ibor_yes2"> &#10004;  </td>
+      					<td class="rank supergreyrow" style="background:#f04c3e;"> C </td>
+                    </tr>
+      			  <tr style="background:white;">
+                      <td class="team supergreyrow" colspan="3" id="perm_disc_no3">No</td>
+      				<td class="rank supergreyrow" id="n_ibor_no4">No</td>
+      				<td class="rank supergreyrow" id="path_ibor_no2"> No </td>
+      					<td class="rank supergreyrow" style="background:#f04c3e;"> C </td>
+                    </tr>
+      			    <tr style="background:white;">
+
+      				 <td class="team supergreyrow" colspan="5">No fallback language found</td>
+      				 <td class="team supergreyrow" style="background:#bb0826;">D</td>
+                    </tr>
+      			    <tr  style="background:white;">
+      				 <td class="team supergreyrow" colspan="5" style="text-align:center;">Reference to associated contract</td>
+      				   <td class="team supergreyrow" style="background:rgba(3, 3, 3,0.6);" >N/A</td>
+                    </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+
+      <!-- End main content-->
+      </div>
+      <!-- End wrapper-->
+      <!-- Vendor scripts -->
+      <script src="vendor/pacejs/pace.min.js"></script>
+      <script src="vendor/jquery/dist/jquery.min.js"></script>
+      <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+      <!-- App scripts -->
+      <script src="scripts/luna.js"></script>
+
+<script>
+
+d3.csv("BI_12032018.csv", function(data){
+
+  var documents_flag=0;
+  var variables = data.columns;
+  variables.forEach(function(d) {
+  if (d == 'Extraction status') {
+		for (var i=0; i < 700; i += 1){
+
+				try{
+
+				if(typeof(data[i])!="undefined"){
+					documents_flag++;
+					}
+				}
+			catch(e){
+					console.log('An error has occurred: '+e.message);
+				}
+
+		}}
+
+  });
+
+
+
+
+
+
+ // Fallback_Language_Detail.html?Use_Id=abc
+var GET = {};
+var query = window.location.search.substring(1).split("&");
+for (var i = 0, max = query.length; i < max; i++)
+{
+    if (query[i] === "") // check for trailing & with no param
+        continue;
+
+    var param = query[i].split("=");
+}
+
+var file_name = param[1];
+var variables = data.columns;
+
+function check_input(string_input)
+{
+	string_input = ((string_input.includes('Unextracted') || string_input.includes('Not Defined')) ? ' ' : string_input);
+	return string_input;
+};
+
+  variables.forEach(function(d) {
+
+
+		for (var i=0; i < documents_flag; i += 1){
+
+			if (data[i]['Full File Name'].includes(file_name)) {
+				console.log(i);
+				 var perm_disc = data[i]['Mortgage Perm Dis'];
+    var fallback_category = data[i]['Mortgage Fallback Rate Category'];
+	  var n_ibor_r_s = data[i]['Mortgage NON-IBOR Rate Specified '];
+	    var path_to_n_ibor = data[i]['Mortgage Path to Non-IBOR Rate'];
+		var fallback_strength = data[i]['Mortgage Fallback Strength'];
+		var fallback_language = data[i]['PermanentFallbackLanguage2'];
+		var alt_rate = data[i]['FloatingConversion'];
+
+
+		console.log(perm_disc);
+		console.log(fallback_language);
+
+  fallback_strength = check_input(fallback_strength);
+  fallback_language = check_input(fallback_language);
+  path_to_n_ibor = check_input(path_to_n_ibor);
+  n_ibor_r_s = check_input(n_ibor_r_s);
+  fallback_category = check_input(fallback_category);
+  perm_disc = check_input(perm_disc);
+  alt_rate = check_input(alt_rate);
+
+  document.getElementById("ans").textContent= perm_disc ;
+  document.getElementById("page_title").textContent= data[i]['Full File Name'] ;
+  document.getElementById("ans1").textContent= fallback_category ;
+  document.getElementById("ans2").textContent= n_ibor_r_s ;
+  document.getElementById("ans3").textContent= path_to_n_ibor ;
+   document.getElementById("recalc").textContent= fallback_strength ;
+   document.getElementById("fl").textContent= fallback_language ;
+   document.getElementById("alt_rate").textContent= alt_rate ;
+
+
+  recalc1(fallback_strength);
+			}
+		}
+
+
+	});
+
+});
+</script>
+   </body>
+
+</html>

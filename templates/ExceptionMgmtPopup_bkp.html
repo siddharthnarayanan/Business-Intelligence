@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+      <!-- Page title -->
+      <title>EY Business Intelligence</title>
+      <!-- Vendor styles -->
+      <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.css"/>
+      <link rel="stylesheet" href="vendor/animate.css/animate.css"/>
+      <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css"/>
+      <link rel="icon" href="EYBIicon.png" sizes="32x32" />
+      <link rel="icon" href="EYBIicon.png" sizes="192x192" />
+      <!-- App styles -->
+      <link rel="stylesheet" href="styles/pe-icons/pe-icon-7-stroke.css"/>
+      <link rel="stylesheet" href="styles/pe-icons/helper.css"/>
+      <link rel="stylesheet" href="styles/stroke-icons/style.css"/>
+      <link rel="stylesheet" href="styles/style.css">
+      <script type='text/javascript' src='../wp-includes/js/jquery/jqueryb8ff.js?ver=1.12.4'></script>
+      <script src="../inputdata/d3.v4.min.js"></script>
+      <script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script>
+      <link rel="stylesheet" href="styles/my-styles.css"/>
+      <!--<link rel="stylesheet" href="styles/my-workflow.css"/>-->
+      <style>
+	  .stepnumber{font-family: 'Roboto', sans-serif; color: white; font-size:20px;}
+	  .vertical-timeline-icon{border:none;}
+	  .check_field{}
+	  .panel-body{padding-bottom: 10px !important; padding-top: 10px !important; padding-right: 20px !important; padding-left: 20px !important; }
+  .cell_width_80{  word-break: break-all; width: 80px;}
+  .cell_width_150{ word-break: break-all; width: 150px;}
+  .bold{font-weight: bold;}
+  .padded_cell{padding:4px;}
+  .panel{background-color: #2c2e35;  padding-left:20px;  padding-right:20px;   border: 1px solid #3d404c;}
+  
+/* Lets Pop up */
+.letspop{
+}
+.letspop:hover{
+  cursor: pointer;
+}
+.overlay{
+  display: none; /* Default Hidden */
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background-color: rgba(0,0,0,0.6);
+  height: 100%;
+  width: 100%;
+} 
+.popup{
+  display: none; /* Default Hidden */
+  position: fixed;
+  left: 50%; 
+  top: 5%;
+  z-index: 2;
+  background:none;
+  height: auto;
+  width: auto;
+  overflow: hidden;
+  padding: 0px;
+  transform: translate(-50%, 0);
+}
+
+
+/* Bored stuff & extras*/
+
+.close{
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: block;
+  color: #666666;
+  font-family: sans-serif;
+}
+.close:hover{
+  cursor: pointer;
+  color: #444444;
+}
+	  </style>
+   </head>
+   <body>
+      <!-- Wrapper-->
+      <div class="wrapper">
+         <!-- Header-->
+         <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+               <div class="navbar-header">
+                  <div id="mobile-menu">
+                     <div class="left-nav-toggle">
+                        <a href="#">
+                        <i class="stroke-hamburgermenu"></i>
+                        </a>
+                     </div>
+                  </div>
+                  <a class="navbar-brand" style="background: #2f323b;" href="index.html">
+                  <a href="Summary_KPI.html">
+                     <img src="EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
+                     <!--<span style="color:white;"> Business </br> Intelligence</span>-->
+                  </a>
+                  </a>
+               </div>
+            </div>
+         </nav>
+         <!-- End header-->
+         <!-- Navigation-->
+       <div id="navbar-frame"></div>
+         <!-- End navigation-->
+         <!-- Main content-->
+         <section class="content">
+            <div class="container-fluid">
+			<!--Start Title-->
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="view-header">
+                        <div class="pull-right text-right" style="line-height: 14px">
+                        </div>
+                        <div class="header-icon">
+                           <i class="pe page-header-icon pe-7s-repeat"></i>
+                        </div>
+                        <div class="header-title">
+                           <h3>Exception Management</h3>
+                           <small style="color: #949ba2;">
+                           Contracts & Amendments
+                           </small>
+                        </div>
+                     </div>
+                     <hr>
+                  </div>
+               </div>
+			   <!-- End Title -->
+			   <!-- Start-->
+			   
+			   
+			   
+			   
+			   <div class="panel">
+			   <div class="row">
+
+                <div class="col-md-12">
+
+    <div class="row">
+
+      <!--  <div class="item "  style=" text-align: left;  vertical-align: middle; padding: 5px; padding-left: 10px; float:left; width:100%;" ng-repeat="person in persons | filter:$scope.query" > -->
+        <!--<a href="Fallback_Language_Detail.html?Use_Id={{ person['Full File Name'] }} " style="text-decoration:none;">-->
+        <div class="header-title" style="padding: 10px">
+            <h3>Document Quality</h3>
+          </div>
+
+          <div class="item-short" style="margin-top: 20px">
+
+
+            <div class="" style="margin-top:-20px; margin-left: 10px; margin-right: 10px">
+              <div class=" ">
+
+                <div class=" ">
+                            <div class="table-responsive">
+                            <table class="table table-vertical-align-middle">
+                                <thead>
+                                <tr>
+                                    <th style="width:150px;">
+                                        Status
+                                    </th>
+                                    <th>
+                                        Document name
+                                    </th>
+                                    <th class="text-right">
+                                        Actions
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="label label-accent-success">Success</span>
+                                    </td>
+                                    <td>
+                                        <h5>BLIC - MSCS Legacy CSA Execution Copy_Annotated.pdf</h5>
+                                        <div class="small"><i class="fa fa-clock-o"></i> Last modified 24.02.2019</div>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="label label-accent-success">Success</span>
+                                    </td>
+                                    <td>
+                                        <h5>CACIB - BLIC ISDA & CSA 4-2-2017.pdf</h5>
+										<h5>Amendment No. 1 CACIB-BLIC (CSA changes) 11-14-2014.pdf</h5>
+                                        <div class="small"><i class="fa fa-clock-o"></i> Last modified 24.02.2019</div>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="label label-accent-success">Success</span>
+                                    </td>
+                                    <td>
+                                        <h5>Elections and Variables to the 2016 Credit Support Annex.pdf</h5>
+                                        <div class="small"><i class="fa fa-clock-o"></i> Last modified 24.02.2019</div>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+								<tr>
+                                    <td>
+                                        <span class="label label-accent-danger">Bad OCR</span>
+                                    </td>
+                                    <td>
+                                        <h5>BCMC - Firstbank - MSFTA - May 4 2017.pdf</h5>
+                                        <div class="small"><i class="fa fa-clock-o"></i> Last modified 24.02.2019</div>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group pull-right">
+                                            <button class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Review </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+          </div>
+        </div>
+      </div>
+	  
+    </div>
+  </div>
+  
+  
+				
+            </div></div>
+			
+			
+			
+			
+		<div class="panel">
+			   <div class="row">
+
+               
+  
+  <div class="col-md-12">
+
+    <div class="row">
+
+      <!--  <div class="item "  style=" text-align: left;  vertical-align: middle; padding: 5px; padding-left: 10px; float:left; width:100%;" ng-repeat="person in persons | filter:$scope.query" > -->
+        <!--<a href="Fallback_Language_Detail.html?Use_Id={{ person['Full File Name'] }} " style="text-decoration:none;">-->
+        <div class="header-title" style="padding: 10px">
+            <h3>Amendment Linking</h3>
+          </div>
+
+          <div class="item-short" style="margin-top: 20px">
+
+
+            <div class="" style="margin-top:-20px; margin-left: 10px; margin-right: 10px">
+              <div class="">
+
+                <div class="">
+                            <div class="table-responsive">
+                            <table class="table table-vertical-align-middle">
+                                <thead>
+                                <tr>
+                                    <th style="width:150px;">
+                                        Status
+                                    </th>
+                                    <th>
+                                        Document name
+                                    </th>
+                                    <th class="text-right">
+                                        Actions
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="label label-accent-success">Success</span>
+                                    </td>
+                                    <td>
+                                        <h5>BLIC - MSCS Legacy CSA Execution Copy_Annotated.pdf</h5>
+                                        <div class="small"><i class="fa fa-clock-o"></i> Last modified 24.02.2019</div>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="label label-accent-success">Success</span>
+                                    </td>
+                                    <td>
+                                        <h5>CACIB - BLIC ISDA & CSA 4-2-2017.pdf</h5>
+										<h5>Amendment No. 1 CACIB-BLIC (CSA changes) 11-14-2014.pdf</h5>
+                                        <div class="small"><i class="fa fa-clock-o"></i> Last modified 24.02.2019</div>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="label label-accent-success">Success</span>
+                                    </td>
+                                    <td>
+                                        <h5>Elections and Variables to the 2016 Credit Support Annex.pdf</h5>
+                                        <div class="small"><i class="fa fa-clock-o"></i> Last modified 24.02.2019</div>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+								<tr>
+                                    <td>
+                                        <span class="label label-accent-danger">Original Missing</span>
+										<span class="label label-accent-danger">Mandatory Fields Missing</span>
+                                    </td>
+                                    <td>
+                                        <h5>Amendment No. 4 UBS-BLIC (Eligible Collateral haircuts) 3-1-2017.pdf</h5>
+                                        <div class="small"><i class="fa fa-clock-o"></i> Last modified 24.02.2019</div>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group pull-right">
+                                            
+											<!-- Popup Trigger -->
+                                           <a href="#popup"> <button class="letspop btn btn-default btn-xs button-pop-up" ><i class="fa fa-pencil"></i> Review</button> </a>
+										   <!-- Overlay -->
+<div class="overlay"></div>
+<!-- Popup -->
+<div class="popup">
+                                        <div class="modal-content" style="padding-top:30px;">
+                                            <div class="modal-header text-center">
+                                                <h3 >Amendment Linking</h3> 
+												<h5>Swiss multinational investment bank amendment</h5>
+                                                <div class="small"><i class="fa fa-clock-o"></i> Last modified 24.02.2019</div>
+                                            </div>
+                                            <div class="modal-body">
+												
+												<div class="table-responsive">
+                            <table class="table table-vertical-align-middle" style="background:none;">
+                                <thead>
+                                <tr>
+                                    <th style="width:150px;">
+                                        Exception
+                                    </th>
+                                    <th>
+                                        Details
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+								
+                                <tr>
+                                    <td>
+										<span class="label label-accent-danger">Original Missing</span>
+                                    </td>
+                                    <td>
+                                                        <h5 class="m-t-xs"><i class="pe page-header-icon pe-7s-close-circle"></i>&nbsp; 2016 Credit Support Annex</h5>
+                                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+										<span class="label label-accent-danger">Mandatory Fields Missing</span>
+                                    </td>
+                                    <td>
+                                                        <h5 class="m-t-xs"><i class="pe page-header-icon pe-7s-check"></i>&nbsp; Eligible collateral haircuts </br></br>
+														<i class="pe page-header-icon pe-7s-close-circle"></i>&nbsp; Minimum Transfer Amount, Settlement convention </h5>
+                                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </div>
+												
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default close-pop" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+</div>
+											
+											
+											
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+				
+            </div></div>
+			
+			
+			
+			
+			<div class="panel">
+			   <div class="row">
+
+                <div class="col-md-12">
+
+    <div class="row">
+
+      <!--  <div class="item "  style=" text-align: left;  vertical-align: middle; padding: 5px; padding-left: 10px; float:left; width:100%;" ng-repeat="person in persons | filter:$scope.query" > -->
+        <!--<a href="Fallback_Language_Detail.html?Use_Id={{ person['Full File Name'] }} " style="text-decoration:none;">-->
+        <div class="header-title" style="padding: 10px">
+            <h3>Data Model</h3>
+          </div>
+
+          <div class="item-short" style="margin-top: 20px">
+
+
+            <div class="" style="margin-top:-20px; margin-left: 10px; margin-right: 10px">
+              <div class=" ">
+
+                <div class=" ">
+                            <div class="table-responsive">
+                            <table class="table table-vertical-align-middle">
+                                <thead>
+                                <tr>
+                                    <th style="width:150px;">
+                                        Status
+                                    </th>
+                                    <th>
+                                        Document name
+                                    </th>
+                                    <th class="text-right">
+                                        Actions
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                
+								<tr>
+                                    <td>
+                                        <span class="label label-accent-warning">FX Haircut</span>
+                                    </td>
+                                    <td>
+                                        <h5>BCMC - Firstbank - MSFTA - May 4 2017.pdf</h5>
+                                        <div class="small"><i class="fa fa-clock-o"></i> Last modified 24.02.2019</div>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group pull-right">
+											<button class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Review </button>
+                                        </div>
+										
+										
+
+
+
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+          </div>
+        </div>
+      </div>
+	  
+    </div>
+  </div>
+  
+  
+				
+            </div></div>
+			
+			   <!-- End  -->
+               
+			   
+			   
+			   
+			   
+            </div>
+         </section>
+         <!-- End main content-->
+      </div>
+      <!-- End wrapper-->
+      <!-- Vendor scripts -->
+      <script src="vendor/pacejs/pace.min.js"></script>
+      <script src="vendor/jquery/dist/jquery.min.js"></script>
+      <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+      <!-- App scripts -->
+      <script src="scripts/luna.js"></script>
+	  <script>
+		$(document).ready(function(){
+    $("#navbar-frame").load("/eybi_nav.html");
+});
+</script>
+<script type="text/javascript">
+   $(function() {
+      var pgurl = window.location.href.substr(window.location.href
+         .lastIndexOf("/") + 1);
+      $(".excpt").each(function() {
+            $(this).addClass("active");
+      })
+	  
+	  console.log(pgurl);
+   });
+   
+   </script>
+</script>
+      <script>
+         var steps = document.querySelectorAll('.process-chart > li');
+         
+         for (var i = steps.length - 1; i >= 0; i--) {
+         var step = steps[i];
+         var pos = i;
+         
+         step.classList.add( (i == 0) ? 'current' : 'after' );
+         
+         step.addEventListener('click', 
+           toggleClasses);
+         }
+         
+         function toggleClasses(evt){
+         var after = true;
+         this.classList.add('current');
+         for (var j = steps.length - 1; j >= 0; j--) {
+           var step = steps[j];
+           
+           if (this === step) {
+             after = false;
+             step.classList.remove('before', 'after');
+           }
+           else {
+             step.classList.remove('current', 'before', 'after');
+             step.classList.add( after ? 'after' : 'before');
+           }    
+         }
+         }
+          
+      </script>
+	  <script>
+	  // The class you click to trigger the popup 
+$('.letspop').on('click', function() {
+  // The Overlay fades in
+  $(".overlay").fadeIn(200, function() {});
+  // The Popup fades in just after
+  $(".popup").fadeIn(600, function() {});
+});
+
+// The class's you click when you want to close the pop
+$('.overlay, .close-pop').on('click', function() {
+  // The Overlay fades out slower
+  $(".overlay").fadeOut(600, function() {});
+  // The Popup fades out faster
+  $(".popup").fadeOut(200, function() {});
+});
+	  </script>
+   </body>
+</html>

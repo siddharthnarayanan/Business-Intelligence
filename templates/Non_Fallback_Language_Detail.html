@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+      <!-- Page title -->
+      <title>EY Business Intelligence</title>
+		<!-- Vendor styles -->
+		<link rel="stylesheet" href="/static/vendor/fontawesome/css/font-awesome.css"/>
+		<link rel="stylesheet" href="/static/vendor/animate.css/animate.css"/>
+		<link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css"/>
+
+		<link rel="icon" href="/static/images/EYBIicon.png" sizes="32x32" />
+		<link rel="icon" href="/static/images/EYBIicon.png" sizes="192x192" />
+
+		<!-- App styles -->
+		<link rel="stylesheet" href="/static/styles/pe-icons/pe-icon-7-stroke.css"/>
+		<link rel="stylesheet" href="/static/styles/pe-icons/helper.css"/>
+		<link rel="stylesheet" href="/static/styles/stroke-icons/style.css"/>
+		<link rel="stylesheet" href="/static/styles/style.css">
+
+		<script type='text/javascript' src='/static/data/dbase/data.js'></script>
+		<script type='text/javascript' src='/static/scripts/angular.min.js'></script>
+
+<!---	<script type='text/javascript' src='../wp-includes/js/jquery/jqueryb8ff.js?ver=1.12.4'></script> -->
+    <script src="/static/scripts/d3.v4.min.js"></script>
+	<script src="/static/scripts/d3-ez.js"></script>
+<!---    <script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script>  -->
+	<link rel="stylesheet" type="text/css" href="/static/styles/d3-ez.css" />
+
+<style>
+
+.greyrow{
+background: #ffe600;
+padding-bottom: 10px !important;
+padding-top: 10px !important;
+font-size:11px;
+text-align:center;
+border:none !important;
+vertical-align: middle !important;
+color: #111;
+}
+
+.supergreyrow{
+background: white;
+border:none !important;
+vertical-align: middle !important;
+text-align:center;
+padding-bottom: 5px !important;
+padding-top: 5px!important;
+font-size:11px;
+color:#111;
+}
+   </style>
+
+   </head>
+   <body>
+      <!-- Wrapper-->
+      <div class="wrapper">
+      <!-- Header-->
+      <nav class="navbar navbar-default navbar-fixed-top">
+         <div class="container-fluid">
+            <div class="navbar-header">
+               <div id="mobile-menu">
+                  <div class="left-nav-toggle">
+                     <a href="#">
+                     <i class="stroke-hamburgermenu"></i>
+                     </a>
+                  </div>
+               </div>
+               <a class="navbar-brand" style="background: #2f323b;" href="/">
+               <a href="/">
+                  <img src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
+                  <!--<span style="color:white;"> Business </br> Intelligence</span>-->
+               </a>
+               </a>
+            </div>
+         </div>
+      </nav>
+      <!-- End header-->
+	  
+      <!-- Navigation-->
+      <div id="navbar-frame"></div>
+      <!-- End navigation-->
+
+
+      <!-- Main content-->
+      <section class="content">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="view-header">
+                     <div class="pull-right text-right" style="line-height: 14px">
+                     </div>
+                     <div class="header-icon">
+                        <i class="pe page-header-icon pe-7s-next-2"></i>
+                     </div>
+                     <div class="header-title">
+                        <h3>IBOR Terms Analysis</h3>
+                        <small><span id="page_title">
+                        Syndicate Loans </span> 
+                        </small>
+                     </div>
+                  </div>
+                  <hr>
+               </div>
+            </div>
+
+			<div class="row">
+
+                <div class="col-md-12">
+                  <h4>Extraction</h4>
+
+                    <div class="panel panel-filled">
+
+                        <div class="panel-body">
+							  
+							  <span id="agreement_name" style="color: #ffe600; line-height: 2px; font-size:1em;">Agreement Name:</span></br>
+                              <span id="agreement_name_val" style="color: #fff; line-height: 2px; font-size:0.8em; "></span>
+							  </br></br>
+							  <span id="le" style="color: #ffe600; line-height: 2px; font-size:1em;">Legal Entities Roles & Legal Entities:</span></br>
+                              <span id="le_val" style="color: #fff; line-height: 2px; font-size:0.8em; "></span>
+							  </br></br>
+							  <span id="orig_date" style="color: #ffe600; line-height: 2px; font-size:1em;">Origination Date:</span></br>
+                              <span id="orig_date_val" style="color: #fff; line-height: 2px; font-size:0.8em; "></span>
+							  </br></br>
+							  <span id="mat_date" style="color: #ffe600; line-height: 2px; font-size:1em;">Maturity Date:</span></br>
+                              <span id="mat_date_val" style="color: #fff; line-height: 2px; font-size:0.8em; "></span>
+							  </br></br>
+							  <span id="gov_law" style="color: #ffe600; line-height: 2px; font-size:1em;">Governing Law:</span></br>
+                              <span id="gov_law_val" style="color: #fff; line-height: 2px; font-size:0.8em; "></span>
+							  </br></br>
+							  <span id="ref_rate" style="color: #ffe600; line-height: 2px; font-size:1em;">Reference Rate Denfinition:</span></br>
+                              <span id="ref_rate_val" style="color: #fff; line-height: 2px; font-size:0.8em; "></span>
+							  </br></br>
+							  <span id="fallback_summary" style="color: #ffe600; line-height: 2px; font-size:1em;">Fallback 1 Summary:</span></br>
+                              <span id="fallback_summary_val1" style="color: #fff; line-height: 2px; font-size:0.8em; "></span>
+                              </br></br>
+							  <span id="fallback_summary" style="color: #ffe600; line-height: 2px; font-size:1em;">Fallback 2 Summary:</span></br>
+                              <span id="fallback_summary_val2" style="color: #fff; line-height: 2px; font-size:0.8em; "></span>
+							  </br>
+                             
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            
+
+                  
+
+                                
+
+
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+
+
+
+<script>
+
+function myFunction_reset() {
+
+		document.getElementById('perm_disc_no1').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('perm_disc_no2').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('perm_disc_no3').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('perm_disc_yes1').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('perm_disc_yes2').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('perm_disc_yes3').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('n_ibor_no1').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('n_ibor_no2').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('n_ibor_no3').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('n_ibor_no4').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('n_ibor_yes1').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('n_ibor_yes2').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('path_ibor_no1').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('path_ibor_no2').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('path_ibor_yes1').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('path_ibor_yes2').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('path_ibor_na1').setAttribute("style", "background:rgba(255,255,255,1);");
+		document.getElementById('path_ibor_na2').setAttribute("style", "background:rgba(255,255,255,1);");
+
+}
+
+function myFunction(name) {
+    document.getElementById('ans').innerHTML = name;
+	document.getElementById('ans').setAttribute("style", "color:rgb(0, 139, 248);");
+	if(name=="NO"||name=="No"||name=="no")
+	{
+		document.getElementById('perm_disc_no1').setAttribute("style", "");
+		document.getElementById('perm_disc_no2').setAttribute("style", "");
+		document.getElementById('perm_disc_no3').setAttribute("style", "");
+		}
+		if(name=="YES"||name=="Yes"||name=="yes")
+	{
+		document.getElementById('perm_disc_yes1').setAttribute("style", "");
+		document.getElementById('perm_disc_yes2').setAttribute("style", "");
+		document.getElementById('perm_disc_yes3').setAttribute("style", "");
+		}
+}
+
+function myFunction2(name) {
+    document.getElementById('ans2').innerHTML = name;
+	document.getElementById('ans2').setAttribute("style", "color:rgb(0, 139, 248);");
+	if(name=="NO"||name=="No"||name=="no")
+	{
+		document.getElementById('n_ibor_no1').setAttribute("style", "");
+		document.getElementById('n_ibor_no2').setAttribute("style", "");
+		document.getElementById('n_ibor_no3').setAttribute("style", "");
+		document.getElementById('n_ibor_no4').setAttribute("style", "");
+		}
+			if(name=="YES"||name=="Yes"||name=="yes")
+	{
+		document.getElementById('n_ibor_yes1').setAttribute("style", "");
+		document.getElementById('n_ibor_yes2').setAttribute("style", "");
+		}
+}
+function myFunction3(name) {
+    document.getElementById('ans3').innerHTML = name;
+	document.getElementById('ans3').setAttribute("style", "color:rgb(0, 139, 248);");
+	if(name=="NO"||name=="No"||name=="no")
+	{
+		document.getElementById('path_ibor_no1').setAttribute("style", "");
+		document.getElementById('path_ibor_no2').setAttribute("style", "");
+		}
+	if(name=="YES"||name=="Yes"||name=="yes")
+	{
+		document.getElementById('path_ibor_yes1').setAttribute("style", "");
+		document.getElementById('path_ibor_yes2').setAttribute("style", "");
+		}
+	if(name==""||name==" "||name=="N/A"||name=="NA"||name=="n/a"||name=="na")
+	{
+		document.getElementById('path_ibor_na1').setAttribute("style", "");
+		document.getElementById('path_ibor_na2').setAttribute("style", "");
+		}
+}
+function recalc() {
+
+	var Permanent_Discontinuation = document.getElementById('ans').innerHTML;
+	var Non_IBOR_Rate_Specified = document.getElementById('ans2').innerHTML;
+	var Path_to_Non_IBOR_Rate = document.getElementById('ans3').innerHTML;
+	var all = Permanent_Discontinuation.toUpperCase() + Non_IBOR_Rate_Specified.toUpperCase() + Path_to_Non_IBOR_Rate.toUpperCase();
+
+	console.log(all);
+	if (all.includes('YESYES',0)  && !all.includes('NOYES',0))
+	{
+		document.getElementById('perm_disc_yes1').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('n_ibor_yes1').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('path_ibor_na1').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+	}
+	if (all.startsWith('NOYES') && !all.startsWith('YESNOYES'))
+	{
+		document.getElementById('perm_disc_no1').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('n_ibor_yes2').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('path_ibor_na2').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+	}
+	if (all.startsWith('YESNOFLAG'))
+	{
+		document.getElementById('perm_disc_yes3').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('n_ibor_no2').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('path_ibor_no1').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+	}
+	if (all.startsWith('YESNOYES'))
+	{
+		document.getElementById('perm_disc_yes2').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('n_ibor_no1').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('path_ibor_yes1').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+	}
+	if (all.startsWith('YESNONO'))
+	{
+		document.getElementById('perm_disc_yes3').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('n_ibor_no2').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('path_ibor_no1').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+	}
+	if (all.startsWith('NONOYES'))
+	{
+		document.getElementById('perm_disc_no2').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('n_ibor_no3').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('path_ibor_yes2').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+	}
+	if (all.startsWith('NONONO'))
+	{
+		document.getElementById('perm_disc_no3').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('n_ibor_no4').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+		document.getElementById('path_ibor_no2').setAttribute("style", "background:rgba(0, 139, 248,0.5);");
+	}
+
+
+	var value;
+
+	console.log(Permanent_Discontinuation);
+	console.log(Non_IBOR_Rate_Specified);
+	console.log(Path_to_Non_IBOR_Rate);
+
+    if ((Permanent_Discontinuation == "Yes" || Permanent_Discontinuation == "yes") && (Non_IBOR_Rate_Specified == "Yes" || Non_IBOR_Rate_Specified == "yes"))
+        value = "A";
+    else if ((Permanent_Discontinuation == "No" || Permanent_Discontinuation == "no") && (Non_IBOR_Rate_Specified == "Yes" || Non_IBOR_Rate_Specified == "yes"))
+        value = "B";
+    else if ((Permanent_Discontinuation == "Yes" || Permanent_Discontinuation == "yes") && (Path_to_Non_IBOR_Rate == "Yes" || Path_to_Non_IBOR_Rate == "yes"))
+        value = "B";
+    else
+        value = "C"
+
+
+	console.log(value);
+
+	document.getElementById('recalc').innerHTML = value;
+	document.getElementById('recalc').setAttribute("style", "color:rgb(0, 139, 248);");
+	recalc1(value);
+}
+
+function recalc1(fallback) {
+	if (fallback.includes('C')||fallback.includes('C'))
+	{document.getElementById('recalc').setAttribute("style", "background:#f04c3e; -webkit-transition: background-color 800ms linear; -ms-transition: background-color 800ms linear; transition: background-color 800ms linear;");}
+	else if (fallback.includes('B')||fallback.includes('B'))
+	{document.getElementById('recalc').setAttribute("style", "background:#ffc000; -webkit-transition: background-color 800ms linear; -ms-transition: background-color 800ms linear; transition: background-color 800ms linear;");}
+	else if (fallback.includes('D')||fallback.includes('D'))
+	{document.getElementById('recalc').setAttribute("style", "background:#bb0826; -webkit-transition: background-color 800ms linear; -ms-transition: background-color 800ms linear; transition: background-color 800ms linear;");}
+	else
+	{document.getElementById('recalc').setAttribute("style", "background:#00b050;  -webkit-transition: background-color 800ms linear; -ms-transition: background-color 800ms linear; transition: background-color 800ms linear;");}
+
+}
+
+function myFunction1234() {
+	var x = document.getElementById("myDIV1234");
+  if (x.style.height != "0px") {
+	x.style.height = "0px";
+	 x.style.opacity = "0";
+	x.style.WebkitTransition = "all 0.5s ease"; // Code for Safari 3.1 to 6.0
+    x.style.transition = "all 0.5s ease";
+
+  } else {
+    x.style.height = "270px";
+	 x.style.opacity = "1";
+	x.style.WebkitTransition = "all 0.5s ease"; // Code for Safari 3.1 to 6.0
+    x.style.transition = "all 0.5s ease";
+  }
+}
+
+function myFunction12345() {
+	var x = document.getElementById("myDIV12345");
+  if (x.style.background != "#333") {
+	x.style.background != "#333"
+	x.style.WebkitTransition = "all 0.3s ease"; // Code for Safari 3.1 to 6.0
+    x.style.transition = "all 0.3s ease";
+
+  } else {
+    x.style.background != "#ccc"
+	x.style.WebkitTransition = "all 0.3s ease"; // Code for Safari 3.1 to 6.0
+    x.style.transition = "all 0.3s ease";
+  }
+}
+
+function myFunction123() {
+  var x = document.getElementById("myDIV");
+  if (x.style.transform != "scale(1)") {
+	x.style.height = "400px";
+	x.style.WebkitTransition = "all 0.3s ease"; // Code for Safari 3.1 to 6.0
+    x.style.transition = "all 0.3s ease";
+	x.style.transform = "scale(1)";
+	x.style.marginLeft = "25%";
+	x.style.marginTop = "0px";
+	x.style.marginBottom = "0px";
+
+  } else {
+    x.style.height = "350px";
+	x.style.WebkitTransition = "all 0.3s ease"; // Code for Safari 3.1 to 6.0
+    x.style.transition = "all 0.3s ease";
+	x.style.transform = "scale(0.3)";
+	x.style.marginTop = "-100px";
+	x.style.marginBottom = "-80px";
+	x.style.marginLeft = "400px";
+  }
+}
+
+
+</script>
+
+
+					</tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+      <!-- End main content-->
+      </div>
+      <!-- End wrapper-->
+      <!-- Vendor scripts -->
+      <script src="/static/vendor/pacejs/pace.min.js"></script>
+      <script src="/static/vendor/jquery/dist/jquery.min.js"></script>
+      <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+      <!-- App scripts -->
+      <script src="/static/scripts/luna.js"></script>
+<script>
+$(document).ready(function() {
+  $("#navbar-frame").load("/nav_bar");
+});
+
+</script>
+<script>
+  var query = window.location.search.substring(1).split("&");
+for (var i = 0, max = query.length; i < max; i++)
+{
+    if (query[i] === "") // check for trailing & with no param
+        continue;
+
+    var param = query[i].split("=");
+}
+
+var file_id = param[1];
+
+  const Http = new XMLHttpRequest();
+const url='https://qa002-ibornp.westus2.dip.sbp.eyclienthub.com:8000/demo/contract_data.json?id=' + file_id;
+Http.open("GET", url);
+Http.send();
+
+Http.onreadystatechange = (e) => {
+     var k =0;
+function myFunction(arr) {
+var out = "";
+var i; 
+for(i = 0; i < arr.length; i++) {
+    k++;
+    out += '<a href="' + arr[i].ocr_suspicion_avg + '">' + 
+    arr[i].document_name + '</a><br>';
+}
+console.log(out);
+return arr.length;
+}
+    debugger;
+    var my_total = -1;
+    //window.localStorage.setItem('user', Http.responseText);
+    var dataToStore = JSON.stringify(Http.responseText);
+    var parsedText = JSON.parse(Http.responseText);
+     data = parsedText;
+  console.log(data);
+  console.log('this is a test' + data.contract_file_name);
+
+    my_total = myFunction(parsedText);
+    
+    console.log('my_total' + my_total);
+
+
+  
+  document.getElementById("page_title").textContent= data.contract_file_name ;
+  //document.getElementById("ans1").textContent= data['Syndicated_Fallback 1 Summary Categorization'] ;
+  //document.getElementById("product_type_val").textContent= data['defaultValues']['Product_Type'] ;
+  document.getElementById("agreement_name_val").textContent= data['defaultValues']['Agreement Name'] ;
+  document.getElementById("le_val").textContent= data['defaultValues']['Legal Entities Roles & Legal Entities'] ;
+  document.getElementById("orig_date_val").textContent= data['defaultValues']['Contract Origination Date'] ;
+  document.getElementById("mat_date_val").textContent= data['defaultValues']['Contractual Maturity Date'] ;
+  document.getElementById("gov_law_val").textContent= data['defaultValues']['Governing Law'] ;
+   document.getElementById("ref_rate_val").textContent= data['defaultValues']['Reference Rate Definition'] ;
+   document.getElementById("fallback_summary_val1").textContent= data['defaultValues']['Fallback 1 Summary Categorization']
+   document.getElementById("fallback_summary_val2").textContent= data['defaultValues']['Fallback 2 Summary Categorization'] ;
+  console.log(data['defaultValues']['Syndicated_Fallback 1 Summary Categorization'])
+  }
+
+</script>
+   </body>
+
+</html>

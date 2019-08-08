@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+    <!-- Page title -->
+    <title>EY Business Intelligence</title>
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="/static/vendor/fontawesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/static/vendor/animate.css/animate.css" />
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="icon" href="/static/images/EYBIicon.png" sizes="32x32" />
+    <link rel="icon" href="/static/images/EYBIicon.png" sizes="192x192" />
+    <!-- App styles -->
+    <link rel="stylesheet" href="/static/styles/pe-icons/pe-icon-7-stroke.css" />
+    <link rel="stylesheet" href="/static/styles/pe-icons/helper.css" />
+    <link rel="stylesheet" href="/static/styles/stroke-icons/style.css" />
+    <link rel="stylesheet" href="/static/styles/style.css">
+    <!-- <script type='text/javascript' src='../wp-includes/js/jquery/jqueryb8ff.js?ver=1.12.4'></script> -->
+    <script src="/static/scripts/d3.v4.min.js"></script>
+    <!-- <script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script> -->
+    <style>
+        /* width */
+        #pdf_filename::-webkit-scrollbar {
+          width: 10px;
+        }
+
+        /* Track */
+        #pdf_filename::-webkit-scrollbar-track {
+          background: #f1f1f1;
+        }
+
+        /* Handle */
+        #pdf_filename::-webkit-scrollbar-thumb {
+          background: #888;
+        }
+
+        /* Handle on hover */
+        #pdf_filename::-webkit-scrollbar-thumb:hover {
+          background: #555;
+        }
+
+        input {
+          border: 1px solid transparent;
+          background-color: #f1f1f1;
+          padding: 10px;
+        }
+
+        input[type=text] {
+          background-color: #f1f1f1;
+          width: 100%;
+        }
+
+        input[type=submit] {
+          background-color: #ffe600;
+          padding-left: 20px;
+          padding-right: 20px;
+          color: #111;
+          cursor: pointer;
+        }
+
+        .autocomplete-items {
+          position: relative;
+          border: 1px solid #d4d4d4;
+          border-bottom: none;
+          border-top: none;
+          z-index: 99;
+          /*position the autocomplete items to be the same width as the container:*/
+          top: 100%;
+          left: 0;
+          right: 0;
+          max-height: 500px;
+            overflow: auto;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .autocomplete-items div {
+          padding: 10px;
+          cursor: pointer;
+          background-color: #fff;
+          border-bottom: 1px solid #d4d4d4;
+        }
+
+        .autocomplete-items div:hover {
+          /*when hovering an item:*/
+          background-color: #e9e9e9;
+        }
+
+        .autocomplete-active {
+          /*when navigating through the items using the arrow keys:*/
+          background-color: DodgerBlue !important;
+          color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Wrapper-->
+    <div class="wrapper">
+        <!-- Header-->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div id="mobile-menu">
+                        <div class="left-nav-toggle">
+                            <a href="#">
+                                <i class="stroke-hamburgermenu"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <a class="navbar-brand" style="background: #2f323b;" href="./">
+                        <a href="Summary_KPI_csa.html">
+                            <img src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
+                            <!--<span style="color:white;"> Business </br> Intelligence</span>-->
+                        </a>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <!-- End header-->
+        <!-- Navigation-->
+        <div id="navbar-frame"></div>
+        <!-- End navigation-->
+        <!-- Main content-->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="view-header">
+                            <div class="pull-right text-right" style="line-height: 14px">
+                            </div>
+                            <div class="header-icon">
+                                <i class="pe page-header-icon pe-7s-graph2"></i>
+                            </div>
+                            <div class="header-title">
+                                <h3>OCR Output</h3>
+                                <small id="page_title">
+                                </small>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row" style="display: none;">
+                    <div class="col-md-12">
+                        <div class="panel panel-filled">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="input-group m-b-xs m-t-xs autocomplete" style="width:100%;">
+                                            <input id="myInput" type="text" name="myCountry" placeholder="Search by organization here.." style="color: #949ba2;border: none;border-radius: 4px;-webkit-box-shadow: none;
+                    box-shadow: none;-webkit-transition: none;-o-transition: none;transition: none;
+                    background-color: #494b54;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="background: rgba(0,0,0,0.2); border-radius: 3px;">
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <div class="panel-tools">
+                                    <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                                </div>
+                                Original Document
+                            </div>
+                            <div class="panel-body">
+                                <div style="text-align:center; padding-top:30px; min-height:270px;">
+                                    <div id="parent12">
+                                        <div id="container12" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px;; z-index:1;"></div>
+                                    </div>
+                                    <div class="met-text" style=" margin-top:100px;  text-align:left;">
+                                        <embed id="pdf_filename" src="" type="application/pdf" width="100%" height="600px" view="Fit" />
+                                    </div>
+                                    <div style="height:0px; width:0px;opacity:0;">
+                                        <div class="pie_dark" id="bla" data-value="67">
+                                            <div class="pie_dark-val">
+                                                <div id="field_extraction_percentage" style="color:white; font-size:0.3em; margin-top:-40px;">67%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <div class="panel-tools">
+                                    <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                                </div>
+                                OCR Transform
+                            </div>
+                            <div class="panel-body">
+                                <div style="text-align:center; padding-top:30px;">
+                                    <div id="parent">
+                                        <div id="container1234" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px;; z-index:1;"></div>
+                                    </div>
+                                    <div class="met-text" style=" margin-top:100px; text-align:left;">
+                                        <object id="ocr_filename" data="" type="application/pdf" width="100%" height="600px" view="Fit" />
+                                    </div>
+                                    <div style="height:0px; width:0px;opacity:0;">
+                                        <div class="pie_dark" id="bla" data-value="67">
+                                            <div class="pie_dark-val">
+                                                <div id="field_extraction_percentage" style="color:white; font-size:0.3em; margin-top:-40px;">67%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="display:none;">
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <div class="panel-tools">
+                                    <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                                </div>
+                                Fallback Language Strength
+                            </div>
+                            <div class="panel-body">
+                                <div style="text-align:center; ">
+                                    <a href="Fallback_Language.html" style="text-decoration:none; color:white;">
+                                        <div id="parent_chart" style="">
+                                            <div id="chart" style="width: 200px; margin-left:-200px; margin-top: -50px; height: 120px; padding-top: 30px; transform:scale(0.8); padding-left:70px; margin-left:-80px; "></div>
+                                        </div>
+                                        <div class="met-text" style=" padding-top: 130px; color:white;font-size: 2vh; text-align:left; padding-left:40px; ">
+                                            <span style=" color: #ffe600; color:white; font-size: 2vh;">
+                                                <span style="border-left:15px solid #bb0826; padding-left:10px;">Silent: </span>
+                                                <a href="#" style="margin-left:20px; color: #bb0826;" id="silent">70</a>
+                                                <span style="margin-left:35px; border-left:15px solid #f04c3e; padding-left:10px;">Weak: &nbsp; &nbsp; </span>
+                                                <a href="#" style="color: #f04c3e;" id="weak"> 100</a>
+                                                </br>
+                                                <span style="border-left:15px solid #ffc000; padding-left:10px;">Medium: </span>
+                                                <a href="#" style="margin-left:19.5px; color: #ffc000;" id="medium">1</a>
+                                                <span style="margin-left:20px; border-left:15px solid #00b050; padding-left:10px;">Strong: &nbsp; &nbsp; </span>
+                                                <a href="#" style="color:#00b050;" id="strong">1</a>
+                                                </br>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <div class="panel-tools">
+                                    <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                                    <a class="panel-close"><i class="fa fa-times"></i></a>
+                                </div>
+                                Reference Rate
+                            </div>
+                            <div class="panel-body">
+                                <div style="text-align:center; padding-top:30px;">
+                                    <div id="parent123" style="max-height:100px;">
+                                        <div id="container123" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px; z-index:1;"></div>
+                                    </div>
+                                    <div style="text-align:center; padding-top:220px;">
+                                        <div id="parent12">
+                                            <div id="container12" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px; z-index:1;"></div>
+                                        </div>
+                                        <div class="met-text" style=" margin-top:70px; margin-left:60px; text-align:left; ">
+                                            <span style=" color: white; font-size: 2vh; border-left:15px solid cornflowerblue; padding-left:10px;">USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent:
+                                            </span> <a href="#" style="" id="ref_rate_2"></a>
+                                            </br>
+                                            <span style=" color: white; font-size: 2vh; border-left:15px solid rgb(66, 62, 110); padding-left:10px;">(Adjusted) Eurocurrency Rate
+                                            </span> <a href="#" style=" " id="ref_rate_3"></a>
+                                            </br>
+                                            <span style=" color: white; font-size: 2vh; border-left:15px solid #D95B43; padding-left:10px;">(Adjusted) Eurodollar Rate :
+                                            </span> <a href="#" style="" id="ref_rate_4"></a>
+                                            </br>
+                                            <span style=" color: white; font-size: 2vh; border-left:15px solid #53777A; padding-left:10px;">EURIBOR Rate:
+                                            </span> <a href="#" style="" id="ref_rate_5"></a>
+                                            </br>
+                                            <span style=" color: white; font-size: 2vh; border-left:15px solid #7792AE; padding-left:10px;">LIBOR Rate:
+                                            </span> <a href="#" style=" " id="ref_rate_6"></a>
+                                            </br>
+                                            <span style=" color: white; font-size: 2vh; border-left:15px solid #ffe600; padding-left:10px;">Unspecified:
+                                            </span> <a href="#" style="" id="ref_rate_1"></a>
+                                            </br>
+                                            <span style=" color: white; font-size: 2vh;">
+                                            </span> <a href="#" style="color:rgba(0,0,0,0)" id="ref_rate_7"></a>
+                                            </br>
+                                            <span style=" font-size: 2vh; color: white;"></span> <a href="#" style="color:#ffe600;"> </a>
+                                        </div>
+                                        <div style="height:0px; width:0px;opacity:0;">
+                                            <div class="pie_dark" id="bla" data-value="67">
+                                                <div class="pie_dark-val">
+                                                    <div id="field_extraction_percentage" style="color:white; font-size:0.3em; margin-top:-40px;">67%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </br>
+                <div class="row" style="display:none;">
+                    <div class="col-md-12">
+                        <div class="panel panel-filled">
+                            <div class="panel-heading">
+                                <div class="panel-tools">
+                                    <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                                    <a class="panel-close"><i class="fa fa-times"></i></a>
+                                </div>
+                                Document Types by Role
+                            </div>
+                            <div class="panel-body">
+                                <div>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="team" id="admin_agent_role" style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">CalculationAdministrativeAgent</td>
+                                                    <td class="rank" id="admin_agent_count" style="color:#eee; border-bottom: 1px solid #444; "></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="team" id="borrower_role" style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">Borrower</td>
+                                                    <td class="rank" id="borrower_count" style="color:#eee; border-bottom: 1px solid #444; "></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="team" id="lead_arranger" style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">Arranger</td>
+                                                    <td class="rank" id="lead_arranger_count" style="color:#eee;border-bottom: 1px solid #444; "></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="team" id="holdings_role" style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">Holdings</td>
+                                                    <td class="rank" id="holdings_count" style="color:#eee; border-bottom: 1px solid #444; "></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="team" id="book_runner" style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">Book Runner</td>
+                                                    <td class="rank" id="book_runner_count" style="color:#eee; border-bottom: 1px solid #444; "></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="team" id="synidcation_agent" style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">Syndication Agent</td>
+                                                    <td class="rank" id="syndication_agent_count" style="color:#eee; border-bottom: 1px solid #444; "></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="team" id="documentation_agent" style="color:#eee;  border-right: 1px solid #444;">Documentation Agent</td>
+                                                    <td class="rank" id="documentation_agent_count" style="color:#eee;border-bottom: 1px solid #444; "></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+        <!-- End main content-->
+    </div>
+    <!-- End wrapper-->
+    <!-- Vendor scripts -->
+    <script src="/static/vendor/pacejs/pace.min.js"></script>
+    <script src="/static/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- App scripts -->
+    <script src="/static/scripts/luna.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#navbar-frame").load("/nav_bar");
+    });
+    d3.csv("/static/data/processed/BI_12032018.csv", function(data) {
+        // Fallback_Language_Detail.html?Use_Id=abc
+        var GET = {};
+        var query = window.location.search.substring(1).split("&");
+        for (var i = 0, max = query.length; i < max; i++) {
+            if (query[i] === "") // check for trailing & with no param
+                continue;
+
+            var param = query[i].split("=");
+        }
+
+        var file_name = param[1];
+        var variables = data.columns;
+
+
+        console.log(file_name);
+        ocr_file_name = "/static/data/processed/Abbyy/" + file_name + ".page1.pdf_abbyy.pdf"
+        console.log(ocr_file_name);
+
+        var parent = $('embed#pdf_filename').parent();
+        // var parent1 = $('embed#ocr_filename').parent();
+
+        var parent1 = $('object#ocr_filename').parent();
+        console.log(parent1);
+
+        var newElement = "<embed src='/static/data/processed/originaldocs/" + file_name + "' id='pdf_filename' type='application/pdf' width='100%' height='600px' view='Fit'>";
+        // var newElement1 = "<embed src='" + ocr_filename + "' id='ocr_filename' type='application/pdf' width='100%' height='600px' view='Fit'>";
+
+        var newElement1 = "<object data='" + ocr_file_name + "' id='ocr_filename' type='application/pdf' width='100%' height='600px' view='Fit'/>";
+        document.getElementById("page_title").innerHTML = file_name;
+
+        $('embed#pdf_filename').remove();
+        // $('embed#ocr_filename').remove();
+
+        $('object#ocr_filename').remove();
+        parent.append(newElement);
+        parent1.append(newElement1);
+
+
+
+    });
+    </script>
+</body>
+
+</html>
