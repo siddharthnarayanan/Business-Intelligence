@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="google" content="notranslate">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
     <!-- Page title -->
     <title>EY Document Intelligence</title>
     <!-- Vendor styles -->
@@ -38,7 +38,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.6/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.1/xlsx.core.min.js"></script>
     <script src="https://cdn.jsdelivr.net/alasql/0.3/alasql.min.js"></script>
-    <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
+    <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
     <!--<link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap-combined.min.css" />-->
     <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
 </head>
@@ -534,7 +534,7 @@
                             <div class="view-header">
                                 <div class="pull-right text-right" style="line-height: 14px">
 
-    <a target='_blank' href='http://qa002-ibornp.westus2.dip.sbp.eyclienthub.com'><button id="select-button" class='btn btn-yellow btn-xs button-pop-up' ><i class="fa fa-cog"></i>&nbsp; Model Training</button></a>
+    <a target='_blank' href='https://qa002-ibornp.westus2.dip.sbp.eyclienthub.com'><button id="select-button" class='btn btn-yellow btn-xs button-pop-up' ><i class="fa fa-cog"></i>&nbsp; Model Training</button></a>
                                 </div>
                                 <div class="header-icon">
                                     <i style="transform: scale(0.6);" class="fa fa-list-alt"></i>
@@ -941,6 +941,7 @@
     <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
     <!-- App scripts -->
     <script src="/static/scripts/luna.js"></script>
+    <script src="/api_host.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script>
     $(document).ready(function() {
@@ -964,7 +965,7 @@ var query = window.location.search.substring(1).split("&");
         var theApp = angular.module('app', ['ui.bootstrap', 'ngStorage']);
 
     theApp.controller('ItemController', function ItemController($scope, $http, $filter, $timeout, $window, $localStorage, $document) {
-        $http.get('https://qa002-ibornp.westus2.dip.sbp.eyclienthub.com:8000/demo/contract_data.json?id=' + file_id).success(function(data) {
+        $http.get(API_HOST+'demo/contract_data.json?id=' + file_id).success(function(data) {
             // console.log(data);
             // var persons_arr = [];
             $scope.persons = [];

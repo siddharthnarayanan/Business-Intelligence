@@ -1,420 +1,1568 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
-    <!-- Page title -->
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+      <!-- Page title -->
     <title>EY Business Intelligence</title>
     <!-- Vendor styles -->
-    <link rel="stylesheet" href="/static/vendor/fontawesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="/static/vendor/animate.css/animate.css" />
-    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/vendor/fontawesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/static/vendor/animate.css/animate.css"/>
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css"/>
+
     <link rel="icon" href="/static/images/EYBIicon.png" sizes="32x32" />
     <link rel="icon" href="/static/images/EYBIicon.png" sizes="192x192" />
+
     <!-- App styles -->
-    <link rel="stylesheet" href="/static/styles/pe-icons/pe-icon-7-stroke.css" />
-    <link rel="stylesheet" href="/static/styles/pe-icons/helper.css" />
-    <link rel="stylesheet" href="/static/styles/stroke-icons/style.css" />
+    <link rel="stylesheet" href="/static/styles/pe-icons/pe-icon-7-stroke.css"/>
+    <link rel="stylesheet" href="/static/styles/pe-icons/helper.css"/>
+    <link rel="stylesheet" href="/static/styles/stroke-icons/style.css"/>
     <link rel="stylesheet" href="/static/styles/style.css">
-    <!-- <script type='text/javascript' src='../wp-includes/js/jquery/jqueryb8ff.js?ver=1.12.4'></script> -->
+
+    <script type='text/javascript' src='/static/data/dbase/data.js'></script>
+    <script type='text/javascript' src='/static/scripts/angular.min.js'></script>
+    
+    <!--- <script type='text/javascript' src='../wp-includes/js/jquery/jqueryb8ff.js?ver=1.12.4'></script> -->
     <script src="/static/scripts/d3.v4.min.js"></script>
-    <!-- <script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script> -->
+    <script src="/static/scripts/d3-ez.js"></script>
+  <!---    <script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script>  -->
+    <link rel="stylesheet" type="text/css" href="/static/styles/d3-ez.css" />
+
     <style>
-        /* width */
-        #pdf_filename::-webkit-scrollbar {
-          width: 10px;
-        }
 
-        /* Track */
-        #pdf_filename::-webkit-scrollbar-track {
-          background: #f1f1f1;
-        }
+/* width */
+#pdf_filename::-webkit-scrollbar {
+  width: 10px;
+}
 
-        /* Handle */
-        #pdf_filename::-webkit-scrollbar-thumb {
-          background: #888;
-        }
+/* Track */
+#pdf_filename::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
 
-        /* Handle on hover */
-        #pdf_filename::-webkit-scrollbar-thumb:hover {
-          background: #555;
-        }
+/* Handle */
+#pdf_filename::-webkit-scrollbar-thumb {
+  background: #888;
+}
 
-        input {
-          border: 1px solid transparent;
-          background-color: #f1f1f1;
-          padding: 10px;
-        }
+/* Handle on hover */
+#pdf_filename::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 
-        input[type=text] {
-          background-color: #f1f1f1;
-          width: 100%;
-        }
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+}
 
-        input[type=submit] {
-          background-color: #ffe600;
-          padding-left: 20px;
-          padding-right: 20px;
-          color: #111;
-          cursor: pointer;
-        }
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
 
-        .autocomplete-items {
-          position: relative;
-          border: 1px solid #d4d4d4;
-          border-bottom: none;
-          border-top: none;
-          z-index: 99;
-          /*position the autocomplete items to be the same width as the container:*/
-          top: 100%;
-          left: 0;
-          right: 0;
-          max-height: 500px;
-            overflow: auto;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
+input[type=submit] {
+  background-color: #ffe600;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #111;
+  cursor: pointer;
+}
 
-        .autocomplete-items div {
-          padding: 10px;
-          cursor: pointer;
-          background-color: #fff;
-          border-bottom: 1px solid #d4d4d4;
-        }
+.autocomplete-items {
+  position: relative;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 500px;
+    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 
-        .autocomplete-items div:hover {
-          /*when hovering an item:*/
-          background-color: #e9e9e9;
-        }
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
 
-        .autocomplete-active {
-          /*when navigating through the items using the arrow keys:*/
-          background-color: DodgerBlue !important;
-          color: #ffffff;
-        }
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #444; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #222; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
     </style>
-</head>
-
-<body>
-    <!-- Wrapper-->
-    <div class="wrapper">
-        <!-- Header-->
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <div id="mobile-menu">
-                        <div class="left-nav-toggle">
-                            <a href="#">
-                                <i class="stroke-hamburgermenu"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <a class="navbar-brand" style="background: #2f323b;" href="./">
-                        <a href="Summary_KPI_csa.html">
-                            <img src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
-                            <!--<span style="color:white;"> Business </br> Intelligence</span>-->
-                        </a>
-                    </a>
-                </div>
+   </head>
+   <body>
+      <!-- Wrapper-->
+      <div class="wrapper">
+      <!-- Header-->
+      <nav class="navbar navbar-default navbar-fixed-top">
+         <div class="container-fluid">
+            <div class="navbar-header">
+               <div id="mobile-menu">
+                  <div class="left-nav-toggle">
+                     <a href="#">
+                     <i class="stroke-hamburgermenu"></i>
+                     </a>
+                  </div>
+               </div>
+               <a class="navbar-brand" style="background: #2f323b;" href="/">
+               <a href="/">
+                  <img src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
+                  <!--<span style="color:white;"> Business </br> Intelligence</span>-->
+               </a>
+               </a>
             </div>
-        </nav>
-        <!-- End header-->
-        <!-- Navigation-->
-        <div id="navbar-frame"></div>
-        <!-- End navigation-->
-        <!-- Main content-->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="view-header">
-                            <div class="pull-right text-right" style="line-height: 14px">
-                            </div>
-                            <div class="header-icon">
-                                <i class="pe page-header-icon pe-7s-graph2"></i>
-                            </div>
-                            <div class="header-title">
-                                <h3>OCR Output</h3>
-                                <small id="page_title">
-                                </small>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-                <div class="row" style="display: none;">
-                    <div class="col-md-12">
-                        <div class="panel panel-filled">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="input-group m-b-xs m-t-xs autocomplete" style="width:100%;">
-                                            <input id="myInput" type="text" name="myCountry" placeholder="Search by organization here.." style="color: #949ba2;border: none;border-radius: 4px;-webkit-box-shadow: none;
+         </div>
+      </nav>
+      <!-- End header-->
+
+  <!-- Navigation-->
+  <div id="navbar-frame"></div>
+  <!-- End navigation-->
+
+
+      <!-- Main content-->
+      <section class="content">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="view-header">
+                     <div class="pull-right text-right" style="line-height: 14px">
+                     </div>
+                     <div class="header-icon">
+                        <i class="pe page-header-icon pe-7s-graph2"></i>
+                     </div>
+                     <div class="header-title">
+                        <h3>OCR Output</h3>
+                        <small id="page_title">
+
+                        </small>
+                     </div>
+                  </div>
+                  <hr>
+               </div>
+            </div>
+            <div class="row" style="display: none;">
+               <div class="col-md-12">
+                  <div class="panel panel-filled">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-group m-b-xs m-t-xs autocomplete" style="width:100%;">
+                                        <input id="myInput" type="text" name="myCountry" placeholder="Search by organization here.."
+                    style="color: #949ba2;border: none;border-radius: 4px;-webkit-box-shadow: none;
                     box-shadow: none;-webkit-transition: none;-o-transition: none;transition: none;
                     background-color: #494b54;">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="background: rgba(0,0,0,0.2); border-radius: 3px;">
-                    <div class="col-md-6">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <div class="panel-tools">
-                                    <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
-                                </div>
-                                Original Document
-                            </div>
-                            <div class="panel-body">
-                                <div style="text-align:center; padding-top:30px; min-height:270px;">
-                                    <div id="parent12">
-                                        <div id="container12" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px;; z-index:1;"></div>
-                                    </div>
-                                    <div class="met-text" style=" margin-top:100px;  text-align:left;">
-                                        <embed id="pdf_filename" src="" type="application/pdf" width="100%" height="600px" view="Fit" />
-                                    </div>
-                                    <div style="height:0px; width:0px;opacity:0;">
-                                        <div class="pie_dark" id="bla" data-value="67">
-                                            <div class="pie_dark-val">
-                                                <div id="field_extraction_percentage" style="color:white; font-size:0.3em; margin-top:-40px;">67%</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <div class="panel-tools">
-                                    <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
-                                </div>
-                                OCR Transform
-                            </div>
-                            <div class="panel-body">
-                                <div style="text-align:center; padding-top:30px;">
-                                    <div id="parent">
-                                        <div id="container1234" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px;; z-index:1;"></div>
-                                    </div>
-                                    <div class="met-text" style=" margin-top:100px; text-align:left;">
-                                        <object id="ocr_filename" data="" type="application/pdf" width="100%" height="600px" view="Fit" />
-                                    </div>
-                                    <div style="height:0px; width:0px;opacity:0;">
-                                        <div class="pie_dark" id="bla" data-value="67">
-                                            <div class="pie_dark-val">
-                                                <div id="field_extraction_percentage" style="color:white; font-size:0.3em; margin-top:-40px;">67%</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="display:none;">
-                    <div class="col-md-6">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <div class="panel-tools">
-                                    <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
-                                </div>
-                                Fallback Language Strength
-                            </div>
-                            <div class="panel-body">
-                                <div style="text-align:center; ">
-                                    <a href="Fallback_Language.html" style="text-decoration:none; color:white;">
-                                        <div id="parent_chart" style="">
-                                            <div id="chart" style="width: 200px; margin-left:-200px; margin-top: -50px; height: 120px; padding-top: 30px; transform:scale(0.8); padding-left:70px; margin-left:-80px; "></div>
-                                        </div>
-                                        <div class="met-text" style=" padding-top: 130px; color:white;font-size: 2vh; text-align:left; padding-left:40px; ">
-                                            <span style=" color: #ffe600; color:white; font-size: 2vh;">
-                                                <span style="border-left:15px solid #bb0826; padding-left:10px;">Silent: </span>
-                                                <a href="#" style="margin-left:20px; color: #bb0826;" id="silent">70</a>
-                                                <span style="margin-left:35px; border-left:15px solid #f04c3e; padding-left:10px;">Weak: &nbsp; &nbsp; </span>
-                                                <a href="#" style="color: #f04c3e;" id="weak"> 100</a>
-                                                </br>
-                                                <span style="border-left:15px solid #ffc000; padding-left:10px;">Medium: </span>
-                                                <a href="#" style="margin-left:19.5px; color: #ffc000;" id="medium">1</a>
-                                                <span style="margin-left:20px; border-left:15px solid #00b050; padding-left:10px;">Strong: &nbsp; &nbsp; </span>
-                                                <a href="#" style="color:#00b050;" id="strong">1</a>
-                                                </br>
-                                            </span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <div class="panel-tools">
-                                    <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
-                                    <a class="panel-close"><i class="fa fa-times"></i></a>
-                                </div>
-                                Reference Rate
-                            </div>
-                            <div class="panel-body">
-                                <div style="text-align:center; padding-top:30px;">
-                                    <div id="parent123" style="max-height:100px;">
-                                        <div id="container123" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px; z-index:1;"></div>
-                                    </div>
-                                    <div style="text-align:center; padding-top:220px;">
-                                        <div id="parent12">
-                                            <div id="container12" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px; z-index:1;"></div>
-                                        </div>
-                                        <div class="met-text" style=" margin-top:70px; margin-left:60px; text-align:left; ">
-                                            <span style=" color: white; font-size: 2vh; border-left:15px solid cornflowerblue; padding-left:10px;">USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent:
-                                            </span> <a href="#" style="" id="ref_rate_2"></a>
-                                            </br>
-                                            <span style=" color: white; font-size: 2vh; border-left:15px solid rgb(66, 62, 110); padding-left:10px;">(Adjusted) Eurocurrency Rate
-                                            </span> <a href="#" style=" " id="ref_rate_3"></a>
-                                            </br>
-                                            <span style=" color: white; font-size: 2vh; border-left:15px solid #D95B43; padding-left:10px;">(Adjusted) Eurodollar Rate :
-                                            </span> <a href="#" style="" id="ref_rate_4"></a>
-                                            </br>
-                                            <span style=" color: white; font-size: 2vh; border-left:15px solid #53777A; padding-left:10px;">EURIBOR Rate:
-                                            </span> <a href="#" style="" id="ref_rate_5"></a>
-                                            </br>
-                                            <span style=" color: white; font-size: 2vh; border-left:15px solid #7792AE; padding-left:10px;">LIBOR Rate:
-                                            </span> <a href="#" style=" " id="ref_rate_6"></a>
-                                            </br>
-                                            <span style=" color: white; font-size: 2vh; border-left:15px solid #ffe600; padding-left:10px;">Unspecified:
-                                            </span> <a href="#" style="" id="ref_rate_1"></a>
-                                            </br>
-                                            <span style=" color: white; font-size: 2vh;">
-                                            </span> <a href="#" style="color:rgba(0,0,0,0)" id="ref_rate_7"></a>
-                                            </br>
-                                            <span style=" font-size: 2vh; color: white;"></span> <a href="#" style="color:#ffe600;"> </a>
-                                        </div>
-                                        <div style="height:0px; width:0px;opacity:0;">
-                                            <div class="pie_dark" id="bla" data-value="67">
-                                                <div class="pie_dark-val">
-                                                    <div id="field_extraction_percentage" style="color:white; font-size:0.3em; margin-top:-40px;">67%</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </br>
-                <div class="row" style="display:none;">
-                    <div class="col-md-12">
-                        <div class="panel panel-filled">
-                            <div class="panel-heading">
-                                <div class="panel-tools">
-                                    <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
-                                    <a class="panel-close"><i class="fa fa-times"></i></a>
-                                </div>
-                                Document Types by Role
-                            </div>
-                            <div class="panel-body">
-                                <div>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="team" id="admin_agent_role" style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">CalculationAdministrativeAgent</td>
-                                                    <td class="rank" id="admin_agent_count" style="color:#eee; border-bottom: 1px solid #444; "></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="team" id="borrower_role" style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">Borrower</td>
-                                                    <td class="rank" id="borrower_count" style="color:#eee; border-bottom: 1px solid #444; "></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="team" id="lead_arranger" style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">Arranger</td>
-                                                    <td class="rank" id="lead_arranger_count" style="color:#eee;border-bottom: 1px solid #444; "></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="team" id="holdings_role" style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">Holdings</td>
-                                                    <td class="rank" id="holdings_count" style="color:#eee; border-bottom: 1px solid #444; "></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="team" id="book_runner" style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">Book Runner</td>
-                                                    <td class="rank" id="book_runner_count" style="color:#eee; border-bottom: 1px solid #444; "></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="team" id="synidcation_agent" style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">Syndication Agent</td>
-                                                    <td class="rank" id="syndication_agent_count" style="color:#eee; border-bottom: 1px solid #444; "></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="team" id="documentation_agent" style="color:#eee;  border-right: 1px solid #444;">Documentation Agent</td>
-                                                    <td class="rank" id="documentation_agent_count" style="color:#eee;border-bottom: 1px solid #444; "></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </section>
-        <!-- End main content-->
-    </div>
-    <!-- End wrapper-->
-    <!-- Vendor scripts -->
-    <script src="/static/vendor/pacejs/pace.min.js"></script>
-    <script src="/static/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <!-- App scripts -->
-    <script src="/static/scripts/luna.js"></script>
-    <script>
-    $(document).ready(function() {
-        $("#navbar-frame").load("/nav_bar");
-    });
-    d3.csv("/static/data/processed/BI_12032018.csv", function(data) {
-        // Fallback_Language_Detail.html?Use_Id=abc
-        var GET = {};
-        var query = window.location.search.substring(1).split("&");
-        for (var i = 0, max = query.length; i < max; i++) {
-            if (query[i] === "") // check for trailing & with no param
-                continue;
 
-            var param = query[i].split("=");
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </div>
+            <div class="row" style="background: rgba(0,0,0,0.2); border-radius: 3px;">
+               <div class="col-md-6">
+                  <div class="panel">
+                     <div class="panel-heading">
+                        <div class="panel-tools">
+                           <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                        </div>
+                        Original Document
+                     </div>
+                     <div class="panel-body">
+                        <div style="text-align:center; padding-top:30px; min-height:270px;">
+                           <div id="parent12">
+                              <div id="container12" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px;; z-index:1;"></div>
+                           </div>
+                           <div class="met-text" style=" margin-top:100px;  text-align:left;">
+                             <embed id="pdf_filename" src="" type="application/pdf" width="100%" height="600px" view="Fit"/>
+
+                           </div>
+                           <div style="height:0px; width:0px;opacity:0;">
+                              <div class="pie_dark" id="bla" data-value="67" >
+                                 <div  class="pie_dark-val" >
+                                    <div id="field_extraction_percentage" style="color:white; font-size:0.3em; margin-top:-40px;">67%</div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="panel">
+                     <div class="panel-heading">
+                        <div class="panel-tools">
+                           <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                        </div>
+                        OCR Transform
+                     </div>
+
+                            <div class="panel-body">
+                               
+                                <pre id='my_ocr_output' style='background:rgba(0,0,0,0.15); height: 630px; color:white;'>
+                                </pre>
+                            </div>
+                   
+
+
+                     <div class="panel-body">
+                        <div style="text-align:center; padding-top:30px;">
+
+                      <div id="parent"><div id="container1234" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px;; z-index:1;"></div></div>
+
+                  <div class="met-text" style=" margin-top:100px; text-align:left;">
+                   <object id="ocr_filename" data="" type="application/pdf" width="100%" height="600px" view="Fit"/>
+                  </div>
+
+                  <div style="height:0px; width:0px;opacity:0;">
+                                       <div class="pie_dark" id="bla" data-value="67" >
+                                          <div  class="pie_dark-val" ><div id="field_extraction_percentage" style="color:white; font-size:0.3em; margin-top:-40px;">67%</div></div>
+                                       </div>
+                                    </div>
+
+                </div>
+                     </div>
+
+
+                  </div>
+               </div>
+            </div>
+            <div class="row" style="display:none;">
+               <div class="col-md-6">
+                  <div class="panel">
+                     <div class="panel-heading">
+                        <div class="panel-tools">
+                           <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                        </div>
+                        Fallback Language Strength
+                     </div>
+                     <div class="panel-body">
+                        <div style="text-align:center; ">
+                           <a href="Fallback_Language.html" style="text-decoration:none; color:white;">
+                              <div id="parent_chart" style="">
+                                 <div id="chart" style="width: 200px; margin-left:-200px; margin-top: -50px; height: 120px; padding-top: 30px; transform:scale(0.8); padding-left:70px; margin-left:-80px; "></div>
+                              </div>
+                              <div class="met-text" style=" padding-top: 130px; color:white;font-size: 2vh; text-align:left; padding-left:40px; ">
+                                 <span style=" color: #ffe600; color:white; font-size: 2vh;">
+                                 <span style="border-left:15px solid #bb0826; padding-left:10px;">Silent:  </span>
+                           <a href="#"  style="margin-left:20px; color: #bb0826;" id="silent">70</a>
+                           <span style="margin-left:35px; border-left:15px solid #f04c3e; padding-left:10px;">Weak: &nbsp; &nbsp; </span>
+                           <a href="#"  style="color: #f04c3e;" id="weak"> 100</a>
+                           </br>
+                           <span style="border-left:15px solid #ffc000; padding-left:10px;">Medium: </span>
+                           <a href="#" style="margin-left:19.5px; color: #ffc000;" id="medium">1</a>
+                           <span style="margin-left:20px; border-left:15px solid #00b050; padding-left:10px;">Strong: &nbsp; &nbsp; </span>
+                           <a href="#" style="color:#00b050;" id="strong">1</a>
+                           </br>
+                           </span>
+                           </div></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="panel">
+                     <div class="panel-heading">
+                        <div class="panel-tools">
+                           <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                           <a class="panel-close"><i class="fa fa-times"></i></a>
+                        </div>
+                        Reference Rate
+                     </div>
+                     <div class="panel-body">
+                        <div style="text-align:center; padding-top:30px;">
+                           <div id="parent123" style="max-height:100px;">
+                              <div id="container123" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px; z-index:1;"></div>
+                           </div>
+                           <div style="text-align:center; padding-top:220px;">
+                              <div id="parent12">
+                                 <div id="container12" style="transform:scale(0.4); position: relative; margin-left: -10px; margin-top:-110px; z-index:1;"></div>
+                              </div>
+                              <div class="met-text" style=" margin-top:70px; margin-left:60px; text-align:left; ">
+                                 <span style=" color: white; font-size: 2vh; border-left:15px solid cornflowerblue; padding-left:10px;">USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent:
+                                 </span> <a href="#" style="" id="ref_rate_2"></a>
+                                 </br>
+                                 <span style=" color: white; font-size: 2vh; border-left:15px solid rgb(66, 62, 110); padding-left:10px;">(Adjusted) Eurocurrency Rate
+                                 </span> <a href="#" style=" " id="ref_rate_3"></a>
+                                 </br>
+                                 <span style=" color: white; font-size: 2vh; border-left:15px solid #D95B43; padding-left:10px;">(Adjusted) Eurodollar Rate :
+                                 </span> <a href="#" style="" id="ref_rate_4"></a>
+                                 </br>
+                                 <span style=" color: white; font-size: 2vh; border-left:15px solid #53777A; padding-left:10px;">EURIBOR Rate:
+                                 </span> <a href="#" style="" id="ref_rate_5"></a>
+                                 </br>
+                                 <span style=" color: white; font-size: 2vh; border-left:15px solid #7792AE; padding-left:10px;">LIBOR Rate:
+                                 </span> <a href="#" style=" " id="ref_rate_6"></a>
+                                 </br>
+                                 <span style=" color: white; font-size: 2vh; border-left:15px solid #ffe600; padding-left:10px;">Unspecified:
+                                 </span> <a href="#" style="" id="ref_rate_1"></a>
+                                 </br>
+                                 <span style=" color: white; font-size: 2vh;">
+                                 </span> <a href="#" style="color:rgba(0,0,0,0)" id="ref_rate_7"></a>
+                                 </br>
+                                 <span style=" font-size: 2vh; color: white;" ></span> <a href="#" style="color:#ffe600;"> </a>
+                              </div>
+                              <div style="height:0px; width:0px;opacity:0;">
+                                 <div class="pie_dark" id="bla" data-value="67" >
+                                    <div  class="pie_dark-val" >
+                                       <div id="field_extraction_percentage" style="color:white; font-size:0.3em; margin-top:-40px;">67%</div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            </br>
+            <div class="row" style="display:none;">
+               <div class="col-md-12">
+                  <div class="panel panel-filled">
+                     <div class="panel-heading">
+                        <div class="panel-tools">
+                           <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                           <a class="panel-close"><i class="fa fa-times"></i></a>
+                        </div>
+                        Document Types by Role
+                     </div>
+                     <div class="panel-body">
+                        <div>
+                           <div class="table-responsive">
+                              <table class="table">
+                                 <tbody>
+                 <tr>
+                                    <td class="team" id="admin_agent_role" style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">CalculationAdministrativeAgent</td>
+                                    <td class="rank" id="admin_agent_count" style="color:#eee; border-bottom: 1px solid #444; "></td>
+                                    </tr>
+                                    <tr>
+                                       <td class="team" id="borrower_role" style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">Borrower</td>
+                                       <td class="rank" id="borrower_count" style="color:#eee; border-bottom: 1px solid #444; "></td>
+                                    </tr>
+                                    <tr>
+                                       <td class="team" id="lead_arranger"style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">Arranger</td>
+                                       <td class="rank" id="lead_arranger_count" style="color:#eee;border-bottom: 1px solid #444; "></td>
+                                    </tr>
+                                    <tr>
+                                       <td class="team" id="holdings_role" style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">Holdings</td>
+                                       <td class="rank" id="holdings_count" style="color:#eee; border-bottom: 1px solid #444; "></td>
+                                    </tr>
+                                    <tr>
+                                       <td class="team" id="book_runner" style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">Book Runner</td>
+                                       <td class="rank" id="book_runner_count"style="color:#eee; border-bottom: 1px solid #444; "></td>
+                                    </tr>
+                                    <tr>
+                                       <td class="team" id="synidcation_agent"style="color:#eee; border-bottom: 1px solid #444; border-right: 1px solid #444;">Syndication Agent</td>
+                                       <td class="rank" id="syndication_agent_count"style="color:#eee; border-bottom: 1px solid #444; "></td>
+                                    </tr>
+                                    <tr>
+                                       <td class="team" id="documentation_agent"  style="color:#eee;  border-right: 1px solid #444;">Documentation Agent</td>
+                                       <td class="rank" id="documentation_agent_count" style="color:#eee;border-bottom: 1px solid #444; "></td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+      </section>
+      <!-- End main content-->
+      </div>
+      <!-- End wrapper-->
+      <!-- Vendor scripts -->
+      <script src="/static/vendor/pacejs/pace.min.js"></script>
+      <script src="/static/vendor/jquery/dist/jquery.min.js"></script>
+      <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+      <!-- App scripts -->
+      <script src="/static/scripts/luna.js"></script>
+      <script src="/azure_storage_account.js"></script>
+      <script src="/api_host.js"></script>
+    
+<script> 
+$(document).ready(function() {
+  $("#navbar-frame").load("/nav_bar");
+});
+</script>
+
+<script>
+  var xhr = new XMLHttpRequest(),
+    method = "GET",
+    url = API_HOST+"demo/sas?type=download";
+
+xhr.open(method, url, true);
+xhr.onreadystatechange = function () {
+  if(xhr.readyState === 4 && xhr.status === 200) {
+  
+    var parsedText = JSON.parse(xhr.responseText);
+     data = parsedText;
+     console.log('THIS IS MY DATA:    ' + data);
+  console.log('THIS IS MY TOKEN:    ' + data.token);
+  }
+
+
+ // Fallback_Language_Detail.html?Use_Id=abc
+var GET = {};
+var query = window.location.search.substring(1).split("&");
+for (var i = 0, max = query.length; i < max; i++)
+{
+    if (query[i] === "") // check for trailing & with no param
+        continue;
+
+    var param = query[i].split("=");
+}
+
+var file_name = param[1];
+console.log('query:  ' + query);
+console.log('file_name: ' + file_name);
+
+
+ocr_file_name = "/static/data/processed/Abbyy/"+file_name+".page1.pdf_abbyy.xml"
+console.log(ocr_file_name);
+
+var parent = $('embed#pdf_filename').parent();
+var parent1 = $('object#ocr_filename').parent();
+console.log(parent1);
+//var newElement = "<embed src='/static/data/processed/originaldocs/"+file_name+"' id='pdf_filename' type='application/pdf' width='100%' height='600px' view='Fit'>";
+var img_url = 'https://'+AZURE_STORAGE_ACCOUNT+'.blob.core.windows.net/processing/' + file_name + '.page1.pdf.png?' + data.token;
+var xml_url = 'https://'+AZURE_STORAGE_ACCOUNT+'.blob.core.windows.net/processing/' + file_name + '.page1.pdf_abbyy.xml?' + data.token;
+
+
+var newElement = "<img src='" + img_url + "' id='pdf_filename' type='application/pdf' width='100%' height='600px' view='Fit'>";
+//var newElement1 = "<object data='"+ ocr_file_name + "' id='ocr_filename' type='application/pdf' width='100%' height='600px' view='Fit'/>";
+
+
+//var newElement1 = "<html><iframe  src='" + xml_url + " '  width='100%' height='600px' view='Fit'/></html>";
+var newElement1 = "<div > </div>";
+var data;
+var text_node = document.createTextNode(newElement1);
+
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+       // Action to be performed when the document is read;
+       data = this.responseText;
+       console.log('YAY!!!!: ' + this.responseText);
+       document.getElementById("my_ocr_output").innerText =String(data) ;
+
+    }
+};
+xhttp.open("GET", xml_url, true);
+xhttp.send();
+
+
+document.getElementById("page_title").innerHTML=file_name ;
+document.getElementById("my_ocr_output").innerHTML=data ;
+
+$('embed#pdf_filename').remove();
+$('object#ocr_filename').remove();
+parent.append(newElement);
+parent1.append(newElement1);
+//parent1.append(newElement1);
+
+
+};
+xhr.send();
+
+</script>
+
+<script>
+
+d3.csv("/static/data/processed/BI_12032018.csv", function(data){
+
+
+
+
+
+
+
+
+
+   var _temp;
+    console.log(data);
+  var variables = data.columns;
+  var admin_agent_count_flag=0;
+  var admin_agent_role_flag="Administrative Agent";
+  var field_extraction_percentage_val = 0;
+  data.map(function(d) {
+    if (d['Extraction status']=='In Progress') {
+  admin_agent_count_flag++;
+        console.log( d['LegalEntitysRoles'] );
+    }
+
+//  document.getElementById("admin_agent_count").textContent=admin_agent_count_flag ;
+//  document.getElementById("admin_agent_role").textContent=admin_agent_role_flag ;
+
+  });
+
+  var documents_flag=0;
+  var variables = data.columns;
+  variables.forEach(function(d) {
+  if (d == 'Extraction status') {
+    for (var i=0; i < 600; i += 1){
+
+        try{
+
+        if(typeof(data[i])!="undefined"){
+          documents_flag++;
+          }
+        }
+      catch(e){
+          console.log('An error has occurred: '+e.message);
         }
 
-        var file_name = param[1];
-        var variables = data.columns;
+    }}
+
+  });
 
 
-        console.log(file_name);
-        ocr_file_name = "/static/data/processed/Abbyy/" + file_name + ".page1.pdf_abbyy.pdf"
-        console.log(ocr_file_name);
+  let legal_role_set = new Set();
+  var weak_flag = 0;
+   var ibor = 0;
+var    nibor =0;
+var ibor_unextracted=0;
+var  silent_flag = 0;
+var  strong_flag = 0;
+var medium_flag = 0;
+  let legal_entity_set = new Set();
+  let borrower_role_set = new Set();
+  let holdings_role_set = new Set();
+  let admin_role_set = new Set();
+  let borrower_role_set_current = new Set();
+  var borrower_role_list_current = [];
+  var admin_role_list = [];
+  var ref_rate = {"No rate": 0, "USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent": 0, "Eurocurrency Rate": 0,
+  "Adjusted LIBOR": 0, "LIBOR": 0, "Eurodollar": 0, "EURIBO": 0};
+  var holdings_role_list = [];
+  var borrower_role_list = [];
+  var legal_role_list = [];
+   var legal_entity_list = [];
+  var ContractualMaturityDatePre2021 = [];
+  var ContractualMaturityDatePost2021 = [];
+  var ContractualMaturityDatePost2000 = [];
+  var ContractualMaturityDatePost0 = [];
+  var ContractualMaturityDateUnextracted = [];
 
-        var parent = $('embed#pdf_filename').parent();
-        // var parent1 = $('embed#ocr_filename').parent();
+  var variables = data.columns;
+  variables.forEach(function(d) {
+    if (d == "LegalEntityies") {
 
-        var parent1 = $('object#ocr_filename').parent();
-        console.log(parent1);
+    for (var i=0; i < documents_flag; i += 1){
 
-        var newElement = "<embed src='/static/data/processed/originaldocs/" + file_name + "' id='pdf_filename' type='application/pdf' width='100%' height='600px' view='Fit'>";
-        // var newElement1 = "<embed src='" + ocr_filename + "' id='ocr_filename' type='application/pdf' width='100%' height='600px' view='Fit'>";
+      if (data[i]['Full File Name'].includes('confirm') || data[i]['Full File Name'].includes('Confirm') || data[i]['Full File Name'].includes('CONFIRM')
+    || data[i]['Full File Name'].includes('Master') || data[i]['Full File Name'].includes('master') || data[i]['Full File Name'].includes('isda')
+    || data[i]['Full File Name'].includes('Isda') || data[i]['Full File Name'].includes('ISDA'))  {
+      if(!data[i][d].includes('Unextracted')){
+        legal_entity_set.add(data[i][d]);
+        legal_entity_list.push(data[i][d]);
+        }
 
-        var newElement1 = "<object data='" + ocr_file_name + "' id='ocr_filename' type='application/pdf' width='100%' height='600px' view='Fit'/>";
-        document.getElementById("page_title").innerHTML = file_name;
+      }
+    }
+  }
+    if (d == "LegalEntitysRoles") {
 
-        $('embed#pdf_filename').remove();
-        // $('embed#ocr_filename').remove();
+    for (var i=0; i < documents_flag; i += 1){
 
-        $('object#ocr_filename').remove();
-        parent.append(newElement);
-        parent1.append(newElement1);
+      if (data[i]['Full File Name'].includes('confirm') || data[i]['Full File Name'].includes('Confirm') || data[i]['Full File Name'].includes('CONFIRM')
+    || data[i]['Full File Name'].includes('Master') || data[i]['Full File Name'].includes('master') || data[i]['Full File Name'].includes('isda')
+    || data[i]['Full File Name'].includes('Isda') || data[i]['Full File Name'].includes('ISDA'))  {
+      if(!data[i][d].includes('Unextracted')){
+        legal_role_set.add(data[i][d]);
+        legal_role_list.push(data[i][d]);
+        }
+
+      }
+    }
+  }
+
+  if (d == "QFCRecordEntity") {
+    for (var i=0; i < documents_flag; i += 1){
+
+      if (data[i]['Full File Name'].includes('confirm') || data[i]['Full File Name'].includes('Confirm') || data[i]['Full File Name'].includes('CONFIRM')
+    || data[i]['Full File Name'].includes('Master') || data[i]['Full File Name'].includes('master') || data[i]['Full File Name'].includes('isda')
+    || data[i]['Full File Name'].includes('Isda') || data[i]['Full File Name'].includes('ISDA'))  {
+      if(!data[i][d].includes('Unextracted')){
+        borrower_role_set.add(data[i][d]);
+        borrower_role_list.push(data[i][d]);
+        }
+      }
+    }
+  }
+
+
+  if (d == "CalculationAdministrativeAgent") {
+    for (var i=0; i < documents_flag; i += 1){
+
+      if (data[i]['Full File Name'].includes('confirm') || data[i]['Full File Name'].includes('Confirm') || data[i]['Full File Name'].includes('CONFIRM')
+    || data[i]['Full File Name'].includes('Master') || data[i]['Full File Name'].includes('master') || data[i]['Full File Name'].includes('isda')
+    || data[i]['Full File Name'].includes('Isda') || data[i]['Full File Name'].includes('ISDA'))  {
+      if(!data[i][d].includes('Unextracted')){
+        admin_role_set.add(data[i][d]);
+        admin_role_list.push(data[i][d]);
+        }
+      }
+    }
+  }
+
+
+  if (d == "QFCCounterpartyEntity") {
+    for (var i=0; i < documents_flag; i += 1){
+
+      if (data[i]['Full File Name'].includes('confirm') || data[i]['Full File Name'].includes('Confirm') || data[i]['Full File Name'].includes('CONFIRM')
+    || data[i]['Full File Name'].includes('Master') || data[i]['Full File Name'].includes('master') || data[i]['Full File Name'].includes('isda')
+    || data[i]['Full File Name'].includes('Isda') || data[i]['Full File Name'].includes('ISDA'))  {
+      if(!data[i][d].includes('Unextracted')){
+        holdings_role_set.add(data[i][d]);
+        holdings_role_list.push(data[i][d]);
+        }
+      }
+    }
+  }
+
+
+  if (d == "ISDA YEAR") {
+    for (var i=0; i < documents_flag; i += 1){
+
+      if (data[i]['Full File Name'].includes('confirm') || data[i]['Full File Name'].includes('Confirm') || data[i]['Full File Name'].includes('CONFIRM')
+    || data[i]['Full File Name'].includes('Master') || data[i]['Full File Name'].includes('master') || data[i]['Full File Name'].includes('isda')
+    || data[i]['Full File Name'].includes('Isda') || data[i]['Full File Name'].includes('ISDA'))  {
+      if(!data[i][d].includes('Unextracted') ){
+
+        if (data[i][d].includes('1991') )
+          {
+            console.log(data[i][d]);
+            console.log("ContractualMaturityDatePre2021.length:  " + ContractualMaturityDatePre2021.length);
+            ContractualMaturityDatePre2021.push(data[i][d]);
+          }
+        else if (data[i][d].includes('2006') )
+          {
+            console.log(data[i][d]);
+            console.log("ContractualMaturityDatePost2021.length:  " + ContractualMaturityDatePost2021.length);
+            ContractualMaturityDatePost2021.push(data[i][d]);
+          }
+        else if (data[i][d].includes('2000') )
+          {
+            console.log(data[i][d]);
+            console.log("ContractualMaturityDatePost2000.length:  " + ContractualMaturityDatePost2000.length);
+            ContractualMaturityDatePost2000.push(data[i][d]);
+          }
+        else if (data[i][d].includes('0') )
+          {
+            console.log(data[i][d]);
+            console.log("ContractualMaturityDatePost0.length:  " + ContractualMaturityDatePost0.length);
+            ContractualMaturityDatePost0.push(data[i][d]);
+          }
+
+        }
+      else
+        {
+          ContractualMaturityDateUnextracted.push(data[i][d]);
+        }
+      }
+    }
+  }
+  document.getElementById("field_extraction_percentage").textContent=92 + "%";
+
+  if (d == "ReferenceRate Only") {
+    for (var i=0; i < documents_flag; i += 1){
+
+      if (data[i]['Full File Name'].includes('confirm') || data[i]['Full File Name'].includes('Confirm') || data[i]['Full File Name'].includes('CONFIRM')
+    || data[i]['Full File Name'].includes('Master') || data[i]['Full File Name'].includes('master') || data[i]['Full File Name'].includes('isda')
+    || data[i]['Full File Name'].includes('Isda') || data[i]['Full File Name'].includes('ISDA'))  {
+      if(!data[i][d].includes('Unextracted') ){
+
+        for(var key in ref_rate) {
+          console.log(key);
+          console.log(data[i][d]);
+          if (data[i][d].includes(key))
+            {
+              ref_rate[key]++;
+            }
+  }
+
+
+        }
+
+      }
+    }
+  }
+  if (d == "ISDA - IBOR/NON IBOR") {
+    for (var i=0; i < documents_flag; i += 1){
+
+      if (data[i]['Full File Name'].includes('confirm') || data[i]['Full File Name'].includes('Confirm') || data[i]['Full File Name'].includes('CONFIRM')
+    || data[i]['Full File Name'].includes('Master') || data[i]['Full File Name'].includes('master') || data[i]['Full File Name'].includes('isda')
+    || data[i]['Full File Name'].includes('Isda') || data[i]['Full File Name'].includes('ISDA'))  {
+      if(!data[i][d].includes('No Data Present') ){
+
+        console.log(data[i]['Full File Name']);
+        console.log(data[i][d]);
+
+        if (data[i][d]=="IBOR")
+          {ibor++;}
+        else if (data[i][d].includes("NON"))
+          {nibor++;}
+        }
+      else
+      {
+        ibor_unextracted++;
+      }
+
+
+      console.log(ibor);
+      console.log(nibor);
+      console.log(ibor_unextracted);
+
+      }
+    }
+  }
+
+
+                  $(document).ready( function () {
+
+        $( "#bla" ).attr('data-value', field_extraction_percentage );
+
+
+});
+
+  if (d == "Fallback Language Strength") {
+    for (var i=0; i < documents_flag; i += 1){
+
+      if (data[i]['Full File Name'].includes('confirm') || data[i]['Full File Name'].includes('Confirm') || data[i]['Full File Name'].includes('CONFIRM')
+    || data[i]['Full File Name'].includes('Master') || data[i]['Full File Name'].includes('master') || data[i]['Full File Name'].includes('isda')
+    || data[i]['Full File Name'].includes('Isda') || data[i]['Full File Name'].includes('ISDA'))  {
+
+        if(data[i][d].includes('Weak')){
+        weak_flag++;}
+      else if(data[i][d].includes('Silent')){
+        silent_flag++;}
+      else if(data[i][d].includes('Medium')){
+        medium_flag++;}
+      else
+        strong_flag++;
+
+
+      }
+    }
+  }
 
 
 
+  });
+
+
+  var dataset2 = {
+  mat_date: [ibor, nibor, ibor_unextracted]
+};
+
+
+  var dataset = {
+  mat_date: [ContractualMaturityDatePre2021.length, ContractualMaturityDatePost2021.length, ContractualMaturityDatePost2000.length, ContractualMaturityDatePost0.length]
+};
+
+//REMOVE AFTER DENMO
+ var dataset = {
+  mat_date: [12,42,37,11]
+};
+
+  var dataset1 = {
+  mat_date: [
+ref_rate["No rate"],
+ref_rate["USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent"],
+ref_rate["Eurocurrency Rate"],
+ref_rate["Eurodollar"],
+ref_rate["EURIBO"],
+ref_rate["LIBOR"],
+ref_rate["Adjusted LIBOR"]
+  ]
+};
+
+
+var bardata = [0,silent_flag*2, weak_flag*2, medium_flag*2, strong_flag*2];
+  cost_bar(bardata);
+
+
+  holdings_role_set.forEach((el) => {
+  console.log(el);
+});
+
+  function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+
+        <!-----   -->
+        _temp=inp.value;
+        console.log(_temp);
+        var current_borrower_count=0;
+        var current_lender_count=0;
+        var current_documentation_agent_count=0;
+        var current_syndication_agent_count=0;
+        var current_lead_arranger_count=0;
+        var current_book_runner_count=0;
+        var current_holdings_count=0;
+        var current_ref_rate = {"No rate": 0, "USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent": 0, "Eurocurrency Rate": 0,
+  "Adjusted LIBOR": 0, "LIBOR": 0, "Eurodollar": 0, "EURIBO": 0};
+        var current_admin_agent_count=0;
+        var current_ibor=0;
+        var current_nibor=0;
+        var current_ibor_unextracted=0;
+        var current_pre_2021_count=0;
+        var current_post_2021_count=0;
+        var current_strong_fallback_count=0;
+        var current_weak_fallback_count=0;
+        var current_silent_fallback_count=0;
+        var current_medium_fallback_count=0;
+        var current_unextracted_matdate_count =0;
+
+  console.log(current_unextracted_matdate_count);
+
+
+    for (var i=0; i < borrower_role_list.length;i += 1){
+
+      if(borrower_role_list[i].includes(_temp)){
+        current_borrower_count++;
+        }
+      console.log(borrower_role_list[i]);
+      console.log(_temp);
+
+    }
+    document.getElementById("borrower_count").textContent=current_borrower_count;
+    for (var j=0; j<holdings_role_list.length;j += 1){
+
+      if(holdings_role_list[j].includes(_temp)){
+        current_holdings_count++;
+        }
+      console.log(holdings_role_list[j]);
+      console.log(_temp);
+
+    }
+    document.getElementById("holdings_count").textContent=current_holdings_count;
+    for (var k=0; k<admin_role_list.length;k += 1){
+
+      if(admin_role_list[k].includes(_temp)){
+        current_admin_agent_count++;
+        }
+      console.log(admin_role_list[k]);
+      console.log(_temp);
+
+    }
+//    document.getElementById("admin_agent_count").textContent=current_admin_agent_count;
+    for (var k=0; k<legal_entity_list.length;k += 1){
+
+      console.log(legal_entity_list[k]);
+      console.log(_temp.substring(0, 5));
+
+      if(legal_entity_list[k].includes(_temp.substring(0, 13)) && data[k]['LegalEntitysRoles'].includes('Arranger')){
+        current_lead_arranger_count++;
+
+        console.log(data[k]['LegalEntitysRoles'] + "  :  " + data[k]['Full File Name']);
+      console.log(_temp);
+        }
+
+
+    }
+    document.getElementById("lead_arranger_count").textContent=current_lead_arranger_count;
+    for (var k=0; k<legal_entity_list.length;k += 1){
+
+      if(legal_entity_list[k].includes(_temp.substring(0, 13)) && data[i]['LegalEntitysRoles'].includes('Book Runner')){
+        current_book_runner_count++;
+        }
+      console.log(data[i]['LegalEntitysRoles']);
+      console.log(_temp);
+
+    }
+    document.getElementById("book_runner_count").textContent=current_book_runner_count;
+    for (var k=0; k<legal_entity_list.length;k += 1){
+
+      if(legal_entity_list[k].includes(_temp.substring(0, 13)) && data[i]['LegalEntitysRoles'].includes('Syndication Agent')){
+        current_syndication_agent_count++;
+        }
+      console.log(data[i]['LegalEntitysRoles']);
+      console.log(_temp);
+
+    }
+    document.getElementById("syndication_agent_count").textContent=current_syndication_agent_count;
+    for (var k=0; k<legal_entity_list.length;k += 1){
+
+      if(legal_entity_list[k].includes(_temp.substring(0, 13)) && data[i]['LegalEntitysRoles'].includes('Documentation Agent')){
+        current_documentation_agent_count++;
+        }
+      console.log(data[i]['LegalEntitysRoles']);
+      console.log(_temp);
+
+    }
+    document.getElementById("documentation_agent_count").textContent=current_documentation_agent_count;
+    for (var i=0; i < documents_flag; i += 1){
+
+      if (data[i]['Full File Name'].includes('confirm') || data[i]['Full File Name'].includes('Confirm') || data[i]['Full File Name'].includes('CONFIRM')
+    || data[i]['Full File Name'].includes('Master') || data[i]['Full File Name'].includes('master') || data[i]['Full File Name'].includes('isda'))  {
+
+    if (data[i]['Holdings'].includes(_temp))
+      {
+
+      if (!data[i]['ContractualMaturityDate'].includes('Unextracted'))
+      {
+      var mydate = new Date(data[i]['ContractualMaturityDate']);
+      if(mydate.getFullYear()<2021)
+        current_pre_2021_count++;
+      if(mydate.getFullYear()>2021)
+        current_post_2021_count++;
+      }
+      else {
+        current_unextracted_matdate_count++;
+      }
+
+
+      if(data[i]['Fallback Language Strength'].includes('Silent')){
+        current_silent_fallback_count++;}
+      else if(data[i]['Fallback Language Strength'].includes('Weak')){
+        current_weak_fallback_count++;}
+      else if(data[i]['Fallback Language Strength'].includes('Medium')){
+        current_medium_fallback_count++;}
+      else
+        current_strong_fallback_count++;
+
+        for(var key in current_ref_rate) {
+          console.log(key);
+          console.log(data[i]['ReferenceRate Only']);
+          if (data[i]['ReferenceRate Only'].includes(key))
+            {
+              current_ref_rate[key]++;
+            }
+        }
+
+      if(!data[i]['IBOR/NON-IBOR'].includes('No Data Present') ){
+
+        if (data[i]['IBOR/NON-IBOR']=="IBOR")
+          {current_ibor++;}
+        else if (data[i]['IBOR/NON-IBOR'].includes("NON"))
+          {current_nibor++;}
+        }
+      else
+      {
+        current_ibor_unextracted++;
+      }
+
+
+
+
+      console.log(data[i]['ContractualMaturityDate']);
+      console.log(_temp);
+      }
+     else if (data[i]['Borrower'].includes(_temp))
+      {
+      if (!data[i]['ContractualMaturityDate'].includes('Unextracted'))
+      {
+      var mydate = new Date(data[i]['ContractualMaturityDate']);
+      if(mydate.getFullYear()<2021)
+        current_pre_2021_count++;
+      if(mydate.getFullYear()>2021)
+        current_post_2021_count++;
+      }
+      else {
+        current_unextracted_matdate_count++;
+      }
+
+      if(data[i]['Fallback Language Strength'].includes('Silent')){
+        current_silent_fallback_count++;}
+      else if(data[i]['Fallback Language Strength'].includes('Weak')){
+        current_weak_fallback_count++;}
+      else if(data[i]['Fallback Language Strength'].includes('Medium')){
+        current_medium_fallback_count++;}
+      else
+        current_strong_fallback_count++;
+
+        for(var key in current_ref_rate) {
+          console.log(key);
+          console.log(data[i]['ReferenceRate Only']);
+          if (data[i]['ReferenceRate Only'].includes(key))
+            {
+              current_ref_rate[key]++;
+            }
+        }
+
+      if(!data[i]['IBOR/NON-IBOR'].includes('No Data Present') ){
+
+        if (data[i]['IBOR/NON-IBOR']=="IBOR")
+          {current_ibor++;}
+        else if (data[i]['IBOR/NON-IBOR'].includes("NON"))
+          {current_nibor++;}
+        }
+      else
+      {
+        current_ibor_unextracted++;
+      }
+
+
+      console.log(data[i]['ContractualMaturityDate']);
+      console.log(_temp);
+      }
+    else if (data[i]['CalculationAdministrativeAgent'].includes(_temp))
+      {
+      if (!data[i]['ContractualMaturityDate'].includes('Unextracted'))
+      {
+      var mydate = new Date(data[i]['ContractualMaturityDate']);
+      if(mydate.getFullYear()<2021)
+        current_pre_2021_count++;
+      if(mydate.getFullYear()>2021)
+        current_post_2021_count++;
+      }
+      else {
+        current_unextracted_matdate_count++;
+      }
+      if(data[i]['Fallback Language Strength'].includes('Silent')){
+        current_silent_fallback_count++;}
+      else if(data[i]['Fallback Language Strength'].includes('Weak')){
+        current_weak_fallback_count++;}
+      else if(data[i]['Fallback Language Strength'].includes('Medium')){
+        current_medium_fallback_count++;}
+      else
+        current_strong_fallback_count++;
+
+        for(var key in current_ref_rate) {
+          console.log(key);
+          console.log(data[i]['ReferenceRate Only']);
+          if (data[i]['ReferenceRate Only'].includes(key))
+            {
+              current_ref_rate[key]++;
+            }
+        }
+
+      if(!data[i]['IBOR/NON-IBOR'].includes('No Data Present') ){
+
+        if (data[i]['IBOR/NON-IBOR']=="IBOR")
+          {current_ibor++;}
+        else if (data[i]['IBOR/NON-IBOR'].includes("NON"))
+          {current_nibor++;}
+        }
+      else
+      {
+        current_ibor_unextracted++;
+      }
+
+      console.log(data[i]['ContractualMaturityDate']);
+      console.log(_temp);
+      }
+    else if(data[i]['LegalEntityies'].includes(_temp))
+      {
+      if (!data[i]['ContractualMaturityDate'].includes('Unextracted'))
+      {
+      var mydate = new Date(data[i]['ContractualMaturityDate']);
+      if(mydate.getFullYear()<2021)
+        current_pre_2021_count++;
+      if(mydate.getFullYear()>2021)
+        current_post_2021_count++;
+      }
+      else {
+        current_unextracted_matdate_count++;
+      }
+      if(data[i]['Fallback Language Strength'].includes('Silent')){
+        current_silent_fallback_count++;}
+      else if(data[i]['Fallback Language Strength'].includes('Weak')){
+        current_weak_fallback_count++;}
+      else if(data[i]['Fallback Language Strength'].includes('Medium')){
+        current_medium_fallback_count++;}
+      else
+        current_strong_fallback_count++;
+
+        for(var key in current_ref_rate) {
+          console.log(key);
+          console.log(data[i]['ReferenceRate Only']);
+          if (data[i]['ReferenceRate Only'].includes(key))
+            {
+              current_ref_rate[key]++;
+            }
+        }
+
+      if(!data[i]['IBOR/NON-IBOR'].includes('No Data Present') ){
+
+        if (data[i]['IBOR/NON-IBOR']=="IBOR")
+          {current_ibor++;}
+        else if (data[i]['IBOR/NON-IBOR'].includes("NON"))
+          {current_nibor++;}
+        }
+      else
+      {
+        current_ibor_unextracted++;
+      }
+
+
+      console.log(data[i]['ContractualMaturityDate']);
+      console.log(_temp);
+      }
+      }
+    }
+
+  document.getElementById("ref_rate_1").textContent=current_ref_rate["No rate"];
+  document.getElementById("ref_rate_2").textContent=current_ref_rate["USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent"];
+  document.getElementById("ref_rate_3").textContent=current_ref_rate["Eurocurrency Rate"];
+  document.getElementById("ref_rate_4").textContent=current_ref_rate["Eurodollar"];
+  document.getElementById("ref_rate_5").textContent=current_ref_rate["EURIBO"];
+  document.getElementById("ref_rate_6").textContent=current_ref_rate["LIBOR"];
+  document.getElementById("ref_rate_7").textContent=current_ref_rate["Adjusted LIBOR"];
+  document.getElementById("ibor_count").textContent=current_ibor;
+  document.getElementById("nibor_count").textContent=current_nibor;
+  document.getElementById("ibor_unextracted_count").textContent=current_ibor_unextracted;
+
+
+    document.getElementById("pre_count").textContent=current_pre_2021_count ;
+    document.getElementById("post_count").textContent=current_post_2021_count ;
+    document.getElementById("ContractualMaturityDateUnextractedCount").textContent=current_unextracted_matdate_count ;
+    field_extraction_percentage = Math.round(current_post_2021_count/(current_pre_2021_count+current_post_2021_count)*100);
+  document.getElementById("field_extraction_percentage").textContent=current_post_2021_count + "/" + current_pre_2021_count;
+
+  console.log(current_unextracted_matdate_count);
+
+
+  var dataset = {
+  mat_date: [current_pre_2021_count, current_post_2021_count, current_unextracted_matdate_count]
+};
+
+
+
+ var dataset1 = {
+  mat_date: [
+current_ref_rate["No rate"],
+current_ref_rate["USD-LIBOR-BBA round up to the nearest 1/1000 of 1 per cent"],
+current_ref_rate["Eurocurrency Rate"],
+current_ref_rate["Eurodollar"],
+current_ref_rate["EURIBO"],
+current_ref_rate["LIBOR"],
+current_ref_rate["Adjusted LIBOR"]
+  ]
+};
+
+
+  var dataset2 = {
+  mat_date: [current_ibor, current_nibor, current_ibor_unextracted]
+};
+
+
+var element = document.getElementById("container1234");
+    element.parentNode.removeChild(element);
+  var p = document.getElementById("parent");
+    var newElement = document.createElement('div');
+    newElement.setAttribute('id', 'container1234');
+  newElement.setAttribute("style", "transform:scale(0.4); position: relative; margin-left: -20px; margin-top:-110px;; z-index:1;");
+    p.appendChild(newElement);
+
+  pie_segments(dataset);
+
+
+ var element = document.getElementById("container123");
+    element.parentNode.removeChild(element);
+  var p = document.getElementById("parent123");
+    var newElement = document.createElement('div');
+    newElement.setAttribute('id', 'container123');
+  newElement.setAttribute("style", "transform:scale(1.2); position: relative; margin-left: 20px; margin-top:50px; z-index:1;");
+    p.appendChild(newElement);
+
+  pie_segments1(dataset1);
+
+  var element = document.getElementById("container12");
+    element.parentNode.removeChild(element);
+  var p = document.getElementById("parent12");
+    var newElement = document.createElement('div');
+    newElement.setAttribute('id', 'container12');
+  newElement.setAttribute("style", "transform:scale(0.4); position: relative; margin-left: -20px; margin-top:-110px;; z-index:1;");
+    p.appendChild(newElement);
+
+  pie_segments2(dataset2);
+
+  var element = document.getElementById("chart");
+    element.parentNode.removeChild(element);
+  var p = document.getElementById("parent_chart");
+    var newElement = document.createElement('div');
+    newElement.setAttribute('id', 'chart');
+  newElement.setAttribute("style", "width: 200px; height: 120px; padding-top: 30px; transform:scale(0.7); margin-left:0px;");
+    p.appendChild(newElement);
+
+  if (current_silent_fallback_count==0)
+    {current_silent_fallback_count1=0.1;}
+  else
+    {current_silent_fallback_count1=current_silent_fallback_count;}
+
+  if (current_weak_fallback_count==0)
+    {current_weak_fallback_count1=0.1;}
+  else
+    {current_weak_fallback_count1=current_weak_fallback_count;}
+
+
+  var bardata = [0,current_silent_fallback_count1*10*2,current_weak_fallback_count1*10*2,current_medium_fallback_count*10*2,current_strong_fallback_count*10*2];
+  cost_bar(bardata);
+  document.getElementById("silent").textContent=current_silent_fallback_count;
+  document.getElementById("weak").textContent=current_weak_fallback_count;
+  document.getElementById("medium").textContent=current_medium_fallback_count;
+  document.getElementById("strong").textContent=current_strong_fallback_count;
+  document.getElementById("page_title").textContent=_temp;
+
+                  $(document).ready( function () {
+
+        $( "#bla" ).attr('data-value', field_extraction_percentage );
+
+});
+
+
+
+        <!---- ---->
+
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+
+
+let set3 = new Set(function*() { yield* holdings_role_set; yield* borrower_role_set; }());
+/*An array containing all the country names in the world:*/
+console.log(set3);
+let countries = Array.from(set3);
+console.log(countries);
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete(document.getElementById("myInput"), countries);
+
+  function msg() {
+    alert("Hello world!");
+}
+
+  function pie_segments(dataset){
+
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#ffe600", "#777", "#999", "#bbb"],
+    svg = d3.select('#container1234')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')');
+
+radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+    .sort(null);
+
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+    .attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
     });
-    </script>
-</body>
 
+
+  }
+
+  function pie_segments1(dataset){
+
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#ffe600", "#777", "#999", "#aaa", "#666", "#ccc", "#888"],
+    svg = d3.select('#container123')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')');
+
+radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+    .sort(null);
+
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+    .attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+
+
+  }
+
+
+  function pie_segments2(dataset){
+
+
+var width = 335,
+    height = 335,
+    radius,
+    color = ["#ffe600", "#777", "#ddd"],
+    svg = d3.select('#container12')
+          .append('svg')
+          .attr('height', height)
+          .attr('width', width);
+
+
+
+var g = svg.attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width/2 +  ',' + height/2 +')');
+
+radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+    .sort(null);
+
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(radius);
+
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
+var path = g.selectAll("path")
+    .data(pie(dataset.mat_date))
+    .enter()
+    .append("path")
+    .attr("stroke-width", 20)
+    .transition()
+    .attr("fill", (d, i) => color[i] )
+    .duration(1000)
+    .attrTween('d', d => {
+       var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+       return function(t) {
+         d.endAngle = i(t);
+         return arc(d);
+       }
+    });
+
+
+  }
+
+  function cost_bar(bardata){
+
+
+var height = 200,
+    width = 415,
+    barWidth = 70,
+    barOffset = 5;
+
+d3.select('#chart').append('svg')
+  .attr('width', width)
+  .attr('height', height)
+  .style('background', '#111')
+  .selectAll('rect').data(bardata)
+  .enter().append('rect')
+      .style('fill', function(d) {
+    if (d<10*2)
+    return "#ccc";
+  else if (d<=20*2)
+    return "#ffe600";
+  else if (d<=30*2)
+    return "#eee";
+  else if (d<=30*2)
+    return "#444";
+  else if (d<=50*2)
+    return "#777";
+  else
+    return "#ffe600";
+  })
+      .attr('width', barWidth)
+      .attr('height', function(d) {
+          return d;
+})
+
+ .attr('x', function(d,i) {
+          return i * (barWidth + barOffset);
+})
+  .attr('y', function(d) {
+          return height - d;
+  })
+
+
+
+  }
+
+
+});
+
+      </script>
+   </body>
 </html>

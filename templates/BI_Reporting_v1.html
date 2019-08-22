@@ -372,11 +372,8 @@ for (i = 0; i < jsonObj.location.length; i++) {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-
-            <div class='row'>
+                </div></div>
+                <div class='row'>
                 <div class="col-md-6">
                         <div class="panel">
                             <div class="panel-heading">
@@ -397,99 +394,6 @@ for (i = 0; i < jsonObj.location.length; i++) {
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <div class="panel-tools">
-                                    <a class="panel-toggle"></a>
-                                    <a class="panel-close"></a>
-                                </div>
-                                <!-- Field Errors -->
-                               Confidence Score
-                            </div>
-                            <div class="panel-body">
-                            <!-- <table style="width:100%"> -->
-                                <style>
-                                    table {
-                                      border-collapse: collapse;
-                                    }
-                                    th, td {
-                                      border: 1px solid rgba(255, 255, 255, 0.226);
-                                      padding: 5px;
-                                      text-align: left;
-                                    }
-                                  </style>
-                                  <table style='margin-left: 30px;'>
-                                <tr>
-                                    <th>Fields</th>
-                                    <th>Percentage</th>
-                                  </tr>
-                                  <tr>
-                                    <td>Agreement Name</td>
-                                    <td>80%</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Alternative Rate Definition</td>
-                                    <td>99%</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Consent</td>
-                                    <td>100%</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Contract Origination Date</td>
-                                    <td>64%</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Contractual Maturity Date</td>
-                                    <td>97%</td>
-                                  </tr>
-                                  <tr>
-                                    <td>ISDA Definition</td>
-                                    <td>N/A</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Fallback 1_Language</td>
-                                    <td>92%</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Governing Law</td>
-                                    <td>97%</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Legal Entity Roles & Legal Entities</td>
-                                    <td>96%</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Reference Rate Definition</td>
-                                    <td>92%</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Reference Rate Optionality</td>
-                                    <td>96%</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Fallback 2_Language</td>
-                                    <td>94%</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Average Confidence Score by Field</td>
-                                    <td>92%</td>
-                                  </tr>
-
-                            </table>
-
-
-                                <div id="barOptionsParent">
-                                <div id='barOptionsLegend' style='width:500px;'></div>
-                                    <canvas id="barOptions" width="500" height="250" style=''></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-            </div>
-    
 				
 				</div>
             
@@ -510,13 +414,14 @@ for (i = 0; i < jsonObj.location.length; i++) {
 
 <!-- App scripts -->
 <script src="scripts/luna.js"></script>
+<script src="/api_host.js"></script>
 
 <script>
 
     
 
 const Http = new XMLHttpRequest();
-const url='https://qa002-ibornp.westus2.dip.sbp.eyclienthub.com:8000/demo/contracts.json';
+const url=API_HOST+'demo/contracts.json';
 Http.open("GET", url);
 Http.send();
 
@@ -551,7 +456,7 @@ function isIBOR(arr){
         else if (arr[i].is_ibor_doc == 0){
             not_ibor += 1;
         }
-        else if (arr[i].is_ibor_doc == "N/A"){na += 1};
+        else if (arr[i].is_ibor_doc == "NA"){na += 1};
     }
     return [is_ibor, not_ibor, na]
 }
@@ -592,14 +497,12 @@ function maturityDate(arr){
 function refRateOption(arr){
     var rr_opt = 0;
     var rr_no_opt = 0;
-    var rr_na = 0;
 
     for (var i = 0; i < arr.length; i++){
-        if (arr[i].defaultValues['Reference Rate Optionality'] == 'null'){rr_no_opt += 1;}
-        else if (arr[i].defaultValues['Reference Rate Optionality'] == 'N/A'){rr_na += 1;}
+        if (arr[i].defaultValues['Reference Rate Optionality'] == 'null'){rr_no_opt += 1}
         else {rr_opt += 1};
     }
-    return [rr_opt, rr_no_opt, rr_na]
+    return [rr_opt, rr_no_opt]
 }
 
 function refRate(arr) {
@@ -632,29 +535,16 @@ function fallbackLangCount(arr){
     var both_null = 0;
 
     for (var i = 0; i < arr.length; i++){
-    //     if ((arr[i].defaultValues['Fallback 1_Language'] != "null") || (arr[i].defaultValues['Fallback 2_Language'] != "null")){
-    //         one_of_two += 1;            
-    //     }
-    //     else if ((arr[i].defaultValues['Fallback 1_Language'] != "null") && (arr[i].defaultValues['Fallback 2_Language'] != "null")){
-    //         both += 1;
-    //         console.log(arr[i].defaultValues['Fallback 1_Language'])
-    //     }
-    //     else if ((arr[i].defaultValues['Fallback 1_Language'] == "null") && (arr[i].defaultValues['Fallback 2_Language'] == "null")){
-    //         both_null += 1;
-    //     }
-    // }
-
-        if ((arr[i].defaultValues['Fallback 1_Language'] == "null") && (arr[i].defaultValues['Fallback 2_Language'] == "null")){
+        if (arr[i].defaultValues['Fallback 1_Language'] != "null" || arr[i].defaultValues['Fallback 2_Language'] != "null"){
+            one_of_two += 1;
+        }
+        else if (arr[i].defaultValues['Fallback 1_Language'] != "null" && arr[i].defaultValues['Fallback 2_Language'] != "null"){
+            both += 1;
+        }
+        else if (arr[i].defaultValues['Fallback 1_Language'] == "null" && arr[i].defaultValues['Fallback 2_Language'] == "null"){
             both_null += 1;
         }
-        else if ((arr[i].defaultValues['Fallback 1_Language'] != "null") && (arr[i].defaultValues['Fallback 2_Language'] != "null")){
-            both += 1;
-            // console.log(arr[i].defaultValues['Fallback 1_Language'])
-        }
-        else {console.log(i);}
     }
-
-        one_of_two = arr.length - [both_null + both]
 
         return [one_of_two, both, both_null]
 }
@@ -712,7 +602,6 @@ function fallbackSummaryCategory2(arr){
     var alt_src = 0;  //C
     var hist_rate = 0;  //D
     var silent = 0;  //E
-    var null_na = 0;
     var multiple = 0; //Rest
 
     for (var i = 0; i < arr.length; i++){
@@ -731,15 +620,13 @@ function fallbackSummaryCategory2(arr){
         else if (arr[i].defaultValues['Fallback 2 Summary Categorization'] == 'E'){
             silent += 1;
         }
-        else if ((arr[i].defaultValues['Fallback 2 Summary Categorization'] == 'null') || (arr[i].defaultValues['Fallback 2 Summary Categorization'] == 'N/A')){
-            null_na += 1;
+        else if (arr[i].defaultValues['Fallback 2 Summary Categorization'] == 'M'){
+            multiple += 1;
         }
-
-        else {multiple += 1;}
-
+        
     }
 
-    return [spec_non_ibor, com_rate, alt_src, hist_rate, silent, multiple, null_na]
+    return [spec_non_ibor, com_rate, alt_src, hist_rate, silent, multiple]
 
 }
 
@@ -944,12 +831,11 @@ Chart.plugins.register({
         var doughnutData1 = {
             labels: [
                 "Yes",
-                "No", 
-                "NA"
+                "No"
             ],
             datasets: [
                 {
-                    data: [ref_rate_option[0], ref_rate_option[1], ref_rate_option[2]],
+                    data: [ref_rate_option[0], ref_rate_option[1]],
                     borderWidth: 0,
                     backgroundColor: [
                         "rgba(66, 62, 110,0.8)",
@@ -1133,7 +1019,7 @@ Chart.plugins.register({
         };
 
         var barData_fb_2 = {
-            labels: ["Specified non-IBOR rate", "Comparable Rate", "Alternative Source", "Historical Rate", "Silent", "Multiple", 'Null or NA'],
+            labels: ["Specified non-IBOR rate", "Comparable Rate", "Alternative Source", "Historical Rate", "Silent", "Multiple"],
             // labels: ref_rate[0],
             datasets:  [{
       label: "Field",

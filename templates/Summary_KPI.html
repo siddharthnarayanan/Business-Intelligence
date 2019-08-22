@@ -384,6 +384,7 @@ Finalizing: <a href="#" id="not_started_count" style="color:#bbb;">1</a>
 <script src="/static/vendor/chart.js/dist/Chart.min.js"></script>
 <!-- App scripts -->
 <script src="/static/scripts/luna.js"></script>
+<script src="/api_host.js"></script>
 
 
 <script>
@@ -511,7 +512,7 @@ function docProcessStatus(arr) {
 
 // Load contracts.json
 const Http = new XMLHttpRequest();
-const url='https://qa002-ibornp.westus2.dip.sbp.eyclienthub.com:8000/demo/contracts.json';
+const url=API_HOST+'demo/contracts.json';
 Http.open("GET", url);
 Http.send();
 
@@ -1239,8 +1240,8 @@ $(document).ready( function () {
 	
 		// document.getElementById("documents_count").textContent= total_num_docs; //documents_flag; //466
 		// document.getElementById("not_started_count").textContent=not_started ;
-		document.getElementById("complete_count").textContent=complete; // 442;
-		document.getElementById("in_review_count").textContent=in_review;// 0;
+		//document.getElementById("complete_count").textContent=complete; // 442;
+		//#document.getElementById("in_review_count").textContent=in_review;// 0;
 		// document.getElementById("in_progress_count").textContent=in_progress;//0;
     //document.getElementById("documents_count_top").textContent = total_num_docs
     
@@ -1288,12 +1289,12 @@ $(document).ready( function () {
 	document.getElementById("fields_not_extracted_count").textContent = ibor ;//191;
 	document.getElementById("total_fields_extracted_count").textContent = nibor; 	
 	
-	document.getElementById("slcount").textContent=SYNDICATED_flag;//211;
-	document.getElementById("isdacount").textContent=ISDA_flag;//113;
-	document.getElementById("mortcount").textContent=MORTGAGE_flag;//118;
-	document.getElementById("totalcount").textContent=(ISDA_flag+MORTGAGE_flag+SYNDICATED_flag);//442;
+	//document.getElementById("slcount").textContent=SYNDICATED_flag;//211;
+	//document.getElementById("isdacount").textContent=ISDA_flag;//113;
+	//document.getElementById("mortcount").textContent=MORTGAGE_flag;//118;
+	//document.getElementById("totalcount").textContent=(ISDA_flag+MORTGAGE_flag+SYNDICATED_flag);//442;
 	
-	document.getElementById("mortvalue").textContent=MORTGAGE[0];//118;
+	/*document.getElementById("mortvalue").textContent=MORTGAGE[0];//118;
 	document.getElementById("mortcompleted").textContent=MORTGAGE[0];//118;
 	document.getElementById("mortreview").textContent=MORTGAGE[2];//0;
 	document.getElementById("mortprogress").textContent=MORTGAGE[3];//0;
@@ -1309,7 +1310,7 @@ $(document).ready( function () {
 	document.getElementById("slcompleted").textContent= SYNDICATED[0]; //211;
 	document.getElementById("slreview").textContent=SYNDICATED[2]; //0;
 	document.getElementById("slprogress").textContent= SYNDICATED[3]; //0;
-	document.getElementById("slnstart").textContent= SYNDICATED[1]; //0;
+	document.getElementById("slnstart").textContent= SYNDICATED[1]; //0;*/
 	
 	
   });
@@ -1448,7 +1449,7 @@ let set3 = new Set(function*() { yield* legal_entity_set; yield* admin_role_set;
 let countries = Array.from(set3);
 // console.log(countries);
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-autocomplete(document.getElementById("myInput"), countries);
+//autocomplete(document.getElementById("myInput"), countries);
   
 function msg() {
     alert("Hello world!");

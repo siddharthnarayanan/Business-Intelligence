@@ -2,7 +2,6 @@
 <html>
 
    <head>
-      
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -126,17 +125,6 @@ border-radius:4px;
 
                               <div ng-app="app" ng-controller="ItemController" style="">
 
-                                 <div class="btn-group pull-right" style="float:right;">
-                                    <!-- <a href = '/static/frames/IBOR_Data_Model.csv'> <button id = 'download_btn' class=" letspop button-pop-up btn btn-yellow btn-xs" href="#popup" style="border-radius:0px; float:right;margin-bottom: 10px;"><i class="fa fa-cloud-download"></i> Download Data Model</button></a> -->
-                                    <!-- <a href="csv_data:text/csv;charset=utf-8,'+escape(csv)+'" download="filename.csv"> <button id = 'download_btn' class=" letspop button-pop-up btn btn-yellow btn-xs" href="#popup" style="border-radius:0px; float:right;margin-bottom: 10px;"><i class="fa fa-cloud-download"></i> Download Data Model</button></a> -->
-                                    <!-- <button class="btn btn-yellow btn-xs" style="margin-right: 5px; border-radius:0px; float:right; margin-bottom: 10px;" ng-click="clickButton(persons, $scope.query)"><i class="fa fa-cog"></i> Process Document</button> -->
-                                    <button class="btn btn-yellow btn-xs" style="margin-right: 5px; border-radius:0px; float:right; margin-bottom: 10px;" ng-click="download_data_model()"><i class="fa fa-cog"></i>Download Data Model</button>
-                                    <!-- <button id = 'fileRequest' class="btn btn-yellow btn-xs" style="margin-right: 5px; border-radius:0px; float:right; margin-bottom: 10px;" ng-click="download_data_model()"><i class="fa fa-cog"></i> Download Data Model</button> -->
-                                    <!-- <button type = 'submit' class="btn btn-yellow btn-xs" style="margin-right: 5px; border-radius:0px; float:right; margin-bottom: 10px;" onclick = "window.open(download_data_model())"><i class="fa fa-cog"></i> Download Data Model</button> -->
-                                    <!-- <button ng-click = downloadCSV() class=" letspop button-pop-up btn btn-yellow btn-xs" href="#popup" style="border-radius:0px; float:right;margin-bottom: 10px;"><i class="fa fa-cloud-download"></i> Download Data Model</button> -->
-                                </div>
-            
-
 							  <div class="row">
                <div class="col-md-12">
                   <div class="panel panel-filled">
@@ -176,8 +164,8 @@ border-radius:4px;
                         <tr style="color:white; height:50px;">
                         <td class="team test" id="admin_agent_role1" style="padding:10px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:80px; ">&nbsp;&nbsp;&nbsp;&nbsp;#</td>
                         <td class="team " id="admin_agent_role1" style="padding:10px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:800px;">Document Name</td>
-                        <td class="team " id="admin_agent_role1" style="text-align:left; padding:10px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:500px;">Fallback 1 Categorization</td>
-                        <td class="team " id="admin_agent_role1" style="padding:10px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:300px;">Fallback 2 Categorization</td>
+                        <!--<td class="team " id="admin_agent_role1" style="text-align:left; padding:10px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:500px;">Agreement Name</td>-->
+                        <td class="team " id="admin_agent_role1" style="padding:10px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:300px;">Fallback Categorization</td>
                         </tr>
                       </thead>
                     </table>
@@ -195,8 +183,8 @@ border-radius:4px;
       				                    <tr class="" style=" height:40px; ">
                                     <td style="width:80px; ">&nbsp;&nbsp;&nbsp;&nbsp;{{'{{$index + 1}}'}}</td>
                                    <td class="team " id="borrower_role" style="padding:5px; width:800px;  word-break: break-all; white-space: wrap; color:#fff;"><i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp;{{'{{ person.document_name }}'}} </td>
-      				                  <td class="rank " id ="borrower_count" style="padding:5px; width:500px;  text-align:center; "><span class="label label-accent" ng-style="set_color(person)" style="background:rgba(0,0,0,0.2); font-size:13px;">{{'{{ person.defaultValues["Fallback 1 Summary Categorization"] }}'}}</span></td>
-      				                  <td class="rank " id="borrower_count1" style="padding:5px; width:300px; text-align:center; "><span class="label label-accent" ng-style="set_color(person)" style="background:rgba(0,0,0,0.2); font-size:13px;"> {{'{{ person.defaultValues["Fallback 2 Summary Categorization"] }}'}}  </span></td>
+      				                    <!-- <td class="rank " id ="borrower_count" style="padding:5px; width:500px;  word-break: break-all; color:#fff; white-space: wrap;">{{'{{ person.AgreementName }}'}}</td>-->
+      				                     	<td class="rank " id="borrower_count1" style="padding:5px; width:300px; text-align:center; "><span class="label label-accent" ng-style="set_color(person)" style="background:rgba(0,0,0,0.2); font-size:13px;"> {{'{{ person.defaultValues["Fallback 2 Summary Categorization"] }}'}}  </span></td>
                                 </tr>
                                 </tbody>
       				               </table>
@@ -250,7 +238,7 @@ border-radius:4px;
       <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
       <!-- App scripts -->
       <script src="/static/scripts/luna.js"></script>
-
+      <script src="/api_host.js"></script>
 	  
 <script> 
 $(document).ready(function() {
@@ -265,111 +253,11 @@ var theApp = angular.module('app', []);
 
 theApp.controller('ItemController', function ItemController($scope,  $http) {
 
-$http.get('https://qa002-ibornp.westus2.dip.sbp.eyclienthub.com:8000/demo/contracts.json').success(function (data) {
+$http.get(API_HOST+'demo/contracts.json').success(function (data) {
 //data = JSON.parse(window.localStorage.getItem('user'));
-      $scope.persons = data;
-      // console.log(Object.keys($scope.persons[20].defaultValues).length);
+        $scope.persons = data;
+		   });
 
-      // for (l = 0; l < $scope.persons.length; l++){
-      //    console.log(Object.keys($scope.persons[l].defaultValues).length);
-      // }
-
-      $scope.download_data_model = function(){
-
-            // Make a csv of all key-value pairs except "defaultValues"
-            var partial_keys = Object.keys($scope.persons[1]).slice(0, 8);
-
-            non_dv = [];
-            // for (var i = 1; i < $scope.persons.length; i++){
-            for (var i = 1; i < 70; i++){
-               temp_non_dv = [];
-               for (var j = 0; j < partial_keys.length; j++){
-                  key_name = partial_keys[j];
-                  temp_non_dv.push($scope.persons[i][key_name])
-               }
-
-               non_dv.push(temp_non_dv);
-            }
-
-            non_dv.unshift(partial_keys);
-
-            // var csvContent = non_dv.map(function (d){
-            //    return d.join();
-            // }).join('\n');
-
-            // Make a csv of defaultValues
-            dv = [];
-            // for (var i = 1; i < $scope.persons.length; i++){
-            for (var i = 1; i < 70; i++){   //Just taking 1 to 70 docs since number of key-value pairs are not same for all docs. For 1 to 70, they are same.
-               dv.push($scope.persons[i].defaultValues)  
-            };
-
-            var fields = Object.keys(dv[1]);
-            var replacer = function(key, value) { return value === null ? '' : value } 
-            var dv_csv = dv.map(function(row){
-               return fields.map(function(fieldName){
-                  return JSON.stringify(row[fieldName], replacer)
-                     }).join('***')
-            })
-            dv_csv.unshift(fields.join('***')) // add header column
-            dv_csv_data = dv_csv.join('\r\n');
-            // console.log(dv_csv_data);
-            
-
-            var non_dv_temp = non_dv.slice(0, 10)
-            // var dv_temp = dv_csv.slice(0, 10)
-            var dv_temp = dv_csv_data.split('\n').slice(0, 10)
-            
-            console.log(dv_temp);
-
-            all_merged= []
-            for (var d = 0; d < dv_temp.length; d++){               
-               temp_dv = dv_temp[d].split('***')
-               non_dv_temp[d].push(temp_dv)
-               var merged = [].concat.apply([], non_dv_temp[d]);
-               all_merged.push(merged)
-            }
-
-
-            // Replace special characters w/ empty characters
-            for (var ele = 1; ele < all_merged.length; ele++){
-               temp_ele = all_merged[ele];
-               for (var sub_ele = 0; sub_ele < all_merged[0].length; sub_ele++){
-                  temp_val = all_merged[ele][sub_ele]
-                  if (typeof temp_val == 'string'){
-                     all_merged[ele][sub_ele] = temp_val.replace(/\,/g, "-");  //Replace comma since it's causing issues in alignment while saving csv
-                     // all_merged[ele][sub_ele] = temp_val.replace(/\\/g, "").replace(/[\r\n]/g, '');
-                     
-                  }
-               }
-            }
-
-            console.log(all_merged);
-
-            // Option-1: Not working
-            // var blob = new Blob([all_merged], {type: 'text/csv' })
-            // saveAs(blob, 'IBOR_Data_Model' + ".csv");
-
-            // Option-2: Working
-            var a = document.createElement("a");
-            if (window.navigator.msSaveOrOpenBlob) {
-            var blob = new Blob([decodeURIComponent(encodeURI(all_merged))], {
-               type: "text/csv;charset=utf-8;"               
-            });
-            navigator.msSaveBlob(blob, 'IBOR_Data_Model.csv');
-            } else {
- 
-            a.href = 'data:attachment/csv;charset=utf-8,' + encodeURI(all_merged);
-            a.target = '_blank';
-            a.download = 'IBOR_Data_Model.csv';
-            document.body.appendChild(a);
-            a.click();
-            }
-   
-   }
-
-
-         });
 
   $scope.set_color = function (person) {
         if (person['Fallback Language Strength'] == 'D') {

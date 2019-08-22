@@ -172,7 +172,7 @@ for (i = 0; i < jsonObj.location.length; i++) {
 
 
             <div class="row">
-                <img style='width:100px; height:100px;' src='https://uw2ncria129sta01.blob.core.windows.net/processing/52_Redacted.pdf.5d2cb556a03c81e2063b8c0b.png'>asdfasdfasdf</img>
+                <img style='width:100px; height:100px;' src='https://'+AZURE_STORAGE_ACCOUNT+'.blob.core.windows.net/processing/52_Redacted.pdf.5d2cb556a03c81e2063b8c0b.png'>asdfasdfasdf</img>
                 <div class="col-lg-12">
                     <div class="view-header">
                      
@@ -428,9 +428,11 @@ for (i = 0; i < jsonObj.location.length; i++) {
 
 <!-- App scripts -->
 <script src="scripts/luna.js"></script>
+<script src="/azure_storage_account.js"></script>
+<script src="/api_host.js"></script>
 <script>
 const Http = new XMLHttpRequest();
-const url='https://iborqa001-dicrnp.westus2.dip.sbp.eyclienthub.com:8000/demo/contracts.json';
+const url=API_HOST+'demo/contracts.json';
 Http.open("GET", url);
 Http.send();
 

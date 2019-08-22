@@ -412,6 +412,7 @@ function myFunction123() {
       <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
       <!-- App scripts -->
       <script src="/static/scripts/luna.js"></script>
+      <script src="/api_host.js"></script>
 <script>
 $(document).ready(function() {
   $("#navbar-frame").load("/nav_bar");
@@ -431,7 +432,7 @@ for (var i = 0, max = query.length; i < max; i++)
 var file_id = param[1];
 
   const Http = new XMLHttpRequest();
-const url='https://qa002-ibornp.westus2.dip.sbp.eyclienthub.com:8000/demo/contract_data.json?id=' + file_id;
+const url=API_HOST+'demo/contract_data.json?id=' + file_id;
 Http.open("GET", url);
 Http.send();
 

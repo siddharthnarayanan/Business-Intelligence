@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
    <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,137 +30,180 @@
 	<script src="/static/scripts/d3-ez.js"></script>
 <!---    <script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script>  -->
 	<link rel="stylesheet" type="text/css" href="/static/styles/d3-ez.css" />
-<style>
-	  .stepnumber{font-family: 'Roboto', sans-serif; color: white; font-size:20px;}
-	  .vertical-timeline-icon{border:none;}
-	  .check_field{}
-	  .panel-body{padding-bottom: 10px !important; padding-top: 10px !important; padding-right: 20px !important; padding-left: 20px !important; }
-  .cell_width_80{  word-break: break-all; width: 80px;}
-  .cell_width_150{ word-break: break-all; width: 150px;}
-  .bold{font-weight: bold;}
-  .padded_cell{padding:4px;}
-  .panel{background-color: #2c2e35;  padding-left:20px;  padding-right:20px;   border: 1px solid #3d404c;}
-  
-/* Lets Pop up */
-.letspop{
-}
-.letspop:hover{
-  cursor: pointer;
-}
-.overlay{
-  display: none; /* Default Hidden */
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 1;
-  background-color: rgba(0,0,0,0.6);
-  height: 100%;
-  width: 100%;
-} 
-.popup{
-  display: none; /* Default Hidden */
-  position: fixed;
-  left: 50%; 
-  top: 5%;
-  z-index: 2;
-  background:none;
-  height: auto;
-  width: auto;
-  overflow: hidden;
-  padding: 0px;
-  transform: translate(-50%, 0);
-}
 
-
-/* Bored stuff & extras*/
-
-.close{
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  display: block;
-  color: #666666;
-  font-family: sans-serif;
+    <style>
+    input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
 }
-.close:hover{
-  cursor: pointer;
-  color: #444444;
+.hoveryellow{
+color:white;
+transition: all .25s ease-in-out;
 }
-	  </style>
+.hoveryellow:hover{
+background:rgba(255,255,255,0.1);
+color: #fff;
+transition: background .25s ease-in-out;
+border-radius:4px;
+}
+    </style>
    </head>
    <body>
       <!-- Wrapper-->
       <div class="wrapper">
-         <!-- Header-->
-         <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
-               <div class="navbar-header">
-                  <div id="mobile-menu">
-                     <div class="left-nav-toggle">
-                        <a href="#">
-                        <i class="stroke-hamburgermenu"></i>
-                        </a>
-                     </div>
+      <!-- Header-->
+      <nav class="navbar navbar-default navbar-fixed-top">
+         <div class="container-fluid">
+            <div class="navbar-header">
+               <div id="mobile-menu">
+                  <div class="left-nav-toggle">
+                     <a href="#">
+                     <i class="stroke-hamburgermenu"></i>
+                     </a>
                   </div>
-                  <a class="navbar-brand" style="background: #2f323b;" href="/">
-                  <a href="/">
-                     <img src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
-                     <!--<span style="color:white;"> Business </br> Intelligence</span>-->
-                  </a>
-                  </a>
                </div>
+               <a class="navbar-brand" style="background: #2f323b;" href="index.html">
+               <a href="Summary_KPI.html">
+                  <img src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
+                  <!--<span style="color:white;"> Business </br> Intelligence</span>-->
+               </a>
+               </a>
             </div>
-         </nav>
-         <!-- End header-->
-		 
-         <!-- Navigation-->
-       <div id="navbar-frame"></div>
-         <!-- End navigation-->
-		 
-         <!-- Main content-->
-         <section class="content">
-            <div class="container-fluid">
-			<!--Start Title-->
-               <div class="row">
-                  <div class="col-lg-12">
-                     <div class="view-header">
-                        <div class="pull-right text-right" style="line-height: 14px">
-                        </div>
-                        <div class="header-icon">
-                           <i class="pe page-header-icon pe-7s-repeat"></i>
-                        </div>
-                        <div class="header-title">
-                           <h3>Exception Management</h3>
+         </div>
+      </nav>
+      <!-- End header-->
+
+	<!-- Navigation-->
+	<div id="navbar-frame"></div>
+	<!-- End navigation-->
+
+      <!-- Main content-->
+      <section class="content">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="view-header">
+                     <div class="pull-right text-right" style="line-height: 14px">
+                     </div>
+                     <div class="header-icon">
+                        <i class="pe page-header-icon pe-7s-next-2"></i>
+                     </div>
+                     <div class="header-title">
+                        <h3>Exception Management and QC</h3>
                            <small style="color: #949ba2;">
-                           <!-- Contracts & Amendments -->
-                           </small>
-                        </div>
+                           Contracts & Amendments
+                        </small>
                      </div>
-                     <hr>
                   </div>
+                  <hr>
                </div>
-			   <!-- End Title -->
-			   <!-- Start-->
-			   
-			   
-			   
-			
-                                  
-										<div class="btn-toolbar" style=" ">
-                        <a href="https://ereview-discovery.ey.com/Relativity/Identity/login?signin=23068fc16762aabf29a8df2ffe0ce54a" target="_blank"><button class="btn btn-default letspop button-pop-up"  style="float:;left; margin-bottom: 10px;"><i class="fa fa-cloud-download"></i> Exception Management</button></a>
-                    </div>
-                                    
-			
-			
-			   <!-- End  -->
-               
-			   
-			   
-			   
-			   
             </div>
-         </section>
-         <!-- End main content-->
+
+        <section  style=""/>
+                                <div id="dock_box">
+
+                              <div ng-app="app" ng-controller="ItemController" style="">
+
+                <div class="row">
+               <div class="col-md-12">
+                  <div class="panel panel-filled">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-group m-b-xs m-t-xs" style="width:100%;">
+                    <input type="text" ng-model="$scope.query" placeholder="Search by document here.."
+                    style="color: #949ba2;border: none; width:100%; border-radius: 4px;-webkit-box-shadow: none;
+                    box-shadow: none;-webkit-transition: none;-o-transition: none;transition: none;
+                    background-color: #494b54;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </div>
+
+
+
+
+
+
+<div class="panel panel-filled">
+
+                        <div class="panel-body" style=" padding: 0px;">
+
+
+      <div class="wrapper1" style="padding:0px; ">
+      
+
+
+
+                <div class="col-md-12">
+
+                            <div class="row">
+<table style="width:100%;">
+              <thead style="background:rgba(0,0,0,0.2);">
+              <tr style="color:white; height:50px;">
+                                                                <td class="team test" id="admin_agent_role1" style="padding:10px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:80px; ">&nbsp;&nbsp;&nbsp;&nbsp;#</td>
+         <td class="team test" id="admin_agent_role1" style="padding:10px; color:white; font-weight:bold; width:550px; white-space: wrap; word-break: break-all;">Document Name</td>
+         <td class="team " id="admin_agent_role1" style="padding:10px; color:white; text-align: center; font-weight:bold; width:200px;  white-space: wrap; word-break: break-all;">QC Status</td>
+        <td class="rank " id="admin_agent_fallback" style="padding:10px; color:white; font-weight:bold;">Action</td>
+
+              </tr> </thead></table>
+              <div class="item hoveryellow"  style="border-radius:0px; text-align: left;  vertical-align: middle; padding: 5px; padding-left: 10px; float:left; width:100%;" ng-repeat="person in persons | filter:$scope.query|filter:{Status:'!Pending'}| orderBy:'-Status'" >
+              
+
+      <div class="item-short" style="">
+
+
+
+      <div class="wrapper1" style="padding:0px; ">
+        <table style="color: white;width:100%;">
+
+          <tbody>
+            
+            <tr style="color:white; height:40px;">
+            <td style="width:80px; ">&nbsp;&nbsp;&nbsp;&nbsp;{{'{{ $index + 1 }}'}}</td>
+                <td class="team " id="borrower_role" style="padding:5px; width:550px; word-break: break-all; white-space: wrap; color:#fff;"><i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp;{{'{{ person.Document_Name }}'}} </td>
+        <td class="rank " id="borrower_count" style="padding:5px; text-align: center; width:200px; word-break: break-all; color:#fff; white-space: wrap;"><span class="label label-accent" style="background:rgba(255,255,255,0.2); ">{{'{{ person.QC_Status }}'}}</span></td>
+       <td class="rank " id="borrower_count1"  style="padding:5px; "> <a href="https://ereview-discovery.ey.com" target="_blank"><span class="label label-accent" style="background:rgba(0,0,0,0.3); " >{{'{{ person.Action }}'}}</span> </a></td>
+              </tr>
+
+
+
+          </tbody>
+        </table>
+      </div>
+
+      </div>
+      <div ng-show="checked" class="item-detail">
+        <div class="person-competence-detail">
+          <ul>
+            <li ng-repeat="item in person.competences.kind">{{'{{ item }}'}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div></div>
+                </div>
+            </div>
+  </section>
+
+
+
+
+
+</div>
+
+
+
+    </div>
+
+
+      </section>
+      <!-- End main content-->
       </div>
       <!-- End wrapper-->
       <!-- Vendor scripts -->
@@ -168,29 +212,39 @@
       <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
       <!-- App scripts -->
       <script src="/static/scripts/luna.js"></script>
-	  
+      <script src="/api_host.js"></script>
+
 <script> 
 $(document).ready(function() {
 	$("#navbar-frame").load("/nav_bar");
 });
-</script>	  
+</script>
 
-	  <script>
-	  // The class you click to trigger the popup 
-$('.letspop').on('click', function() {
-  // The Overlay fades in
-  $(".overlay").fadeIn(200, function() {});
-  // The Popup fades in just after
-  $(".popup").fadeIn(600, function() {});
+<script>
+var theApp = angular.module('app', []);
+
+theApp.controller('ItemController', function ItemController($scope,  $http) {
+
+$http.get('/static/data/dbase/Digitalized.json').success(function (data) {
+    data = JSON.parse(window.localStorage.getItem('user'));
+        $scope.persons = data;
+		console.log($scope.persons)
 });
 
-// The class's you click when you want to close the pop
-$('.overlay, .close-pop').on('click', function() {
-  // The Overlay fades out slower
-  $(".overlay").fadeOut(600, function() {});
-  // The Popup fades out faster
-  $(".popup").fadeOut(200, function() {});
+	
+  $scope.set_color = function (person) {
+    if (person.QC_Status == 'Check Needed') {
+            return { background: "#ffe600" }
+    }
+    else if (person.QC_Status == 'Complete') {
+            return { background: "green" }
+        }
+    else
+      return { background: "#00b050" }
+        }
+
 });
-	  </script>
+        </script>
    </body>
+
 </html>

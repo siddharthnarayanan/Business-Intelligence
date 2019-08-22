@@ -338,7 +338,7 @@
       <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
       <!-- App scripts -->
       <script src="/static/scripts/luna.js"></script>
-
+      <script src="/api_host.js"></script>
 	  
 <script> 
 $(document).ready(function() {
@@ -377,7 +377,7 @@ $(document).ready(function() {
     <script>
     var theApp = angular.module('app', []);
     theApp.controller('ItemController', function ItemController($scope, $http, $filter, $timeout, $window) {
-        $http.get('https://qa002-ibornp.westus2.dip.sbp.eyclienthub.com:8000/demo/contracts.json').success(function(data) {
+        $http.get(API_HOST+'demo/contracts.json').success(function(data) {
             //data = JSON.parse(window.localStorage.getItem('user'));
             $scope.persons = data;
 //            $scope.persons.process = false;
