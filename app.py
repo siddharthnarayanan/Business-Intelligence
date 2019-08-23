@@ -74,9 +74,6 @@ def create_app():
 		return render_template("tableStyles.html")
 		
 		
-	@app.route("/bi_reporting")
-	def bi_reporting():
-		return render_template("BIReporting2_signature.html")
 		
 	@app.route("/fallback_language")
 	def fallback_language():

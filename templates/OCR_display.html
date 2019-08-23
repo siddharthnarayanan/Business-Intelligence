@@ -17,6 +17,7 @@
     <link rel="icon" href="/static/images/EYBIicon.png" sizes="192x192" />
 
     <!-- App styles -->
+    <link rel="stylesheet" href="/static/styles/updates.css">
     <link rel="stylesheet" href="/static/styles/pe-icons/pe-icon-7-stroke.css"/>
     <link rel="stylesheet" href="/static/styles/pe-icons/helper.css"/>
     <link rel="stylesheet" href="/static/styles/stroke-icons/style.css"/>
@@ -144,7 +145,7 @@ input[type=submit] {
                </div>
                <a class="navbar-brand" style="background: #2f323b;" href="/">
                <a href="/">
-                  <img src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
+                  <img class='header-img' src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
                   <!--<span style="color:white;"> Business </br> Intelligence</span>-->
                </a>
                </a>
@@ -176,7 +177,7 @@ input[type=submit] {
                         </small>
                      </div>
                   </div>
-                  <hr>
+                  
                </div>
             </div>
             <div class="row" style="display: none;">
@@ -189,7 +190,7 @@ input[type=submit] {
                                         <input id="myInput" type="text" name="myCountry" placeholder="Search by organization here.."
                     style="color: #949ba2;border: none;border-radius: 4px;-webkit-box-shadow: none;
                     box-shadow: none;-webkit-transition: none;-o-transition: none;transition: none;
-                    background-color: #494b54;">
+                    background-color: #494b54;"><span><i style='float:right; margin-top:-25px; margin-right:15px;' class="fa fa-search" aria-hidden="true"></i></span>
 
                                     </div>
                                 </div>
@@ -203,7 +204,7 @@ input[type=submit] {
                   <div class="panel">
                      <div class="panel-heading">
                         <div class="panel-tools">
-                           <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                           <a class="panel-toggle"></a>
                         </div>
                         Original Document
                      </div>
@@ -231,12 +232,12 @@ input[type=submit] {
                   <div class="panel">
                      <div class="panel-heading">
                         <div class="panel-tools">
-                           <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                           <a class="panel-toggle"></a>
                         </div>
                         OCR Transform
                      </div>
 
-                            <div class="panel-body">
+                            <div class="panel-body" style='margin-top:16px;'>
                                
                                 <pre id='my_ocr_output' style='background:rgba(0,0,0,0.15); height: 630px; color:white;'>
                                 </pre>
@@ -452,8 +453,9 @@ for (var i = 0, max = query.length; i < max; i++)
     var param = query[i].split("=");
 }
 
-var file_name = param[1];
+var file_name1 = param[1];
 console.log('query:  ' + query);
+file_name = file_name1.replace(/%20/g, "_");
 console.log('file_name: ' + file_name);
 
 
@@ -466,7 +468,7 @@ console.log(parent1);
 //var newElement = "<embed src='/static/data/processed/originaldocs/"+file_name+"' id='pdf_filename' type='application/pdf' width='100%' height='600px' view='Fit'>";
 var img_url = 'https://'+AZURE_STORAGE_ACCOUNT+'.blob.core.windows.net/processing/' + file_name + '.page1.pdf.png?' + data.token;
 var xml_url = 'https://'+AZURE_STORAGE_ACCOUNT+'.blob.core.windows.net/processing/' + file_name + '.page1.pdf_abbyy.xml?' + data.token;
-
+console.log('xml_url:  ' + xml_url);
 
 var newElement = "<img src='" + img_url + "' id='pdf_filename' type='application/pdf' width='100%' height='600px' view='Fit'>";
 //var newElement1 = "<object data='"+ ocr_file_name + "' id='ocr_filename' type='application/pdf' width='100%' height='600px' view='Fit'/>";
