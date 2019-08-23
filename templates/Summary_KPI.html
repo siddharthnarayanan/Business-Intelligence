@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="/static/styles/pe-icons/helper.css"/>
     <link rel="stylesheet" href="/static/styles/stroke-icons/style.css"/>
     <link rel="stylesheet" href="/static/styles/style.css">
+    <link rel="stylesheet" href="/static/styles/updates.css">
 	
 	<script type='text/javascript' src='/static/data/dbase/data.js'></script>
 	<script type='text/javascript' src='/static/scripts/angular.min.js'></script>
@@ -85,7 +86,7 @@ border-radius:4px;
                 </div>
                 <a class="navbar-brand" style="background: #2f323b;" href="/main_page">
                     <a href="/main_page">
-                	<img src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
+                	<img class='header-img' src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
 					<!--<span style="color:white;"> Business </br> Intelligence</span>-->
                 </a>
                 </a>
@@ -119,7 +120,7 @@ border-radius:4px;
                             </small>
                         </div>
                     </div>
-                    <hr>
+                    
                 </div>
             </div>
 			
@@ -237,8 +238,9 @@ border-radius:4px;
                         <div class="panel-body">
 						
                             <div id="doughnutChartParent1" style=" ">
-							<div id='doughnutChartLegend1' style='margin-left:-30px;'></div>
-                                <canvas id="doughnutChart1" width="200" height="200" style=' float:left; margin-left:100px;'></canvas>
+							<div id='doughnutChartLegend1' style='margin-left:30px;'></div>
+                                <canvas id="doughnutChart1" class="my-canvas" width="200" height="200" style='float: right !important;
+    margin-right: 33% !important; '></canvas>
                             </div>
                         </div>
                     </div>
@@ -255,7 +257,7 @@ border-radius:4px;
 							  
 								<div class="container" style="width:100%;">
   
-  <span style=" color: #ffe600; color:white; font-size: 2vh;">
+  <span style=" color: #ffe600; color:white; font-size: 12px;">
 
   Total documents: <a href="#" id="documents_count" style="color:#fff;">70</a> 
   <div class="progress progressbar" style=" height: 5px;    background-color: #171717; border-left: 0px solid #777; border-radius: 0px; margin-bottom: 5px;">
@@ -317,7 +319,7 @@ Finalizing: <a href="#" id="not_started_count" style="color:#bbb;">1</a>
                            
                             <div class="table-responsive">
 
-                                <table class="table table-hover table-striped table-bordered table-condensed" style='font-weight:400; color:white;' id="table0"></table>
+                                <table class="table table-hover table-condensed" style='font-weight:400; color:white;' id="table0"></table>
 
                             </div>
 
@@ -547,11 +549,11 @@ Http.onreadystatechange = (e) => {
      var array_names = ref_rate[0];
                                var array_values = ref_rate[1];
 
-var result = "<table style='background:red;' border=1>";
-result += "<tr>";
+var result = "<table style='background:red;' border=0>";
+result += "<tr style='border:none;'>";
 for (var j = 0; j < array_names.length; j++) {
-  result += "<td style='font-size:12px;  max-width: 500px; background:rgba(0,0,0,0.3);'>" + array_names[j] + "</td>";
-  result += "<td style='font-size:12px;   background:rgba(0,0,0,0.3);'>" + array_values[j] + "</td>";
+  result += "<td style='font-size:12px; border:none;   padding:15px;  max-width: 500px; background:rgba(0,0,0,0.1);'>" + array_names[j] + "</td>";
+  result += "<td style='font-size:12px; border:none; padding:15px;  background:rgba(0,0,0,0.1);'>" + array_values[j] + "</td>";
   if ((j + 1) % 1 == 0) {
     result += "</tr><tr>";
   }
@@ -691,7 +693,7 @@ Chart.plugins.register({
 						labelFontColor: "red"
                     },
                     gridLines: {
-                        color: "#37393F"
+                        color: "rgba(0,0,0,0)",
                     }
                 }],
                 yAxes: [{
@@ -701,7 +703,7 @@ Chart.plugins.register({
 						labelFontColor: "red"
                     },
                     gridLines: {
-                        color: "#37393F"
+                        color: "rgba(0,0,0,0)",
                     }
                 }]
             }
@@ -720,6 +722,57 @@ Chart.plugins.register({
 			// console.log(data);
 			// console.log(datasets);
 			// console.log(labels);
+
+            if (datasets.length) {
+                for (var i = 0; i < datasets[0].data.length; ++i) {
+                    text.push('<tr style="text-align: center;"><div style="margin-left:10px; height: 10px; width: 20px; float:left; background-color:' + chart.data.datasets[0].backgroundColor[i] + '"></div><div style="margin-left:10px; margin-top:-2px; float:left; color:white; font-size:12px;">' + labels[i] + ':  ' + datasets[0].data[i] + '</div></tr>'); 
+                    
+                }
+            }
+            text.push('</tbody></table>');
+            return text.join('');
+        },
+        legend: {
+            // since you're providing your own legend
+            display: false,
+        }
+        };
+
+        var globalOptions_noAxis_Bar = {
+            responsive: false,
+             scales: {
+                xAxes: [{
+                    ticks: {
+                        fontColor: "white",
+                        fontSize: 10,
+                        labelFontColor: "red"
+                    },
+                    gridLines: {
+                        color: "rgba(0,0,0,0)",
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        fontColor: "white",
+                        fontSize: 10,
+                        labelFontColor: "red"
+                    },
+                    gridLines: {
+                        color: "rgba(0,0,0,0)",
+                    }
+                }]
+            },
+            legendCallback: function (chart) {
+            var text = [];
+            text.push('<table class="' + chart.id + '-legend"><tbody>');
+
+            var data = chart.data;
+            var datasets = data.datasets;
+            var labels = data.labels;
+            
+            // console.log(data);
+            // console.log(datasets);
+            // console.log(labels);
 
             if (datasets.length) {
                 for (var i = 0; i < datasets[0].data.length; ++i) {
@@ -780,7 +833,7 @@ var doughnutData1 = {
 	newElement.setAttribute('id', 'doughnutChart1');
 	newElement.setAttribute('width', '200');
 	newElement.setAttribute('height', '200');
-	newElement.setAttribute("style", "  margin-left:100px; float:left; ");
+	newElement.setAttribute("style", "  margin-right:33%; float:right; ");
     p.appendChild(newElement);
 
 		Chart.defaults.global.defaultFontColor='white';
@@ -824,7 +877,7 @@ var barData = {
 		Chart.defaults.global.defaultFontColor='white';
 			
 		var c4 = document.getElementById("barOptions").getContext("2d");
-        var temp4 = new Chart(c4, {type: 'horizontalBar', data: barData, options: globalOptions_noAxis});
+        var temp4 = new Chart(c4, {type: 'horizontalBar', data: barData, options: globalOptions_noAxis_Bar});
 		var legend4 = temp4.generateLegend();
 		document.getElementById("barOptionsLegend").innerHTML = legend4;
 

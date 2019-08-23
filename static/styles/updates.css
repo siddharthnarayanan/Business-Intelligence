@@ -1,0 +1,36 @@
+@media only screen and (min-width: 768px) {
+  .navbar-default {
+    height:0px !important;
+    min-height:0px !important;
+  }
+  .container-fluid {
+    height:0px !important;
+  }
+  
+}
+body{font-size:12px !important;}
+.content:before {background: #1e1e1e !important;}
+.modal-content{background: #171717 !important;
+box-shadow: none !important;
+border: none !important;
+border-radius: 0px !important;}
+.navigation::before {background: #1c1c1c !important;}
+.navbar-default .navbar-brand {background: #1c1c1c !important}
+.navigation nav {background: #1c1c1c !important}
+.luna-nav.nav .nav-info {background: #1c1c1c !important}
+.navbar-default {background-color: #1c1c1c !important; 
+    box-shadow: none !important;}
+    .left-nav-toggle:hover a {color: rgb(255, 230, 0) !important;}
+    .panel.panel-filled {background:none !important;}
+    input{border-radius: 0px !important;
+      background: none !important;
+border-bottom: 1px solid rgba(255,255,255,0.1)  !important;}
+    .panel.panel-filled .panel-body {padding:0px !important;}
+    .btn-group-xs > .btn, .btn-xs {border-radius: 0px !important;}
+    .m-t-xs{color: #949ba2 !important;}
+    .header-img{transform: scale(1.1) !important; margin-top: 4px !important; margin-left: -50% !important;}
+    .my-canvas{ float: right !important;
+    margin-right: 33% !important;
+}
+thead{background: none !important;}
+.btn-toolbar .btn, .btn-toolbar .btn-group, .btn-toolbar .input-group {border-radius: 0px !important;}

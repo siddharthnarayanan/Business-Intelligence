@@ -18,7 +18,8 @@
 
 		<!-- App styles -->
 		<link rel="stylesheet" href="/static/styles/pe-icons/pe-icon-7-stroke.css"/>
-		<link rel="stylesheet" href="/static/styles/pe-icons/helper.css"/>WF_IBOR_DataModelort
+        <link rel="stylesheet" href="/static/styles/updates.css">
+		<link rel="stylesheet" href="/static/styles/pe-icons/helper.css"/>
 		<link rel="stylesheet" href="/static/styles/stroke-icons/style.css"/>
 		<link rel="stylesheet" href="/static/styles/style.css">
 
@@ -141,7 +142,7 @@
                     </div>
                     <a class="navbar-brand" style="background: #2f323b;" href="index.html">
                         <a href="Summary_KPI.html">
-                            <img src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
+                            <img class='header-img' src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
                             <!--<span style="color:white;"> Business </br> Intelligence</span>-->
                         </a>
                     </a>
@@ -197,7 +198,7 @@
                                             <div class="input-group m-b-xs m-t-xs" style="width:100%;">
                                                 <input type="text" ng-change="getData()" ng-model="$scope.query" placeholder="Search by document here.." style="color: #949ba2;border: none; width:100%; border-radius: 4px;-webkit-box-shadow: none;
                                                         box-shadow: none;-webkit-transition: none;-o-transition: none;transition: none;
-                                                        background-color: #494b54;">
+                                                        background-color: #494b54;"><span><i style='float:right; margin-top:-25px; margin-right:15px;' class="fa fa-search" aria-hidden="true"></i></span>
                                             </div>
                                         </div>
                                     </div>
@@ -224,15 +225,15 @@
                                                                     </div> -->
                                                                 </td>
                                                                 <td class="team test" id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:50px; ">#</td>
-                                                                <td class="team test" id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold;   white-space: wrap; word-break: break-all; width:500px; ">Document Name</td>
-                                                                <td class="team test" id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:100px; ">IBOR or </br>Non IBOR</td>
-                                                                <td class="team " id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:150px;">Document Class </br>(Predicted)</td>
+                                                                <td class="team test" id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold;   white-space: wrap; word-break: break-all; width:750px; ">Document Name</td>
+                                                                <td class="team test" id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:200px; ">IBOR / Non IBOR</td>
+                                                                <td class="team " id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:200px;">Document Class (Predicted)</td>
                                                                <!--<td class="team " id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold;   white-space: wrap; word-break: break-all; width:150px;">Status Date</td>-->
                                                                 <!-- <td class="team " id="admin_agent_role1" style="padding:5px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:150px;">Status</td> -->
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr class="wrapper1 hoveryellow" style="color:white; border-top: 1px solid rgba(255,255,255,0.1); height:50px;" ng-repeat="person in persons| filter:$scope.query|filter:{Status:'!Pending'}| orderBy: '-Status'" ng-click="person.checked = !person.checked">
+                                                            <tr class="wrapper1 hoveryellow" style="color:white; height:50px;" ng-repeat="person in persons| filter:$scope.query|filter:{Status:'!Pending'}| orderBy: '-Status'" ng-click="person.checked = !person.checked">
                                                                 <td class="team " id="borrower_role" style="text-align:center; padding:5px; max-width:100; min-width:50px;  word-break: break-all; white-space: wrap; color:#aaa;transform: scale(0.7);">
                                                                     <!-- <div class="checkbox checkbox-primary">
                                                                         <input id="checkbox2" class="styled" type="checkbox" checked=""/>
@@ -241,14 +242,14 @@
                                                                         </label>
                                                                     </div> -->
                                                                 </td>
-                                                                <td class="team " id="borrower_role" style="padding:5px;    word-break: break-all; white-space: wrap; color:white;">{{'{{ $index + 1 }}'}} </td>
-                                                                <td class="team " id="borrower_role" style="padding:5px;  word-break: break-all; white-space: wrap; color:white;">
+                                                                <td class="team " id="borrower_role" style="width:50px; padding:5px;    word-break: break-all; white-space: wrap; color:white;">{{'{{ $index + 1 }}'}} </td>
+                                                                <td class="team " id="borrower_role" style="width:750px; padding:5px;  word-break: break-all; white-space: wrap; color:white;">
                                                                     <i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp;
                                                                     {{'{{ person.document_name }}'}} </td>
-                                                                <td class="team " id="borrower_role" ng-style="set_color(person)" style="padding:5px;  word-break: break-all; white-space: wrap; color:#aaa;">
+                                                                <td class="team " id="borrower_role" ng-style="set_color(person)" style="width:200px; padding:5px;  word-break: break-all; white-space: wrap; color:#aaa;">
                                                                     <span class="label label-accent" style="background:rgba(0,0,0,0.3); ">{{'{{person.is_ibor_doc === 1 ? "IBOR" : "NON-IBOR"}}'}}
                                                                     </span></td>
-                                                                <td class="rank " id="borrower_count" style="padding:5px;   word-break: break-all; color:white; white-space: wrap;">
+                                                                <td class="rank " id="borrower_count" style="padding:5px;  width:200px;  word-break: break-all; color:white; white-space: wrap;">
                                                                     <span class="label label-accent" style="background:rgba(0,0,0,0); ">{{'{{ person.ibor_doc_class }}'}} </span></td>
                                                                  <!--<td class="team " id="borrower_role" style="padding:5px;  word-break: break-all; white-space: wrap; color:white;" ng-bind="person['Status_Date'] | date:'MM/dd/yyyy'">
                                                                     <span class="label label-accent" style="background:rgba(255,255,255,0.2);">{{'{{ person.Status_Date }}'}}</span>

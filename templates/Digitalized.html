@@ -17,6 +17,7 @@
 		<link rel="icon" href="/static/images/EYBIicon.png" sizes="192x192" />
 
 		<!-- App styles -->
+    <link rel="stylesheet" href="/static/styles/updates.css">
 		<link rel="stylesheet" href="/static/styles/pe-icons/pe-icon-7-stroke.css"/>
 		<link rel="stylesheet" href="/static/styles/pe-icons/helper.css"/>
 		<link rel="stylesheet" href="/static/styles/stroke-icons/style.css"/>
@@ -86,7 +87,7 @@ border-radius:4px;
                </div>
                <a class="navbar-brand" style="background: #2f323b;" href="/">
                <a href="/">
-                  <img src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
+                  <img class='header-img' src="/static/images/EYBI.png" alt="" style="transform: scale(1); width: 134px; height:auto; max-width:100%; margin-left: -50%; margin-top: 7px;" />
                   <!--<span style="color:white;"> Business </br> Intelligence</span>-->
                </a>
                </a>
@@ -118,7 +119,7 @@ border-radius:4px;
                         </small>
                      </div>
                   </div>
-                  <hr>
+                  
                </div>
             </div>
 
@@ -137,7 +138,7 @@ border-radius:4px;
 										<input type="text" ng-model="$scope.query" placeholder="Search by document here.."
 										style="color: #949ba2;border: none; width:100%; border-radius: 4px;-webkit-box-shadow: none;
 										box-shadow: none;-webkit-transition: none;-o-transition: none;transition: none;
-										background-color: #494b54;">
+										background-color: #494b54;"><span><i style='float:right; margin-top:-25px; margin-right:15px;' class="fa fa-search" aria-hidden="true"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +169,7 @@ border-radius:4px;
 							<thead style="background:rgba(0,0,0,0.2);">
 							<tr style="color:white; height:50px;">
                                                                 <td class="team test" id="admin_agent_role1" style="padding:10px; color:white; font-weight:bold;  white-space: wrap; word-break: break-all; width:80px; ">&nbsp;&nbsp;&nbsp;&nbsp;#</td>
-				 <td class="team test" id="admin_agent_role1" style="padding:10px; color:white; font-weight:bold; width:550px; white-space: wrap; word-break: break-all;">Document Name</td>
+				 <td class="team test" id="admin_agent_role1" style="padding:10px; color:white; font-weight:bold; width:750px; white-space: wrap; word-break: break-all;">Document Name</td>
 			   <td class="team " id="admin_agent_role1" style="padding:10px; color:white; text-align: center; font-weight:bold; width:200px;  white-space: wrap; word-break: break-all;">Processing Status</td>
 				<td class="rank " id="admin_agent_fallback" style="padding:10px; color:white; font-weight:bold;">Digitization Quality</td>
 
@@ -187,7 +188,7 @@ border-radius:4px;
 						
 					  <tr style="color:white; height:40px;">
 					  <td style="width:80px; ">&nbsp;&nbsp;&nbsp;&nbsp;{{'{{ $index + 1 }}'}}</td>
-                <td class="team " id="borrower_role" style="padding:5px; width:550px; word-break: break-all; white-space: wrap; color:#fff;"><i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp;{{'{{ person.document_name }}'}} </td>
+                <td class="team " id="borrower_role" style="padding:5px; width:750px; word-break: break-all; white-space: wrap; color:#fff;"><i class="fa fa-file-pdf-o" style="background:darkred; border-radius:5px;"></i>&nbsp; &nbsp;{{'{{ person.document_name }}'}} </td>
 				<td class="rank " id="borrower_count" style="padding:5px; text-align: center; width:200px; word-break: break-all; color:#fff; white-space: wrap;"><span class="label label-accent" style="background:rgba(255,255,255,0.2); ">{{'{{ person.processing_status }}'}}</span></td>
 				<td class="rank " id="borrower_count1"  style="padding:5px; "><span class="label label-accent" style="background:rgba(0,0,0,0.3); " ng-style="set_color(person)">{{'{{ person.ocr_suspicion_avg.toFixed(3) }}'}}</span> </td>
               </tr>
